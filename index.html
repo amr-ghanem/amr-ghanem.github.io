@@ -126,128 +126,141 @@
   </div>
 
   <div class="exp-panel">
-    <div class="mh-views">
+
+    <div class="exp-left">
       <div class="mh-struct">
-        <canvas id="structCanvas" width="420" height="560" role="img"
-          aria-label="Structure elevation responding to earthquake drift and tsunami inundation"></canvas>
+        <canvas id="structCanvas" width="420" height="370" role="img"
+          aria-label="Structure elevation responding to earthquake damage and tsunami inundation"></canvas>
       </div>
-      <div class="mh-surf">
-        <canvas id="surfCanvas" width="900" height="560" role="img"
-          aria-label="Fragility surface: failure probability against peak ground acceleration and tsunami inundation depth"></canvas>
+
+      <div class="exp-controls">
+        <div class="ctrl">
+          <label for="sPga">Ground shaking <span id="vPga">0.35 g</span></label>
+          <input type="range" id="sPga" min="0" max="1.5" step="0.01" value="0.35">
+          <p class="hint">Peak ground acceleration.</p>
+        </div>
+
+        <div class="ctrl">
+          <label for="sDep">Inundation <span id="vDep">13.1 ft</span></label>
+          <input type="range" id="sDep" min="0" max="8" step="0.1" value="4">
+          <p class="hint">Water depth at the wall.</p>
+        </div>
+
+        <div class="ctrl">
+          <label for="sFr">Flow velocity, Fr <span id="vFr">1.40</span></label>
+          <input type="range" id="sFr" min="0.4" max="2" step="0.05" value="1.4">
+          <p class="hint">Froude number &mdash; higher means faster flow.</p>
+        </div>
+
+        <div class="ctrl">
+          <label for="sBe">Uncertainty <span id="vBe">0.50</span></label>
+          <input type="range" id="sBe" min="0.2" max="0.9" step="0.02" value="0.5">
+          <p class="hint">Lognormal dispersion &beta;.</p>
+        </div>
+
+        <div class="ctrl">
+          <label for="sRot">View <span id="vRot">32&deg;</span></label>
+          <input type="range" id="sRot" min="-180" max="180" step="1" value="32">
+          <p class="hint">Rotate the surface.</p>
+        </div>
       </div>
     </div>
 
-    <div class="exp-controls">
+    <div class="exp-right">
       <div class="readout" aria-live="polite">
         <p class="ro-num" id="sProb">&mdash;</p>
         <p class="ro-text" id="sText"></p>
       </div>
 
-      <div class="ctrl">
-        <label for="sPga">Ground shaking <span id="vPga">0.35 g</span></label>
-        <input type="range" id="sPga" min="0" max="1.5" step="0.01" value="0.35">
-        <p class="hint">Peak ground acceleration. Drives the earthquake demand &mdash; and the damage the tsunami then meets.</p>
-      </div>
-
-      <div class="ctrl">
-        <label for="sDep">Inundation <span id="vDep">13.1 ft</span></label>
-        <input type="range" id="sDep" min="0" max="8" step="0.1" value="4">
-        <p class="hint">Depth of water against the wall, in feet.</p>
-      </div>
-
-      <div class="ctrl">
-        <label for="sFr">Flow velocity, Fr <span id="vFr">1.40</span></label>
-        <input type="range" id="sFr" min="0.4" max="2" step="0.05" value="1.4">
-        <p class="hint">Froude number. Higher means a faster surge and a far larger drag force.</p>
-      </div>
-
-      <div class="ctrl">
-        <label for="sBe">Uncertainty <span id="vBe">0.50</span></label>
-        <input type="range" id="sBe" min="0.2" max="0.9" step="0.02" value="0.5">
-        <p class="hint">Lognormal dispersion &beta;. Flattens the whole surface, not one line.</p>
-      </div>
-
-      <div class="ctrl">
-        <label for="sRot">View <span id="vRot">32&deg;</span></label>
-        <input type="range" id="sRot" min="-60" max="60" step="1" value="32">
-        <p class="hint">Rotate the surface.</p>
+      <div class="mh-surf">
+        <canvas id="surfCanvas" width="900" height="540" role="img"
+          aria-label="Fragility surface: failure probability against peak ground acceleration and tsunami inundation depth"></canvas>
       </div>
 
       <p class="eqn">P = 1 &minus; (1 &minus; P<sub>eq</sub>)(1 &minus; P<sub>ts</sub>) &nbsp;&middot;&nbsp; &theta;<sub>ts</sub> reduced by earthquake damage</p>
       <p class="disclaim">Forces follow ASCE 7 Chapter 6; capacities are representative values for a mid-rise RC frame, not results from a specific study. Published analyses are on the <a href="research.html">research page</a>.</p>
     </div>
-  </div>
-</section>
+
+  </div></section>
 
 <section class="howitworks">
   <h2 class="rule">How Locus works</h2>
   <p class="rlede">A <em>locus</em> is the set of all points satisfying a condition &mdash; exactly what a fragility surface is. Run the loop below once for one probability; run it across a parameter space, in parallel, for the whole surface.</p>
 <figure class="engine">
-  <svg viewBox="0 0 780 360" role="img" aria-label="Coupled engine: input and model uncertainty distributions feed a reliability search, which exchanges deterministic trials and structural responses with a nonlinear analysis until convergence, returning a fragility curve">
+  <svg viewBox="-32 0 848 396" role="img" aria-label="Coupled engine: input and model uncertainty distributions feed a reliability search, which exchanges deterministic trials and structural responses with a nonlinear analysis until convergence, returning a fragility curve">
 
     <g class="ein">
-      <path class="epdf" d="M14 118 C 30 118, 32 78, 48 78 C 64 78, 66 118, 82 118"/>
-      <line class="eaxis" x1="10" y1="118" x2="86" y2="118"/>
-      <text class="elab" x="48" y="142" text-anchor="middle">Input uncertainty</text>
-      <text class="esub" x="48" y="160" text-anchor="middle">ground motion, geometry</text>
+      <path class="epdf" d="M14 130 C 30 130, 32 90, 48 90 C 64 90, 66 130, 82 130"/>
+      <line class="eaxis" x1="10" y1="130" x2="86" y2="130"/>
+      <text class="elab" x="48" y="154" text-anchor="middle">Input uncertainty</text>
+      <text class="esub" x="48" y="172" text-anchor="middle">ground motion, geometry</text>
     </g>
     <g class="ein">
-      <path class="epdf" d="M14 268 C 30 268, 34 234, 48 234 C 62 234, 66 268, 82 268"/>
-      <line class="eaxis" x1="10" y1="268" x2="86" y2="268"/>
-      <text class="elab" x="48" y="292" text-anchor="middle">Model uncertainty</text>
-      <text class="esub" x="48" y="310" text-anchor="middle">material, capacity</text>
+      <path class="epdf" d="M14 300 C 30 300, 34 266, 48 266 C 62 266, 66 300, 82 300"/>
+      <line class="eaxis" x1="10" y1="300" x2="86" y2="300"/>
+      <text class="elab" x="48" y="324" text-anchor="middle">Model uncertainty</text>
+      <text class="esub" x="48" y="342" text-anchor="middle">material, capacity</text>
     </g>
-    <path class="earr" d="M100 108 h44 l0-9 20 14 -20 14 0-9 h-44 z"/>
-    <path class="earr" d="M100 258 h44 l0-9 20 14 -20 14 0-9 h-44 z"/>
+    <path class="earr" d="M100 105 h44 l0-9 20 14 -20 14 0-9 h-44 z"/>
+    <path class="earr" d="M100 278 h44 l0-9 20 14 -20 14 0-9 h-44 z"/>
 
-    <rect class="ebox" x="182" y="30" width="404" height="300" rx="16"/>
+    <rect class="ebox" x="182" y="30" width="404" height="352" rx="16"/>
     <text class="etitle" x="384" y="20" text-anchor="middle">Coupled engine</text>
 
+    <!-- band 1: the cycle out -->
+    <text class="ecyclab" x="384" y="52" text-anchor="middle">deterministic trial</text>
+    <path class="ecyc" d="M312 96 C 346 68, 422 68, 456 96"/>
+    <polygon class="ecycHead" points="460,99 442,87 458,80"/>
+
+    <!-- band 2: the two codes -->
+    <text class="ecode" x="279" y="134" text-anchor="middle">FERUM</text>
+    <text class="esub"  x="279" y="155" text-anchor="middle">reliability analysis</text>
+    <text class="esub"  x="279" y="172" text-anchor="middle">searches for failure</text>
+
+    <text class="ecode" x="489" y="134" text-anchor="middle">ZEUS-NL</text>
+    <text class="esub"  x="489" y="155" text-anchor="middle">nonlinear structural</text>
+    <text class="esub"  x="489" y="172" text-anchor="middle">analysis</text>
+
+    <!-- band 3: the cycle back -->
+    <path class="ecyc" d="M456 200 C 422 228, 346 228, 312 200"/>
+    <polygon class="ecycHead" points="308,197 326,209 310,216"/>
+    <text class="ecyclab" x="384" y="248" text-anchor="middle">output response</text>
+
+    <!-- band 4: what each one actually produces -->
     <g class="eside">
-      <rect class="epanel" x="204" y="200" width="150" height="106" rx="8"/>
-      <path class="ecurve" d="M216 292 C 246 292, 254 224, 300 220 L346 219"/>
-      <circle class="etrial" cx="242" cy="282" r="3.2" opacity=".4"/>
-      <circle class="etrial" cx="256" cy="266" r="3.2" opacity=".62"/>
-      <circle class="etrial" cx="268" cy="245" r="3.2" opacity=".82"/>
-      <circle class="edesign" cx="280" cy="229" r="5"/>
-      <line class="edash" x1="222" y1="294" x2="280" y2="229"/>
-      <text class="eglyph" x="279" y="300" text-anchor="middle">design point</text>
+      <rect class="epanel" x="204" y="264" width="150" height="100" rx="8"/>
+      <text class="eglyph" x="279" y="283" text-anchor="middle">design point</text>
+      <line class="eaxis" x1="216" y1="352" x2="344" y2="352"/>
+      <path class="ecurve" d="M218 350 C 246 350, 252 306, 294 302 L342 300"/>
+      <circle class="etrial" cx="238" cy="342" r="3" opacity=".38"/>
+      <circle class="etrial" cx="252" cy="331" r="3" opacity=".6"/>
+      <circle class="etrial" cx="266" cy="318" r="3" opacity=".8"/>
+      <line class="edash" x1="219" y1="351" x2="280" y2="307"/>
+      <circle class="edesign" cx="281" cy="306" r="4.6"/>
     </g>
-    <text class="ecode" x="279" y="114" text-anchor="middle">FERUM</text>
-    <text class="esub"  x="279" y="136" text-anchor="middle">reliability analysis</text>
-    <text class="esub"  x="279" y="154" text-anchor="middle">searches for failure</text>
 
     <g class="eside">
-      <rect class="epanel" x="414" y="200" width="150" height="106" rx="8"/>
+      <rect class="epanel" x="414" y="264" width="150" height="100" rx="8"/>
+      <text class="eglyph" x="489" y="283" text-anchor="middle">response history</text>
       <g class="eframe">
-        <line x1="434" y1="292" x2="434" y2="220"/>
-        <line x1="474" y1="292" x2="474" y2="220"/>
-        <line x1="434" y1="220" x2="474" y2="220"/>
-        <line x1="434" y1="256" x2="474" y2="256"/>
-        <line x1="426" y1="292" x2="482" y2="292"/>
+        <line x1="437" y1="348" x2="437" y2="299"/>
+        <line x1="471" y1="348" x2="471" y2="299"/>
+        <line x1="437" y1="299" x2="471" y2="299"/>
+        <line x1="437" y1="324" x2="471" y2="324"/>
+        <line x1="429" y1="348" x2="479" y2="348"/>
       </g>
-      <path class="ehyst" d="M504 272 C 498 254, 522 240, 540 236 C 548 234, 550 244, 542 250 C 526 260, 504 262, 502 254 C 500 246, 514 236, 532 232"/>
-      <text class="eglyph" x="489" y="300" text-anchor="middle">response history</text>
+      <line class="eaxis" x1="500" y1="324" x2="552" y2="324"/>
+      <line class="eaxis" x1="526" y1="300" x2="526" y2="348"/>
+      <path class="ehyst" d="M506 340 C 513 328, 528 309, 541 302 C 546 299, 549 303, 545 308 C 535 320, 520 337, 511 344 C 506 347, 503 344, 506 340 Z"/>
     </g>
-    <text class="ecode" x="489" y="114" text-anchor="middle">ZEUS-NL</text>
-    <text class="esub"  x="489" y="136" text-anchor="middle">nonlinear structural</text>
-    <text class="esub"  x="489" y="154" text-anchor="middle">analysis</text>
 
-    <path class="ecyc" d="M318 78 C 352 52, 416 52, 450 78"/>
-    <polygon class="ecycHead" points="454,81 437,68 453,62"/>
-    <text class="ecyclab" x="384" y="46" text-anchor="middle">deterministic trial</text>
-
-    <path class="ecyc" d="M450 180 C 416 204, 352 204, 318 180"/>
-    <polygon class="ecycHead" points="314,177 331,190 315,196"/>
-    <text class="ecyclab" x="384" y="196" text-anchor="middle">output response</text>
-
-    <path class="earr out" d="M600 168 h34 l0-9 20 14 -20 14 0-9 h-34 z"/>
+    <path class="earr out" d="M600 201 h34 l0-9 20 14 -20 14 0-9 h-34 z"/>
     <g class="eout">
-      <path class="efrag" d="M678 252 C 702 252, 708 190, 740 188 L766 187"/>
-      <line class="eaxis" x1="674" y1="252" x2="770" y2="252"/>
-      <line class="eaxis" x1="678" y1="256" x2="678" y2="180"/>
-      <text class="elab out" x="722" y="164" text-anchor="middle">Failure probability</text>
-      <text class="esub"     x="722" y="274" text-anchor="middle">at every intensity</text>
+      <path class="efrag" d="M678 250 C 702 250, 708 188, 740 186 L766 185"/>
+      <line class="eaxis" x1="674" y1="250" x2="770" y2="250"/>
+      <line class="eaxis" x1="678" y1="254" x2="678" y2="178"/>
+      <text class="elab out" x="722" y="162" text-anchor="middle">Failure probability</text>
+      <text class="esub"     x="722" y="272" text-anchor="middle">at every intensity</text>
     </g>
   </svg>
   <figcaption>The reliability search and the structural analysis run as a coupled loop &mdash; a trial realisation goes out, a response comes back, the search updates, and it cycles until the design point converges. After Figure 8 of the dissertation.</figcaption>
@@ -421,7 +434,7 @@
   function proj(u,v,z,rot){
     var a=rot*Math.PI/180, x=u-0.5, y=v-0.5;
     var rx=x*Math.cos(a)-y*Math.sin(a), ry=x*Math.sin(a)+y*Math.cos(a);
-    return { x:W*0.5+rx*W*0.60, y:H*0.66+ry*H*0.26-z*H*0.50, depth:ry };
+    return { x:W*0.5+rx*W*0.52, y:H*0.70+ry*H*0.26-z*H*0.44, depth:ry };
   }
 
   function drawSurface(){
@@ -446,11 +459,15 @@
     var vb=proj(back[0],back[1],0,rot), vt=proj(back[0],back[1],1,rot);
     g1.globalAlpha=0.9; g1.beginPath(); g1.moveTo(vb.x,vb.y); g1.lineTo(vt.x,vt.y); g1.stroke(); g1.globalAlpha=1;
 
-    g1.fillStyle=mute; g1.font='14px "IBM Plex Mono", monospace'; g1.textAlign='right';
+    // the probability axis rides the back corner, which moves as the view turns,
+    // so its ticks have to point away from the plot rather than always left
+    var zs = vb.x >= W*0.5 ? 1 : -1;
+    g1.fillStyle=mute; g1.font='14px "IBM Plex Mono", monospace';
+    g1.textAlign = zs>0 ? 'left' : 'right';
     for(var pz=0;pz<=1.0001;pz+=0.25){
       var tk=proj(back[0],back[1],pz,rot);
-      g1.beginPath(); g1.moveTo(tk.x,tk.y); g1.lineTo(tk.x-8,tk.y); g1.strokeStyle=grid; g1.stroke();
-      g1.fillText(Math.round(pz*100)+'%', tk.x-13, tk.y+5);
+      g1.beginPath(); g1.moveTo(tk.x,tk.y); g1.lineTo(tk.x+zs*8,tk.y); g1.strokeStyle=grid; g1.stroke();
+      g1.fillText(Math.round(pz*100)+'%', tk.x+zs*13, tk.y+5);
     }
 
     var quads=[];
@@ -479,14 +496,31 @@
     g1.beginPath(); g1.arc(pt.x,pt.y,8,0,Math.PI*2);
     g1.fillStyle=mark; g1.fill(); g1.strokeStyle=sheet; g1.lineWidth=3; g1.stroke();
 
+    // The view turns a full circle, so the labels cannot live on fixed edges -
+    // each axis is annotated on whichever of its two edges is nearest the
+    // viewer, and the depth labels flip to the outward side of the plot.
+    var vE = proj(0.5,0,0,rot).depth > proj(0.5,1,0,rot).depth ? 0 : 1;
+    var uE = proj(0,0.5,0,rot).depth > proj(1,0.5,0,rot).depth ? 0 : 1;
+
     g1.fillStyle=mute; g1.textAlign='center'; g1.font='13px "IBM Plex Mono", monospace';
-    for(var gx=0;gx<=1.0001;gx+=0.25){ var t1=proj(gx,1,0,rot); g1.fillText((gx*MAXPGA).toFixed(2), t1.x, t1.y+19); }
-    for(var gy=0;gy<=1.0001;gy+=0.25){ var t2=proj(1,gy,0,rot); g1.fillText(Math.round(gy*MAXDEP*M2FT)+' ft', t2.x+34, t2.y+5); }
-    g1.font='14px "Libre Franklin", sans-serif';
-    var l1=proj(0.5,1.16,0,rot), l2=proj(1.22,0.5,0,rot), l3=proj(back[0],back[1],1.1,rot);
-    g1.fillText('PEAK GROUND ACCELERATION (g)', l1.x, l1.y+24);
-    g1.fillText('INUNDATION DEPTH', l2.x, l2.y+24);
-    g1.fillText('FAILURE PROBABILITY', l3.x, l3.y-6);
+    for(var gx=0;gx<=1.0001;gx+=0.25){ var t1=proj(gx,vE,0,rot); g1.fillText((gx*MAXPGA).toFixed(2), t1.x, t1.y+19); }
+    for(var gy=0;gy<=1.0001;gy+=0.25){
+      var t2=proj(uE,gy,0,rot), sg = t2.x >= W*0.5 ? 1 : -1;
+      g1.textAlign = sg>0 ? 'left' : 'right';
+      g1.fillText(Math.round(gy*MAXDEP*M2FT)+' ft', t2.x+sg*12, t2.y+5);
+    }
+    g1.textAlign='center'; g1.font='14px "Libre Franklin", sans-serif';
+    var l1=proj(0.5,vE+(vE?0.15:-0.15),0,rot), l2=proj(uE+(uE?0.18:-0.18),0.5,0,rot), l3=proj(back[0],back[1],1.1,rot);
+    // titles sit outside the plot, so at some angles they would run off the
+    // canvas - clamp each one by its own measured half-width so it always lands
+    // on the sheet, whatever the view angle or canvas size
+    function title(s,x,y){
+      var pad = g1.measureText(s).width/2 + 6;
+      g1.fillText(s, Math.max(pad, Math.min(W-pad, x)), Math.max(18, Math.min(H-6, y)));
+    }
+    title('PEAK GROUND ACCELERATION (g)', l1.x, l1.y+24);
+    title('INUNDATION DEPTH',             l2.x, l2.y+24);
+    title('FAILURE PROBABILITY',          l3.x, l3.y-6);
   }
 
   function drawStructure(){
@@ -500,7 +534,7 @@
     g2.clearRect(0,0,w,h);
     g2.fillStyle=sunk; g2.fillRect(0,0,w,h);
 
-    var GY=448, BH=290, BW=126, BX=(w-BW)/2+18, N=5;
+    var GY=298, BH=192, BW=104, BX=(w-BW)/2+16, N=5;
     var dam=pEq(pga,be), lean=Math.min(1,dam)*12;
     var storey=BH/N;
 
@@ -567,7 +601,7 @@
 
     // --- shaking
     g2.strokeStyle=ink; g2.fillStyle=ink; g2.lineWidth=2.4; g2.globalAlpha=0.8;
-    var sw=20+Math.min(pga,1.5)*40, cxb=BX+BW/2, sy=GY+40;
+    var sw=20+Math.min(pga,1.5)*40, cxb=BX+BW/2, sy=GY+36;
     g2.beginPath(); g2.moveTo(cxb-sw,sy); g2.lineTo(cxb+sw,sy); g2.stroke();
     [-1,1].forEach(function(sg){
       g2.beginPath();
@@ -578,18 +612,18 @@
     });
     g2.globalAlpha=1;
     g2.font='600 17px "IBM Plex Mono", monospace'; g2.textAlign='center';
-    g2.fillText(pga.toFixed(2)+' g', cxb, sy+30);
+    g2.fillText(pga.toFixed(2)+' g', cxb, sy+26);
 
     // --- sequence labels
     g2.textAlign='left';
     g2.fillStyle=ink;  g2.font='600 15px "Libre Franklin", sans-serif';
-    g2.fillText('1  EARTHQUAKE', 18, 36);
+    g2.fillText('1  EARTHQUAKE', 18, 28);
     g2.fillStyle=mute; g2.font='14px "Libre Franklin", sans-serif';
-    g2.fillText('plastic hinges form, capacity drops', 18, 58);
+    g2.fillText('plastic hinges form, capacity drops', 18, 48);
     g2.fillStyle=ink;  g2.font='600 15px "Libre Franklin", sans-serif';
-    g2.fillText('2  TSUNAMI', 18, 90);
+    g2.fillText('2  TSUNAMI', 18, 76);
     g2.fillStyle=mute; g2.font='14px "Libre Franklin", sans-serif';
-    g2.fillText('arrives at the weakened frame', 18, 112);
+    g2.fillText('arrives at the weakened frame', 18, 96);
   }
   function render(){
     var pga=parseFloat(sPga.value), dep=parseFloat(sDep.value),
@@ -625,6 +659,23 @@
     var mq=window.matchMedia('(prefers-color-scheme: dark)');
     if (mq.addEventListener) mq.addEventListener('change', render);
   }
+
+  // Once the panel stacks to one column the surface gets the full width but far
+  // less of it, and a 900x540 plot flattens to an unreadable strip. Give the
+  // narrow layout a taller drawing space so the surface keeps its relief.
+  function fit(){
+    var narrow = window.innerWidth <= 1040;
+    var nw = narrow ? 680 : 900, nh = narrow ? 620 : 540;
+    if (sf.width !== nw || sf.height !== nh) { sf.width = nw; sf.height = nh; }
+    W = sf.width; H = sf.height;
+  }
+  var rt;
+  window.addEventListener('resize', function(){
+    clearTimeout(rt);
+    rt = setTimeout(function(){ fit(); render(); }, 120);
+  });
+
+  fit();
   render();
 })();
 </script>
