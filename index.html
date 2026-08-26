@@ -150,9 +150,9 @@
       </div>
 
       <div class="ctrl">
-        <label for="sDep">Inundation depth <span id="vDep">13.1 ft (4.0 m)</span></label>
+        <label for="sDep">Inundation <span id="vDep">13.1 ft</span></label>
         <input type="range" id="sDep" min="0" max="8" step="0.1" value="4">
-        <p class="hint">How deep the water stands against the wall.</p>
+        <p class="hint">Depth of water against the wall, in feet.</p>
       </div>
 
       <div class="ctrl">
@@ -162,9 +162,9 @@
       </div>
 
       <div class="ctrl">
-        <label for="sBe">Dispersion &beta; <span id="vBe">0.50</span></label>
+        <label for="sBe">Uncertainty <span id="vBe">0.50</span></label>
         <input type="range" id="sBe" min="0.2" max="0.9" step="0.02" value="0.5">
-        <p class="hint">Uncertainty. Flattens the whole surface, not one line.</p>
+        <p class="hint">Lognormal dispersion &beta;. Flattens the whole surface, not one line.</p>
       </div>
 
       <div class="ctrl">
@@ -181,8 +181,8 @@
 
 <section class="howitworks">
   <h2 class="rule">How Locus works</h2>
-  <p class="rlede">Six stages from a model to a decision. Stages two and three are why it has to be software: the sweep is thousands of nonlinear analyses, and nobody runs those by hand.</p>
-  <ol class="hsteps"><li><div class="htop"><p class="hn">01</p><svg class="hglyph" viewBox="0 0 64 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="16" width="20" height="26" /><line x1="6" y1="24" x2="26" y2="24"/><line x1="6" y1="33" x2="26" y2="33"/><path d="M36 40 q4-14 8 0 t8 0" class="acc"/><path d="M40 14 l4-8 4 8" class="acc"/></svg></div><h3>Define</h3><p class="hd">A structural model, and a hazard. The hazard is an input parameter, so it can be swapped or varied like any other.</p></li><li><div class="htop"><p class="hn">02</p><svg class="hglyph" viewBox="0 0 64 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><g class="acc"><rect x="10" y="12" width="8" height="8"/><rect x="22" y="12" width="8" height="8"/><rect x="34" y="12" width="8" height="8"/><rect x="46" y="12" width="8" height="8"/><rect x="10" y="24" width="8" height="8"/><rect x="22" y="24" width="8" height="8"/><rect x="34" y="24" width="8" height="8"/><rect x="46" y="24" width="8" height="8"/><rect x="10" y="36" width="8" height="8"/><rect x="22" y="36" width="8" height="8"/><rect x="34" y="36" width="8" height="8"/><rect x="46" y="36" width="8" height="8"/></g></svg></div><h3>Sweep</h3><p class="hd">The parameter space is discretised. Every combination of intensity and configuration becomes a case to run.</p></li><li><div class="htop"><p class="hn">03</p><svg class="hglyph" viewBox="0 0 64 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 30 q4-12 8 0 t8-6 8 10 8-8 8 6 8-2 8 4" class="acc"/><path d="M4 40 q5-8 10 2 t10-4 10 6 10-4 10 2" opacity=".45"/><path d="M4 20 q5 8 10-2 t10 4 10-6 10 4 10-2" opacity=".45"/></svg></div><h3>Analyse</h3><p class="hd">Nonlinear dynamic analysis drives each case through a suite of ground motions. Hundreds of runs per configuration.</p></li><li><div class="htop"><p class="hn">04</p><svg class="hglyph" viewBox="0 0 64 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 42 C 18 42, 22 8, 42 8 L58 8" class="acc"/><circle cx="16" cy="38" r="2" fill="currentColor" stroke="none"/><circle cx="24" cy="26" r="2" fill="currentColor" stroke="none"/><circle cx="30" cy="16" r="2" fill="currentColor" stroke="none"/><circle cx="40" cy="9" r="2" fill="currentColor" stroke="none"/></svg></div><h3>Fit</h3><p class="hd">Damage states are extracted and a lognormal fit converts the scatter into a failure probability.</p></li><li><div class="htop"><p class="hn">05</p><svg class="hglyph" viewBox="0 0 64 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 34 L22 42 L58 26 L42 18 Z" opacity=".35"/><path d="M6 24 C 16 24, 20 8, 42 8 L58 14 L22 32 Z" class="acc"/><line x1="14" y1="28" x2="30" y2="36" opacity=".5"/><line x1="26" y1="20" x2="42" y2="28" opacity=".5"/></svg></div><h3>Surface</h3><p class="hd">The fits join into a continuous surface. A probability now exists for configurations that were never explicitly run.</p></li><li><div class="htop"><p class="hn">06</p><svg class="hglyph" viewBox="0 0 64 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="10" width="14" height="32" opacity=".4"/><rect x="26" y="18" width="14" height="24" class="acc"/><rect x="44" y="28" width="14" height="14" opacity=".4"/><line x1="4" y1="42" x2="60" y2="42"/></svg></div><h3>Compare</h3><p class="hd">The index reduces a surface to one number, so different structures can be ranked against each other for retrofit.</p></li></ol>
+  <p class="rlede"><em>Locus</em> is the mathematical term for the set of all points satisfying a condition &mdash; which is exactly what a fragility surface is. Eight stages get you there, from a model to a decision. <br><br>Stages three and five are where the method earns its keep: the cases are independent so they run in parallel, and the reliability search converges on a design point instead of brute-forcing the probability.</p>
+  <ol class="hsteps"><li><div class="htop"><p class="hn">01</p><svg class="hglyph" viewBox="0 0 64 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="14" width="22" height="28"/><line x1="6" y1="23" x2="28" y2="23"/><line x1="6" y1="32" x2="28" y2="32"/><path d="M38 40 q4-13 8 0 t8 0" class="acc"/><path d="M42 12 l4-7 4 7" class="acc"/><line x1="46" y1="5" x2="46" y2="20" class="acc"/></svg></div><h3>Define</h3><p class="hd">A structural model, and a hazard. The hazard enters as an input parameter, so it can be swapped or varied like any other.</p></li><li><div class="htop"><p class="hn">02</p><svg class="hglyph" viewBox="0 0 64 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><g class="acc"><rect x="8" y="10" width="9" height="9"/><rect x="21" y="10" width="9" height="9"/><rect x="34" y="10" width="9" height="9"/><rect x="47" y="10" width="9" height="9"/><rect x="8" y="23" width="9" height="9"/><rect x="21" y="23" width="9" height="9"/><rect x="34" y="23" width="9" height="9"/><rect x="47" y="23" width="9" height="9"/><rect x="8" y="36" width="9" height="9"/><rect x="21" y="36" width="9" height="9"/><rect x="34" y="36" width="9" height="9"/><rect x="47" y="36" width="9" height="9"/></g></svg></div><h3>Sweep</h3><p class="hd">The parameter space is discretised. Every combination of intensity and configuration becomes a case to solve.</p></li><li><div class="htop"><p class="hn">03</p><svg class="hglyph" viewBox="0 0 64 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="10" x2="44" y2="10"/><line x1="4" y1="19" x2="52" y2="19"/><line x1="4" y1="28" x2="38" y2="28"/><line x1="4" y1="37" x2="48" y2="37"/><g class="acc"><polygon points="52,10 44,6.5 44,13.5"/><polygon points="60,19 52,15.5 52,22.5"/><polygon points="46,28 38,24.5 38,31.5"/><polygon points="56,37 48,33.5 48,40.5"/></g><line x1="4" y1="4" x2="4" y2="44" class="acc"/></svg></div><h3>Distribute</h3><p class="hd">Cases are independent, so they run concurrently. This is the step that turns weeks of sequential analysis into hours.</p></li><li><div class="htop"><p class="hn">04</p><svg class="hglyph" viewBox="0 0 64 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 24 q4-13 8 0 t8-6 8 11 8-9 8 7 8-2 8 4" class="acc"/><path d="M4 36 q5-8 10 2 t10-4 10 6 10-4 10 2" opacity=".4"/><path d="M4 12 q5 8 10-2 t10 4 10-6 10 4 10-2" opacity=".4"/></svg></div><h3>Analyse</h3><p class="hd">Nonlinear dynamic analysis drives each case through a suite of ground motions, giving the response history the limit state is checked against.</p></li><li><div class="htop"><p class="hn">05</p><svg class="hglyph" viewBox="0 0 64 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 42 C 20 42, 26 10, 58 8" class="acc"/><circle cx="20" cy="34" r="1.8" opacity=".45"/><circle cx="27" cy="26" r="1.8" opacity=".65"/><circle cx="32" cy="19" r="1.8" opacity=".85"/><circle cx="36" cy="14" r="3" fill="currentColor" stroke="none" class="acc"/><line x1="14" y1="42" x2="36" y2="14" stroke-dasharray="2 2" opacity=".5"/><line x1="4" y1="44" x2="60" y2="44" opacity=".5"/></svg></div><h3>Reliability</h3><p class="hd">The first-order reliability method iterates to the design point on the limit state surface and returns a failure probability at that intensity &mdash; without the full Monte Carlo the same answer would otherwise cost.</p></li><li><div class="htop"><p class="hn">06</p><svg class="hglyph" viewBox="0 0 64 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="40" r="2.2" fill="currentColor" stroke="none"/><circle cx="22" cy="33" r="2.2" fill="currentColor" stroke="none"/><circle cx="29" cy="23" r="2.2" fill="currentColor" stroke="none"/><circle cx="37" cy="14" r="2.2" fill="currentColor" stroke="none"/><circle cx="48" cy="10" r="2.2" fill="currentColor" stroke="none"/><path d="M6 43 C 18 43, 24 10, 44 9 L58 8.4" class="acc"/><line x1="4" y1="44" x2="60" y2="44" opacity=".5"/></svg></div><h3>Fit</h3><p class="hd">The reliability analysis returns a probability at each intensity, not a curve. A lognormal fitted through those points gives the continuous fragility relationship.</p></li><li><div class="htop"><p class="hn">07</p><svg class="hglyph" viewBox="0 0 64 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 34 L22 42 L58 26 L42 18 Z" opacity=".3"/><path d="M6 24 C 16 24, 20 8, 42 8 L58 14 L22 32 Z" class="acc"/><line x1="14" y1="28" x2="30" y2="36" opacity=".45"/><line x1="26" y1="20" x2="42" y2="28" opacity=".45"/></svg></div><h3>Surface</h3><p class="hd">The fitted curves join across the parameter space into a surface. A probability now exists for configurations that were never explicitly run.</p></li><li><div class="htop"><p class="hn">08</p><svg class="hglyph" viewBox="0 0 64 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="12" width="13" height="30" opacity=".35"/><rect x="26" y="20" width="13" height="22" class="acc"/><rect x="44" y="30" width="13" height="12" opacity=".35"/><line x1="4" y1="42" x2="60" y2="42"/></svg></div><h3>Compare</h3><p class="hd">The index reduces a surface to one number, so different structures can be ranked against each other for retrofit.</p></li></ol>
 </section>
 
 <section class="story">
@@ -216,8 +216,8 @@
       <p class="idx">01</p>
       <div>
         <h3>Locus, the multi-hazard assessment tool</h3>
-        <p class="exp-lead">Software that computes fragility surfaces with the hazard as an input variable rather than a built-in assumption — so hazards can be assessed together, and the method does not have to be rebuilt for each new one. This is the doctoral contribution; the case studies exist to demonstrate and test it.</p>
-        <ul class="evidence"><li>Ph.D. dissertation — Integrated Framework for Multi-Hazard Resilience Assessment of Infrastructures (2023)</li><li>Nonlinear dynamic analysis pipeline in Python and MATLAB</li><li>Demonstrated across three independent cases: skewed RC bridges, mass-irregular frames, and tsunami loading</li><li>Funded by the U.S. DOT Pacific Southwest Region UTC</li></ul>
+        <p class="exp-lead">Software that computes fragility surfaces with the hazard as an input variable rather than a built-in assumption. Cases run in parallel and the failure probability comes from a first-order reliability search rather than brute-force simulation, which is what makes sweeping a whole parameter space tractable.</p>
+        <ul class="evidence"><li>Ph.D. dissertation — Integrated Framework for Multi-Hazard Resilience Assessment of Infrastructures (2023)</li><li>First-order reliability method (FORM) for efficient fragility computation</li><li>Parallelised nonlinear dynamic analysis pipeline in Python and MATLAB</li><li>Demonstrated across three independent cases: skewed RC bridges, mass-irregular frames, and tsunami loading</li><li>Funded by the U.S. DOT Pacific Southwest Region UTC</li></ul>
       </div>
     </div>
           <figure class="exp-fig">
@@ -429,65 +429,92 @@
     g2.clearRect(0,0,w,h);
     g2.fillStyle=sunk; g2.fillRect(0,0,w,h);
 
-    var GY=470, BH=340, BW=150, BX=w*0.46;
-    var dam=pEq(pga,be), lean=dam*26;
+    var GY=452, BH=300, BW=132, BX=(w-BW)/2 + 26, FLOORS=5;
+    var dam=pEq(pga,be);
+    var lean=Math.min(1,dam)*14;          // capped: a 26px lean read as collapse
 
-    g2.fillStyle=mute; g2.globalAlpha=0.25; g2.fillRect(0,GY,w,h-GY); g2.globalAlpha=1;
+    // ground
+    g2.strokeStyle=rule; g2.lineWidth=1.4;
+    g2.beginPath(); g2.moveTo(0,GY); g2.lineTo(w,GY); g2.stroke();
+    g2.fillStyle=mute; g2.globalAlpha=0.14; g2.fillRect(0,GY,w,h-GY); g2.globalAlpha=1;
+    g2.strokeStyle=mute; g2.lineWidth=1; g2.globalAlpha=0.35;
+    for(var hx=-40;hx<w;hx+=16){ g2.beginPath(); g2.moveTo(hx,h); g2.lineTo(hx+30,GY); g2.stroke(); }
+    g2.globalAlpha=1;
 
+    // water behind the building
+    var wy=GY-Math.min(1,dep/MAXDEP)*BH;
+    if(dep>0.02){
+      g2.fillStyle=acc; g2.globalAlpha=0.22; g2.fillRect(0,wy,w,GY-wy); g2.globalAlpha=1;
+      g2.strokeStyle=acc; g2.lineWidth=2;
+      g2.beginPath(); g2.moveTo(0,wy); g2.lineTo(w,wy); g2.stroke();
+    }
+
+    // building
     g2.save();
     g2.translate(BX,GY);
     g2.transform(1,0,-lean/BH,1,0,0);
-    g2.fillStyle=sheet; g2.strokeStyle=ink; g2.lineWidth=1.6;
-    g2.fillRect(0,-BH,BW,BH); g2.strokeRect(0,-BH,BW,BH);
+    g2.fillStyle=sheet; g2.globalAlpha=0.9; g2.fillRect(0,-BH,BW,BH); g2.globalAlpha=1;
+    g2.strokeStyle=ink; g2.lineWidth=1.6; g2.strokeRect(0,-BH,BW,BH);
     g2.strokeStyle=rule; g2.lineWidth=1;
-    for(var f=1;f<5;f++){ g2.beginPath(); g2.moveTo(0,-BH*f/5); g2.lineTo(BW,-BH*f/5); g2.stroke(); }
-    if(dam>0.15){
-      g2.strokeStyle=mark; g2.lineWidth=1.4; g2.globalAlpha=Math.min(1,dam*1.6);
-      var nc=Math.round(dam*7);
-      for(var c=0;c<nc;c++){
-        var cy=-BH*0.12-c*(BH*0.11), cx=12+((c*37)%(BW-30));
-        g2.beginPath(); g2.moveTo(cx,cy); g2.lineTo(cx+11,cy-13); g2.lineTo(cx+5,cy-24); g2.stroke();
+    for(var f=1;f<FLOORS;f++){
+      var fy=-BH*f/FLOORS;
+      g2.beginPath(); g2.moveTo(0,fy); g2.lineTo(BW,fy); g2.stroke();
+    }
+    // damage: diagonal shear cracks, worst at the base, one per storey
+    if(dam>0.08){
+      var nc=Math.max(1,Math.round(dam*FLOORS));
+      g2.strokeStyle=mark; g2.lineWidth=1.8; g2.lineCap='round';
+      for(var c=0;c<nc && c<FLOORS;c++){
+        var y0=-BH*c/FLOORS, y1=-BH*(c+1)/FLOORS;
+        var inten=Math.min(1, dam*1.4 - c*0.16);
+        if(inten<=0.05) continue;
+        g2.globalAlpha=inten;
+        g2.beginPath(); g2.moveTo(BW*0.16,y0-4); g2.lineTo(BW*0.72,y1+4); g2.stroke();
+        if(inten>0.55){ g2.beginPath(); g2.moveTo(BW*0.84,y0-4); g2.lineTo(BW*0.34,y1+4); g2.stroke(); }
       }
-      g2.globalAlpha=1;
+      g2.globalAlpha=1; g2.lineCap='butt';
     }
     g2.restore();
 
-    var wy=GY-(dep/MAXDEP)*BH;
+    // tsunami drag arrows onto the wetted face
     if(dep>0.02){
-      g2.fillStyle=acc; g2.globalAlpha=0.30; g2.fillRect(0,wy,BX,GY-wy); g2.globalAlpha=1;
-      g2.strokeStyle=acc; g2.lineWidth=2;
-      g2.beginPath(); g2.moveTo(0,wy); g2.lineTo(BX+BW,wy); g2.stroke();
       var rel=Math.min(1,fTs(dep,fr)/900);
-      g2.strokeStyle=mark; g2.fillStyle=mark; g2.lineWidth=2;
-      var n=Math.max(2,Math.min(5,Math.round(dep)));
+      g2.strokeStyle=mark; g2.fillStyle=mark; g2.lineWidth=2.2;
+      var n=Math.max(2,Math.min(5,Math.round(dep*0.8)+1));
       for(var k=0;k<n;k++){
-        var ay=GY-8-(k+0.5)*((GY-wy)/n), len=22+rel*54;
-        g2.beginPath(); g2.moveTo(BX-len-10,ay); g2.lineTo(BX-12,ay); g2.stroke();
-        g2.beginPath(); g2.moveTo(BX-4,ay); g2.lineTo(BX-14,ay-4.5); g2.lineTo(BX-14,ay+4.5); g2.closePath(); g2.fill();
+        var ay=GY-10-(k+0.5)*((GY-wy)/n), len=26+rel*46;
+        g2.beginPath(); g2.moveTo(BX-len-14,ay); g2.lineTo(BX-16,ay); g2.stroke();
+        g2.beginPath(); g2.moveTo(BX-6,ay); g2.lineTo(BX-17,ay-5); g2.lineTo(BX-17,ay+5); g2.closePath(); g2.fill();
       }
-      g2.fillStyle=acc; g2.font='14px "IBM Plex Mono", monospace'; g2.textAlign='left';
-      g2.fillText((dep*M2FT).toFixed(1)+' ft', 10, wy-9);
+      g2.fillStyle=acc; g2.font='600 15px "IBM Plex Mono", monospace'; g2.textAlign='left';
+      g2.fillText((dep*M2FT).toFixed(1)+' ft', 14, wy-12);
     }
 
-    g2.strokeStyle=ink; g2.fillStyle=ink; g2.lineWidth=2; g2.globalAlpha=0.75;
-    var sw=16+pga*46;
-    g2.beginPath(); g2.moveTo(BX+BW/2-sw,GY+22); g2.lineTo(BX+BW/2+sw,GY+22); g2.stroke();
-    [-1,1].forEach(function(s){
+    // ground shaking, drawn below grade
+    g2.strokeStyle=ink; g2.fillStyle=ink; g2.lineWidth=2.2; g2.globalAlpha=0.7;
+    var sw=18+Math.min(pga,1.5)*40, cxb=BX+BW/2, sy=GY+34;
+    g2.beginPath(); g2.moveTo(cxb-sw,sy); g2.lineTo(cxb+sw,sy); g2.stroke();
+    [-1,1].forEach(function(sgn){
       g2.beginPath();
-      g2.moveTo(BX+BW/2+s*(sw+7),GY+22);
-      g2.lineTo(BX+BW/2+s*sw,GY+17);
-      g2.lineTo(BX+BW/2+s*sw,GY+27);
+      g2.moveTo(cxb+sgn*(sw+9),sy);
+      g2.lineTo(cxb+sgn*sw,sy-5.5);
+      g2.lineTo(cxb+sgn*sw,sy+5.5);
       g2.closePath(); g2.fill();
     });
     g2.globalAlpha=1;
-    g2.fillStyle=mute; g2.font='13px "Libre Franklin", sans-serif'; g2.textAlign='center';
-    g2.fillText(pga.toFixed(2)+' g', BX+BW/2, GY+50);
+    g2.fillStyle=ink; g2.font='600 15px "IBM Plex Mono", monospace'; g2.textAlign='center';
+    g2.fillText(pga.toFixed(2)+' g', cxb, sy+26);
 
-    g2.textAlign='left'; g2.font='12px "Libre Franklin", sans-serif'; g2.fillStyle=mute;
-    g2.fillText('1  EARTHQUAKE  â†’  damage', 14, 30);
-    g2.fillText('2  TSUNAMI  â†’  reduced capacity', 14, 52);
+    // sequence labels
+    g2.textAlign='left'; g2.font='600 12px "Libre Franklin", sans-serif';
+    g2.fillStyle=ink;  g2.fillText('1  EARTHQUAKE', 16, 30);
+    g2.fillStyle=mute; g2.font='12px "Libre Franklin", sans-serif';
+    g2.fillText('shaking damages the frame', 16, 48);
+    g2.fillStyle=ink;  g2.font='600 12px "Libre Franklin", sans-serif';
+    g2.fillText('2  TSUNAMI', 16, 74);
+    g2.fillStyle=mute; g2.font='12px "Libre Franklin", sans-serif';
+    g2.fillText('arrives at reduced capacity', 16, 92);
   }
-
   function render(){
     var pga=parseFloat(sPga.value), dep=parseFloat(sDep.value),
         fr=parseFloat(sFr.value), be=parseFloat(sBe.value);
@@ -495,10 +522,10 @@
     drawSurface(); drawStructure();
 
     document.getElementById('vPga').textContent = pga.toFixed(2)+' g';
-    document.getElementById('vDep').textContent = (dep*M2FT).toFixed(1)+' ft ('+dep.toFixed(1)+' m)';
+    document.getElementById('vDep').textContent = (dep*M2FT).toFixed(1)+' ft';
     document.getElementById('vFr').textContent  = fr.toFixed(2);
     document.getElementById('vBe').textContent  = be.toFixed(2);
-    document.getElementById('vRot').textContent = Math.round(parseFloat(sRot.value))+'Â°';
+    document.getElementById('vRot').textContent = Math.round(parseFloat(sRot.value))+'°';
 
     var a=pEq(pga,be), b=pTs(dep,fr,be,a), tot=1-(1-a)*(1-b);
     document.getElementById('sProb').textContent = Math.round(tot*100)+'%';
