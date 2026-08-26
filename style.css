@@ -240,6 +240,23 @@ figcaption p{font-size:.87rem;color:var(--ink-soft);max-width:40ch;line-height:1
 #surfCanvas{width:100%;height:auto;display:block}
 
 /* ---------- how it works ---------- */
+/* ---------- coupled engine diagram ---------- */
+.engine{margin:0 0 32px;background:var(--sheet);border:1px solid var(--rule);padding:24px}
+.engine svg{width:100%;height:auto;display:block;overflow:visible}
+.engine .ebox{fill:none;stroke:var(--ink-mute);stroke-width:1.6}
+.engine .etitle{font-family:"Libre Franklin",sans-serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase;fill:var(--ink-mute)}
+.engine .ecode{font-family:"Newsreader",Georgia,serif;font-size:27px;fill:var(--ink)}
+.engine .esub{font-family:"Libre Franklin",sans-serif;font-size:13px;fill:var(--ink-mute)}
+.engine .elab{font-family:"Libre Franklin",sans-serif;font-size:16px;fill:var(--ink-soft)}
+.engine .earr{fill:none;stroke:var(--ink-mute);stroke-width:1.6}
+.engine .earr.out{stroke:var(--accent)}
+.engine .elab.out{fill:var(--accent)}
+.engine .ecyc{fill:none;stroke:var(--accent);stroke-width:2.4}
+.engine .ecycHead{fill:var(--accent)}
+.engine .ecyclab{font-family:"Libre Franklin",sans-serif;font-size:13px;fill:var(--ink-mute);letter-spacing:.02em}
+.engine figcaption{font-family:"Libre Franklin",sans-serif;font-size:.8rem;line-height:1.6;color:var(--ink-mute);margin-top:16px;max-width:78ch}
+.rnote{font-family:"Libre Franklin",sans-serif;font-size:.8rem;line-height:1.6;color:var(--ink-mute);margin:24px 0 0;max-width:78ch}
+@media(max-width:580px){.engine{padding:12px}.engine .ecode{font-size:22px}}
 .hsteps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
 .hsteps li{background:var(--sheet);padding:24px}
 .htop{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--rule-soft)}
