@@ -177,7 +177,6 @@ figcaption p{font-size:.87rem;color:var(--ink-soft);max-width:40ch;line-height:1
 .exp-controls .eqn{grid-column:1/-1;margin:0;padding-top:16px}
 .readout{display:flex;align-items:baseline;gap:24px;flex-wrap:wrap}
 .ro-num{margin:0!important;flex:none}
-.ro-text{max-width:64ch}
 .exp-chart svg{width:100%;height:auto;display:block}
 #fragChart .grid line{stroke:var(--rule-soft);stroke-width:1}
 #fragChart .ax{font-family:"IBM Plex Mono",monospace;font-size:9.5px;fill:var(--ink-mute)}
@@ -192,7 +191,7 @@ figcaption p{font-size:.87rem;color:var(--ink-soft);max-width:40ch;line-height:1
 
 .readout{border-left:3px solid var(--data4);padding:2px 0 2px 16px;margin-bottom:24px}
 .ro-num{font-family:"IBM Plex Mono",monospace;font-size:2.6rem;line-height:1;color:var(--data4);margin:0 0 12px;font-variant-numeric:tabular-nums;letter-spacing:-.03em}
-.ro-text{font-size:.94rem;color:var(--ink-soft);margin:0;line-height:1.6;max-width:38ch}
+.ro-text{font-size:.96rem;color:var(--ink-soft);margin:0;line-height:1.65;flex:1 1 340px;max-width:none}
 
 .ctrl{margin-bottom:16px}
 .ctrl label{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-family:"Libre Franklin",sans-serif;font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:8px}
@@ -232,10 +231,12 @@ figcaption p{font-size:.87rem;color:var(--ink-soft);max-width:40ch;line-height:1
 @media(max-width:860px){.tsu-views{grid-template-columns:0.8fr 1fr;gap:16px}}
 @media(max-width:580px){.tsu-views{grid-template-columns:1fr;gap:24px}}
 /* ---------- surface explorer ---------- */
-.mh-views{display:grid;grid-template-columns:0.36fr 1fr;gap:24px;align-items:center;margin-bottom:24px}
+.mh-views{display:grid;grid-template-columns:0.36fr 1fr;gap:24px;align-items:stretch;margin-bottom:24px}
+.mh-struct,.mh-surf{height:440px;display:flex}
+.mh-views canvas{width:100%;height:100%;object-fit:contain;display:block}
 .mh-struct,.mh-surf{background:var(--sunk);border:1px solid var(--rule-soft)}
 .mh-views canvas{width:100%;height:auto;display:block}
-@media(max-width:860px){.mh-views{grid-template-columns:1fr}.mh-struct{max-width:320px;margin:0 auto}}
+@media(max-width:860px){.mh-views{grid-template-columns:1fr}.mh-struct{max-width:320px;margin:0 auto;height:380px}.mh-surf{height:320px}}
 .surfwrap{background:var(--sunk);border:1px solid var(--rule-soft);padding:8px}
 #surfCanvas{width:100%;height:auto;display:block}
 
