@@ -190,9 +190,9 @@ figcaption p{font-size:.87rem;color:var(--ink-soft);max-width:40ch;line-height:1
 @media(max-width:860px){.tsu-panel{grid-template-columns:1fr}.tsu-views{grid-template-columns:0.8fr 1fr}}
 @media(max-width:580px){.tsu-views{grid-template-columns:1fr;gap:24px}}
 /* ---------- research images ---------- */
-.rgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(264px,1fr));gap:24px}
 .rfig{margin:0}
-.rfig img{width:100%;height:auto;display:block;border:1px solid var(--rule);background:var(--sheet)}
+.rfig img{width:100%;aspect-ratio:4/3;object-fit:contain;display:block;border:1px solid var(--rule);background:#fff;padding:8px}
 .rfig figcaption{font-size:.85rem;color:var(--ink-soft);margin-top:12px;line-height:1.55}
 .credit{display:block;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute);margin-top:8px}
 
