@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Amr M. Ghanem &mdash; Structural Engineer & Multi-Hazard Resilience Researcher</title>
-<meta name="description" content="I turn multi-hazard risk science into design decisions engineers can actually use. My research covers seismic and tsunami fragility of reinforced concrete structures and bridges; my practice is structural design and analysis in Honolulu. I write the software that connects the two.">
+<meta name="description" content="Amr Ghanem, Ph.D., is a structural engineer and multi-hazard resilience researcher in Honolulu. His work covers seismic and tsunami fragility of reinforced concrete structures and bridges, structural health monitoring, and the automation of structural analysis.">
 <link rel="canonical" href="https://amrghanem.com/index.html">
 <meta property="og:title" content="Amr M. Ghanem &mdash; Structural Engineer & Multi-Hazard Resilience Researcher">
-<meta property="og:description" content="I turn multi-hazard risk science into design decisions engineers can actually use. My research covers seismic and tsunami fragility of reinforced concrete structures and bridges; my practice is structural design and analysis in Honolulu. I write the software that connects the two.">
+<meta property="og:description" content="Amr Ghanem, Ph.D., is a structural engineer and multi-hazard resilience researcher in Honolulu. His work covers seismic and tsunami fragility of reinforced concrete structures and bridges, structural health monitoring, and the automation of structural analysis.">
 <meta property="og:type" content="profile">
 <meta property="og:url" content="https://amrghanem.com/index.html">
 <meta name="twitter:card" content="summary">
@@ -22,7 +22,7 @@
     "familyName":  "Ghanem",
     "honorificSuffix":  "Ph.D.",
     "jobTitle":  "Advanced Structural Designer and Analyst",
-    "description":  "I turn multi-hazard risk science into design decisions engineers can actually use. My research covers seismic and tsunami fragility of reinforced concrete structures and bridges; my practice is structural design and analysis in Honolulu. I write the software that connects the two.",
+    "description":  "Amr Ghanem, Ph.D., is a structural engineer and multi-hazard resilience researcher in Honolulu. His work covers seismic and tsunami fragility of reinforced concrete structures and bridges, structural health monitoring, and the automation of structural analysis.",
     "email":  "mailto:aghanem@martinchockcarden.com",
     "url":  "https://amrghanem.com",
     "identifier":  {
@@ -89,10 +89,60 @@
   <div class="hero-text">
     <p class="eyebrow">Advanced Structural Designer and Analyst<br><span>Martin, Chock &amp; Carden, Inc.</span></p>
     <h1>I make infrastructure resilience computable</h1>
-    <p class="lede">I turn multi-hazard risk science into design decisions engineers can actually use. My research covers seismic and tsunami fragility of reinforced concrete structures and bridges; my practice is structural design and analysis in Honolulu. I write the software that connects the two.</p>
+    <p class="lede">I turn multi-hazard risk science into design decisions engineers can actually use. My research covers seismic and tsunami fragility of reinforced concrete structures and bridges; my practice is structural design and analysis in Honolulu, and the software that connects the two.</p>
     <p class="cta"><a class="btn" href="research.html">Selected research</a><a class="btn ghost" href="about.html">About</a></p>
   </div>
   <figure class="hero-portrait"><img class="portrait" src="headshot.jpg" alt="Amr Ghanem" width="320" height="400"></figure>
+</section>
+
+<section class="explorer" id="explorer">
+  <div class="exp-intro">
+    <p class="fignum">Interactive</p>
+    <h2>Try it: what does a fragility curve actually say?</h2>
+    <p>This is the calculation behind most of my research. Move the sliders and watch the curve respond &mdash; the readout translates it into the sentence an owner or an agency actually needs.</p>
+  </div>
+
+  <div class="exp-panel">
+    <div class="exp-chart">
+      <svg id="fragChart" viewBox="0 0 580 320" role="img" aria-labelledby="fragChartTitle">
+        <title id="fragChartTitle">Fragility curve: probability of damage against peak ground acceleration</title>
+        <g class="grid" id="fragGrid"></g>
+        <path id="fragCurve" class="curve" fill="none" />
+        <path id="fragFill" class="curvefill" />
+        <line id="fragMarkV" class="mark" />
+        <line id="fragMarkH" class="mark" />
+        <circle id="fragDot" class="markdot" r="5" />
+        <text id="fragMedian" class="medlabel" text-anchor="middle"></text>
+      </svg>
+    </div>
+
+    <div class="exp-controls">
+      <div class="readout" aria-live="polite">
+        <p class="ro-num" id="roProb">&mdash;</p>
+        <p class="ro-text" id="roText"></p>
+      </div>
+
+      <div class="ctrl">
+        <label for="sIm">Ground shaking <span id="vIm">0.40 g</span></label>
+        <input type="range" id="sIm" min="0.02" max="2" step="0.02" value="0.4">
+        <p class="hint">Peak ground acceleration at the site</p>
+      </div>
+
+      <div class="ctrl">
+        <label for="sTheta">Median capacity &theta; <span id="vTheta">0.35 g</span></label>
+        <input type="range" id="sTheta" min="0.05" max="1.5" step="0.01" value="0.35">
+        <p class="hint">The intensity at which half of these structures reach the damage state. Stronger structure, higher value.</p>
+      </div>
+
+      <div class="ctrl">
+        <label for="sBeta">Dispersion &beta; <span id="vBeta">0.55</span></label>
+        <input type="range" id="sBeta" min="0.2" max="0.9" step="0.01" value="0.55">
+        <p class="hint">Uncertainty. Higher values flatten the curve &mdash; less confidence about when damage arrives.</p>
+      </div>
+
+      <p class="eqn">P(damage | IM) = &Phi;( ln(IM / &theta;) / &beta; )</p>
+    </div>
+  </div>
 </section>
 
 <section class="story">
@@ -105,7 +155,7 @@
     <div><p>I trained as a structural engineer in Egypt and spent two years designing steel — sugar refineries, a steel rolling mill, cement plants — before coordinating BIM across disciplines on projects where the model mattered more than the drawings.</p><p>Then I moved to Hawaiʻi for a PhD, and the problem changed shape. Islands concentrate the question. The same building may need to survive an earthquake, a tsunami, and a hurricane, and the standards treating each hazard separately do not tell you what happens when you consider them together.</p></div>
   </article>  <article class="chapter">
     <h3>Research and practice, at once</h3>
-    <div><p>I now design and analyse structures at a firm whose president chairs the ASCE committee that writes the tsunami provisions I published research on. That is an unusual place to stand, and it changes how I work: I see which parts of the standard are hard to apply before I write about them, and I know which research questions actually reach a drawing board.</p><p>I also write the software. Fragility pipelines, deep-learning crack detection, design automation. Two of those became competition-winning ventures at UH. The tooling is not a side interest — for this kind of analysis it is the only way the work gets done at all.</p></div>
+    <div><p>I now design and analyse structures at a firm whose president chairs the ASCE committee behind the tsunami provisions my research addresses. That is an unusual place to stand. You learn which parts of a standard are awkward to apply long before you write about them, and which research questions actually reach a drawing board.</p><p>The software matters too. Fragility pipelines, deep-learning crack detection, design automation — two of which became competition-winning ventures at UH. For analysis at this scale the tooling is not a side interest; it is the only way the work gets done at all.</p></div>
   </article>
 </section>
 
@@ -216,5 +266,109 @@
   </div>
   <p class="colophon">&copy; 2026 Amr M. Ghanem. Set in Newsreader and Libre Franklin.</p>
 </footer>
+<script>
+(function () {
+  var svg = document.getElementById('fragChart');
+  if (!svg) return;
+
+  var W = 580, H = 320, padL = 52, padR = 16, padT = 16, padB = 42;
+  var plotW = W - padL - padR, plotH = H - padT - padB;
+  var MAXIM = 2.0;
+
+  var curve = document.getElementById('fragCurve');
+  var fill  = document.getElementById('fragFill');
+  var markV = document.getElementById('fragMarkV');
+  var markH = document.getElementById('fragMarkH');
+  var dot   = document.getElementById('fragDot');
+  var medLb = document.getElementById('fragMedian');
+  var grid  = document.getElementById('fragGrid');
+
+  var sIm = document.getElementById('sIm'),
+      sTh = document.getElementById('sTheta'),
+      sBe = document.getElementById('sBeta');
+
+  // Abramowitz & Stegun 26.2.17
+  function normCdf(x) {
+    var neg = x < 0; if (neg) x = -x;
+    var t = 1 / (1 + 0.2316419 * x);
+    var phi = Math.exp(-0.5 * x * x) / Math.sqrt(2 * Math.PI);
+    var p = t * (0.319381530 + t * (-0.356563782 + t * (1.781477937 +
+            t * (-1.821255978 + t * 1.330274429))));
+    var r = 1 - phi * p;
+    return neg ? 1 - r : r;
+  }
+
+  function px(im) { return padL + (im / MAXIM) * plotW; }
+  function py(p)  { return padT + plotH - p * plotH; }
+
+  // static grid, drawn once
+  (function buildGrid() {
+    var s = '';
+    for (var i = 0; i <= 4; i++) {
+      var y = py(i / 4);
+      s += '<line x1="' + padL + '" y1="' + y + '" x2="' + (padL + plotW) + '" y2="' + y + '"/>';
+      s += '<text class="ax" x="' + (padL - 9) + '" y="' + (y + 3.5) + '" text-anchor="end">' + (i * 25) + '</text>';
+    }
+    for (var g = 0; g <= MAXIM + 0.001; g += 0.5) {
+      s += '<text class="ax" x="' + px(g) + '" y="' + (padT + plotH + 20) + '" text-anchor="middle">' + g.toFixed(1) + '</text>';
+    }
+    s += '<text class="axt" x="14" y="' + (padT + plotH / 2) + '" text-anchor="middle" transform="rotate(-90 14 ' + (padT + plotH / 2) + ')">Probability of damage (%)</text>';
+    s += '<text class="axt" x="' + (padL + plotW / 2) + '" y="' + (H - 6) + '" text-anchor="middle">Peak ground acceleration (g)</text>';
+    grid.innerHTML = s;
+  })();
+
+  function verdict(p) {
+    if (p < 0.05)  return 'Very unlikely to reach this damage state.';
+    if (p < 0.20)  return 'Unlikely, but no longer negligible.';
+    if (p < 0.50)  return 'A real possibility. Worth designing against.';
+    if (p < 0.80)  return 'More likely than not. This is the range where retrofit decisions get made.';
+    return 'Near certain. At this intensity the question is recovery, not prevention.';
+  }
+
+  function render() {
+    var im = parseFloat(sIm.value),
+        th = parseFloat(sTh.value),
+        be = parseFloat(sBe.value);
+
+    var d = '', a = '';
+    for (var i = 0; i <= 200; i++) {
+      var x = (i / 200) * MAXIM;
+      var p = x > 0.0001 ? normCdf(Math.log(x / th) / be) : 0;
+      d += (i === 0 ? 'M' : 'L') + px(x).toFixed(1) + ' ' + py(p).toFixed(1);
+    }
+    a = d + 'L' + px(MAXIM).toFixed(1) + ' ' + py(0) + 'L' + px(0).toFixed(1) + ' ' + py(0) + 'Z';
+    curve.setAttribute('d', d);
+    fill.setAttribute('d', a);
+
+    var prob = im > 0.0001 ? normCdf(Math.log(im / th) / be) : 0;
+    var cx = px(im), cy = py(prob);
+
+    markV.setAttribute('x1', cx); markV.setAttribute('y1', py(0));
+    markV.setAttribute('x2', cx); markV.setAttribute('y2', cy);
+    markH.setAttribute('x1', padL); markH.setAttribute('y1', cy);
+    markH.setAttribute('x2', cx);   markH.setAttribute('y2', cy);
+    dot.setAttribute('cx', cx);     dot.setAttribute('cy', cy);
+
+    medLb.setAttribute('x', px(th));
+    medLb.setAttribute('y', padT + plotH + 36);
+    medLb.textContent = 'median ' + th.toFixed(2) + 'g';
+
+    document.getElementById('vIm').textContent    = im.toFixed(2) + ' g';
+    document.getElementById('vTheta').textContent = th.toFixed(2) + ' g';
+    document.getElementById('vBeta').textContent  = be.toFixed(2);
+
+    document.getElementById('roProb').textContent = Math.round(prob * 100) + '%';
+    document.getElementById('roText').textContent =
+      'At ' + im.toFixed(2) + 'g of shaking, this structure has a ' + Math.round(prob * 100) +
+      '% chance of reaching the damage state. ' + verdict(prob);
+  }
+
+  [sIm, sTh, sBe].forEach(function (el) {
+    el.addEventListener('input', render);
+    el.addEventListener('change', render);
+  });
+  render();
+})();
+</script>
 </body>
 </html>
