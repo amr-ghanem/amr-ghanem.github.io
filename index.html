@@ -429,91 +429,96 @@
     g2.clearRect(0,0,w,h);
     g2.fillStyle=sunk; g2.fillRect(0,0,w,h);
 
-    var GY=452, BH=300, BW=132, BX=(w-BW)/2 + 26, FLOORS=5;
-    var dam=pEq(pga,be);
-    var lean=Math.min(1,dam)*14;          // capped: a 26px lean read as collapse
+    var GY=448, BH=290, BW=126, BX=(w-BW)/2+18, N=5;
+    var dam=pEq(pga,be), lean=Math.min(1,dam)*12;
+    var storey=BH/N;
 
-    // ground
-    g2.strokeStyle=rule; g2.lineWidth=1.4;
+    // --- ground
+    g2.strokeStyle=mute; g2.lineWidth=1.6; g2.globalAlpha=0.8;
     g2.beginPath(); g2.moveTo(0,GY); g2.lineTo(w,GY); g2.stroke();
-    g2.fillStyle=mute; g2.globalAlpha=0.14; g2.fillRect(0,GY,w,h-GY); g2.globalAlpha=1;
-    g2.strokeStyle=mute; g2.lineWidth=1; g2.globalAlpha=0.35;
-    for(var hx=-40;hx<w;hx+=16){ g2.beginPath(); g2.moveTo(hx,h); g2.lineTo(hx+30,GY); g2.stroke(); }
+    g2.lineWidth=1; g2.globalAlpha=0.3;
+    for(var hx=-30;hx<w;hx+=15){ g2.beginPath(); g2.moveTo(hx,GY+26); g2.lineTo(hx+22,GY); g2.stroke(); }
     g2.globalAlpha=1;
 
-    // water behind the building
+    // --- water behind
     var wy=GY-Math.min(1,dep/MAXDEP)*BH;
     if(dep>0.02){
-      g2.fillStyle=acc; g2.globalAlpha=0.22; g2.fillRect(0,wy,w,GY-wy); g2.globalAlpha=1;
+      g2.fillStyle=acc; g2.globalAlpha=0.20; g2.fillRect(0,wy,w,GY-wy); g2.globalAlpha=1;
       g2.strokeStyle=acc; g2.lineWidth=2;
       g2.beginPath(); g2.moveTo(0,wy); g2.lineTo(w,wy); g2.stroke();
     }
 
-    // building
+    // --- moment frame: two columns, N floor beams. Damage shows as plastic
+    //     hinges at member ends, which is how engineers actually draw it.
+    //     Symmetric X marks read as bracing, not damage.
     g2.save();
     g2.translate(BX,GY);
     g2.transform(1,0,-lean/BH,1,0,0);
-    g2.fillStyle=sheet; g2.globalAlpha=0.9; g2.fillRect(0,-BH,BW,BH); g2.globalAlpha=1;
-    g2.strokeStyle=ink; g2.lineWidth=1.6; g2.strokeRect(0,-BH,BW,BH);
-    g2.strokeStyle=rule; g2.lineWidth=1;
-    for(var f=1;f<FLOORS;f++){
-      var fy=-BH*f/FLOORS;
+
+    g2.strokeStyle=ink; g2.lineWidth=2.4; g2.lineCap='round';
+    g2.beginPath(); g2.moveTo(0,0);  g2.lineTo(0,-BH);  g2.stroke();
+    g2.beginPath(); g2.moveTo(BW,0); g2.lineTo(BW,-BH); g2.stroke();
+    for(var f=0;f<=N;f++){
+      var fy=-storey*f;
       g2.beginPath(); g2.moveTo(0,fy); g2.lineTo(BW,fy); g2.stroke();
     }
-    // damage: diagonal shear cracks, worst at the base, one per storey
-    if(dam>0.08){
-      var nc=Math.max(1,Math.round(dam*FLOORS));
-      g2.strokeStyle=mark; g2.lineWidth=1.8; g2.lineCap='round';
-      for(var c=0;c<nc && c<FLOORS;c++){
-        var y0=-BH*c/FLOORS, y1=-BH*(c+1)/FLOORS;
-        var inten=Math.min(1, dam*1.4 - c*0.16);
-        if(inten<=0.05) continue;
-        g2.globalAlpha=inten;
-        g2.beginPath(); g2.moveTo(BW*0.16,y0-4); g2.lineTo(BW*0.72,y1+4); g2.stroke();
-        if(inten>0.55){ g2.beginPath(); g2.moveTo(BW*0.84,y0-4); g2.lineTo(BW*0.34,y1+4); g2.stroke(); }
+    g2.lineCap='butt';
+
+    // plastic hinges - form at the base first, work upward
+    if(dam>0.05){
+      for(var s2=0;s2<N;s2++){
+        var inten=Math.min(1, dam*1.7 - s2*0.28);
+        if(inten<=0.06) continue;
+        var yb=-storey*s2, yt=-storey*(s2+1);
+        var r=3.2+inten*2.6;
+        g2.fillStyle=mark; g2.globalAlpha=0.35+inten*0.65;
+        [[0,yb+9],[BW,yb+9],[0,yt-9],[BW,yt-9]].forEach(function(pt){
+          g2.beginPath(); g2.arc(pt[0],pt[1],r,0,Math.PI*2); g2.fill();
+        });
+        g2.globalAlpha=1;
       }
-      g2.globalAlpha=1; g2.lineCap='butt';
     }
     g2.restore();
 
-    // tsunami drag arrows onto the wetted face
+    // --- tsunami drag onto the wetted face
     if(dep>0.02){
       var rel=Math.min(1,fTs(dep,fr)/900);
-      g2.strokeStyle=mark; g2.fillStyle=mark; g2.lineWidth=2.2;
-      var n=Math.max(2,Math.min(5,Math.round(dep*0.8)+1));
-      for(var k=0;k<n;k++){
-        var ay=GY-10-(k+0.5)*((GY-wy)/n), len=26+rel*46;
-        g2.beginPath(); g2.moveTo(BX-len-14,ay); g2.lineTo(BX-16,ay); g2.stroke();
-        g2.beginPath(); g2.moveTo(BX-6,ay); g2.lineTo(BX-17,ay-5); g2.lineTo(BX-17,ay+5); g2.closePath(); g2.fill();
+      g2.strokeStyle=mark; g2.fillStyle=mark; g2.lineWidth=2.4;
+      var na=Math.max(2,Math.min(5,Math.round(dep*0.8)+1));
+      for(var k=0;k<na;k++){
+        var ay=GY-12-(k+0.5)*((GY-wy)/na), len=30+rel*44;
+        g2.beginPath(); g2.moveTo(BX-len-10,ay); g2.lineTo(BX-12,ay); g2.stroke();
+        g2.beginPath(); g2.moveTo(BX-2,ay); g2.lineTo(BX-14,ay-5.5); g2.lineTo(BX-14,ay+5.5); g2.closePath(); g2.fill();
       }
-      g2.fillStyle=acc; g2.font='600 15px "IBM Plex Mono", monospace'; g2.textAlign='left';
-      g2.fillText((dep*M2FT).toFixed(1)+' ft', 14, wy-12);
+      g2.fillStyle=acc; g2.font='600 17px "IBM Plex Mono", monospace'; g2.textAlign='left';
+      g2.fillText((dep*M2FT).toFixed(1)+' ft', 16, wy-14);
     }
 
-    // ground shaking, drawn below grade
-    g2.strokeStyle=ink; g2.fillStyle=ink; g2.lineWidth=2.2; g2.globalAlpha=0.7;
-    var sw=18+Math.min(pga,1.5)*40, cxb=BX+BW/2, sy=GY+34;
+    // --- shaking
+    g2.strokeStyle=ink; g2.fillStyle=ink; g2.lineWidth=2.4; g2.globalAlpha=0.8;
+    var sw=20+Math.min(pga,1.5)*40, cxb=BX+BW/2, sy=GY+40;
     g2.beginPath(); g2.moveTo(cxb-sw,sy); g2.lineTo(cxb+sw,sy); g2.stroke();
-    [-1,1].forEach(function(sgn){
+    [-1,1].forEach(function(sg){
       g2.beginPath();
-      g2.moveTo(cxb+sgn*(sw+9),sy);
-      g2.lineTo(cxb+sgn*sw,sy-5.5);
-      g2.lineTo(cxb+sgn*sw,sy+5.5);
+      g2.moveTo(cxb+sg*(sw+10),sy);
+      g2.lineTo(cxb+sg*sw,sy-6);
+      g2.lineTo(cxb+sg*sw,sy+6);
       g2.closePath(); g2.fill();
     });
     g2.globalAlpha=1;
-    g2.fillStyle=ink; g2.font='600 15px "IBM Plex Mono", monospace'; g2.textAlign='center';
-    g2.fillText(pga.toFixed(2)+' g', cxb, sy+26);
+    g2.font='600 17px "IBM Plex Mono", monospace'; g2.textAlign='center';
+    g2.fillText(pga.toFixed(2)+' g', cxb, sy+30);
 
-    // sequence labels
-    g2.textAlign='left'; g2.font='600 12px "Libre Franklin", sans-serif';
-    g2.fillStyle=ink;  g2.fillText('1  EARTHQUAKE', 16, 30);
-    g2.fillStyle=mute; g2.font='12px "Libre Franklin", sans-serif';
-    g2.fillText('shaking damages the frame', 16, 48);
-    g2.fillStyle=ink;  g2.font='600 12px "Libre Franklin", sans-serif';
-    g2.fillText('2  TSUNAMI', 16, 74);
-    g2.fillStyle=mute; g2.font='12px "Libre Franklin", sans-serif';
-    g2.fillText('arrives at reduced capacity', 16, 92);
+    // --- sequence labels
+    g2.textAlign='left';
+    g2.fillStyle=ink;  g2.font='600 15px "Libre Franklin", sans-serif';
+    g2.fillText('1  EARTHQUAKE', 18, 36);
+    g2.fillStyle=mute; g2.font='14px "Libre Franklin", sans-serif';
+    g2.fillText('plastic hinges form, capacity drops', 18, 58);
+    g2.fillStyle=ink;  g2.font='600 15px "Libre Franklin", sans-serif';
+    g2.fillText('2  TSUNAMI', 18, 90);
+    g2.fillStyle=mute; g2.font='14px "Libre Franklin", sans-serif';
+    g2.fillText('arrives at the weakened frame', 18, 112);
   }
   function render(){
     var pga=parseFloat(sPga.value), dep=parseFloat(sDep.value),
