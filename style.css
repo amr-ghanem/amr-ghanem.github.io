@@ -237,6 +237,21 @@ figcaption p{font-size:.87rem;color:var(--ink-soft);max-width:40ch;line-height:1
 .creds li.pending strong{color:var(--ink-soft);font-style:italic}
 .affil{font-size:.99rem;color:var(--ink-soft);max-width:60ch}
 
+/* ---------- icons ---------- */
+.icon{width:1em;height:1em;flex:none;vertical-align:-0.12em;opacity:.85}
+.fcols a{display:inline-flex;align-items:center;gap:9px}
+.fplain{display:flex;align-items:center;gap:9px}
+h2.rule .icon{width:1.5em;height:1.5em;margin-right:9px;opacity:.75}
+h2.rule{display:flex;align-items:center}
+.creds li{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px}
+.creds .icon{width:1.15rem;height:1.15rem;color:var(--accent)}
+.creds li.pending .icon{color:var(--ink-mute)}
+
+/* ---------- about: bio + portrait ---------- */
+.bio-split{display:grid;grid-template-columns:1fr 260px;gap:52px;align-items:start;padding-top:36px}
+.bio-portrait{margin:0;position:sticky;top:32px}
+.bio-portrait figcaption{font-family:"Libre Franklin",sans-serif;font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-mute);margin-top:12px}
+@media(max-width:860px){.bio-split{grid-template-columns:1fr;gap:32px}.bio-portrait{position:static;max-width:230px}}
 /* ---------- footer ---------- */
 footer.site{border-top:1px solid var(--rule);padding-top:34px;padding-bottom:60px;margin-top:52px}
 .fcols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px}
