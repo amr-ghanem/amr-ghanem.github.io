@@ -183,34 +183,72 @@
   <h2 class="rule">How Locus works</h2>
   <p class="rlede"><em>Locus</em> is the mathematical term for the set of all points satisfying a condition &mdash; which is exactly what a fragility surface is. At the centre sits a coupled loop between reliability analysis and structural analysis. Running it once gives one probability; running it across a whole parameter space, in parallel, gives the surface.</p>
 <figure class="engine">
-  <svg viewBox="0 0 720 300" role="img" aria-label="Coupled reliability and structural analysis loop: uncertainties feed the reliability search, which exchanges deterministic input and output response with the structural analysis until convergence, returning a failure probability">
-    <text class="elab" x="8" y="104">Input uncertainty</text>
-    <text class="elab" x="8" y="194">Model uncertainty</text>
-    <path class="earr" d="M150 96 h30 l0-8 18 13 -18 13 0-8 h-30 z"/>
-    <path class="earr" d="M156 186 h24 l0-8 18 13 -18 13 0-8 h-24 z"/>
+  <svg viewBox="0 0 780 360" role="img" aria-label="Coupled engine: input and model uncertainty distributions feed a reliability search, which exchanges deterministic trials and structural responses with a nonlinear analysis until convergence, returning a fragility curve">
 
-    <rect class="ebox" x="212" y="34" width="330" height="232" rx="14"/>
-    <text class="etitle" x="377" y="24" text-anchor="middle">Coupled engine</text>
+    <g class="ein">
+      <path class="epdf" d="M14 118 C 30 118, 32 78, 48 78 C 64 78, 66 118, 82 118"/>
+      <line class="eaxis" x1="10" y1="118" x2="86" y2="118"/>
+      <text class="elab" x="48" y="142" text-anchor="middle">Input uncertainty</text>
+      <text class="esub" x="48" y="160" text-anchor="middle">ground motion, geometry</text>
+    </g>
+    <g class="ein">
+      <path class="epdf" d="M14 268 C 30 268, 34 234, 48 234 C 62 234, 66 268, 82 268"/>
+      <line class="eaxis" x1="10" y1="268" x2="86" y2="268"/>
+      <text class="elab" x="48" y="292" text-anchor="middle">Model uncertainty</text>
+      <text class="esub" x="48" y="310" text-anchor="middle">material, capacity</text>
+    </g>
+    <path class="earr" d="M100 108 h44 l0-9 20 14 -20 14 0-9 h-44 z"/>
+    <path class="earr" d="M100 258 h44 l0-9 20 14 -20 14 0-9 h-44 z"/>
 
-    <text class="ecode" x="288" y="142" text-anchor="middle">FERUM</text>
-    <text class="esub"  x="288" y="162" text-anchor="middle">reliability</text>
-    <text class="esub"  x="288" y="178" text-anchor="middle">analysis</text>
+    <rect class="ebox" x="182" y="30" width="404" height="300" rx="16"/>
+    <text class="etitle" x="384" y="20" text-anchor="middle">Coupled engine</text>
 
-    <text class="ecode" x="468" y="142" text-anchor="middle">ZEUS-NL</text>
-    <text class="esub"  x="468" y="162" text-anchor="middle">nonlinear</text>
-    <text class="esub"  x="468" y="178" text-anchor="middle">structural analysis</text>
+    <g class="eside">
+      <rect class="epanel" x="204" y="200" width="150" height="106" rx="8"/>
+      <path class="ecurve" d="M216 292 C 246 292, 254 224, 300 220 L346 219"/>
+      <circle class="etrial" cx="242" cy="282" r="3.2" opacity=".4"/>
+      <circle class="etrial" cx="256" cy="266" r="3.2" opacity=".62"/>
+      <circle class="etrial" cx="268" cy="245" r="3.2" opacity=".82"/>
+      <circle class="edesign" cx="280" cy="229" r="5"/>
+      <line class="edash" x1="222" y1="294" x2="280" y2="229"/>
+      <text class="eglyph" x="279" y="300" text-anchor="middle">design point</text>
+    </g>
+    <text class="ecode" x="279" y="114" text-anchor="middle">FERUM</text>
+    <text class="esub"  x="279" y="136" text-anchor="middle">reliability analysis</text>
+    <text class="esub"  x="279" y="154" text-anchor="middle">searches for failure</text>
 
-    <path class="ecyc" d="M300 108 C 332 76, 424 76, 456 108"/>
-    <polygon class="ecycHead" points="459,110 444,96 460,92"/>
-    <text class="ecyclab" x="377" y="68" text-anchor="middle">deterministic input</text>
+    <g class="eside">
+      <rect class="epanel" x="414" y="200" width="150" height="106" rx="8"/>
+      <g class="eframe">
+        <line x1="434" y1="292" x2="434" y2="220"/>
+        <line x1="474" y1="292" x2="474" y2="220"/>
+        <line x1="434" y1="220" x2="474" y2="220"/>
+        <line x1="434" y1="256" x2="474" y2="256"/>
+        <line x1="426" y1="292" x2="482" y2="292"/>
+      </g>
+      <path class="ehyst" d="M504 272 C 498 254, 522 240, 540 236 C 548 234, 550 244, 542 250 C 526 260, 504 262, 502 254 C 500 246, 514 236, 532 232"/>
+      <text class="eglyph" x="489" y="300" text-anchor="middle">response history</text>
+    </g>
+    <text class="ecode" x="489" y="114" text-anchor="middle">ZEUS-NL</text>
+    <text class="esub"  x="489" y="136" text-anchor="middle">nonlinear structural</text>
+    <text class="esub"  x="489" y="154" text-anchor="middle">analysis</text>
 
-    <path class="ecyc" d="M456 204 C 424 236, 332 236, 300 204"/>
-    <polygon class="ecycHead" points="297,202 312,216 296,220"/>
-    <text class="ecyclab" x="377" y="254" text-anchor="middle">output response</text>
+    <path class="ecyc" d="M318 78 C 352 52, 416 52, 450 78"/>
+    <polygon class="ecycHead" points="454,81 437,68 453,62"/>
+    <text class="ecyclab" x="384" y="46" text-anchor="middle">deterministic trial</text>
 
-    <path class="earr out" d="M556 148 h32 l0-8 18 13 -18 13 0-8 h-32 z"/>
-    <text class="elab out" x="618" y="144">Failure</text>
-    <text class="elab out" x="618" y="164">probability</text>
+    <path class="ecyc" d="M450 180 C 416 204, 352 204, 318 180"/>
+    <polygon class="ecycHead" points="314,177 331,190 315,196"/>
+    <text class="ecyclab" x="384" y="196" text-anchor="middle">output response</text>
+
+    <path class="earr out" d="M600 168 h34 l0-9 20 14 -20 14 0-9 h-34 z"/>
+    <g class="eout">
+      <path class="efrag" d="M678 252 C 702 252, 708 190, 740 188 L766 187"/>
+      <line class="eaxis" x1="674" y1="252" x2="770" y2="252"/>
+      <line class="eaxis" x1="678" y1="256" x2="678" y2="180"/>
+      <text class="elab out" x="722" y="164" text-anchor="middle">Failure probability</text>
+      <text class="esub"     x="722" y="274" text-anchor="middle">at every intensity</text>
+    </g>
   </svg>
   <figcaption>The reliability search and the structural analysis run as a coupled loop &mdash; a trial realisation goes out, a response comes back, the search updates, and it cycles until the design point converges. After Figure 8 of the dissertation.</figcaption>
 </figure>

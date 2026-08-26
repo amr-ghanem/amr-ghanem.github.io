@@ -243,20 +243,31 @@ figcaption p{font-size:.87rem;color:var(--ink-soft);max-width:40ch;line-height:1
 /* ---------- coupled engine diagram ---------- */
 .engine{margin:0 0 32px;background:var(--sheet);border:1px solid var(--rule);padding:24px}
 .engine svg{width:100%;height:auto;display:block;overflow:visible}
-.engine .ebox{fill:none;stroke:var(--ink-mute);stroke-width:1.6}
-.engine .etitle{font-family:"Libre Franklin",sans-serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase;fill:var(--ink-mute)}
-.engine .ecode{font-family:"Newsreader",Georgia,serif;font-size:27px;fill:var(--ink)}
-.engine .esub{font-family:"Libre Franklin",sans-serif;font-size:13px;fill:var(--ink-mute)}
-.engine .elab{font-family:"Libre Franklin",sans-serif;font-size:16px;fill:var(--ink-soft)}
-.engine .earr{fill:none;stroke:var(--ink-mute);stroke-width:1.6}
+.engine .ebox{fill:none;stroke:var(--rule);stroke-width:1.6}
+.engine .epanel{fill:var(--sunk);stroke:none}
+.engine .etitle{font-family:"Libre Franklin",sans-serif;font-size:12px;letter-spacing:.16em;text-transform:uppercase;fill:var(--ink-mute)}
+.engine .ecode{font-family:"Newsreader",Georgia,serif;font-size:26px;fill:var(--ink)}
+.engine .esub{font-family:"Libre Franklin",sans-serif;font-size:12.5px;fill:var(--ink-mute)}
+.engine .elab{font-family:"Libre Franklin",sans-serif;font-size:14.5px;fill:var(--ink-soft)}
+.engine .eglyph{font-family:"Libre Franklin",sans-serif;font-size:11px;letter-spacing:.08em;text-transform:uppercase;fill:var(--ink-mute)}
+.engine .earr{fill:none;stroke:var(--ink-mute);stroke-width:1.5}
 .engine .earr.out{stroke:var(--accent)}
-.engine .elab.out{fill:var(--accent)}
+.engine .elab.out{fill:var(--accent);font-size:15px}
+.engine .eaxis{stroke:var(--ink-mute);stroke-width:1;opacity:.5}
+.engine .epdf{fill:none;stroke:var(--data2);stroke-width:2}
+.engine .ecurve{fill:none;stroke:var(--ink-mute);stroke-width:1.6}
+.engine .etrial{fill:var(--ink-mute)}
+.engine .edesign{fill:var(--data4)}
+.engine .edash{stroke:var(--data4);stroke-width:1;stroke-dasharray:3 3;opacity:.7}
+.engine .eframe line{stroke:var(--ink-soft);stroke-width:2;stroke-linecap:round}
+.engine .ehyst{fill:none;stroke:var(--data3);stroke-width:1.6}
+.engine .efrag{fill:none;stroke:var(--accent);stroke-width:2.4}
 .engine .ecyc{fill:none;stroke:var(--accent);stroke-width:2.4}
 .engine .ecycHead{fill:var(--accent)}
-.engine .ecyclab{font-family:"Libre Franklin",sans-serif;font-size:13px;fill:var(--ink-mute);letter-spacing:.02em}
+.engine .ecyclab{font-family:"Libre Franklin",sans-serif;font-size:12.5px;fill:var(--ink-mute)}
 .engine figcaption{font-family:"Libre Franklin",sans-serif;font-size:.8rem;line-height:1.6;color:var(--ink-mute);margin-top:16px;max-width:78ch}
 .rnote{font-family:"Libre Franklin",sans-serif;font-size:.8rem;line-height:1.6;color:var(--ink-mute);margin:24px 0 0;max-width:78ch}
-@media(max-width:580px){.engine{padding:12px}.engine .ecode{font-size:22px}}
+@media(max-width:580px){.engine{padding:12px}.engine .ecode{font-size:21px}}
 .hsteps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
 .hsteps li{background:var(--sheet);padding:24px}
 .htop{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--rule-soft)}
