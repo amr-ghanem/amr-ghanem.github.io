@@ -180,6 +180,30 @@ svg.trajectory .mlab{font-family:"Libre Franklin",sans-serif;font-size:10px;fill
 .eqn{font-family:"IBM Plex Mono",monospace;font-size:.78rem;color:var(--ink-mute);margin:24px 0 0;padding-top:18px;border-top:1px solid var(--rule-soft)}
 
 @media(max-width:860px){.exp-panel{grid-template-columns:1fr;gap:28px;padding:22px}}
+/* ---------- tsunami explorer ---------- */
+.tsu-panel{grid-template-columns:1.7fr 1fr}
+.tsu-views{display:grid;grid-template-columns:0.82fr 1fr;gap:18px;align-items:center}
+.tsu-views svg{width:100%;height:auto;display:block}
+#tsuScene .sky{fill:var(--sunk)}
+#tsuScene .bldg{fill:var(--sheet);stroke:var(--ink-mute);stroke-width:1.2}
+#tsuScene .floors line{stroke:var(--rule);stroke-width:1}
+#tsuScene .ground{fill:var(--ink-mute);opacity:.28}
+#tsuScene .water{fill:var(--accent);opacity:.3}
+#tsuScene .wline{stroke:var(--accent);stroke-width:1.6}
+#tsuScene .farrow{stroke:var(--data4);stroke-width:1.8}
+#tsuScene .fhead{fill:var(--data4)}
+#tsuScene .dlab{font-family:"IBM Plex Mono",monospace;font-size:11px;fill:var(--accent)}
+#tsuChart .grid line{stroke:var(--rule-soft);stroke-width:1}
+#tsuChart .ax{font-family:"IBM Plex Mono",monospace;font-size:9.5px;fill:var(--ink-mute)}
+#tsuChart .axt{font-family:"Libre Franklin",sans-serif;font-size:8px;fill:var(--ink-mute);letter-spacing:.13em;text-transform:uppercase}
+#tsuChart .curve{stroke-width:2.1;stroke-linecap:round}
+#tsuChart .c1{stroke:var(--data1)} #tsuChart .c3{stroke:var(--data3)} #tsuChart .c4{stroke:var(--data4)}
+#tsuChart .mark{stroke:var(--data4);stroke-width:1.2;stroke-dasharray:3 3}
+#tsuChart .markdot{fill:var(--data4);stroke:var(--sheet);stroke-width:2}
+.tsu .legend{margin:26px 0 0}
+.eqn sub{font-size:.8em}
+@media(max-width:860px){.tsu-panel{grid-template-columns:1fr}.tsu-views{grid-template-columns:0.8fr 1fr}}
+@media(max-width:580px){.tsu-views{grid-template-columns:1fr;gap:22px}}
 /* ---------- research images ---------- */
 .rgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
 .rfig{margin:0}
