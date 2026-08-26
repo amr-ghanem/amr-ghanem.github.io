@@ -220,6 +220,10 @@ figcaption p{font-size:.87rem;color:var(--ink-soft);max-width:40ch;line-height:1
 
 /* ---------- research + about ---------- */
 .pagehead{padding:48px 0 8px}
+.pub.haspic{display:grid;grid-template-columns:1fr 220px;gap:32px;align-items:start}
+.pubfig{margin:0}
+.pubfig img{width:100%;aspect-ratio:4/3;object-fit:contain;background:#fff;border:1px solid var(--rule);padding:8px;display:block}
+@media(max-width:700px){.pub.haspic{grid-template-columns:1fr;gap:16px}.pubfig{max-width:280px}}
 .pub{padding:24px 0;border-bottom:1px solid var(--rule-soft)}
 .pub:last-child{border-bottom:none}
 .pub h3 a{color:var(--ink);text-decoration:none}
