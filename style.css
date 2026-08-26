@@ -49,7 +49,7 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
 .num,.cites,.meta,.idx,.when,.fignum{font-family:"IBM Plex Mono",monospace}
 
 /* ---------- header ---------- */
-header.site{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;padding-top:32px;padding-bottom:24px}
+header.site{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
 .wordmark{text-decoration:none;color:var(--ink);display:flex;align-items:baseline;gap:8px}
 .wordmark strong{font-weight:400;font-size:1.32rem;letter-spacing:-.014em}
 .wordmark span{font-family:"IBM Plex Mono",monospace;font-size:.6rem;letter-spacing:.16em;color:var(--ink-mute);text-transform:uppercase}
@@ -58,6 +58,27 @@ nav a{color:var(--ink-mute);text-decoration:none;padding-bottom:3px;border-botto
 nav a.active{color:var(--ink);border-bottom-color:var(--accent)}
 nav a:hover{color:var(--accent)}
 
+/* ---------- sticky header ---------- */
+header.site{
+  position:sticky;top:0;z-index:50;
+  background:var(--ground);
+  border-bottom:1px solid var(--rule);
+  padding-top:16px;padding-bottom:16px;
+}
+@supports (backdrop-filter:blur(8px)){
+  header.site{background:color-mix(in srgb, var(--ground) 88%, transparent);backdrop-filter:blur(8px)}
+}
+.headright{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.hicons{display:flex;align-items:center;gap:16px;padding-left:24px;border-left:1px solid var(--rule)}
+.hicons a{color:var(--ink-mute);display:flex;text-decoration:none}
+.hicons a:hover{color:var(--accent)}
+.hicons .icon{width:1.15rem;height:1.15rem;opacity:1}
+/* anchor targets must clear the sticky header */
+:target,[id]{scroll-margin-top:96px}
+@media(max-width:580px){
+  .hicons{padding-left:16px;gap:12px}
+  .headright{gap:16px}
+}
 /* ---------- type ---------- */
 section,.exp-wrap{padding:48px 0 0}
 .eyebrow{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-mute);margin:0 0 24px;line-height:1.9}
