@@ -229,6 +229,10 @@ figcaption p{font-size:.87rem;color:var(--ink-soft);max-width:40ch;line-height:1
 @media(max-width:860px){.tsu-views{grid-template-columns:0.8fr 1fr;gap:16px}}
 @media(max-width:580px){.tsu-views{grid-template-columns:1fr;gap:24px}}
 /* ---------- surface explorer ---------- */
+.mh-views{display:grid;grid-template-columns:0.42fr 1fr;gap:24px;align-items:stretch;margin-bottom:24px}
+.mh-struct,.mh-surf{background:var(--sunk);border:1px solid var(--rule-soft)}
+.mh-views canvas{width:100%;height:auto;display:block}
+@media(max-width:860px){.mh-views{grid-template-columns:1fr}.mh-struct{max-width:320px;margin:0 auto}}
 .surfwrap{background:var(--sunk);border:1px solid var(--rule-soft);padding:8px}
 #surfCanvas{width:100%;height:auto;display:block}
 

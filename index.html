@@ -112,7 +112,7 @@
 <section class="hero">
   <div class="hero-text">
     <h1>Quantifying structural resilience</h1>
-    <p class="lede">Locus — an integrated multi-hazard fragility assessment tool. Any hazard, any configuration, one continuous surface.</p>
+    <p class="lede">Locus — an integrated multi-hazard fragility assessment tool for buildings and bridges.</p>
     <ul class="roles"><li><span class="rl">Associate Researcher</span><span class="ro">University of Hawaiʻi at Mānoa</span></li><li><span class="rl">Advanced Structural Designer and Analyst</span><span class="ro">Martin, Chock &amp; Carden, Inc.</span></li></ul>
     <p class="cta"><a class="btn" href="research.html">Selected research</a><a class="btn ghost" href="#explorer">Try the model</a></p>
   </div>
@@ -124,14 +124,20 @@
 <section class="explorer" id="explorer">
   <div class="exp-intro">
     <p class="fignum">Interactive</p>
-    <h2>The surface, not the curve</h2>
-    <p>Standard practice gives one curve: one configuration, one hazard, one line. Locus returns the whole surface &mdash; failure probability across every configuration and every intensity at once, so an answer exists for cases nobody explicitly ran. Move the sliders and read a point off it.</p>
+    <h2>Two hazards, one surface</h2>
+    <p>A subduction earthquake shakes a structure and then floods it. The tsunami arrives at a building the shaking has already weakened, so assessing the two separately understates the risk. This is the combined surface &mdash; failure probability across both demands at once, with the earthquake eroding the capacity the tsunami then has to overcome.</p>
   </div>
 
   <div class="exp-panel">
-    <div class="exp-chart surfwrap">
-      <canvas id="surfCanvas" width="1100" height="600" role="img"
-        aria-label="Three-dimensional fragility surface: failure probability against ground shaking intensity and structural configuration"></canvas>
+    <div class="mh-views">
+      <div class="mh-struct">
+        <canvas id="structCanvas" width="420" height="560" role="img"
+          aria-label="Structure elevation responding to earthquake drift and tsunami inundation"></canvas>
+      </div>
+      <div class="mh-surf">
+        <canvas id="surfCanvas" width="900" height="560" role="img"
+          aria-label="Fragility surface: failure probability against peak ground acceleration and tsunami inundation depth"></canvas>
+      </div>
     </div>
 
     <div class="exp-controls">
@@ -141,30 +147,36 @@
       </div>
 
       <div class="ctrl">
-        <label for="sIm">Ground shaking <span id="vIm">0.40 g</span></label>
-        <input type="range" id="sIm" min="0.05" max="2" step="0.05" value="0.4">
-        <p class="hint">Intensity at the site. One axis of the surface.</p>
+        <label for="sPga">Ground shaking <span id="vPga">0.35 g</span></label>
+        <input type="range" id="sPga" min="0" max="1.5" step="0.01" value="0.35">
+        <p class="hint">Peak ground acceleration. Drives the earthquake demand &mdash; and the damage the tsunami then meets.</p>
       </div>
 
       <div class="ctrl">
-        <label for="sCfg">Configuration <span id="vCfg">0.50</span></label>
-        <input type="range" id="sCfg" min="0" max="1" step="0.02" value="0.5">
-        <p class="hint">The structural variable &mdash; here, degree of mass irregularity. The other axis.</p>
+        <label for="sDep">Inundation depth <span id="vDep">13.1 ft (4.0 m)</span></label>
+        <input type="range" id="sDep" min="0" max="8" step="0.1" value="4">
+        <p class="hint">How deep the water stands against the wall.</p>
       </div>
 
       <div class="ctrl">
-        <label for="sBeta">Dispersion &beta; <span id="vBeta">0.50</span></label>
-        <input type="range" id="sBeta" min="0.2" max="0.9" step="0.02" value="0.5">
+        <label for="sFr">Flow velocity, Fr <span id="vFr">1.40</span></label>
+        <input type="range" id="sFr" min="0.4" max="2" step="0.05" value="1.4">
+        <p class="hint">Froude number. Higher means a faster surge and a far larger drag force.</p>
+      </div>
+
+      <div class="ctrl">
+        <label for="sBe">Dispersion &beta; <span id="vBe">0.50</span></label>
+        <input type="range" id="sBe" min="0.2" max="0.9" step="0.02" value="0.5">
         <p class="hint">Uncertainty. Flattens the whole surface, not one line.</p>
       </div>
 
       <div class="ctrl">
-        <label for="sRot">View <span id="vRot">35&deg;</span></label>
-        <input type="range" id="sRot" min="-60" max="60" step="1" value="35">
-        <p class="hint">Rotate to see the shape.</p>
+        <label for="sRot">View <span id="vRot">32&deg;</span></label>
+        <input type="range" id="sRot" min="-60" max="60" step="1" value="32">
+        <p class="hint">Rotate the surface.</p>
       </div>
 
-      <p class="eqn">P(fail | IM, c) = &Phi;( ln(IM / &theta;(c)) / &beta; )</p>
+      <p class="eqn">P = 1 &minus; (1 &minus; P<sub>eq</sub>)(1 &minus; P<sub>ts</sub>) &nbsp;&middot;&nbsp; &theta;<sub>ts</sub> reduced by earthquake damage</p>
     </div>
   </div>
 </section>
@@ -234,7 +246,7 @@
     </div>
           <figure class="exp-fig">
         <svg class="fragility" viewBox="0 0 560 300" role="img" aria-label="Tsunami force per unit width against inundation depth, showing hydrostatic, drag and combined components" xmlns="http://www.w3.org/2000/svg"><g class="grid"><line x1="50" y1="266" x2="546" y2="266" /><text class="ax" x="42" y="269.5" text-anchor="end">0</text><line x1="50" y1="203" x2="546" y2="203" /><text class="ax" x="42" y="206.5" text-anchor="end">168</text><line x1="50" y1="140" x2="546" y2="140" /><text class="ax" x="42" y="143.5" text-anchor="end">335</text><line x1="50" y1="77" x2="546" y2="77" /><text class="ax" x="42" y="80.5" text-anchor="end">503</text><line x1="50" y1="14" x2="546" y2="14" /><text class="ax" x="42" y="17.5" text-anchor="end">670</text><text class="ax" x="50" y="284" text-anchor="middle">0</text><text class="ax" x="215.3" y="284" text-anchor="middle">2</text><text class="ax" x="380.7" y="284" text-anchor="middle">4</text><text class="ax" x="546" y="284" text-anchor="middle">6</text></g><text class="axt" x="13" y="140" text-anchor="middle" transform="rotate(-90 13 140)">Force per metre (kN/m)</text><text class="axt" x="298" y="296" text-anchor="middle">Inundation depth (m)</text><path class="curve c1" d="M50 266L54.1 266L58.3 266L62.4 266L66.5 265.9L70.7 265.9L74.8 265.8L78.9 265.8L83.1 265.7L87.2 265.6L91.3 265.5L95.5 265.4L99.6 265.3L103.7 265.1L107.9 265L112 264.9L116.1 264.7L120.3 264.5L124.4 264.4L128.5 264.2L132.7 264L136.8 263.8L140.9 263.5L145.1 263.3L149.2 263.1L153.3 262.8L157.5 262.6L161.6 262.3L165.7 262L169.9 261.7L174 261.4L178.1 261.1L182.3 260.8L186.4 260.5L190.5 260.1L194.7 259.8L198.8 259.4L202.9 259.1L207.1 258.7L211.2 258.3L215.3 257.9L219.5 257.5L223.6 257.1L227.7 256.6L231.9 256.2L236 255.7L240.1 255.3L244.3 254.8L248.4 254.3L252.5 253.8L256.7 253.3L260.8 252.8L264.9 252.3L269.1 251.8L273.2 251.2L277.3 250.7L281.5 250.1L285.6 249.5L289.7 248.9L293.9 248.3L298 247.7L302.1 247.1L306.3 246.5L310.4 245.9L314.5 245.2L318.7 244.6L322.8 243.9L326.9 243.2L331.1 242.5L335.2 241.8L339.3 241.1L343.5 240.4L347.6 239.7L351.7 239L355.9 238.2L360 237.5L364.1 236.7L368.3 235.9L372.4 235.1L376.5 234.3L380.7 233.5L384.8 232.7L388.9 231.9L393.1 231.1L397.2 230.2L401.3 229.4L405.5 228.5L409.6 227.6L413.7 226.7L417.9 225.8L422 224.9L426.1 224L430.3 223.1L434.4 222.1L438.5 221.2L442.7 220.2L446.8 219.3L450.9 218.3L455.1 217.3L459.2 216.3L463.3 215.3L467.5 214.3L471.6 213.2L475.7 212.2L479.9 211.1L484 210.1L488.1 209L492.3 207.9L496.4 206.8L500.5 205.7L504.7 204.6L508.8 203.5L512.9 202.4L517.1 201.2L521.2 200.1L525.3 198.9L529.5 197.7L533.6 196.6L537.7 195.4L541.9 194.2L546 193" fill="none" /><path class="curve c3" d="M50 266L54.1 266L58.3 266L62.4 265.9L66.5 265.8L70.7 265.7L74.8 265.6L78.9 265.4L83.1 265.2L87.2 265L91.3 264.8L95.5 264.5L99.6 264.2L103.7 263.9L107.9 263.6L112 263.2L116.1 262.8L120.3 262.4L124.4 262L128.5 261.5L132.7 261L136.8 260.5L140.9 260L145.1 259.4L149.2 258.8L153.3 258.2L157.5 257.6L161.6 256.9L165.7 256.3L169.9 255.5L174 254.8L178.1 254.1L182.3 253.3L186.4 252.5L190.5 251.6L194.7 250.8L198.8 249.9L202.9 249L207.1 248.1L211.2 247.1L215.3 246.1L219.5 245.1L223.6 244.1L227.7 243L231.9 241.9L236 240.8L240.1 239.7L244.3 238.5L248.4 237.4L252.5 236.2L256.7 234.9L260.8 233.7L264.9 232.4L269.1 231.1L273.2 229.8L277.3 228.4L281.5 227L285.6 225.6L289.7 224.2L293.9 222.7L298 221.3L302.1 219.8L306.3 218.2L310.4 216.7L314.5 215.1L318.7 213.5L322.8 211.9L326.9 210.2L331.1 208.5L335.2 206.8L339.3 205.1L343.5 203.4L347.6 201.6L351.7 199.8L355.9 197.9L360 196.1L364.1 194.2L368.3 192.3L372.4 190.4L376.5 188.4L380.7 186.5L384.8 184.5L388.9 182.4L393.1 180.4L397.2 178.3L401.3 176.2L405.5 174.1L409.6 171.9L413.7 169.8L417.9 167.6L422 165.3L426.1 163.1L430.3 160.8L434.4 158.5L438.5 156.2L442.7 153.8L446.8 151.5L450.9 149.1L455.1 146.6L459.2 144.2L463.3 141.7L467.5 139.2L471.6 136.7L475.7 134.2L479.9 131.6L484 129L488.1 126.4L492.3 123.7L496.4 121L500.5 118.3L504.7 115.6L508.8 112.9L512.9 110.1L517.1 107.3L521.2 104.5L525.3 101.6L529.5 98.8L533.6 95.9L537.7 93L541.9 90L546 87" fill="none" /><path class="curve c4" d="M50 266L54.1 266L58.3 265.9L62.4 265.8L66.5 265.7L70.7 265.6L74.8 265.4L78.9 265.1L83.1 264.9L87.2 264.6L91.3 264.2L95.5 263.9L99.6 263.5L103.7 263L107.9 262.6L112 262.1L116.1 261.5L120.3 260.9L124.4 260.3L128.5 259.7L132.7 259L136.8 258.3L140.9 257.5L145.1 256.7L149.2 255.9L153.3 255.1L157.5 254.2L161.6 253.2L165.7 252.3L169.9 251.3L174 250.2L178.1 249.2L182.3 248.1L186.4 246.9L190.5 245.8L194.7 244.6L198.8 243.3L202.9 242L207.1 240.7L211.2 239.4L215.3 238L219.5 236.6L223.6 235.1L227.7 233.6L231.9 232.1L236 230.6L240.1 229L244.3 227.3L248.4 225.7L252.5 224L256.7 222.2L260.8 220.5L264.9 218.7L269.1 216.8L273.2 215L277.3 213.1L281.5 211.1L285.6 209.1L289.7 207.1L293.9 205.1L298 203L302.1 200.9L306.3 198.7L310.4 196.5L314.5 194.3L318.7 192.1L322.8 189.8L326.9 187.4L331.1 185.1L335.2 182.7L339.3 180.2L343.5 177.8L347.6 175.3L351.7 172.7L355.9 170.2L360 167.6L364.1 164.9L368.3 162.2L372.4 159.5L376.5 156.8L380.7 154L384.8 151.2L388.9 148.3L393.1 145.4L397.2 142.5L401.3 139.6L405.5 136.6L409.6 133.5L413.7 130.5L417.9 127.4L422 124.2L426.1 121.1L430.3 117.9L434.4 114.6L438.5 111.4L442.7 108.1L446.8 104.7L450.9 101.3L455.1 97.9L459.2 94.5L463.3 91L467.5 87.5L471.6 83.9L475.7 80.3L479.9 76.7L484 73.1L488.1 69.4L492.3 65.6L496.4 61.9L500.5 58.1L504.7 54.2L508.8 50.4L512.9 46.5L517.1 42.5L521.2 38.6L525.3 34.6L529.5 30.5L533.6 26.4L537.7 22.3L541.9 18.2L546 14" fill="none" stroke-dasharray="5 3" /></svg>
-        <figcaption><p>Tsunami force per metre of wall against inundation depth, per ASCE 7 Chapter 6. Try the interactive version below.</p><ul class="legend"><li class="c1"><span class="sw"></span>Hydrostatic</li><li class="c3"><span class="sw"></span>Drag</li><li class="c4"><span class="sw"></span>Combined</li></ul></figcaption>
+        <figcaption><p>Tsunami force per metre of wall against inundation depth, per ASCE 7 Chapter 6. Hydrostatic pressure, drag, and the two combined.</p><ul class="legend"><li class="c1"><span class="sw"></span>Hydrostatic</li><li class="c3"><span class="sw"></span>Drag</li><li class="c4"><span class="sw"></span>Combined</li></ul></figcaption>
       </figure>
   </section>  <section class="expertise">
     <div class="exp-head">
@@ -249,66 +261,7 @@
   </section>
 </div>
 
-<section class="explorer tsu" id="tsunami">
-  <div class="exp-intro">
-    <p class="fignum">Interactive</p>
-    <h2>And what does a tsunami actually do to a wall?</h2>
-    <p>Same idea, different hazard. Raise the water and watch where the demand comes from &mdash; drag overtakes hydrostatic pressure long before the depths that matter on a real coastline.</p>
-  </div>
 
-  <div class="exp-panel tsu-panel">
-    <div class="tsu-views">
-      <svg id="tsuScene" viewBox="0 0 260 430" role="img" aria-labelledby="tsuSceneTitle">
-        <title id="tsuSceneTitle">Building elevation with rising inundation depth and force arrows</title>
-        <rect class="sky" x="0" y="0" width="260" height="430" />
-        <rect class="bldg" x="120" y="86" width="112" height="304" />
-        <g class="floors" id="tsuFloors"></g>
-        <rect class="ground" x="0" y="390" width="260" height="40" />
-        <rect class="water" id="tsuWater" x="0" width="120" />
-        <line class="wline" id="tsuWLine" x1="0" x2="232" />
-        <g id="tsuArrows"></g>
-        <text class="dlab" id="tsuDepthLab" x="8" text-anchor="start"></text>
-      </svg>
-
-      <svg id="tsuChart" viewBox="0 0 320 430" role="img" aria-labelledby="tsuChartTitle">
-        <title id="tsuChartTitle">Force per metre against inundation depth</title>
-        <g class="grid" id="tsuGrid"></g>
-        <path id="tsuHydro" class="curve c1" fill="none" />
-        <path id="tsuDrag"  class="curve c3" fill="none" />
-        <path id="tsuTotal" class="curve c4" fill="none" stroke-dasharray="5 3" />
-        <line id="tsuMark" class="mark" />
-        <circle id="tsuDot" class="markdot" r="5" />
-      </svg>
-    </div>
-
-    <div class="exp-controls">
-      <div class="readout" aria-live="polite">
-        <p class="ro-num" id="tsuForce">&mdash;</p>
-        <p class="ro-text" id="tsuText"></p>
-      </div>
-
-      <div class="ctrl">
-        <label for="tDepth">Inundation depth <span id="tvDepth">9.8 ft (3.0 m)</span></label>
-        <input type="range" id="tDepth" min="0.2" max="6" step="0.1" value="3">
-        <p class="hint">How deep the water stands against the wall.</p>
-      </div>
-
-      <div class="ctrl">
-        <label for="tFr">Froude number <span id="tvFr">1.40</span></label>
-        <input type="range" id="tFr" min="0.4" max="2" step="0.05" value="1.4">
-        <p class="hint">How fast the flow moves for that depth. Higher means a faster, more energetic surge.</p>
-      </div>
-
-      <ul class="legend" id="tsuLegend">
-        <li class="c1"><span class="sw"></span>Hydrostatic</li>
-        <li class="c3"><span class="sw"></span>Drag</li>
-        <li class="c4"><span class="sw"></span>Combined</li>
-      </ul>
-
-      <p class="eqn">F<sub>h</sub> = &frac12;&rho;gh&sup2; &nbsp;&middot;&nbsp; F<sub>d</sub> = &frac12;&rho;C<sub>d</sub>h(Fr&sup2;gh)</p>
-    </div>
-  </div>
-</section>
 
 
 
@@ -363,305 +316,215 @@
 </footer>
 <script>
 (function () {
-  var cv = document.getElementById('surfCanvas');
-  if (!cv || !cv.getContext) return;
-  var ctx = cv.getContext('2d');
+  var sf = document.getElementById('surfCanvas'), st = document.getElementById('structCanvas');
+  if (!sf || !sf.getContext || !st) return;
+  var g1 = sf.getContext('2d'), g2 = st.getContext('2d');
 
-  var NX = 32, NY = 32, MAXIM = 2.0;
-  var sIm  = document.getElementById('sIm'),
-      sCfg = document.getElementById('sCfg'),
-      sBe  = document.getElementById('sBeta'),
-      sRot = document.getElementById('sRot');
+  var NX = 56, NY = 56;
+  var MAXPGA = 1.5, MAXDEP = 8.0, M2FT = 3.28084;
+  var RHO = 1100, G = 9.81, CD = 1.25;
+  var THETA_EQ = 0.45, THETA_TS = 380, KDAM = 0.55;
 
-  function css(name, fb) {
-    var v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-    return v || fb;
-  }
-  function hex2rgb(h) {
-    h = h.replace('#','');
-    if (h.length === 3) h = h[0]+h[0]+h[1]+h[1]+h[2]+h[2];
-    return [parseInt(h.slice(0,2),16), parseInt(h.slice(2,4),16), parseInt(h.slice(4,6),16)];
-  }
-  function mix(a,b,t){
-    return 'rgb('+Math.round(a[0]+(b[0]-a[0])*t)+','+Math.round(a[1]+(b[1]-a[1])*t)+','+Math.round(a[2]+(b[2]-a[2])*t)+')';
-  }
+  var sPga=document.getElementById('sPga'), sDep=document.getElementById('sDep'),
+      sFr=document.getElementById('sFr'), sBe=document.getElementById('sBe'),
+      sRot=document.getElementById('sRot');
 
-  // Abramowitz & Stegun 26.2.17
-  function normCdf(x){
-    var neg = x < 0; if (neg) x = -x;
-    var t = 1/(1+0.2316419*x);
-    var phi = Math.exp(-0.5*x*x)/Math.sqrt(2*Math.PI);
-    var p = t*(0.319381530 + t*(-0.356563782 + t*(1.781477937 + t*(-1.821255978 + t*1.330274429))));
-    var r = 1 - phi*p;
-    return neg ? 1-r : r;
+  function css(n,fb){ var v=getComputedStyle(document.documentElement).getPropertyValue(n).trim(); return v||fb; }
+  function hex(h){ h=h.replace('#',''); if(h.length===3) h=h[0]+h[0]+h[1]+h[1]+h[2]+h[2];
+    return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)]; }
+  function mix(a,b,t){ return 'rgb('+Math.round(a[0]+(b[0]-a[0])*t)+','+Math.round(a[1]+(b[1]-a[1])*t)+','+Math.round(a[2]+(b[2]-a[2])*t)+')'; }
+
+  function ncdf(x){
+    var neg=x<0; if(neg)x=-x;
+    var t=1/(1+0.2316419*x), phi=Math.exp(-0.5*x*x)/Math.sqrt(2*Math.PI);
+    var p=t*(0.319381530+t*(-0.356563782+t*(1.781477937+t*(-1.821255978+t*1.330274429))));
+    var r=1-phi*p; return neg?1-r:r;
   }
 
-  // median capacity falls as the configuration worsens
-  function theta(c){ return 0.62 - 0.42*c; }
-  function pf(im,c,be){ return im <= 0.0001 ? 0 : normCdf(Math.log(im/theta(c))/be); }
+  function pEq(pga,be){ return pga<=0.001 ? 0 : ncdf(Math.log(pga/THETA_EQ)/be); }
+  function fTs(h,fr){ return (0.5*RHO*G + 0.5*RHO*CD*fr*fr*G)*h*h/1000; }
+  function pTs(h,fr,be,dam){
+    if(h<=0.01) return 0;
+    return ncdf(Math.log(fTs(h,fr)/(THETA_TS*(1-KDAM*dam)))/be);
+  }
+  function pAll(pga,h,fr,be){ var a=pEq(pga,be); return 1-(1-a)*(1-pTs(h,fr,be,a)); }
 
-  var W = cv.width, H = cv.height;
-
-  function project(u,v,z,rot){
-    var a = rot*Math.PI/180;
-    var x = u-0.5, y = v-0.5;
-    var rx = x*Math.cos(a) - y*Math.sin(a);
-    var ry = x*Math.sin(a) + y*Math.cos(a);
-    return { x: W*0.5 + rx*W*0.60, y: H*0.62 + ry*H*0.30 - z*H*0.46, depth: ry };
+  var W=sf.width, H=sf.height;
+  function proj(u,v,z,rot){
+    var a=rot*Math.PI/180, x=u-0.5, y=v-0.5;
+    var rx=x*Math.cos(a)-y*Math.sin(a), ry=x*Math.sin(a)+y*Math.cos(a);
+    return { x:W*0.5+rx*W*0.60, y:H*0.66+ry*H*0.26-z*H*0.50, depth:ry };
   }
 
-  function draw(){
-    var im  = parseFloat(sIm.value),  cfg = parseFloat(sCfg.value),
-        be  = parseFloat(sBe.value),  rot = parseFloat(sRot.value);
+  function drawSurface(){
+    var pga=parseFloat(sPga.value), dep=parseFloat(sDep.value),
+        fr=parseFloat(sFr.value), be=parseFloat(sBe.value), rot=parseFloat(sRot.value);
 
-    var cLow  = hex2rgb(css('--accent','#0A6E6E'));
-    var cMid  = hex2rgb(css('--data3','#A8792B'));
-    var cHigh = hex2rgb(css('--data4','#A8482B'));
-    var mute  = css('--ink-mute','#6E7B78');
-    var mark  = css('--data4','#A8482B');
-    var sheet = css('--sheet','#FAFAF8');
+    var cLow=hex(css('--accent','#0A6E6E')), cMid=hex(css('--data3','#A8792B')), cHigh=hex(css('--data4','#A8482B'));
+    var grid=css('--rule','#C7CFCB'), mute=css('--ink-mute','#6E7B78'),
+        mark=css('--data4','#A8482B'), sheet=css('--sheet','#FAFAF8');
 
-    ctx.clearRect(0,0,W,H);
+    g1.clearRect(0,0,W,H);
 
-    // ---- axis box, drawn first so the surface sits on top of it
-    var grid = css('--rule','#C7CFCB');
-    ctx.strokeStyle = grid; ctx.lineWidth = 1; ctx.globalAlpha = 0.55;
+    g1.strokeStyle=grid; g1.lineWidth=1; g1.globalAlpha=0.5;
+    for(var q=0;q<=1.0001;q+=0.125){
+      var a1=proj(q,0,0,rot), a2=proj(q,1,0,rot);
+      g1.beginPath(); g1.moveTo(a1.x,a1.y); g1.lineTo(a2.x,a2.y); g1.stroke();
+      var b1=proj(0,q,0,rot), b2=proj(1,q,0,rot);
+      g1.beginPath(); g1.moveTo(b1.x,b1.y); g1.lineTo(b2.x,b2.y); g1.stroke();
+    }
+    var cs=[[0,0],[1,0],[1,1],[0,1]], back=cs[0], bd=proj(0,0,0,rot).depth;
+    cs.forEach(function(c){ var d=proj(c[0],c[1],0,rot).depth; if(d<bd){bd=d;back=c;} });
+    var vb=proj(back[0],back[1],0,rot), vt=proj(back[0],back[1],1,rot);
+    g1.globalAlpha=0.9; g1.beginPath(); g1.moveTo(vb.x,vb.y); g1.lineTo(vt.x,vt.y); g1.stroke(); g1.globalAlpha=1;
 
-    // floor grid at z = 0
-    for (var g = 0; g <= 1.0001; g += 0.125) {
-      var a1 = project(g,0,0,rot), a2 = project(g,1,0,rot);
-      ctx.beginPath(); ctx.moveTo(a1.x,a1.y); ctx.lineTo(a2.x,a2.y); ctx.stroke();
-      var b1 = project(0,g,0,rot), b2 = project(1,g,0,rot);
-      ctx.beginPath(); ctx.moveTo(b1.x,b1.y); ctx.lineTo(b2.x,b2.y); ctx.stroke();
+    g1.fillStyle=mute; g1.font='14px "IBM Plex Mono", monospace'; g1.textAlign='right';
+    for(var pz=0;pz<=1.0001;pz+=0.25){
+      var tk=proj(back[0],back[1],pz,rot);
+      g1.beginPath(); g1.moveTo(tk.x,tk.y); g1.lineTo(tk.x-8,tk.y); g1.strokeStyle=grid; g1.stroke();
+      g1.fillText(Math.round(pz*100)+'%', tk.x-13, tk.y+5);
     }
 
-    // vertical axis at whichever corner sits furthest back
-    var corners = [[0,0],[1,0],[1,1],[0,1]];
-    var back = corners[0], bd = project(back[0],back[1],0,rot).depth;
-    corners.forEach(function(c){
-      var d = project(c[0],c[1],0,rot).depth;
-      if (d < bd) { bd = d; back = c; }
-    });
-    var vb = project(back[0],back[1],0,rot), vt = project(back[0],back[1],1,rot);
-    ctx.globalAlpha = 0.9;
-    ctx.beginPath(); ctx.moveTo(vb.x,vb.y); ctx.lineTo(vt.x,vt.y); ctx.stroke();
-    ctx.globalAlpha = 1;
-
-    // probability ticks up the vertical axis
-    ctx.fillStyle = mute;
-    ctx.font = '15px "IBM Plex Mono", monospace';
-    ctx.textAlign = 'right';
-    for (var pz = 0; pz <= 1.0001; pz += 0.25) {
-      var tk = project(back[0],back[1],pz,rot);
-      ctx.beginPath(); ctx.moveTo(tk.x,tk.y); ctx.lineTo(tk.x-9,tk.y); ctx.strokeStyle = grid; ctx.stroke();
-      ctx.fillText(Math.round(pz*100)+'%', tk.x-14, tk.y+5);
-    }
-
-    var quads = [];
-    for (var i=0;i<NX;i++){
-      for (var j=0;j<NY;j++){
-        var u0=i/NX, u1=(i+1)/NX, v0=j/NY, v1=(j+1)/NY;
-        var z00=pf(u0*MAXIM,v0,be), z10=pf(u1*MAXIM,v0,be),
-            z11=pf(u1*MAXIM,v1,be), z01=pf(u0*MAXIM,v1,be);
-        var a=project(u0,v0,z00,rot), b=project(u1,v0,z10,rot),
-            c=project(u1,v1,z11,rot), d=project(u0,v1,z01,rot);
-        quads.push({ pts:[a,b,c,d], z:(z00+z10+z11+z01)/4, depth:(a.depth+c.depth)/2 });
+    var quads=[];
+    for(var i=0;i<NX;i++){
+      for(var j=0;j<NY;j++){
+        var u0=i/NX,u1=(i+1)/NX,v0=j/NY,v1=(j+1)/NY;
+        var z00=pAll(u0*MAXPGA,v0*MAXDEP,fr,be), z10=pAll(u1*MAXPGA,v0*MAXDEP,fr,be),
+            z11=pAll(u1*MAXPGA,v1*MAXDEP,fr,be), z01=pAll(u0*MAXPGA,v1*MAXDEP,fr,be);
+        var A=proj(u0,v0,z00,rot),B=proj(u1,v0,z10,rot),C=proj(u1,v1,z11,rot),D=proj(u0,v1,z01,rot);
+        quads.push({p:[A,B,C,D], z:(z00+z10+z11+z01)/4, d:(A.depth+C.depth)/2});
       }
     }
-    quads.sort(function(p,q){ return p.depth - q.depth; });
-
+    quads.sort(function(a,b){ return a.d-b.d; });
     quads.forEach(function(q){
-      var t = q.z;
-      ctx.beginPath();
-      ctx.moveTo(q.pts[0].x,q.pts[0].y);
-      for (var k=1;k<4;k++) ctx.lineTo(q.pts[k].x,q.pts[k].y);
-      ctx.closePath();
-      ctx.fillStyle = t < 0.5 ? mix(cLow,cMid,t*2) : mix(cMid,cHigh,(t-0.5)*2);
-      ctx.fill();
-      ctx.strokeStyle = 'rgba(0,0,0,0.12)';
-      ctx.lineWidth = 0.6;
-      ctx.stroke();
+      g1.beginPath(); g1.moveTo(q.p[0].x,q.p[0].y);
+      for(var k=1;k<4;k++) g1.lineTo(q.p[k].x,q.p[k].y);
+      g1.closePath();
+      g1.fillStyle = q.z<0.5 ? mix(cLow,cMid,q.z*2) : mix(cMid,cHigh,(q.z-0.5)*2);
+      g1.fill();
     });
 
-    var z    = pf(im,cfg,be);
-    var pt   = project(im/MAXIM,cfg,z,rot);
-    var base = project(im/MAXIM,cfg,0,rot);
+    var z=pAll(pga,dep,fr,be);
+    var pt=proj(pga/MAXPGA,dep/MAXDEP,z,rot), bs=proj(pga/MAXPGA,dep/MAXDEP,0,rot);
+    g1.strokeStyle=mark; g1.lineWidth=2; g1.setLineDash([5,5]);
+    g1.beginPath(); g1.moveTo(bs.x,bs.y); g1.lineTo(pt.x,pt.y); g1.stroke(); g1.setLineDash([]);
+    g1.beginPath(); g1.arc(pt.x,pt.y,8,0,Math.PI*2);
+    g1.fillStyle=mark; g1.fill(); g1.strokeStyle=sheet; g1.lineWidth=3; g1.stroke();
 
-    ctx.strokeStyle = mark; ctx.lineWidth = 2; ctx.setLineDash([5,5]);
-    ctx.beginPath(); ctx.moveTo(base.x,base.y); ctx.lineTo(pt.x,pt.y); ctx.stroke();
-    ctx.setLineDash([]);
-    ctx.beginPath(); ctx.arc(pt.x,pt.y,8,0,Math.PI*2);
-    ctx.fillStyle = mark; ctx.fill();
-    ctx.strokeStyle = sheet; ctx.lineWidth = 3; ctx.stroke();
+    g1.fillStyle=mute; g1.textAlign='center'; g1.font='13px "IBM Plex Mono", monospace';
+    for(var gx=0;gx<=1.0001;gx+=0.25){ var t1=proj(gx,1,0,rot); g1.fillText((gx*MAXPGA).toFixed(2), t1.x, t1.y+19); }
+    for(var gy=0;gy<=1.0001;gy+=0.25){ var t2=proj(1,gy,0,rot); g1.fillText(Math.round(gy*MAXDEP*M2FT)+' ft', t2.x+34, t2.y+5); }
+    g1.font='14px "Libre Franklin", sans-serif';
+    var l1=proj(0.5,1.16,0,rot), l2=proj(1.22,0.5,0,rot), l3=proj(back[0],back[1],1.1,rot);
+    g1.fillText('PEAK GROUND ACCELERATION (g)', l1.x, l1.y+24);
+    g1.fillText('INUNDATION DEPTH', l2.x, l2.y+24);
+    g1.fillText('FAILURE PROBABILITY', l3.x, l3.y-6);
+  }
 
-    ctx.fillStyle = mute;
-    ctx.textAlign = 'center';
+  function drawStructure(){
+    var pga=parseFloat(sPga.value), dep=parseFloat(sDep.value),
+        fr=parseFloat(sFr.value), be=parseFloat(sBe.value);
+    var w=st.width, h=st.height;
+    var ink=css('--ink','#131E1C'), mute=css('--ink-mute','#6E7B78'),
+        acc=css('--accent','#0A6E6E'), mark=css('--data4','#A8482B'),
+        sunk=css('--sunk','#E4E8E5'), sheet=css('--sheet','#FAFAF8'), rule=css('--rule','#C7CFCB');
 
-    // PGA ticks along the near edge
-    ctx.font = '14px "IBM Plex Mono", monospace';
-    for (var gx = 0; gx <= 1.0001; gx += 0.25) {
-      var t1 = project(gx,1,0,rot);
-      ctx.fillText((gx*MAXIM).toFixed(1), t1.x, t1.y+20);
+    g2.clearRect(0,0,w,h);
+    g2.fillStyle=sunk; g2.fillRect(0,0,w,h);
+
+    var GY=470, BH=340, BW=150, BX=w*0.46;
+    var dam=pEq(pga,be), lean=dam*26;
+
+    g2.fillStyle=mute; g2.globalAlpha=0.25; g2.fillRect(0,GY,w,h-GY); g2.globalAlpha=1;
+
+    g2.save();
+    g2.translate(BX,GY);
+    g2.transform(1,0,-lean/BH,1,0,0);
+    g2.fillStyle=sheet; g2.strokeStyle=ink; g2.lineWidth=1.6;
+    g2.fillRect(0,-BH,BW,BH); g2.strokeRect(0,-BH,BW,BH);
+    g2.strokeStyle=rule; g2.lineWidth=1;
+    for(var f=1;f<5;f++){ g2.beginPath(); g2.moveTo(0,-BH*f/5); g2.lineTo(BW,-BH*f/5); g2.stroke(); }
+    if(dam>0.15){
+      g2.strokeStyle=mark; g2.lineWidth=1.4; g2.globalAlpha=Math.min(1,dam*1.6);
+      var nc=Math.round(dam*7);
+      for(var c=0;c<nc;c++){
+        var cy=-BH*0.12-c*(BH*0.11), cx=12+((c*37)%(BW-30));
+        g2.beginPath(); g2.moveTo(cx,cy); g2.lineTo(cx+11,cy-13); g2.lineTo(cx+5,cy-24); g2.stroke();
+      }
+      g2.globalAlpha=1;
     }
-    // configuration ticks along the other edge
-    for (var gy = 0; gy <= 1.0001; gy += 0.25) {
-      var t2 = project(1,gy,0,rot);
-      ctx.fillText(gy.toFixed(2), t2.x+30, t2.y+6);
+    g2.restore();
+
+    var wy=GY-(dep/MAXDEP)*BH;
+    if(dep>0.02){
+      g2.fillStyle=acc; g2.globalAlpha=0.30; g2.fillRect(0,wy,BX,GY-wy); g2.globalAlpha=1;
+      g2.strokeStyle=acc; g2.lineWidth=2;
+      g2.beginPath(); g2.moveTo(0,wy); g2.lineTo(BX+BW,wy); g2.stroke();
+      var rel=Math.min(1,fTs(dep,fr)/900);
+      g2.strokeStyle=mark; g2.fillStyle=mark; g2.lineWidth=2;
+      var n=Math.max(2,Math.min(5,Math.round(dep)));
+      for(var k=0;k<n;k++){
+        var ay=GY-8-(k+0.5)*((GY-wy)/n), len=22+rel*54;
+        g2.beginPath(); g2.moveTo(BX-len-10,ay); g2.lineTo(BX-12,ay); g2.stroke();
+        g2.beginPath(); g2.moveTo(BX-4,ay); g2.lineTo(BX-14,ay-4.5); g2.lineTo(BX-14,ay+4.5); g2.closePath(); g2.fill();
+      }
+      g2.fillStyle=acc; g2.font='14px "IBM Plex Mono", monospace'; g2.textAlign='left';
+      g2.fillText((dep*M2FT).toFixed(1)+' ft', 10, wy-9);
     }
 
-    ctx.font = '15px "Libre Franklin", sans-serif';
-    var ax1 = project(0.5,1.14,0,rot), ax2 = project(1.16,0.5,0,rot), ax3 = project(back[0],back[1],1.12,rot);
-    ctx.fillText('PEAK GROUND ACCELERATION (g)', ax1.x, ax1.y+26);
-    ctx.fillText('CONFIGURATION', ax2.x, ax2.y+26);
-    ctx.fillText('FAILURE PROBABILITY', ax3.x, ax3.y-6);
+    g2.strokeStyle=ink; g2.fillStyle=ink; g2.lineWidth=2; g2.globalAlpha=0.75;
+    var sw=16+pga*46;
+    g2.beginPath(); g2.moveTo(BX+BW/2-sw,GY+22); g2.lineTo(BX+BW/2+sw,GY+22); g2.stroke();
+    [-1,1].forEach(function(s){
+      g2.beginPath();
+      g2.moveTo(BX+BW/2+s*(sw+7),GY+22);
+      g2.lineTo(BX+BW/2+s*sw,GY+17);
+      g2.lineTo(BX+BW/2+s*sw,GY+27);
+      g2.closePath(); g2.fill();
+    });
+    g2.globalAlpha=1;
+    g2.fillStyle=mute; g2.font='13px "Libre Franklin", sans-serif'; g2.textAlign='center';
+    g2.fillText(pga.toFixed(2)+' g', BX+BW/2, GY+50);
 
-    document.getElementById('vIm').textContent   = im.toFixed(2)+' g';
-    document.getElementById('vCfg').textContent  = cfg.toFixed(2);
-    document.getElementById('vBeta').textContent = be.toFixed(2);
-    document.getElementById('vRot').textContent  = Math.round(rot)+'Â°';
-    document.getElementById('sProb').textContent = Math.round(z*100)+'%';
+    g2.textAlign='left'; g2.font='12px "Libre Franklin", sans-serif'; g2.fillStyle=mute;
+    g2.fillText('1  EARTHQUAKE  â†’  damage', 14, 30);
+    g2.fillText('2  TSUNAMI  â†’  reduced capacity', 14, 52);
+  }
 
-    var verdict;
-    if (z < 0.05)      verdict = 'Very unlikely to reach this damage state.';
-    else if (z < 0.20) verdict = 'Unlikely, but no longer negligible.';
-    else if (z < 0.50) verdict = 'A real possibility. Worth designing against.';
-    else if (z < 0.80) verdict = 'More likely than not. This is where retrofit decisions get made.';
-    else               verdict = 'Near certain. At this intensity the question is recovery, not prevention.';
+  function render(){
+    var pga=parseFloat(sPga.value), dep=parseFloat(sDep.value),
+        fr=parseFloat(sFr.value), be=parseFloat(sBe.value);
+
+    drawSurface(); drawStructure();
+
+    document.getElementById('vPga').textContent = pga.toFixed(2)+' g';
+    document.getElementById('vDep').textContent = (dep*M2FT).toFixed(1)+' ft ('+dep.toFixed(1)+' m)';
+    document.getElementById('vFr').textContent  = fr.toFixed(2);
+    document.getElementById('vBe').textContent  = be.toFixed(2);
+    document.getElementById('vRot').textContent = Math.round(parseFloat(sRot.value))+'Â°';
+
+    var a=pEq(pga,be), b=pTs(dep,fr,be,a), tot=1-(1-a)*(1-b);
+    document.getElementById('sProb').textContent = Math.round(tot*100)+'%';
+
+    var alone=pTs(dep,fr,be,0), extra=Math.round((b-alone)*100);
+    var tail = extra>1
+      ? ' Assessed alone the tsunami gives ' + Math.round(alone*100) + '%; the earthquake damage adds ' + extra + ' points.'
+      : '';
 
     document.getElementById('sText').textContent =
-      'At ' + im.toFixed(2) + 'g and configuration ' + cfg.toFixed(2) +
-      ', failure probability is ' + Math.round(z*100) + '%. ' + verdict +
-      ' Every other point on this surface was computed at the same time.';
+      'At ' + pga.toFixed(2) + 'g and ' + (dep*M2FT).toFixed(1) + ' ft of inundation, combined failure probability is ' +
+      Math.round(tot*100) + '%. Earthquake alone ' + Math.round(a*100) + '%, tsunami on the damaged structure ' +
+      Math.round(b*100) + '%.' + tail;
   }
 
-  [sIm,sCfg,sBe,sRot].forEach(function(el){
-    el.addEventListener('input', draw);
-    el.addEventListener('change', draw);
-  });
-  if (window.matchMedia) {
-    var mq = window.matchMedia('(prefers-color-scheme: dark)');
-    if (mq.addEventListener) mq.addEventListener('change', draw);
-  }
-  draw();
-})();
-</script><script>
-(function () {
-  var scene = document.getElementById('tsuScene');
-  if (!scene) return;
-
-  var RHO = 1100, G = 9.81, CD = 1.25, MAXD = 6.0;
-  var M2FT = 3.28084, KNM2KIPFT = 0.0685218;   // SI internally, US for display
-  var CW = 320, CH = 430, pL = 52, pR = 14, pT = 20, pB = 48;
-  var plotW = CW - pL - pR, plotH = CH - pT - pB;
-
-  var sD = document.getElementById('tDepth'), sF = document.getElementById('tFr');
-  var water = document.getElementById('tsuWater'), wline = document.getElementById('tsuWLine');
-  var arrows = document.getElementById('tsuArrows'), dlab = document.getElementById('tsuDepthLab');
-  var hydroP = document.getElementById('tsuHydro'), dragP = document.getElementById('tsuDrag');
-  var totalP = document.getElementById('tsuTotal'), mark = document.getElementById('tsuMark');
-  var dot = document.getElementById('tsuDot');
-
-  // building sits between y=60 (roof) and y=280 (ground). 220px covers 8 m.
-  var GROUND = 390, MPP = 304 / 8;
-
-  function fHydro(h) { return 0.5 * RHO * G * h * h / 1000; }
-  function fDrag(h, fr) { return 0.5 * RHO * CD * fr * fr * G * h * h / 1000; }
-
-  (function floors() {
-    var f = '';
-    for (var i = 1; i <= 4; i++) {
-      var y = GROUND - i * 61;
-      f += '<line x1="120" y1="' + y + '" x2="232" y2="' + y + '"/>';
-    }
-    document.getElementById('tsuFloors').innerHTML = f;
-  })();
-
-  // Scale to the CURRENT Froude number, not a fixed worst case - otherwise the
-  // curves occupy a fraction of the plot and hydrostatic reads as flat.
-  var MAXF = 1;
-  function niceMax(v) {
-    var mag = Math.pow(10, Math.floor(Math.log(v) / Math.LN10));
-    return Math.ceil(v / (mag / 2)) * (mag / 2);
-  }
-  function cx(d) { return pL + (d / MAXD) * plotW; }
-  function cy(f) { return pT + plotH - (f / MAXF) * plotH; }
-
-  function drawGrid() {
-    var g = '';
-    for (var j = 0; j <= 4; j++) {
-      var gy = pT + plotH - (j / 4) * plotH;
-      g += '<line x1="' + pL + '" y1="' + gy + '" x2="' + (pL + plotW) + '" y2="' + gy + '"/>';
-      g += '<text class="ax" x="' + (pL - 8) + '" y="' + (gy + 3.5) + '" text-anchor="end">' + (MAXF * KNM2KIPFT * j / 4).toFixed(0) + '</text>';
-    }
-    for (var d = 0; d <= MAXD; d += 2) {
-      g += '<text class="ax" x="' + cx(d) + '" y="' + (pT + plotH + 19) + '" text-anchor="middle">' + Math.round(d * M2FT) + '</text>';
-    }
-    g += '<text class="axt" x="14" y="' + (pT + plotH / 2) + '" text-anchor="middle" transform="rotate(-90 14 ' + (pT + plotH / 2) + ')">Force, kip/ft</text>';
-    g += '<text class="axt" x="' + (pL + plotW / 2) + '" y="' + (CH - 6) + '" text-anchor="middle">Inundation depth, ft</text>';
-    document.getElementById('tsuGrid').innerHTML = g;
-  }
-
-  function path(fn) {
-    var s = '';
-    for (var i = 0; i <= 120; i++) {
-      var d = (i / 120) * MAXD;
-      s += (i === 0 ? 'M' : 'L') + cx(d).toFixed(1) + ' ' + cy(fn(d)).toFixed(1);
-    }
-    return s;
-  }
-
-  function render() {
-    var h = parseFloat(sD.value), fr = parseFloat(sF.value);
-    var fh = fHydro(h), fd = fDrag(h, fr), ft = fh + fd;
-
-    MAXF = niceMax(fHydro(MAXD) + fDrag(MAXD, fr));
-    drawGrid();
-
-    // --- scene
-    var wy = GROUND - h * MPP;
-    water.setAttribute('y', wy);
-    water.setAttribute('height', Math.max(0, GROUND - wy));
-    wline.setAttribute('y1', wy); wline.setAttribute('y2', wy);
-    dlab.setAttribute('y', wy - 7);
-    dlab.textContent = (h * M2FT).toFixed(1) + ' ft';
-
-    // arrows scale with force, capped so the drawing stays legible
-    var n = Math.max(2, Math.min(6, Math.round(h * 1.1)));
-    var a = '';
-    for (var i = 0; i < n; i++) {
-      var ay = GROUND - 6 - (i + 0.5) * ((GROUND - wy) / n);
-      var len = 20 + (ft / MAXF) * 46;
-      a += '<line class="farrow" x1="' + (120 - len) + '" y1="' + ay + '" x2="114" y2="' + ay + '"/>';
-      a += '<polygon class="fhead" points="120,' + ay + ' 112,' + (ay - 3.5) + ' 112,' + (ay + 3.5) + '"/>';
-    }
-    arrows.innerHTML = a;
-
-    // --- chart
-    hydroP.setAttribute('d', path(function (d) { return fHydro(d); }));
-    dragP.setAttribute('d', path(function (d) { return fDrag(d, fr); }));
-    totalP.setAttribute('d', path(function (d) { return fHydro(d) + fDrag(d, fr); }));
-    mark.setAttribute('x1', cx(h)); mark.setAttribute('y1', cy(0));
-    mark.setAttribute('x2', cx(h)); mark.setAttribute('y2', cy(ft));
-    dot.setAttribute('cx', cx(h)); dot.setAttribute('cy', cy(ft));
-
-    // --- readout
-    document.getElementById('tvDepth').textContent = (h * M2FT).toFixed(1) + ' ft (' + h.toFixed(1) + ' m)';
-    document.getElementById('tvFr').textContent = fr.toFixed(2);
-    document.getElementById('tsuForce').textContent = (ft * KNM2KIPFT).toFixed(1) + ' kip/ft';
-
-    var cars = Math.max(1, Math.round((ft * KNM2KIPFT) / 3.3));  // ~3.3 kip per car, per FOOT of wall
-    var share = Math.round((fd / ft) * 100);
-    document.getElementById('tsuText').textContent =
-      'At ' + (h * M2FT).toFixed(1) + ' ft (' + h.toFixed(1) + ' m) of inundation, every foot of wall carries about ' +
-      (ft * KNM2KIPFT).toFixed(1) + ' kip/ft (' + Math.round(ft) + ' kN/m) - roughly ' + cars +
-      ' cars pressed against every foot of wall. Drag accounts for ' + share +
-      '% of it, and that is the part people underestimate.';
-  }
-
-  [sD, sF].forEach(function (el) {
+  [sPga,sDep,sFr,sBe,sRot].forEach(function(el){
     el.addEventListener('input', render);
     el.addEventListener('change', render);
   });
+  if (window.matchMedia) {
+    var mq=window.matchMedia('(prefers-color-scheme: dark)');
+    if (mq.addEventListener) mq.addEventListener('change', render);
+  }
   render();
 })();
 </script>
