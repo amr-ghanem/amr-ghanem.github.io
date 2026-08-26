@@ -104,12 +104,19 @@
 <main id="main">
 <section class="hero">
   <div class="hero-text">
-    <p class="eyebrow">Associate Researcher<br><span>University of Hawaiʻi at Mānoa</span><br>Advanced Structural Designer and Analyst<br><span>Martin, Chock &amp; Carden, Inc.</span></p>
     <h1>Making infrastructure resilience computable</h1>
-    <p class="lede">Turning multi-hazard risk science into design decisions engineers can actually use. Research in seismic and tsunami fragility of reinforced concrete structures and bridges; practice in structural design and analysis in Honolulu; and the software that connects the two.</p>
-    <p class="cta"><a class="btn" href="research.html">Selected research</a><a class="btn ghost" href="about.html">About</a></p>
+    <p class="lede">Seismic and tsunami fragility, from the analysis to the drawing board.</p>
+    <ul class="roles"><li><span class="rl">Associate Researcher</span><span class="ro">University of Hawaiʻi at Mānoa</span></li><li><span class="rl">Advanced Structural Designer and Analyst</span><span class="ro">Martin, Chock &amp; Carden, Inc.</span></li></ul>
+    <p class="cta"><a class="btn" href="research.html">Selected research</a><a class="btn ghost" href="#explorer">Try the model</a></p>
   </div>
-  <figure class="hero-portrait"><img class="portrait" src="headshot.jpg" alt="Amr Ghanem" width="320" height="400"></figure>
+  <div class="hero-side">
+    <figure class="hero-portrait"><img class="portrait" src="headshot.jpg" alt="Amr Ghanem" width="320" height="400"></figure>
+    <dl class="herostats">
+      <div><dt>Publications</dt><dd>20</dd></div>
+      <div><dt>Citations</dt><dd>76</dd></div>
+      <div><dt>Students taught</dt><dd>155</dd></div>
+    </dl>
+  </div>
 </section>
 
 <section class="explorer" id="explorer">
@@ -121,7 +128,7 @@
 
   <div class="exp-panel">
     <div class="exp-chart">
-      <svg id="fragChart" viewBox="0 0 580 320" role="img" aria-labelledby="fragChartTitle">
+      <svg id="fragChart" viewBox="0 0 580 440" role="img" aria-labelledby="fragChartTitle">
         <title id="fragChartTitle">Fragility curve: probability of damage against peak ground acceleration</title>
         <g class="grid" id="fragGrid"></g>
         <path id="fragCurve" class="curve" fill="none" />
@@ -236,19 +243,19 @@
 
   <div class="exp-panel tsu-panel">
     <div class="tsu-views">
-      <svg id="tsuScene" viewBox="0 0 260 320" role="img" aria-labelledby="tsuSceneTitle">
+      <svg id="tsuScene" viewBox="0 0 260 430" role="img" aria-labelledby="tsuSceneTitle">
         <title id="tsuSceneTitle">Building elevation with rising inundation depth and force arrows</title>
-        <rect class="sky" x="0" y="0" width="260" height="320" />
-        <rect class="bldg" x="120" y="60" width="112" height="220" />
+        <rect class="sky" x="0" y="0" width="260" height="430" />
+        <rect class="bldg" x="120" y="86" width="112" height="304" />
         <g class="floors" id="tsuFloors"></g>
-        <rect class="ground" x="0" y="280" width="260" height="40" />
+        <rect class="ground" x="0" y="390" width="260" height="40" />
         <rect class="water" id="tsuWater" x="0" width="120" />
         <line class="wline" id="tsuWLine" x1="0" x2="232" />
         <g id="tsuArrows"></g>
         <text class="dlab" id="tsuDepthLab" x="8" text-anchor="start"></text>
       </svg>
 
-      <svg id="tsuChart" viewBox="0 0 320 320" role="img" aria-labelledby="tsuChartTitle">
+      <svg id="tsuChart" viewBox="0 0 320 430" role="img" aria-labelledby="tsuChartTitle">
         <title id="tsuChartTitle">Force per metre against inundation depth</title>
         <g class="grid" id="tsuGrid"></g>
         <path id="tsuHydro" class="curve c1" fill="none" />
@@ -371,7 +378,7 @@
   var svg = document.getElementById('fragChart');
   if (!svg) return;
 
-  var W = 580, H = 320, padL = 52, padR = 16, padT = 16, padB = 42;
+  var W = 580, H = 440, padL = 52, padR = 16, padT = 20, padB = 46;
   var plotW = W - padL - padR, plotH = H - padT - padB;
   var MAXIM = 2.0;
 
@@ -479,7 +486,7 @@
 
   var RHO = 1100, G = 9.81, CD = 1.25, MAXD = 6.0;
   var M2FT = 3.28084, KNM2KIPFT = 0.0685218;   // SI internally, US for display
-  var CW = 320, CH = 320, pL = 52, pR = 14, pT = 16, pB = 44;
+  var CW = 320, CH = 430, pL = 52, pR = 14, pT = 20, pB = 48;
   var plotW = CW - pL - pR, plotH = CH - pT - pB;
 
   var sD = document.getElementById('tDepth'), sF = document.getElementById('tFr');
@@ -490,7 +497,7 @@
   var dot = document.getElementById('tsuDot');
 
   // building sits between y=60 (roof) and y=280 (ground). 220px covers 8 m.
-  var GROUND = 280, MPP = 220 / 8;
+  var GROUND = 390, MPP = 304 / 8;
 
   function fHydro(h) { return 0.5 * RHO * G * h * h / 1000; }
   function fDrag(h, fr) { return 0.5 * RHO * CD * fr * fr * G * h * h / 1000; }
@@ -498,7 +505,7 @@
   (function floors() {
     var f = '';
     for (var i = 1; i <= 4; i++) {
-      var y = GROUND - i * 44;
+      var y = GROUND - i * 61;
       f += '<line x1="120" y1="' + y + '" x2="232" y2="' + y + '"/>';
     }
     document.getElementById('tsuFloors').innerHTML = f;
