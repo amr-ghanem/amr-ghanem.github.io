@@ -105,69 +105,67 @@
 <section class="hero">
   <div class="hero-text">
     <h1>Making infrastructure resilience computable</h1>
-    <p class="lede">Locus — a multi-hazard assessment tool. The hazard is a variable, not a built-in assumption.</p>
+    <p class="lede">Locus computes fragility surfaces. Any hazard, any configuration, one continuous answer.</p>
     <ul class="roles"><li><span class="rl">Associate Researcher</span><span class="ro">University of Hawaiʻi at Mānoa</span></li><li><span class="rl">Advanced Structural Designer and Analyst</span><span class="ro">Martin, Chock &amp; Carden, Inc.</span></li></ul>
     <p class="cta"><a class="btn" href="research.html">Selected research</a><a class="btn ghost" href="#explorer">Try the model</a></p>
   </div>
   <div class="hero-side">
     <figure class="hero-portrait"><img class="portrait" src="headshot.jpg" alt="Amr Ghanem" width="320" height="400"></figure>
-    <dl class="herostats">
-      <div><dt>Publications</dt><dd>20</dd></div>
-      <div><dt>Citations</dt><dd>76</dd></div>
-      <div><dt>Students taught</dt><dd>155</dd></div>
-    </dl>
   </div>
 </section>
 
 <section class="explorer" id="explorer">
   <div class="exp-intro">
     <p class="fignum">Interactive</p>
-    <h2>Start with one curve</h2>
-    <p>This is standard practice: one curve, one configuration, one hazard. Move the sliders and watch it respond &mdash; the readout gives the sentence an owner or an agency actually needs. Then notice what it takes to produce: every point on it is hundreds of nonlinear analyses. <strong>Locus computes a surface of these at once.</strong></p>
+    <h2>The surface, not the curve</h2>
+    <p>Standard practice gives one curve: one configuration, one hazard, one line. Locus returns the whole surface &mdash; failure probability across every configuration and every intensity at once, so an answer exists for cases nobody explicitly ran. Move the sliders and read a point off it.</p>
   </div>
 
   <div class="exp-panel">
-    <div class="exp-chart">
-      <svg id="fragChart" viewBox="0 0 580 440" role="img" aria-labelledby="fragChartTitle">
-        <title id="fragChartTitle">Fragility curve: probability of damage against peak ground acceleration</title>
-        <g class="grid" id="fragGrid"></g>
-        <path id="fragCurve" class="curve" fill="none" />
-        <path id="fragFill" class="curvefill" />
-        <line id="fragMarkV" class="mark" />
-        <line id="fragMarkH" class="mark" />
-        <circle id="fragDot" class="markdot" r="5" />
-        <line id="fragMedLine" class="medline" />
-        <text id="fragMedian" class="medlabel" text-anchor="middle"></text>
-      </svg>
+    <div class="exp-chart surfwrap">
+      <canvas id="surfCanvas" width="1100" height="600" role="img"
+        aria-label="Three-dimensional fragility surface: failure probability against ground shaking intensity and structural configuration"></canvas>
     </div>
 
     <div class="exp-controls">
       <div class="readout" aria-live="polite">
-        <p class="ro-num" id="roProb">&mdash;</p>
-        <p class="ro-text" id="roText"></p>
+        <p class="ro-num" id="sProb">&mdash;</p>
+        <p class="ro-text" id="sText"></p>
       </div>
 
       <div class="ctrl">
         <label for="sIm">Ground shaking <span id="vIm">0.40 g</span></label>
-        <input type="range" id="sIm" min="0.02" max="2" step="0.02" value="0.4">
-        <p class="hint">Peak ground acceleration at the site</p>
+        <input type="range" id="sIm" min="0.05" max="2" step="0.05" value="0.4">
+        <p class="hint">Intensity at the site. One axis of the surface.</p>
       </div>
 
       <div class="ctrl">
-        <label for="sTheta">Median capacity &theta; <span id="vTheta">0.35 g</span></label>
-        <input type="range" id="sTheta" min="0.05" max="1.5" step="0.01" value="0.35">
-        <p class="hint">The intensity at which half of these structures reach the damage state. Stronger structure, higher value.</p>
+        <label for="sCfg">Configuration <span id="vCfg">0.50</span></label>
+        <input type="range" id="sCfg" min="0" max="1" step="0.02" value="0.5">
+        <p class="hint">The structural variable &mdash; here, degree of mass irregularity. The other axis.</p>
       </div>
 
       <div class="ctrl">
-        <label for="sBeta">Dispersion &beta; <span id="vBeta">0.55</span></label>
-        <input type="range" id="sBeta" min="0.2" max="0.9" step="0.01" value="0.55">
-        <p class="hint">Uncertainty. Higher values flatten the curve &mdash; less confidence about when damage arrives.</p>
+        <label for="sBeta">Dispersion &beta; <span id="vBeta">0.50</span></label>
+        <input type="range" id="sBeta" min="0.2" max="0.9" step="0.02" value="0.5">
+        <p class="hint">Uncertainty. Flattens the whole surface, not one line.</p>
       </div>
 
-      <p class="eqn">P(damage | IM) = &Phi;( ln(IM / &theta;) / &beta; )</p>
+      <div class="ctrl">
+        <label for="sRot">View <span id="vRot">35&deg;</span></label>
+        <input type="range" id="sRot" min="-60" max="60" step="1" value="35">
+        <p class="hint">Rotate to see the shape.</p>
+      </div>
+
+      <p class="eqn">P(fail | IM, c) = &Phi;( ln(IM / &theta;(c)) / &beta; )</p>
     </div>
   </div>
+</section>
+
+<section class="howitworks">
+  <h2 class="rule">How Locus works</h2>
+  <p class="rlede">Six steps from a model to a decision. Steps two and three are the reason it has to be software: the sweep is thousands of nonlinear analyses, and nobody runs those by hand.</p>
+  <ol class="hsteps"><li><p class="hn">01</p><h3>Define</h3><p class="hd">A structural model and a hazard. The hazard is an input parameter, so it can be swapped or varied like any other.</p></li><li><p class="hn">02</p><h3>Sweep</h3><p class="hd">The parameter space is discretised. Every combination of hazard intensity and structural configuration becomes a case.</p></li><li><p class="hn">03</p><h3>Analyse</h3><p class="hd">Nonlinear dynamic analysis runs each case against a suite of ground motions. Hundreds of runs per configuration.</p></li><li><p class="hn">04</p><h3>Fit</h3><p class="hd">Damage states are extracted and a lognormal fit gives a failure probability for every point in the space.</p></li><li><p class="hn">05</p><h3>Surface</h3><p class="hd">The result is a continuous fragility surface. Read a probability for any configuration, including ones never explicitly run.</p></li><li><p class="hn">06</p><h3>Compare</h3><p class="hd">The index reduces a surface to a single comparable number, so different structures can be ranked for retrofit.</p></li></ol>
 </section>
 
 <section class="story">
@@ -305,34 +303,7 @@
   </div>
 </section>
 
-<section>
-  <h2 class="rule">From the work</h2>
-  <div class="rgrid">      <figure class="rfig">
-        <p class="rstep"><span class="ryear">2021</span>Isolate one variable</p>
-        <img src="research/skew-pushover.jpg" alt="Pushover curves for bridge skew angles from 0 to 90 degrees, base shear against column drift ratio" loading="lazy">
-        <figcaption>Base shear capacity across skew angles from 0° to 90°. The arrow is the finding: skew is not a detail, it is a threefold swing in capacity.<span class="credit">Ghanem, Moon &amp; Lee — Seismic Vulnerability Assessment of Skewed RC Bridges. engrXiv, CC BY 4.0</span></figcaption>
-      </figure>      <figure class="rfig">
-        <p class="rstep"><span class="ryear">2021</span>Quantify the consequence</p>
-        <img src="research/irregularity-effect.jpg" alt="Two fragility curves compared with an inset zoom showing a ten point difference in failure probability" loading="lazy">
-        <figcaption>The same building, regular and irregular. At 0.16 g the inset shows failure probability moving from 74% to 84% — the cost of an irregularity nobody designed in.<span class="credit">Ghanem &amp; Moon — Seismic Fragility Analysis of 3D Vertical Irregular RC Structures. engrXiv, CC BY 4.0</span></figcaption>
-      </figure>      <figure class="rfig">
-        <p class="rstep"><span class="ryear">2021</span>Build the model</p>
-        <img src="research/skewed-bridge-model.jpg" alt="Three-dimensional finite element model of a skewed reinforced concrete bridge" loading="lazy">
-        <figcaption>The finite element model underneath both results. Every pier, bearing and abutment, driven through hundreds of nonlinear time-history analyses.<span class="credit">Doctoral dissertation, University of Hawaiʻi at Mānoa</span></figcaption>
-      </figure>      <figure class="rfig">
-        <p class="rstep"><span class="ryear">2023</span>The contribution</p>
-        <img src="research/fragility-surface-3d.jpg" alt="Three-dimensional fragility surface, failure probability against ground acceleration and normalised height" loading="lazy">
-        <figcaption>The fragility surface the tool produces. Not a curve for one configuration but a continuum across the parameter space — read a failure probability for any structure in it, including ones never explicitly run.<span class="credit">Doctoral dissertation — Integrated Framework for Multi-Hazard Resilience Assessment</span></figcaption>
-      </figure>      <figure class="rfig">
-        <p class="rstep"><span class="ryear">2023</span>The contribution</p>
-        <img src="research/fragility-family.jpg" alt="Family of fragility curves coloured by a structural parameter" loading="lazy">
-        <figcaption>The same surface seen from above, each line a different configuration. The spread between the first and the last is what a single design scenario hides.<span class="credit">Doctoral dissertation, University of Hawaiʻi at Mānoa</span></figcaption>
-      </figure>      <figure class="rfig">
-        <p class="rstep"><span class="ryear">2022</span>Put it in front of people</p>
-        <img src="research/mixed-reality-fragility.jpg" alt="Mixed reality view of a bridge girder and its fragility curve rendered into a real room" loading="lazy">
-        <figcaption>A girder and its fragility curve rendered into a physical room. Analysis is only useful where the decision happens, so it was taken there.<span class="credit">PSR-21-71, Pacific Southwest Region UTC — U.S. Department of Transportation</span></figcaption>
-      </figure></div>
-</section>
+
 
 <section>
   <h2 class="rule">Selected work</h2>
@@ -385,109 +356,138 @@
 </footer>
 <script>
 (function () {
-  var svg = document.getElementById('fragChart');
-  if (!svg) return;
+  var cv = document.getElementById('surfCanvas');
+  if (!cv || !cv.getContext) return;
+  var ctx = cv.getContext('2d');
 
-  var W = 580, H = 440, padL = 52, padR = 16, padT = 20, padB = 46;
-  var plotW = W - padL - padR, plotH = H - padT - padB;
-  var MAXIM = 2.0;
+  var NX = 32, NY = 32, MAXIM = 2.0;
+  var sIm  = document.getElementById('sIm'),
+      sCfg = document.getElementById('sCfg'),
+      sBe  = document.getElementById('sBeta'),
+      sRot = document.getElementById('sRot');
 
-  var curve = document.getElementById('fragCurve');
-  var fill  = document.getElementById('fragFill');
-  var markV = document.getElementById('fragMarkV');
-  var markH = document.getElementById('fragMarkH');
-  var dot   = document.getElementById('fragDot');
-  var medLb = document.getElementById('fragMedian');
-  var medLn = document.getElementById('fragMedLine');
-  var grid  = document.getElementById('fragGrid');
-
-  var sIm = document.getElementById('sIm'),
-      sTh = document.getElementById('sTheta'),
-      sBe = document.getElementById('sBeta');
+  function css(name, fb) {
+    var v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    return v || fb;
+  }
+  function hex2rgb(h) {
+    h = h.replace('#','');
+    if (h.length === 3) h = h[0]+h[0]+h[1]+h[1]+h[2]+h[2];
+    return [parseInt(h.slice(0,2),16), parseInt(h.slice(2,4),16), parseInt(h.slice(4,6),16)];
+  }
+  function mix(a,b,t){
+    return 'rgb('+Math.round(a[0]+(b[0]-a[0])*t)+','+Math.round(a[1]+(b[1]-a[1])*t)+','+Math.round(a[2]+(b[2]-a[2])*t)+')';
+  }
 
   // Abramowitz & Stegun 26.2.17
-  function normCdf(x) {
+  function normCdf(x){
     var neg = x < 0; if (neg) x = -x;
-    var t = 1 / (1 + 0.2316419 * x);
-    var phi = Math.exp(-0.5 * x * x) / Math.sqrt(2 * Math.PI);
-    var p = t * (0.319381530 + t * (-0.356563782 + t * (1.781477937 +
-            t * (-1.821255978 + t * 1.330274429))));
-    var r = 1 - phi * p;
-    return neg ? 1 - r : r;
+    var t = 1/(1+0.2316419*x);
+    var phi = Math.exp(-0.5*x*x)/Math.sqrt(2*Math.PI);
+    var p = t*(0.319381530 + t*(-0.356563782 + t*(1.781477937 + t*(-1.821255978 + t*1.330274429))));
+    var r = 1 - phi*p;
+    return neg ? 1-r : r;
   }
 
-  function px(im) { return padL + (im / MAXIM) * plotW; }
-  function py(p)  { return padT + plotH - p * plotH; }
+  // median capacity falls as the configuration worsens
+  function theta(c){ return 0.62 - 0.42*c; }
+  function pf(im,c,be){ return im <= 0.0001 ? 0 : normCdf(Math.log(im/theta(c))/be); }
 
-  // static grid, drawn once
-  (function buildGrid() {
-    var s = '';
-    for (var i = 0; i <= 4; i++) {
-      var y = py(i / 4);
-      s += '<line x1="' + padL + '" y1="' + y + '" x2="' + (padL + plotW) + '" y2="' + y + '"/>';
-      s += '<text class="ax" x="' + (padL - 9) + '" y="' + (y + 3.5) + '" text-anchor="end">' + (i * 25) + '</text>';
-    }
-    for (var g = 0; g <= MAXIM + 0.001; g += 0.5) {
-      s += '<text class="ax" x="' + px(g) + '" y="' + (padT + plotH + 20) + '" text-anchor="middle">' + g.toFixed(1) + '</text>';
-    }
-    s += '<text class="axt" x="14" y="' + (padT + plotH / 2) + '" text-anchor="middle" transform="rotate(-90 14 ' + (padT + plotH / 2) + ')">Probability of damage (%)</text>';
-    s += '<text class="axt" x="' + (padL + plotW / 2) + '" y="' + (H - 6) + '" text-anchor="middle">Peak ground acceleration (g)</text>';
-    grid.innerHTML = s;
-  })();
+  var W = cv.width, H = cv.height;
 
-  function verdict(p) {
-    if (p < 0.05)  return 'Very unlikely to reach this damage state.';
-    if (p < 0.20)  return 'Unlikely, but no longer negligible.';
-    if (p < 0.50)  return 'A real possibility. Worth designing against.';
-    if (p < 0.80)  return 'More likely than not. This is the range where retrofit decisions get made.';
-    return 'Near certain. At this intensity the question is recovery, not prevention.';
+  function project(u,v,z,rot){
+    var a = rot*Math.PI/180;
+    var x = u-0.5, y = v-0.5;
+    var rx = x*Math.cos(a) - y*Math.sin(a);
+    var ry = x*Math.sin(a) + y*Math.cos(a);
+    return { x: W*0.5 + rx*W*0.60, y: H*0.62 + ry*H*0.30 - z*H*0.46, depth: ry };
   }
 
-  function render() {
-    var im = parseFloat(sIm.value),
-        th = parseFloat(sTh.value),
-        be = parseFloat(sBe.value);
+  function draw(){
+    var im  = parseFloat(sIm.value),  cfg = parseFloat(sCfg.value),
+        be  = parseFloat(sBe.value),  rot = parseFloat(sRot.value);
 
-    var d = '', a = '';
-    for (var i = 0; i <= 200; i++) {
-      var x = (i / 200) * MAXIM;
-      var p = x > 0.0001 ? normCdf(Math.log(x / th) / be) : 0;
-      d += (i === 0 ? 'M' : 'L') + px(x).toFixed(1) + ' ' + py(p).toFixed(1);
+    var cLow  = hex2rgb(css('--accent','#0A6E6E'));
+    var cMid  = hex2rgb(css('--data3','#A8792B'));
+    var cHigh = hex2rgb(css('--data4','#A8482B'));
+    var mute  = css('--ink-mute','#6E7B78');
+    var mark  = css('--data4','#A8482B');
+    var sheet = css('--sheet','#FAFAF8');
+
+    ctx.clearRect(0,0,W,H);
+
+    var quads = [];
+    for (var i=0;i<NX;i++){
+      for (var j=0;j<NY;j++){
+        var u0=i/NX, u1=(i+1)/NX, v0=j/NY, v1=(j+1)/NY;
+        var z00=pf(u0*MAXIM,v0,be), z10=pf(u1*MAXIM,v0,be),
+            z11=pf(u1*MAXIM,v1,be), z01=pf(u0*MAXIM,v1,be);
+        var a=project(u0,v0,z00,rot), b=project(u1,v0,z10,rot),
+            c=project(u1,v1,z11,rot), d=project(u0,v1,z01,rot);
+        quads.push({ pts:[a,b,c,d], z:(z00+z10+z11+z01)/4, depth:(a.depth+c.depth)/2 });
+      }
     }
-    a = d + 'L' + px(MAXIM).toFixed(1) + ' ' + py(0) + 'L' + px(0).toFixed(1) + ' ' + py(0) + 'Z';
-    curve.setAttribute('d', d);
-    fill.setAttribute('d', a);
+    quads.sort(function(p,q){ return p.depth - q.depth; });
 
-    var prob = im > 0.0001 ? normCdf(Math.log(im / th) / be) : 0;
-    var cx = px(im), cy = py(prob);
+    quads.forEach(function(q){
+      var t = q.z;
+      ctx.beginPath();
+      ctx.moveTo(q.pts[0].x,q.pts[0].y);
+      for (var k=1;k<4;k++) ctx.lineTo(q.pts[k].x,q.pts[k].y);
+      ctx.closePath();
+      ctx.fillStyle = t < 0.5 ? mix(cLow,cMid,t*2) : mix(cMid,cHigh,(t-0.5)*2);
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(0,0,0,0.12)';
+      ctx.lineWidth = 0.6;
+      ctx.stroke();
+    });
 
-    markV.setAttribute('x1', cx); markV.setAttribute('y1', py(0));
-    markV.setAttribute('x2', cx); markV.setAttribute('y2', cy);
-    markH.setAttribute('x1', padL); markH.setAttribute('y1', cy);
-    markH.setAttribute('x2', cx);   markH.setAttribute('y2', cy);
-    dot.setAttribute('cx', cx);     dot.setAttribute('cy', cy);
+    var z    = pf(im,cfg,be);
+    var pt   = project(im/MAXIM,cfg,z,rot);
+    var base = project(im/MAXIM,cfg,0,rot);
 
-    medLn.setAttribute('x1', px(th)); medLn.setAttribute('y1', padT + 18);
-    medLn.setAttribute('x2', px(th)); medLn.setAttribute('y2', py(0));
-    medLb.setAttribute('x', px(th));
-    medLb.setAttribute('y', padT + 12);
-    medLb.textContent = 'median ' + th.toFixed(2) + 'g';
+    ctx.strokeStyle = mark; ctx.lineWidth = 2; ctx.setLineDash([5,5]);
+    ctx.beginPath(); ctx.moveTo(base.x,base.y); ctx.lineTo(pt.x,pt.y); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.beginPath(); ctx.arc(pt.x,pt.y,8,0,Math.PI*2);
+    ctx.fillStyle = mark; ctx.fill();
+    ctx.strokeStyle = sheet; ctx.lineWidth = 3; ctx.stroke();
 
-    document.getElementById('vIm').textContent    = im.toFixed(2) + ' g';
-    document.getElementById('vTheta').textContent = th.toFixed(2) + ' g';
-    document.getElementById('vBeta').textContent  = be.toFixed(2);
+    ctx.fillStyle = mute;
+    ctx.font = '16px "Libre Franklin", sans-serif';
+    ctx.textAlign = 'center';
+    var ax1 = project(1.04,0.5,0,rot), ax2 = project(0.5,1.06,0,rot);
+    ctx.fillText('GROUND SHAKING', ax1.x, ax1.y+28);
+    ctx.fillText('CONFIGURATION',  ax2.x, ax2.y+28);
 
-    document.getElementById('roProb').textContent = Math.round(prob * 100) + '%';
-    document.getElementById('roText').textContent =
-      'At ' + im.toFixed(2) + 'g of shaking, this structure has a ' + Math.round(prob * 100) +
-      '% chance of reaching the damage state. ' + verdict(prob);
+    document.getElementById('vIm').textContent   = im.toFixed(2)+' g';
+    document.getElementById('vCfg').textContent  = cfg.toFixed(2);
+    document.getElementById('vBeta').textContent = be.toFixed(2);
+    document.getElementById('vRot').textContent  = Math.round(rot)+'Â°';
+    document.getElementById('sProb').textContent = Math.round(z*100)+'%';
+
+    var verdict;
+    if (z < 0.05)      verdict = 'Very unlikely to reach this damage state.';
+    else if (z < 0.20) verdict = 'Unlikely, but no longer negligible.';
+    else if (z < 0.50) verdict = 'A real possibility. Worth designing against.';
+    else if (z < 0.80) verdict = 'More likely than not. This is where retrofit decisions get made.';
+    else               verdict = 'Near certain. At this intensity the question is recovery, not prevention.';
+
+    document.getElementById('sText').textContent =
+      'At ' + im.toFixed(2) + 'g and configuration ' + cfg.toFixed(2) +
+      ', failure probability is ' + Math.round(z*100) + '%. ' + verdict +
+      ' Every other point on this surface was computed at the same time.';
   }
 
-  [sIm, sTh, sBe].forEach(function (el) {
-    el.addEventListener('input', render);
-    el.addEventListener('change', render);
+  [sIm,sCfg,sBe,sRot].forEach(function(el){
+    el.addEventListener('input', draw);
+    el.addEventListener('change', draw);
   });
-  render();
+  if (window.matchMedia) {
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    if (mq.addEventListener) mq.addEventListener('change', draw);
+  }
+  draw();
 })();
 </script><script>
 (function () {

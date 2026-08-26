@@ -70,7 +70,7 @@ p{margin:0 0 16px;max-width:62ch}
 
 /* ---------- hero ---------- */
 .hero{display:grid;grid-template-columns:1fr 264px;gap:64px;align-items:start;padding:48px 0 32px}
-.hero-side{display:flex;flex-direction:column;gap:24px}
+.hero-side{display:block}
 .hero-text h1{font-size:clamp(2rem,3.9vw,2.9rem);line-height:1.1;letter-spacing:-.026em;margin:0 0 16px;max-width:19ch;text-wrap:balance}
 .hero .lede{font-size:1.14rem;font-style:italic;font-weight:300;max-width:40ch;margin:0 0 24px}
 .roles{list-style:none;margin:0 0 32px;padding:24px 0 0;border-top:1px solid var(--rule);display:grid;gap:16px}
@@ -207,6 +207,16 @@ figcaption p{font-size:.87rem;color:var(--ink-soft);max-width:40ch;line-height:1
 .eqn sub{font-size:.8em}
 @media(max-width:860px){.tsu-views{grid-template-columns:0.8fr 1fr;gap:16px}}
 @media(max-width:580px){.tsu-views{grid-template-columns:1fr;gap:24px}}
+/* ---------- surface explorer ---------- */
+.surfwrap{background:var(--sunk);border:1px solid var(--rule-soft);padding:8px}
+#surfCanvas{width:100%;height:auto;display:block}
+
+/* ---------- how it works ---------- */
+.hsteps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.hsteps li{background:var(--sheet);padding:24px}
+.hn{font-family:"IBM Plex Mono",monospace;font-size:.74rem;color:var(--accent);margin:0 0 12px;font-variant-numeric:tabular-nums}
+.hsteps h3{font-size:1.12rem;margin:0 0 8px}
+.hd{font-size:.9rem;color:var(--ink-soft);margin:0;line-height:1.6}
 /* ---------- research images ---------- */
 .rlede{font-size:1.04rem;color:var(--ink-soft);max-width:60ch;margin:0 0 32px}
 .rstep{display:flex;align-items:baseline;gap:12px;margin:0 0 12px;font-family:"Libre Franklin",sans-serif;font-size:.66rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-mute)}
@@ -241,6 +251,7 @@ figcaption p{font-size:.87rem;color:var(--ink-soft);max-width:40ch;line-height:1
 .pub.haspic{display:grid;grid-template-columns:1fr 220px;gap:32px;align-items:start}
 .pubfig{margin:0}
 .pubfig img{width:100%;aspect-ratio:4/3;object-fit:contain;background:#fff;border:1px solid var(--rule);padding:8px;display:block}
+.pubfig figcaption{font-family:"Libre Franklin",sans-serif;font-size:.62rem;letter-spacing:.06em;color:var(--ink-mute);margin-top:8px;line-height:1.4}
 @media(max-width:700px){.pub.haspic{grid-template-columns:1fr;gap:16px}.pubfig{max-width:280px}}
 .pub{padding:24px 0;border-bottom:1px solid var(--rule-soft)}
 .pub:last-child{border-bottom:none}
