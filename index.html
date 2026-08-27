@@ -597,12 +597,35 @@
     for(var hx=-30;hx<w;hx+=15){ g2.beginPath(); g2.moveTo(hx,GY+26); g2.lineTo(hx+22,GY); g2.stroke(); }
     g2.globalAlpha=1;
 
-    // --- water behind
+    // --- water behind, with a wave surface rather than a ruled line. Amplitude
+    //     grows with the flow so a fast surge visibly breaks rougher.
     var wy=GY-Math.min(1,dep/MAXDEP)*BH;
     if(dep>0.02){
-      g2.fillStyle=acc; g2.globalAlpha=0.20; g2.fillRect(0,wy,w,GY-wy); g2.globalAlpha=1;
-      g2.strokeStyle=acc; g2.lineWidth=2;
-      g2.beginPath(); g2.moveTo(0,wy); g2.lineTo(w,wy); g2.stroke();
+      var amp = 2.5 + Math.min(1,(fr-0.4)/1.6)*5.5;
+      var lam = 74;
+      function waveY(x){ return wy + Math.sin(x/lam*Math.PI*2)*amp + Math.sin(x/(lam*0.43)*Math.PI*2)*amp*0.35; }
+
+      g2.beginPath();
+      g2.moveTo(0, waveY(0));
+      for(var wx=2; wx<=w; wx+=2) g2.lineTo(wx, waveY(wx));
+      g2.lineTo(w, GY); g2.lineTo(0, GY); g2.closePath();
+      g2.fillStyle=acc; g2.globalAlpha=0.20; g2.fill(); g2.globalAlpha=1;
+
+      g2.strokeStyle=acc; g2.lineWidth=2; g2.lineJoin='round';
+      g2.beginPath();
+      g2.moveTo(0, waveY(0));
+      for(var wx2=2; wx2<=w; wx2+=2) g2.lineTo(wx2, waveY(wx2));
+      g2.stroke();
+
+      // a second crest below the surface reads as moving water, not a filled box
+      g2.globalAlpha=0.30; g2.lineWidth=1.4;
+      g2.beginPath();
+      for(var wx3=0; wx3<=w; wx3+=2){
+        var yy = waveY(wx3+lam*0.5) + 13;
+        if (yy > GY-3) continue;
+        if (wx3===0) g2.moveTo(wx3,yy); else g2.lineTo(wx3,yy);
+      }
+      g2.stroke(); g2.globalAlpha=1;
     }
 
     // --- moment frame: two columns, N floor beams. Damage shows as plastic
@@ -651,20 +674,34 @@
       g2.fillText((dep*M2FT).toFixed(1)+' ft', 16, wy-14);
     }
 
-    // --- shaking
-    g2.strokeStyle=ink; g2.fillStyle=ink; g2.lineWidth=2.4; g2.globalAlpha=0.8;
-    var sw=20+Math.min(pga,1.5)*40, cxb=BX+BW/2, sy=GY+36;
-    g2.beginPath(); g2.moveTo(cxb-sw,sy); g2.lineTo(cxb+sw,sy); g2.stroke();
-    [-1,1].forEach(function(sg){
+    // --- shaking, drawn as the ground motion itself: an accelerogram trace
+    //     through the soil. A double-headed arrow says "it moves"; a record
+    //     says "this is an earthquake", and its amplitude carries the PGA.
+    var sy = GY + 30, cxb = BX + BW/2;
+    var amp2 = Math.min(pga, 1.5) / 1.5 * 15;
+    if (pga > 0.005) {
+      g2.strokeStyle = ink; g2.lineWidth = 1.7; g2.globalAlpha = 0.85;
+      g2.lineJoin = 'round'; g2.lineCap = 'round';
       g2.beginPath();
-      g2.moveTo(cxb+sg*(sw+10),sy);
-      g2.lineTo(cxb+sg*sw,sy-6);
-      g2.lineTo(cxb+sg*sw,sy+6);
-      g2.closePath(); g2.fill();
-    });
-    g2.globalAlpha=1;
-    g2.font='600 17px "IBM Plex Mono", monospace'; g2.textAlign='center';
-    g2.fillText(pga.toFixed(2)+' g', cxb, sy+26);
+      for (var ex = 0; ex <= w; ex += 2) {
+        // deterministic pseudo-noise: a few detuned sines, enveloped so the
+        // record swells and decays the way a real trace does
+        var ph = ex / w;
+        var env = Math.exp(-Math.pow((ph - 0.42) * 2.6, 2)) * 0.75 + 0.25;
+        var v = Math.sin(ex * 0.21) * 0.55 + Math.sin(ex * 0.077 + 1.3) * 0.9 +
+                Math.sin(ex * 0.44 + 2.1) * 0.32 + Math.sin(ex * 0.031 + 0.7) * 0.45;
+        var ey = sy + v * amp2 * env;
+        if (ex === 0) g2.moveTo(ex, ey); else g2.lineTo(ex, ey);
+      }
+      g2.stroke();
+      g2.globalAlpha = 1; g2.lineCap = 'butt';
+    } else {
+      g2.strokeStyle = mute; g2.globalAlpha = 0.4; g2.lineWidth = 1.4;
+      g2.beginPath(); g2.moveTo(0, sy); g2.lineTo(w, sy); g2.stroke(); g2.globalAlpha = 1;
+    }
+    g2.fillStyle = ink;
+    g2.font = '600 17px "IBM Plex Mono", monospace'; g2.textAlign = 'center';
+    g2.fillText(pga.toFixed(2) + ' g', cxb, sy + 34);
 
     // --- sequence labels
     g2.textAlign='left';
