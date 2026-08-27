@@ -359,6 +359,8 @@ figcaption p{font-size:0.95rem;color:var(--ink-soft);max-width:54ch;line-height:
   .hstep:first-child::before{display:block}
   .hstep:last-child::before{display:none}
   .hstep::after{content:"";top:auto;bottom:18px;left:31px;border-left:8px solid transparent;border-right:8px solid transparent;border-top:12px solid var(--rule);border-bottom:0;display:block}
+  .hstep:hover::after{border-left-color:transparent;border-right-color:transparent;border-top-color:var(--accent)}
+  .hstep::after{transition:border-top-color .3s ease}
   .hstep:first-child::after{display:block}
   .hstep:last-child::after{display:none}
 }
@@ -475,7 +477,7 @@ a,.btn,.xcard,.work,.entry,.recog li,.hdot,.icon{transition:color .22s ease,back
 .hstep:hover .hdot{border-color:var(--accent);transform:translateY(-3px)}
 .hsteps:hover .hstep::before{background:var(--rule-soft)}
 .hstep:hover::before{background:var(--accent)}
-.hstep:hover::after{border-left-color:var(--accent)}
+@media(min-width:1200px){.hstep:hover::after{border-left-color:var(--accent)}}
 .hstep::before,.hstep::after{transition:background-color .3s ease,border-left-color .3s ease}
 .hdot{transition:transform .3s cubic-bezier(.2,.6,.2,1),border-color .3s ease}
 .work:hover h3 a,.entry:hover h3 a{color:var(--accent)}
