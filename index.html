@@ -636,12 +636,18 @@
     // Static lean is the permanent set left by damage. On top of it the frame
     // sways: amplitude from the shaking, period lengthening as damage softens
     // the structure - which is what actually happens to a damaged building.
+    // The two hazards are SEQUENTIAL, not concurrent. Shaking lasts seconds to
+    // a couple of minutes; the tsunami arrives minutes to tens of minutes later,
+    // by which time the ground motion has stopped. So the sway only runs while
+    // the site is dry - once water is up, the earthquake is over and what
+    // remains of it is the permanent damage: residual lean and plastic hinges.
     var sway = 0;
-    if (ANIM && pga > 0.005) {
+    if (ANIM && pga > 0.005 && dep <= 0.35) {
       var soft = 1 + dam*0.9;                       // period grows with damage
-      sway = Math.sin(T/(430*soft)) * Math.min(pga,1.5)/1.5 * 9 * (0.55+dam*0.45);
+      var quiet = 1 - Math.min(1, dep/0.35);        // fades out as water arrives
+      sway = Math.sin(T/(430*soft)) * Math.min(pga,1.5)/1.5 * 9 * (0.55+dam*0.45) * quiet;
     }
-    var lean = Math.min(1,dam)*12 + sway;
+    var lean = Math.min(1,dam)*12 + sway;            // residual lean always stays
     var storey=BH/N;
 
     // --- the whole scene is isometric, not just the frame: a ground plane
@@ -673,33 +679,52 @@
 
     // --- foundation: a pad under each column plus the grade beam between them
     var FBW = 26, FBH = 13, FD = 20;   // footing width, thickness, embedment
-    function footing(cx){
-      var x0 = BX + cx - FBW/2, x1 = BX + cx + FBW/2, yTop = GY + FD - FBH;
+    // One pad under every column - four, not two. The rear pair is dimmed and
+    // drawn first so the front pair overlaps it correctly.
+    function footing(cx, back){
+      var ox = back ? DX : 0, oy = back ? DY : 0, dim = back ? 0.42 : 1;
+      var x0 = BX + cx - FBW/2 + ox, x1 = BX + cx + FBW/2 + ox, yTop = GY + FD - FBH + oy;
+      var tdx = DX*0.55, tdy = DY*0.55;
+      g2.fillStyle=sunk; g2.strokeStyle=mute; g2.lineWidth=1.3;
       // top face
       g2.beginPath();
       g2.moveTo(x0,yTop); g2.lineTo(x1,yTop);
-      g2.lineTo(x1+DX*0.55, yTop+DY*0.55); g2.lineTo(x0+DX*0.55, yTop+DY*0.55);
+      g2.lineTo(x1+tdx, yTop+tdy); g2.lineTo(x0+tdx, yTop+tdy);
       g2.closePath();
-      g2.fillStyle=sunk; g2.globalAlpha=0.95; g2.fill();
-      g2.strokeStyle=mute; g2.lineWidth=1.3; g2.globalAlpha=0.75; g2.stroke();
+      g2.globalAlpha=0.95*dim; g2.fill();
+      g2.globalAlpha=0.75*dim; g2.stroke();
       // front face
       g2.beginPath(); g2.rect(x0, yTop, FBW, FBH);
-      g2.fillStyle=sunk; g2.globalAlpha=0.95; g2.fill();
-      g2.globalAlpha=0.75; g2.stroke();
+      g2.globalAlpha=0.95*dim; g2.fill();
+      g2.globalAlpha=0.75*dim; g2.stroke();
       // right return
       g2.beginPath();
-      g2.moveTo(x1,yTop); g2.lineTo(x1+DX*0.55, yTop+DY*0.55);
-      g2.lineTo(x1+DX*0.55, yTop+DY*0.55+FBH); g2.lineTo(x1, yTop+FBH);
-      g2.closePath(); g2.fillStyle=sunk; g2.fill(); g2.stroke();
-      // stub connecting footing to column base
-      g2.beginPath(); g2.moveTo(BX+cx, GY); g2.lineTo(BX+cx, yTop); g2.stroke();
+      g2.moveTo(x1,yTop); g2.lineTo(x1+tdx, yTop+tdy);
+      g2.lineTo(x1+tdx, yTop+tdy+FBH); g2.lineTo(x1, yTop+FBH);
+      g2.closePath();
+      g2.globalAlpha=0.95*dim; g2.fill();
+      g2.globalAlpha=0.75*dim; g2.stroke();
+      // stub from pad up to the column base
+      g2.globalAlpha=0.75*dim; g2.lineWidth=2;
+      g2.beginPath(); g2.moveTo(BX+cx+ox, GY+oy); g2.lineTo(BX+cx+ox, yTop); g2.stroke();
       g2.globalAlpha=1;
     }
-    // grade beam tying the two footings
-    g2.strokeStyle=mute; g2.globalAlpha=0.5; g2.lineWidth=1.2;
-    g2.beginPath(); g2.rect(BX, GY+FD-FBH+3, BW, FBH-6); g2.stroke();
+    // grade beams: along each face and across the depth, tying all four pads
+    var gbY = GY+FD-FBH+3, gbH = FBH-6;
+    g2.strokeStyle=mute; g2.lineWidth=1.2;
+    g2.globalAlpha=0.25;
+    g2.beginPath(); g2.rect(BX+DX, gbY+DY, BW, gbH); g2.stroke();          // back
+    g2.globalAlpha=0.4;
+    [0,BW].forEach(function(cx){                                            // transverse
+      g2.beginPath();
+      g2.moveTo(BX+cx, gbY+gbH/2); g2.lineTo(BX+cx+DX, gbY+DY+gbH/2); g2.stroke();
+    });
+    g2.globalAlpha=0.5;
+    g2.beginPath(); g2.rect(BX, gbY, BW, gbH); g2.stroke();                 // front
     g2.globalAlpha=1;
-    footing(0); footing(BW);
+
+    footing(0,1); footing(BW,1);      // rear pads first
+    footing(0,0); footing(BW,0);      // then the front pair over them
 
     // --- water behind, with a wave surface rather than a ruled line. Amplitude
     //     grows with the flow so a fast surge visibly breaks rougher.
@@ -822,16 +847,41 @@
       g2.globalAlpha=1;
     }
 
-    // --- tsunami drag onto the wetted face
+    // --- Tsunami loading on the two front columns.
+    //
+    //     Arrow length is the PRESSURE at that height, not the total force.
+    //     Previously every arrow shared one length driven by F_ts, so the whole
+    //     set grew uniformly with depth - which drew a rectangular distribution
+    //     for a load that is not rectangular.
+    //
+    //     Hydrostatic pressure varies linearly with depth below the surface
+    //     (zero at the waterline, maximum at the bed). Drag under Froude
+    //     scaling, u^2 = Fr^2*g*h, is uniform over the wetted height. The sum
+    //     is a trapezoid: widest at the base, never zero at the top while there
+    //     is flow. Overall magnitude still scales with F_ts.
     if(dep>0.02){
       var rel=Math.min(1,fTs(dep,fr)/900);
-      g2.strokeStyle=mark; g2.fillStyle=mark; g2.lineWidth=2.4;
-      var na=Math.max(2,Math.min(5,Math.round(dep*0.8)+1));
-      for(var k=0;k<na;k++){
-        var ay=GY-12-(k+0.5)*((GY-wy)/na), len=30+rel*44;
-        g2.beginPath(); g2.moveTo(BX-len-10,ay); g2.lineTo(BX-12,ay); g2.stroke();
-        g2.beginPath(); g2.moveTo(BX-2,ay); g2.lineTo(BX-14,ay-5.5); g2.lineTo(BX-14,ay+5.5); g2.closePath(); g2.fill();
-      }
+      var hyd=0.5*RHO*G*dep*dep, drg=0.5*RHO*CD*fr*fr*G*dep*dep;
+      var dragShare=drg/(hyd+drg);                    // 0 = all hydrostatic
+      g2.lineCap='round';
+      var na=Math.max(3,Math.min(6,Math.round(dep*0.9)+2));
+      var wetted=GY-wy;
+      [0,BW].forEach(function(cx,ci){
+        var tipX=BX+cx-3, near=(ci===0);
+        g2.globalAlpha=near?1:0.6;                    // rear column partly sheltered
+        g2.strokeStyle=mark; g2.fillStyle=mark; g2.lineWidth=near?2.4:2;
+        for(var k=0;k<na;k++){
+          var frac=(k+0.5)/na;                        // 0 at surface, 1 at bed
+          var ay=wy+frac*wetted;
+          if(ay>GY-4) continue;
+          var press=(1-dragShare)*frac + dragShare;   // triangular + uniform
+          var len=(12+press*(26+rel*40))*(near?1:0.72);
+          g2.beginPath(); g2.moveTo(tipX-len-11,ay); g2.lineTo(tipX-11,ay); g2.stroke();
+          g2.beginPath(); g2.moveTo(tipX,ay); g2.lineTo(tipX-12,ay-5); g2.lineTo(tipX-12,ay+5);
+          g2.closePath(); g2.fill();
+        }
+      });
+      g2.globalAlpha=1; g2.lineCap='butt';
       g2.fillStyle=acc; g2.font='600 17px "IBM Plex Mono", monospace'; g2.textAlign='left';
       g2.fillText((dep*M2FT).toFixed(1)+' ft', 16, wy-14);
     }
@@ -871,11 +921,11 @@
     g2.fillStyle=ink;  g2.font='600 15px "Libre Franklin", sans-serif';
     g2.fillText('1  EARTHQUAKE', 18, 28);
     g2.fillStyle=mute; g2.font='14px "Libre Franklin", sans-serif';
-    g2.fillText('hinges form, capacity drops', 18, 48);
+    g2.fillText('shaking ends, hinges form', 18, 48);
     g2.fillStyle=ink;  g2.font='600 15px "Libre Franklin", sans-serif';
     g2.fillText('2  TSUNAMI', 18, 76);
     g2.fillStyle=mute; g2.font='14px "Libre Franklin", sans-serif';
-    g2.fillText('hits the weakened frame', 18, 96);
+    g2.fillText('arrives later, at the weakened frame', 18, 96);
   }
   function render(){
     var pga=parseFloat(sPga.value), dep=parseFloat(sDep.value),
