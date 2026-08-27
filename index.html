@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="Amr Ghanem">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230B1211'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='17' fill='%236BBFAE' text-anchor='middle'%3EAG%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Libre+Franklin:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,200;0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&display=swap">
-<link rel="stylesheet" href="style.css?v=dde07ceb7c">
+<link rel="stylesheet" href="style.css?v=d633648c7e">
 <script type="application/ld+json">
 {
     "@context":  "https://schema.org",
@@ -864,6 +864,36 @@
       g2.globalAlpha=1;
     }
 
+    // --- Seismic lateral load, applied at the floor levels.
+    //
+    //     Under the equivalent lateral force procedure the storey force is
+    //     Fx = V * w_x*h_x^k / SUM(w_i*h_i^k). With equal floor weights and
+    //     k = 1 that is proportional to height: an INVERTED triangle, largest
+    //     at the roof.
+    //
+    //     Worth seeing beside the tsunami case, which is the opposite shape -
+    //     hydrostatic plus drag is largest at the base. The same frame is
+    //     pushed from the top by one hazard and from the bottom by the other,
+    //     which is exactly why assessing them separately understates the risk.
+    if (PHASE === 'eq' && pga > 0.005){
+      var sTot=0; for(var w1=1; w1<=N; w1++) sTot += w1;
+      g2.strokeStyle=mark; g2.fillStyle=mark; g2.lineCap='round';
+      for(var s3=1; s3<=N; s3++){
+        var h3=storey*s3, sharePct=s3/sTot;
+        var L=(14 + sharePct*N*0.72*(30+Math.min(pga,1.5)/1.5*46));
+        [1,0].forEach(function(back){
+          var pt=P(0,h3,back);
+          g2.globalAlpha = back?0.4:0.95;
+          g2.lineWidth = back?1.8:2.3;
+          var tip=pt.x-3, len=L*(back?0.82:1);
+          g2.beginPath(); g2.moveTo(tip-len-11,pt.y); g2.lineTo(tip-11,pt.y); g2.stroke();
+          g2.beginPath(); g2.moveTo(tip,pt.y); g2.lineTo(tip-12,pt.y-5); g2.lineTo(tip-12,pt.y+5);
+          g2.closePath(); g2.fill();
+        });
+      }
+      g2.globalAlpha=1; g2.lineCap='butt';
+    }
+
     // --- Tsunami loading on the two front columns.
     //
     //     Arrow length is the PRESSURE at that height, not the total force.
@@ -915,13 +945,11 @@
     var amp2 = Math.min(pga, 1.5) / 1.5 * 15;
     var quakeOver = (PHASE === 'ts');
     if (quakeOver) {
-      // Shaking has stopped. A flat trace and a dimmed value: the intensity
-      // explains why the frame is damaged, it is not still happening.
+      // Shaking has stopped, so the trace goes flat and the intensity value
+      // goes with it - it belongs to a stage that is over. The slider still
+      // reads it, which is where a locked past value belongs.
       g2.strokeStyle = mute; g2.globalAlpha = 0.28; g2.lineWidth = 1.4;
       g2.beginPath(); g2.moveTo(0, sy); g2.lineTo(w, sy); g2.stroke();
-      g2.globalAlpha = 0.4; g2.fillStyle = mute;
-      g2.font = '600 17px "IBM Plex Mono", monospace'; g2.textAlign = 'center';
-      g2.fillText(pga.toFixed(2) + ' g', cxb, sy + 34);
       g2.globalAlpha = 1;
     } else if (pga > 0.005) {
       g2.strokeStyle = ink; g2.lineWidth = 1.7; g2.globalAlpha = 0.85;
@@ -956,7 +984,16 @@
     //     with a gap between them for the delay, and whichever stage the current
     //     state represents is lit while the other recedes.
     (function(){
-      var by=27, x1=20, x2=190;
+      // Span the canvas: shaking anchored left, inundation anchored right, the
+      // delay centred between them. The right group is positioned from its
+      // measured width so it truly right-aligns whatever the label says.
+      var by=27, x1=18, pad=16;
+      g2.font='700 15px "Libre Franklin", sans-serif';
+      var wIn=g2.measureText('INUNDATION').width, wSh=g2.measureText('SHAKING').width;
+      var x2 = w - pad - wIn - 21;
+      // the delay spans the clear gap between the two labels, not between the
+      // two markers - measured, so it never runs underneath the type
+      var dA = x1 + 21 + wSh + 10, dB = x2 - 10;
       var stage2 = (PHASE === 'ts');
       function stage(x, on, kind){
         g2.globalAlpha = on ? 1 : 0.3;
@@ -986,12 +1023,12 @@
       // the delay between them
       g2.globalAlpha=0.42; g2.strokeStyle=mute; g2.fillStyle=mute; g2.lineWidth=1.3;
       g2.beginPath(); g2.setLineDash([4,4]);
-      g2.moveTo(x1+20, by); g2.lineTo(x2-12, by); g2.stroke(); g2.setLineDash([]);
-      g2.beginPath(); g2.moveTo(x2-4,by); g2.lineTo(x2-12,by-4); g2.lineTo(x2-12,by+4);
+      g2.moveTo(dA, by); g2.lineTo(dB-8, by); g2.stroke(); g2.setLineDash([]);
+      g2.beginPath(); g2.moveTo(dB,by); g2.lineTo(dB-8,by-4); g2.lineTo(dB-8,by+4);
       g2.closePath(); g2.fill();
 
       g2.font='700 13px "Libre Franklin", sans-serif'; g2.textAlign='center';
-      g2.fillText('MINUTES LATER', (x1+20+x2-12)/2, by-12);
+      g2.fillText('MINUTES LATER', (dA + dB)/2, by-12);
 
       g2.textAlign='left'; g2.font='700 15px "Libre Franklin", sans-serif';
       g2.globalAlpha = stage2?0.5:1; g2.fillStyle = stage2?mute:ink;
@@ -1027,6 +1064,17 @@
       (extra>1 ? ' — up ' + extra + ' points from ' + Math.round(alone*100) + '% undamaged.' : '.');
   }
 
+  function lock(sl, off){
+    sl.disabled = off;
+    var row = sl.closest ? sl.closest('.ctrl') : null;
+    if (row) row.classList.toggle('muted', off);
+  }
+  function applyLocks(p){
+    lock(sDep, p === 'eq');
+    lock(sFr,  p === 'eq');
+    lock(sPga, p === 'ts');
+  }
+
   function setPhase(p){
     PHASE = p;
     phaseBtns.forEach(function(b){
@@ -1034,11 +1082,13 @@
       b.classList.toggle('on', on);
       b.setAttribute('aria-pressed', on ? 'true' : 'false');
     });
-    // the flood controls mean nothing during the shaking stage
-    [sDep, sFr].forEach(function(sl){
-      var row = sl.closest ? sl.closest('.ctrl') : null;
-      if (row) row.classList.toggle('muted', p === 'eq');
-    });
+    // Each stage locks the other stage's demands. During the shaking there is
+    // no water yet, so the flood controls are disabled; once the water arrives
+    // the shaking is over, so its intensity is fixed at whatever was set and
+    // the slider is disabled holding that value. A locked slider still shows
+    // its number - that is the record of what the frame has already been
+    // through, which is exactly what the tsunami stage is conditioned on.
+    applyLocks(p);
     render();
     if (ANIM) startLoop();
   }
@@ -1048,7 +1098,6 @@
 
   [sPga,sDep,sFr,sBe,sRot].forEach(function(el){
     el.addEventListener('input', function(){
-      if ((el === sDep || el === sFr) && PHASE !== 'ts') { setPhase('ts'); return; }
       render();
     });
     el.addEventListener('change', render);
@@ -1092,6 +1141,7 @@
     if (document.hidden) stopLoop(); else startLoop();
   });
 
+  applyLocks(PHASE);
   fit();
   render();
 })();
