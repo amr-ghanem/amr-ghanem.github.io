@@ -94,7 +94,7 @@ p{margin:0 0 14px;max-width:86ch}
 .hero{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:72px;align-items:start;padding:48px 0 32px}
 .hero-side{display:block}
 .hero-text h1{font-size:clamp(2.6rem,5.2vw,4rem);line-height:1.04;letter-spacing:-.03em;margin:0 0 12px;max-width:14ch;text-wrap:balance}
-.hero-claim{font-family:"Newsreader",Georgia,serif;font-weight:300;font-size:clamp(1.35rem,2.1vw,1.72rem);line-height:1.22;letter-spacing:-.015em;color:var(--ink-soft);margin:0 0 18px;max-width:24ch}
+.hero-claim{font-family:"Newsreader",Georgia,serif;font-weight:300;font-size:clamp(1.35rem,2.1vw,1.72rem);line-height:1.22;letter-spacing:-.015em;color:var(--ink-soft);margin:0 0 18px;max-width:none}
 .hero .lede{font-size:1.16rem;font-style:italic;font-weight:300;max-width:64ch;margin:0 0 24px}
 .roles{list-style:none;margin:0 0 32px;padding:24px 0 0;border-top:1px solid var(--rule);display:grid;gap:16px}
 .roles li{display:flex;flex-direction:column;gap:2px}
