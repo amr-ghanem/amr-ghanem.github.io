@@ -124,14 +124,21 @@
 <figure class="engine">
   <svg viewBox="-32 0 848 396" role="img" aria-label="Coupled engine: input and model uncertainty distributions feed a reliability search, which exchanges deterministic trials and structural responses with a nonlinear analysis until convergence, returning a fragility curve">
 
+    <!-- The two streams are not the same distribution and should not be drawn as
+         one. Hazard intensity is lognormal - a sharp rise and a long upper tail,
+         which is where the rare severe events live. Model uncertainty is a
+         narrow symmetric scatter about a nominal capacity. The dashed line marks
+         each mode, so the skew of the upper curve is legible at a glance. -->
     <g class="ein">
-      <path class="epdf" d="M14 130 C 30 130, 32 90, 48 90 C 64 90, 66 130, 82 130"/>
+      <path class="epdf" d="M12 130 C 20 130, 25 97, 35 93 C 43 90, 49 105, 57 116 C 65 125, 74 130, 84 130"/>
+      <line class="emode" x1="35" y1="95" x2="35" y2="130"/>
       <line class="eaxis" x1="10" y1="130" x2="86" y2="130"/>
-      <text class="elab" x="48" y="154" text-anchor="middle">Input uncertainty</text>
-      <text class="esub" x="48" y="172" text-anchor="middle">ground motion, geometry</text>
+      <text class="elab" x="48" y="154" text-anchor="middle">Hazard uncertainty</text>
+      <text class="esub" x="48" y="172" text-anchor="middle">intensity, duration</text>
     </g>
     <g class="ein">
-      <path class="epdf" d="M14 300 C 30 300, 34 266, 48 266 C 62 266, 66 300, 82 300"/>
+      <path class="epdf" d="M22 300 C 35 300, 37 264, 48 264 C 59 264, 61 300, 74 300"/>
+      <line class="emode" x1="48" y1="266" x2="48" y2="300"/>
       <line class="eaxis" x1="10" y1="300" x2="86" y2="300"/>
       <text class="elab" x="48" y="324" text-anchor="middle">Model uncertainty</text>
       <text class="esub" x="48" y="342" text-anchor="middle">material, capacity</text>
@@ -297,26 +304,14 @@
 <div class="exp-wrap">
   <h2 class="rule">Expertise</h2>
   <article class="xcard">
-          <figure class="xpic">
-        <img src="research/fragility-surface-3d.jpg" alt="Three-dimensional fragility surface, failure probability against ground acceleration and normalised height" loading="lazy">
-        <figcaption>Doctoral dissertation — Integrated Framework for Multi-Hazard Resilience Assessment</figcaption>
-      </figure>
     <h3>Locus, the multi-hazard assessment tool</h3>
     <p class="exp-lead">Fragility surfaces with the hazard as an input variable, not a built-in assumption. A reliability search replaces brute-force simulation, so sweeping a whole parameter space stays tractable.</p>
     <ul class="evidence"><li>Ph.D. dissertation — Integrated Framework for Multi-Hazard Resilience Assessment of Infrastructures (2023)</li><li>First-order reliability method (FORM)</li><li>Parallelised nonlinear dynamic analysis in Python and MATLAB</li><li>Demonstrated on skewed RC bridges, mass-irregular frames, and tsunami loading</li><li>Funded by the U.S. DOT Pacific Southwest Region UTC</li></ul>
   </article>  <article class="xcard">
-          <figure class="xpic">
-        <img src="research/fragility-family.jpg" alt="Family of fragility curves coloured by a structural parameter" loading="lazy">
-        <figcaption>Doctoral dissertation, University of Hawaiʻi at Mānoa</figcaption>
-      </figure>
     <h3>A comparable fragility index</h3>
     <p class="exp-lead">Fragility results resist comparison across structural systems, leaving retrofit priorities to judgement. A single index makes them commensurable.</p>
     <ul class="evidence"><li>Indexing Seismic Fragility Curves of Skewed RC Bridges (12NCEE 2022)</li><li>Extended in the dissertation across structural systems</li><li>Further generalisation in progress</li></ul>
   </article>  <article class="xcard">
-          <figure class="xpic">
-        <img src="research/mixed-reality-fragility.jpg" alt="Mixed reality view of a bridge girder and its fragility curve rendered into a real room" loading="lazy">
-        <figcaption>PSR-21-71, Pacific Southwest Region UTC — U.S. Department of Transportation</figcaption>
-      </figure>
     <h3>Instrumentation and damage detection</h3>
     <p class="exp-lead">What feeds the tool from the field: sensors on aging bridges, multi-sensor fusion, and deep-learning crack detection from images.</p>
     <ul class="evidence"><li>Long-term structural health monitoring of aging bridges, funded by Hawaii DOT</li><li>Multi-sensor fusion for non-destructive condition assessment (12NCEE 2022)</li><li>Crack detection and classification via deep-learning image processing</li><li>Model-C and Resesio — two UH competition wins built on the same optimisation work</li></ul>
