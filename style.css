@@ -147,14 +147,22 @@ p{margin:0 0 14px;max-width:86ch}
    the remainder fills the grid instead. The nth-child tests are count-agnostic:
    :nth-child(odd) as the last item means one cell short of a pair, and 3n+1 /
    3n+2 mean the final row of three holds one or two. */
-@media (max-width:1040px){
-  .stats{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .stats>div:last-child:nth-child(3n+1){grid-column:span 3}
-  .stats>div:last-child:nth-child(3n+2){grid-column:span 2}
+/* Wrapping rows are balanced, not left-aligned with one stretched card. The
+   trick is a grid of 6 (or 4) with each card spanning 2, so a short final row
+   can widen its cards EVENLY to fill the width instead of one card growing to
+   twice its neighbour. The nth-child tests read the remainder: 3n+2 as the last
+   item means two cards on the final row, 3n+1 means one. */
+@media (min-width:561px) and (max-width:1040px){
+  .stats{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .stats>div{grid-column:span 2}
+  .stats>div:last-child:nth-child(3n+1){grid-column:span 6}
+  .stats>div:last-child:nth-child(3n+2),
+  .stats>div:nth-last-child(2):nth-child(3n+1){grid-column:span 3}
 }
 @media (max-width:560px){
-  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .stats>div:last-child:nth-child(odd){grid-column:span 2}
+  .stats{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .stats>div{grid-column:span 2}
+  .stats>div:last-child:nth-child(odd){grid-column:span 4}
 }
 .stats>div{background:var(--sheet);padding:22px 16px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
 .sicon{width:34px;height:28px;color:var(--accent);margin-bottom:4px;display:block}
@@ -362,8 +370,16 @@ figcaption p{font-size:0.95rem;color:var(--ink-soft);max-width:54ch;line-height:
 .engine .ehyst{fill:none;stroke:var(--accent);stroke-width:1.8;stroke-linejoin:round}
 .engine .ehyst.inner{stroke-width:1.2;opacity:.5}
 .engine .efrag{fill:none;stroke:var(--accent);stroke-width:2.4}
-.engine .ecyc{fill:none;stroke:var(--accent);stroke-width:2.4}
-.engine .ecycHead{fill:var(--accent)}
+/* The loop is two journeys, not one line. Colouring the outbound trial and the
+   returning response differently is what makes it read as a cycle rather than
+   a decorative oval - and it matches the two labels already on the diagram. */
+.engine .ecyc{fill:none;stroke-width:2.4}
+.engine .ecyc.ecyc-out{stroke:var(--accent)}
+.engine .ecyc.ecyc-back{stroke:var(--data3)}
+.engine .ecycHead.ecyc-out{fill:var(--accent)}
+.engine .ecycHead.ecyc-back{fill:var(--data3)}
+.engine .ecyclab.lab-out{fill:var(--accent)}
+.engine .ecyclab.lab-back{fill:var(--data3)}
 .engine .ecyclab{font-family:"Libre Franklin",sans-serif;font-size:9.5px;fill:var(--ink-mute)}
 .engine figcaption{font-family:"Libre Franklin",sans-serif;font-size:0.84rem;line-height:1.6;color:var(--ink-mute);margin-top:16px;max-width:none}
 .rnote{font-family:"Libre Franklin",sans-serif;font-size:0.84rem;line-height:1.6;color:var(--ink-mute);margin:24px 0 0;max-width:none}
@@ -662,6 +678,10 @@ footer.site{border-top:1px solid var(--rule);padding-top:32px;padding-bottom:48p
 .fcols a{font-size:0.95rem;text-decoration:none}
 .fcols a:hover{text-decoration:underline}
 .fplain{font-size:0.95rem;color:var(--ink-mute);margin:0}
+.fplain a{display:inline-flex;align-items:center;gap:8px;color:inherit;text-decoration:none}
+.fplain a:hover{color:var(--ink);text-decoration:underline}
+.fplain a .icon{color:var(--accent);transition:color .3s ease}
+.fplain a:hover .icon{color:var(--data2)}
 .footbar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 32px;margin-top:36px;padding-top:20px;border-top:1px solid var(--rule-soft)}
 .colophon{font-size:0.76rem;color:var(--ink-mute);margin:0;letter-spacing:.06em}
 
@@ -790,9 +810,9 @@ nav a.on::after{transform:scaleX(1)}
 
 .engine .ecyc,.engine .ecycHead,.engine .edesign,.engine .efrag,.engine .epdf,.engine .ebox{transition:opacity .3s ease,stroke .3s ease}
 .engine:hover .ecyc{stroke-dasharray:10 6;animation:eFlowFwd 1.15s linear infinite}
-.engine:hover .ecyc:nth-of-type(2){animation-name:eFlowBack}
+.engine:hover .ecyc.ecyc-back{animation-name:eFlowBack}
 .engine:hover .ecycHead{animation:gPulse 1.15s ease-in-out infinite}
-.engine:hover .ecycHead:nth-of-type(2){animation-delay:.57s}
+.engine:hover .ecycHead.ecyc-back{animation-delay:.57s}
 .engine:hover .edesign{transform-box:fill-box;transform-origin:center;animation:gDot 1.5s ease-in-out infinite}
 .engine:hover .efrag{stroke-dasharray:210;animation:gTrace 2s ease-in-out infinite}
 .engine:hover .epdf{animation:gDrift 2.2s ease-in-out infinite}

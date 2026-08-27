@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="Amr Ghanem">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230B1211'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='17' fill='%236BBFAE' text-anchor='middle'%3EAG%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Libre+Franklin:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,200;0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&display=swap">
-<link rel="stylesheet" href="style.css?v=69b93e2df1">
+<link rel="stylesheet" href="style.css?v=3174a246d3">
 <script type="application/ld+json">
 {
     "@context":  "https://schema.org",
@@ -170,9 +170,9 @@
     <text class="etitle" x="384" y="20" text-anchor="middle">Coupled engine</text>
 
     <!-- band 1: the cycle out -->
-    <text class="ecyclab" x="384" y="52" text-anchor="middle">deterministic trial</text>
-    <path class="ecyc" d="M312 96 C 346 68, 422 68, 456 96"/>
-    <polygon class="ecycHead" points="460,99 442,87 458,80"/>
+    <text class="ecyclab lab-out" x="384" y="52" text-anchor="middle">deterministic trial</text>
+    <path class="ecyc ecyc-out" d="M312 96 C 346 68, 422 68, 456 96"/>
+    <polygon class="ecycHead ecyc-out" points="460,99 442,87 458,80"/>
 
     <!-- band 2: the two codes -->
     <text class="ecode" x="279" y="134" text-anchor="middle">FERUM</text>
@@ -184,9 +184,9 @@
     <text class="esub"  x="489" y="172" text-anchor="middle">analysis</text>
 
     <!-- band 3: the cycle back -->
-    <path class="ecyc" d="M456 200 C 422 228, 346 228, 312 200"/>
-    <polygon class="ecycHead" points="308,197 326,209 310,216"/>
-    <text class="ecyclab" x="384" y="248" text-anchor="middle">output response</text>
+    <path class="ecyc ecyc-back" d="M456 200 C 422 228, 346 228, 312 200"/>
+    <polygon class="ecycHead ecyc-back" points="308,197 326,209 310,216"/>
+    <text class="ecyclab lab-back" x="384" y="248" text-anchor="middle">output response</text>
 
     <!-- band 4: what each one actually produces -->
     <!-- The reliability side, drawn as the textbook FORM picture: a limit-state
@@ -348,14 +348,8 @@
   </article>
 </div>
 
-<section class="affilband">
-  <h2 class="rule">Affiliations</h2>
-  <p class="rl">Where the work is done, and where it was learned.</p>
-<ul class="logowall bare nolabels" style="--lw-n:3"><li class="lw"><a href="https://www.hawaii.edu/" class="lw-a" title="University of Hawaiʻi at Mānoa" rel="noopener noreferrer" target="_blank"><span class="lw-mark lw-sq" style="--lw-mask:url('logos/uh-seal-mask.png')"><img class="lw-art lw-solo lw-sq" src="logos/uh-seal.svg" alt="University of Hawaiʻi at Mānoa" loading="lazy" decoding="async"></span><span class="lw-note">Associate Researcher</span></a></li><li class="lw"><a href="https://www.martinchockcarden.com/" class="lw-a" title="Martin, Chock &amp; Carden, Inc." rel="noopener noreferrer" target="_blank"><span class="lw-mark lw-sq" style="--lw-mask:url('logos/mcc.png')"><img class="lw-art lw-light lw-sq" src="logos/mcc.png" alt="Martin, Chock &amp; Carden, Inc." loading="lazy" decoding="async"><img class="lw-art lw-dark lw-sq" src="logos/mcc-dark.png" alt="" aria-hidden="true" loading="lazy" decoding="async"></span><span class="lw-note">Structural design and analysis</span></a></li><li class="lw"><a href="https://cu.edu.eg/" class="lw-a" title="Cairo University" rel="noopener noreferrer" target="_blank"><span class="lw-mark lw-sq" style="--lw-mask:url('logos/cairo-mask.png');--lw-scale:1.15"><img class="lw-art lw-light lw-sq" src="logos/cairo.png" alt="Cairo University" loading="lazy" decoding="async"><img class="lw-art lw-dark lw-sq" src="logos/cairo-dark.png" alt="" aria-hidden="true" loading="lazy" decoding="async"></span><span class="lw-note">B.Sc. and M.Sc., Structural Engineering</span></a></li></ul>
-</section>
-
 <section>
-  <h2 class="rule">Selected work</h2>
+  <h2 class="rule">Selected research</h2>
   <article class="work">
     <p class="idx">01</p>
     <div>
@@ -378,7 +372,13 @@
       <p class="plain">Vertical irregularity assessed in three dimensions rather than the usual planar simplification. At 0.16 g the difference in failure probability is ten percentage points.</p>
     </div>
   </article>
-  <p class="more"><a href="research.html">All publications &rarr;</a></p>
+  <p class="more"><a href="research.html">More publications &rarr;</a></p>
+</section>
+
+<section class="affilband">
+  <h2 class="rule">Affiliations</h2>
+  <p class="rl">Where the work is done, and where it was learned.</p>
+<ul class="logowall bare nolabels" style="--lw-n:3"><li class="lw"><a href="https://www.hawaii.edu/" class="lw-a" title="University of Hawaiʻi at Mānoa" rel="noopener noreferrer" target="_blank"><span class="lw-mark lw-sq" style="--lw-mask:url('logos/uh-seal-mask.png')"><img class="lw-art lw-solo lw-sq" src="logos/uh-seal.svg" alt="University of Hawaiʻi at Mānoa" loading="lazy" decoding="async"></span><span class="lw-note">Associate Researcher</span></a></li><li class="lw"><a href="https://www.martinchockcarden.com/" class="lw-a" title="Martin, Chock &amp; Carden, Inc." rel="noopener noreferrer" target="_blank"><span class="lw-mark lw-sq" style="--lw-mask:url('logos/mcc.png')"><img class="lw-art lw-light lw-sq" src="logos/mcc.png" alt="Martin, Chock &amp; Carden, Inc." loading="lazy" decoding="async"><img class="lw-art lw-dark lw-sq" src="logos/mcc-dark.png" alt="" aria-hidden="true" loading="lazy" decoding="async"></span><span class="lw-note">Structural design and analysis</span></a></li><li class="lw"><a href="https://cu.edu.eg/" class="lw-a" title="Cairo University" rel="noopener noreferrer" target="_blank"><span class="lw-mark lw-sq" style="--lw-mask:url('logos/cairo-mask.png');--lw-scale:1.15"><img class="lw-art lw-light lw-sq" src="logos/cairo.png" alt="Cairo University" loading="lazy" decoding="async"><img class="lw-art lw-dark lw-sq" src="logos/cairo-dark.png" alt="" aria-hidden="true" loading="lazy" decoding="async"></span><span class="lw-note">B.Sc. and M.Sc., Structural Engineering</span></a></li></ul>
 </section>
 
 </main>
@@ -397,7 +397,7 @@
     <div>
       <p class="flab">Contact</p>
       <a href="mailto:aghanem@hawaii.edu"><svg class="icon" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.6" y="4.6" width="14.8" height="10.8" rx="1"/><path d="m2.6 5.6 7.4 5.2 7.4-5.2"/></svg>aghanem@hawaii.edu</a>
-      <p class="fplain"><svg class="icon" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 17.4s5.4-5 5.4-9a5.4 5.4 0 1 0-10.8 0c0 4 5.4 9 5.4 9z"/><circle cx="10" cy="8.4" r="2"/></svg>Honolulu, Hawaiʻi</p>
+      <p class="fplain"><a href="https://www.google.com/maps/place/Honolulu%2C%20Hawai%CA%BBi"  rel="noopener noreferrer" target="_blank"><svg class="icon" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 17.4s5.4-5 5.4-9a5.4 5.4 0 1 0-10.8 0c0 4 5.4 9 5.4 9z"/><circle cx="10" cy="8.4" r="2"/></svg>Honolulu, Hawaiʻi</a></p>
     </div>
   </div>
   <div class="footbar">
