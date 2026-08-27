@@ -533,6 +533,32 @@ nav a.on::after{transform:scaleX(1)}
 .xcard:nth-child(4) .xglyph circle:nth-child(7){animation-delay:0.6s}
 .xcard:nth-child(4) .xglyph path.acc{stroke-dasharray:140;animation:gTrace 4s ease-in-out infinite}
 
+
+/* ---------- hover motion ----------
+   The engine diagram is static until you point at it, then the exchange it
+   describes actually runs: dashes travel along the two cycle arcs in their
+   own directions, the arrowheads fire in turn, the design point converges and
+   the fragility curve draws. Hovering a glyph accelerates it and pulls it to
+   the accent, so the icon answers the pointer. */
+@keyframes eFlowFwd{to{stroke-dashoffset:-56}}
+@keyframes eFlowBack{to{stroke-dashoffset:56}}
+
+.engine .ecyc,.engine .ecycHead,.engine .edesign,.engine .efrag,.engine .epdf,.engine .ebox{transition:opacity .3s ease,stroke .3s ease}
+.engine:hover .ecyc{stroke-dasharray:10 6;animation:eFlowFwd 1.15s linear infinite}
+.engine:hover .ecyc:nth-of-type(2){animation-name:eFlowBack}
+.engine:hover .ecycHead{animation:gPulse 1.15s ease-in-out infinite}
+.engine:hover .ecycHead:nth-of-type(2){animation-delay:.57s}
+.engine:hover .edesign{transform-box:fill-box;transform-origin:center;animation:gDot 1.5s ease-in-out infinite}
+.engine:hover .efrag{stroke-dasharray:210;animation:gTrace 2s ease-in-out infinite}
+.engine:hover .epdf{animation:gDrift 2.2s ease-in-out infinite}
+.engine:hover .earr.out{animation:gAdvance 1.7s ease-in-out infinite}
+.engine:hover .ebox{stroke:var(--accent);opacity:.7}
+
+/* glyphs answer the pointer: faster, and pulled to the accent */
+.hglyph,.xglyph{transition:color .3s ease}
+.hstep:hover .hglyph,.xcard:hover .xglyph{color:var(--accent)}
+.hstep:hover .hglyph *,.xcard:hover .xglyph *{animation-duration:1.15s!important}
+
 /* ---------- responsive ---------- */
 @media(max-width:860px){
   .hero{grid-template-columns:1fr;gap:32px}
