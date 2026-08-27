@@ -77,7 +77,8 @@ nav{display:flex;gap:24px;font-size:0.82rem;letter-spacing:.07em;text-transform:
 nav a{color:var(--accent);text-decoration:none;padding-bottom:3px;border-bottom:1px solid transparent;
   transition:color .28s ease,border-color .28s ease}
 nav a.active,nav a:hover,nav a:focus-visible{color:var(--data3)}
-nav a.active{border-bottom-color:var(--data3)}
+/* The marker is the animated ::after line alone. Colouring the border-bottom
+   too drew a second rule right under it - two lines under the current page. */
 
 /* ---------- sticky header ---------- */
 header.site{
