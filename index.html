@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="Amr Ghanem">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230B1211'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='17' fill='%236BBFAE' text-anchor='middle'%3EAG%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Libre+Franklin:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,200;0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&display=swap">
-<link rel="stylesheet" href="style.css?v=b168e4c5f6">
+<link rel="stylesheet" href="style.css?v=dde07ceb7c">
 <script type="application/ld+json">
 {
     "@context":  "https://schema.org",
@@ -253,6 +253,11 @@
           aria-label="Structure elevation responding to earthquake damage and tsunami inundation"></canvas>
       </div>
 
+      <div class="phase" role="group" aria-label="Hazard stage">
+        <button type="button" class="ph on" data-phase="eq" aria-pressed="true">Earthquake</button>
+        <button type="button" class="ph" data-phase="ts" aria-pressed="false">Tsunami on damaged frame</button>
+      </div>
+
       <div class="exp-controls">
         <div class="ctrl">
           <label for="sPga">Ground shaking <span id="vPga">0.35 g</span></label>
@@ -437,6 +442,13 @@
   // it redraws only when a control moves. The elevation is cheap, so it carries
   // the motion: sway from the shaking, travelling crests from the flow, and a
   // scrolling ground record. Off entirely under prefers-reduced-motion.
+  // The two hazards are separated in time, so the figure shows one stage at a
+  // time. PHASE decides which: 'eq' draws the dry site shaking, 'ts' draws the
+  // already-damaged frame under inundation. The sliders keep their values
+  // throughout - switching stage does not discard what the user set.
+  var PHASE = 'eq';
+  var phaseBtns = [].slice.call(document.querySelectorAll('.phase .ph'));
+
   var ANIM = !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   var T = 0, rafId = null, visible = false, t0 = 0;
 
@@ -623,6 +635,7 @@
   function drawStructure(){
     var pga=parseFloat(sPga.value), dep=parseFloat(sDep.value),
         fr=parseFloat(sFr.value), be=parseFloat(sBe.value);
+    if (PHASE === 'eq') dep = 0;                  // the water has not arrived yet
     var w=st.width, h=st.height;
     var ink=css('--ink','#131E1C'), mute=css('--ink-mute','#6E7B78'),
         acc=css('--accent','#0A6E6E'), mark=css('--data4','#A8482B'),
@@ -642,10 +655,10 @@
     // the site is dry - once water is up, the earthquake is over and what
     // remains of it is the permanent damage: residual lean and plastic hinges.
     var sway = 0;
-    if (ANIM && pga > 0.005 && dep <= 0.35) {
+    if (ANIM && pga > 0.005 && PHASE === 'eq') {
       var soft = 1 + dam*0.9;                       // period grows with damage
       var quiet = 1 - Math.min(1, dep/0.35);        // fades out as water arrives
-      sway = Math.sin(T/(430*soft)) * Math.min(pga,1.5)/1.5 * 9 * (0.55+dam*0.45) * quiet;
+      sway = Math.sin(T/(430*soft)) * Math.min(pga,1.5)/1.5 * 9 * (0.55+dam*0.45);
     }
     var lean = Math.min(1,dam)*12 + sway;            // residual lean always stays
     var storey=BH/N;
@@ -784,20 +797,6 @@
         if (wx3===0) g2.moveTo(wx3,yy); else g2.lineTo(wx3,yy);
       }
       g2.stroke(); g2.globalAlpha=1;
-
-      // State the flow direction outright rather than leaving it to be inferred
-      // from the animation - a still frame should be unambiguous, and the
-      // direction has to agree with the drag arrows on the windward columns.
-      if (GY - wy > 26){
-        var fy = wy + (GY-wy)*0.30, fx0 = 14, fx1 = Math.max(48, BX-58);
-        g2.strokeStyle=acc; g2.fillStyle=acc; g2.globalAlpha=0.75; g2.lineWidth=2;
-        g2.beginPath(); g2.moveTo(fx0,fy); g2.lineTo(fx1-9,fy); g2.stroke();
-        g2.beginPath(); g2.moveTo(fx1,fy); g2.lineTo(fx1-10,fy-5); g2.lineTo(fx1-10,fy+5);
-        g2.closePath(); g2.fill();
-        g2.font='600 10.5px "Libre Franklin", sans-serif'; g2.textAlign='left';
-        g2.fillText('FLOW', fx0+1, fy-8);
-        g2.globalAlpha=1;
-      }
     }
 
     // --- moment frame in isometric: two bays of frame, front and back, tied by
@@ -946,7 +945,7 @@
     //     state represents is lit while the other recedes.
     (function(){
       var by=26, x1=20, x2=176;
-      var stage2 = dep > 0.35;                 // water up means the quake is over
+      var stage2 = (PHASE === 'ts');
       function stage(x, on, kind){
         g2.globalAlpha = on ? 1 : 0.3;
         // marker
@@ -1016,8 +1015,30 @@
       (extra>1 ? ' — up ' + extra + ' points from ' + Math.round(alone*100) + '% undamaged.' : '.');
   }
 
+  function setPhase(p){
+    PHASE = p;
+    phaseBtns.forEach(function(b){
+      var on = b.getAttribute('data-phase') === p;
+      b.classList.toggle('on', on);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    // the flood controls mean nothing during the shaking stage
+    [sDep, sFr].forEach(function(sl){
+      var row = sl.closest ? sl.closest('.ctrl') : null;
+      if (row) row.classList.toggle('muted', p === 'eq');
+    });
+    render();
+    if (ANIM) startLoop();
+  }
+  phaseBtns.forEach(function(b){
+    b.addEventListener('click', function(){ setPhase(b.getAttribute('data-phase')); });
+  });
+
   [sPga,sDep,sFr,sBe,sRot].forEach(function(el){
-    el.addEventListener('input', render);
+    el.addEventListener('input', function(){
+      if ((el === sDep || el === sFr) && PHASE !== 'ts') { setPhase('ts'); return; }
+      render();
+    });
     el.addEventListener('change', render);
   });
   if (window.matchMedia) {
