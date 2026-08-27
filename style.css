@@ -342,8 +342,34 @@ figcaption p{font-size:0.95rem;color:var(--ink-soft);max-width:54ch;line-height:
 .hn{font-family:"IBM Plex Mono",monospace;font-size:0.76rem;color:var(--accent);margin:0 0 6px;font-variant-numeric:tabular-nums}
 .hsteps h3{font-size:1.06rem;margin:0 0 8px}
 .hd{font-size:0.84rem;color:var(--ink-soft);margin:0;line-height:1.55;max-width:none}
-@media(max-width:1040px){.hsteps{grid-template-columns:repeat(3,minmax(0,1fr));gap:32px 18px}.hstep:nth-child(3n+1)::before,.hstep:nth-child(3n+1)::after{display:none}}
-@media(max-width:640px){.hsteps{grid-template-columns:1fr;gap:24px}.hstep::before,.hstep::after{display:none}.hrail{margin-bottom:12px}}
+/* Six across only when there is genuinely room for it. Below that the old
+   layout dropped to three columns and stretched each connector across ~240px
+   of empty line - sparse dots on a wire. A vertical timeline keeps the steps
+   adjacent, gives the descriptions a sane measure, and still reads as one
+   sequence running top to bottom. */
+@media(max-width:1199px){
+  .hsteps{grid-template-columns:1fr;gap:0}
+  .hstep{display:grid;grid-template-columns:78px minmax(0,1fr);column-gap:26px;text-align:left;align-items:start;padding-bottom:34px}
+  .hrail{grid-column:1;grid-row:1 / span 3;margin:0;justify-content:flex-start}
+  .hstep > .hn,.hstep > h3,.hstep > .hd{grid-column:2}
+  .hstep > .hn{margin-top:14px}
+  .hstep > .hd{max-width:62ch}
+  .hstep:last-child{padding-bottom:0}
+  .hstep::before{content:"";top:78px;left:38px;width:2px;height:calc(100% - 78px);background:var(--rule);display:block}
+  .hstep:first-child::before{display:block}
+  .hstep:last-child::before{display:none}
+  .hstep::after{content:"";top:auto;bottom:20px;left:31px;border-left:7px solid transparent;border-right:7px solid transparent;border-top:9px solid var(--rule);border-bottom:0;display:block}
+  .hstep:first-child::after{display:block}
+  .hstep:last-child::after{display:none}
+}
+@media(max-width:520px){
+  .hstep{grid-template-columns:58px minmax(0,1fr);column-gap:18px}
+  .hdot{width:58px;height:58px}
+  .hglyph{width:34px;height:26px}
+  .hstep::before{top:58px;left:28px;height:calc(100% - 58px)}
+  .hstep::after{left:21px}
+}
+
 /* ---------- research images ---------- */
 .rlede{font-size:1.06rem;color:var(--ink-soft);max-width:90ch;margin:0 0 16px}
 .rstep{display:flex;align-items:baseline;gap:12px;margin:0 0 12px;font-family:"Libre Franklin",sans-serif;font-size:0.72rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-mute)}
