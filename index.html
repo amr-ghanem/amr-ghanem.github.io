@@ -127,13 +127,12 @@
 
   <div class="exp-panel">
 
-    <div class="exp-top">
+    <div class="exp-left">
       <div class="mh-struct">
         <canvas id="structCanvas" width="420" height="370" role="img"
           aria-label="Structure elevation responding to earthquake damage and tsunami inundation"></canvas>
       </div>
 
-      <div class="exp-side">
       <div class="exp-controls">
         <div class="ctrl">
           <label for="sPga">Ground shaking <span id="vPga">0.35 g</span></label>
@@ -160,21 +159,22 @@
           <input type="range" id="sRot" min="-180" max="180" step="1" value="32">
         </div>
       </div>
+    </div>
 
-        <div class="readout" aria-live="polite">
-          <p class="ro-num" id="sProb">&mdash;</p>
-          <p class="ro-text" id="sText"></p>
-        </div>
+    <div class="exp-right">
+      <div class="readout" aria-live="polite">
+        <p class="ro-num" id="sProb">&mdash;</p>
+        <p class="ro-text" id="sText"></p>
       </div>
-    </div>
 
-    <div class="mh-surf">
-      <canvas id="surfCanvas" width="1280" height="620" role="img"
-        aria-label="Fragility surface: failure probability against peak ground acceleration and tsunami inundation depth"></canvas>
-    </div>
+      <div class="mh-surf">
+        <canvas id="surfCanvas" width="900" height="520" role="img"
+          aria-label="Fragility surface: failure probability against peak ground acceleration and tsunami inundation depth"></canvas>
+      </div>
 
-    <p class="eqn">P = 1 &minus; (1 &minus; P<sub>eq</sub>)(1 &minus; P<sub>ts</sub>) &nbsp;&middot;&nbsp; &theta;<sub>ts</sub> reduced by earthquake damage</p>
-    <p class="disclaim">Forces follow ASCE 7 Chapter 6; capacities are representative for a mid-rise RC frame, not a specific study. See the <a href="research.html">research page</a>.</p>
+      <p class="eqn">P = 1 &minus; (1 &minus; P<sub>eq</sub>)(1 &minus; P<sub>ts</sub>) &nbsp;&middot;&nbsp; &theta;<sub>ts</sub> reduced by earthquake damage</p>
+      <p class="disclaim">Forces follow ASCE 7 Chapter 6; capacities are representative for a mid-rise RC frame, not a specific study. See the <a href="research.html">research page</a>.</p>
+    </div>
 
   </div></section>
 
@@ -666,7 +666,7 @@
     var avail = (sf.parentNode && sf.parentNode.clientWidth) || 900;
     var nw = Math.max(260, Math.round(avail));
     var narrow = window.innerWidth <= 1040;
-    var nh = Math.max(260, Math.min(Math.round(nw * (narrow ? 1.02 : 0.42)), 560));
+    var nh = Math.max(260, Math.min(Math.round(nw * (narrow ? 1.02 : 0.58)), 560));
     if (sf.width !== nw || sf.height !== nh) { sf.width = nw; sf.height = nh; }
     W = sf.width; H = sf.height;
   }
