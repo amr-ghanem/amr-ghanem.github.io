@@ -420,7 +420,11 @@ footer.site{border-top:1px solid var(--rule);padding-top:32px;padding-bottom:48p
 .fplain{font-size:0.95rem;color:var(--ink-mute);margin:0}
 .footbar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 32px;margin-top:36px;padding-top:20px;border-top:1px solid var(--rule-soft)}
 .colophon{font-size:0.76rem;color:var(--ink-mute);margin:0;letter-spacing:.06em}
-.fdisc{letter-spacing:0}
+.touch{list-style:none;margin:0 0 20px;padding:0;display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:var(--r);overflow:hidden}
+.touch li{background:var(--sheet);padding:16px 24px;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:baseline}
+.touch .tl{font-family:"Libre Franklin",sans-serif;font-size:0.76rem;color:var(--ink-mute)}
+.touch a{display:inline-flex;align-items:center;gap:8px;font-size:0.95rem;text-decoration:none}
+.touch a:hover{text-decoration:underline}
 
 /* ---------- responsive ---------- */
 @media(max-width:860px){
