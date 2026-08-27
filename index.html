@@ -410,6 +410,23 @@
   }
   function pAll(pga,h,fr,be){ var a=pEq(pga,be); return 1-(1-a)*(1-pTs(h,fr,be,a)); }
 
+  // The structure elevation animates; the surface does not. The surface is
+  // 56x56 quads sorted every draw, which is far too costly for a frame loop -
+  // it redraws only when a control moves. The elevation is cheap, so it carries
+  // the motion: sway from the shaking, travelling crests from the flow, and a
+  // scrolling ground record. Off entirely under prefers-reduced-motion.
+  var ANIM = !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var T = 0, rafId = null, visible = false, t0 = 0;
+
+  function frame(ts){
+    if (!t0) t0 = ts;
+    T = ts - t0;
+    drawStructure();
+    rafId = visible ? requestAnimationFrame(frame) : null;
+  }
+  function startLoop(){ if (ANIM && visible && rafId === null) rafId = requestAnimationFrame(frame); }
+  function stopLoop(){ if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; } }
+
   var W=sf.width, H=sf.height;
   function proj(u,v,z,rot){
     var a=rot*Math.PI/180, x=u-0.5, y=v-0.5;
@@ -593,7 +610,16 @@
     g2.fillStyle=sunk; g2.fillRect(0,0,w,h);
 
     var GY=298, BH=192, BW=104, BX=(w-BW)/2+16, N=5;
-    var dam=pEq(pga,be), lean=Math.min(1,dam)*12;
+    var dam=pEq(pga,be);
+    // Static lean is the permanent set left by damage. On top of it the frame
+    // sways: amplitude from the shaking, period lengthening as damage softens
+    // the structure - which is what actually happens to a damaged building.
+    var sway = 0;
+    if (ANIM && pga > 0.005) {
+      var soft = 1 + dam*0.9;                       // period grows with damage
+      sway = Math.sin(T/(430*soft)) * Math.min(pga,1.5)/1.5 * 9 * (0.55+dam*0.45);
+    }
+    var lean = Math.min(1,dam)*12 + sway;
     var storey=BH/N;
 
     // --- ground
@@ -609,7 +635,9 @@
     if(dep>0.02){
       var amp = 2.5 + Math.min(1,(fr-0.4)/1.6)*5.5;
       var lam = 74;
-      function waveY(x){ return wy + Math.sin(x/lam*Math.PI*2)*amp + Math.sin(x/(lam*0.43)*Math.PI*2)*amp*0.35; }
+      // the surface travels: faster Froude number, faster-moving crests
+      var ph = ANIM ? T/1000 * (0.5 + fr*1.4) : 0;
+      function waveY(x){ return wy + Math.sin(x/lam*Math.PI*2 + ph)*amp + Math.sin(x/(lam*0.43)*Math.PI*2 + ph*1.7)*amp*0.35; }
 
       g2.beginPath();
       g2.moveTo(0, waveY(0));
@@ -688,14 +716,15 @@
     if (pga > 0.005) {
       g2.strokeStyle = ink; g2.lineWidth = 1.7; g2.globalAlpha = 0.85;
       g2.lineJoin = 'round'; g2.lineCap = 'round';
+      // the record scrolls right to left, like a live seismograph drum
+      var sh = ANIM ? T * 0.055 : 0;
       g2.beginPath();
       for (var ex = 0; ex <= w; ex += 2) {
-        // deterministic pseudo-noise: a few detuned sines, enveloped so the
-        // record swells and decays the way a real trace does
-        var ph = ex / w;
-        var env = Math.exp(-Math.pow((ph - 0.42) * 2.6, 2)) * 0.75 + 0.25;
-        var v = Math.sin(ex * 0.21) * 0.55 + Math.sin(ex * 0.077 + 1.3) * 0.9 +
-                Math.sin(ex * 0.44 + 2.1) * 0.32 + Math.sin(ex * 0.031 + 0.7) * 0.45;
+        var u = ex + sh;
+        var frac = ex / w;
+        var env = Math.exp(-Math.pow((frac - 0.42) * 2.6, 2)) * 0.75 + 0.25;
+        var v = Math.sin(u * 0.21) * 0.55 + Math.sin(u * 0.077 + 1.3) * 0.9 +
+                Math.sin(u * 0.44 + 2.1) * 0.32 + Math.sin(u * 0.031 + 0.7) * 0.45;
         var ey = sy + v * amp2 * env;
         if (ex === 0) g2.moveTo(ex, ey); else g2.lineTo(ex, ey);
       }
@@ -725,6 +754,7 @@
         fr=parseFloat(sFr.value), be=parseFloat(sBe.value);
 
     drawSurface(); drawStructure();
+    if (ANIM) startLoop();
 
     document.getElementById('vPga').textContent = pga.toFixed(2)+' g';
     document.getElementById('vDep').textContent = (dep*M2FT).toFixed(1)+' ft';
@@ -773,6 +803,19 @@
   window.addEventListener('resize', function(){
     clearTimeout(rt);
     rt = setTimeout(function(){ fit(); render(); }, 120);
+  });
+
+  // run the loop only while the panel is on screen and the tab is focused
+  if (ANIM && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function(es){
+      visible = es[0].isIntersecting;
+      if (visible) startLoop(); else stopLoop();
+    }, {threshold:0.05}).observe(st);
+  } else {
+    ANIM = false;
+  }
+  document.addEventListener('visibilitychange', function(){
+    if (document.hidden) stopLoop(); else startLoop();
   });
 
   fit();
