@@ -520,7 +520,11 @@ figcaption p{font-size:0.95rem;color:var(--ink-soft);max-width:54ch;line-height:
 .entry{display:grid;grid-template-columns:118px 1fr;gap:32px;padding:24px 0;border-top:1px solid var(--rule-soft)}
 .when{font-size:0.76rem;color:var(--ink-mute);margin:8px 0 0;font-variant-numeric:tabular-nums;line-height:1.7}
 .when span{opacity:.7}
-.org{color:var(--accent);font-size:0.95rem;font-style:italic;margin:0 0 12px}
+/* Employers and institutions carry the gold here exactly as they do in the home
+   hero - same information, same treatment. Upright rather than italic for the
+   same reason: the hero sets the pattern and the About page should not restate
+   it differently. */
+.org{color:var(--data3);font-weight:500;font-size:0.95rem;margin:0 0 12px}
 .thesis{font-size:0.95rem;font-style:italic;color:var(--ink-soft);margin:0}
 .entry ul{margin:12px 0 0;padding-left:16px}
 .entry li{font-size:0.95rem;color:var(--ink-soft);margin-bottom:8px}
