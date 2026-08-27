@@ -559,6 +559,29 @@ nav a.on::after{transform:scaleX(1)}
 .hstep:hover .hglyph,.xcard:hover .xglyph{color:var(--accent)}
 .hstep:hover .hglyph *,.xcard:hover .xglyph *{animation-duration:1.15s!important}
 
+
+/* ---------- fragility figure: scatter, then the fit ----------
+   The base state is the FINISHED figure - points visible, curves fully drawn.
+   The keyframes start hidden and end at the base, so if animation is switched
+   off (prefers-reduced-motion, an old browser) the reader still sees a complete
+   chart rather than an empty grid. Curves cascade by damage state. */
+svg.fragility .pt{opacity:1}
+svg.fragility .curve{stroke-dasharray:1;stroke-dashoffset:0}
+svg.fragility .pt.c1{fill:var(--data1)}
+svg.fragility .pt.c2{fill:var(--data2)}
+svg.fragility .pt.c3{fill:var(--data3)}
+svg.fragility .pt.c4{fill:var(--data4)}
+
+@keyframes fragPt{0%,3%{opacity:0}11%,90%{opacity:1}98%,100%{opacity:0}}
+@keyframes fragDraw{0%,9%{stroke-dashoffset:1}44%,90%{stroke-dashoffset:0}98%,100%{stroke-dashoffset:1}}
+
+svg.fragility .pt{animation:fragPt 13s ease-in-out infinite}
+svg.fragility .curve{animation:fragDraw 13s ease-in-out infinite}
+svg.fragility .pt.c2,svg.fragility .curve.c2{animation-delay:.55s}
+svg.fragility .pt.c3,svg.fragility .curve.c3{animation-delay:1.1s}
+svg.fragility .pt.c4,svg.fragility .curve.c4{animation-delay:1.65s}
+svg.fragility .dot{animation:fragPt 13s ease-in-out infinite}
+
 /* ---------- responsive ---------- */
 @media(max-width:860px){
   .hero{grid-template-columns:1fr;gap:32px}
