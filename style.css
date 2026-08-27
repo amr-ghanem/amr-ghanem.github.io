@@ -260,10 +260,14 @@ figcaption p{font-size:.87rem;color:var(--ink-soft);max-width:40ch;line-height:1
 .engine .epdf{fill:none;stroke:var(--accent);stroke-width:2}
 .engine .ecurve{fill:none;stroke:var(--ink-mute);stroke-width:1.6}
 .engine .etrial{fill:var(--ink-mute)}
+.engine .elimit{fill:none;stroke:var(--accent);stroke-width:2}
+.engine .efail{fill:var(--accent);opacity:.10}
+.engine .eorigin{fill:var(--ink-mute)}
 .engine .edesign{fill:var(--data4)}
-.engine .edash{stroke:var(--data4);stroke-width:1;stroke-dasharray:3 3;opacity:.7}
+.engine .edash{stroke:var(--ink-mute);stroke-width:1.2;stroke-dasharray:3 3;opacity:.85}
 .engine .eframe line{stroke:var(--ink-soft);stroke-width:2;stroke-linecap:round}
-.engine .ehyst{fill:none;stroke:var(--ink-soft);stroke-width:1.6}
+.engine .ehyst{fill:none;stroke:var(--accent);stroke-width:1.8;stroke-linejoin:round}
+.engine .ehyst.inner{stroke-width:1.2;opacity:.5}
 .engine .efrag{fill:none;stroke:var(--accent);stroke-width:2.4}
 .engine .ecyc{fill:none;stroke:var(--accent);stroke-width:2.4}
 .engine .ecycHead{fill:var(--accent)}

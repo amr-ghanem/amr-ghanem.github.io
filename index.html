@@ -118,6 +118,98 @@
   </div>
 </section>
 
+<section class="howitworks">
+  <h2 class="rule">How Locus works</h2>
+  <p class="rlede">A <em>locus</em> is the set of all points satisfying a condition &mdash; exactly what a fragility surface is. Run the loop below once for one probability; run it across a parameter space, in parallel, for the whole surface.</p>
+<figure class="engine">
+  <svg viewBox="-32 0 848 396" role="img" aria-label="Coupled engine: input and model uncertainty distributions feed a reliability search, which exchanges deterministic trials and structural responses with a nonlinear analysis until convergence, returning a fragility curve">
+
+    <g class="ein">
+      <path class="epdf" d="M14 130 C 30 130, 32 90, 48 90 C 64 90, 66 130, 82 130"/>
+      <line class="eaxis" x1="10" y1="130" x2="86" y2="130"/>
+      <text class="elab" x="48" y="154" text-anchor="middle">Input uncertainty</text>
+      <text class="esub" x="48" y="172" text-anchor="middle">ground motion, geometry</text>
+    </g>
+    <g class="ein">
+      <path class="epdf" d="M14 300 C 30 300, 34 266, 48 266 C 62 266, 66 300, 82 300"/>
+      <line class="eaxis" x1="10" y1="300" x2="86" y2="300"/>
+      <text class="elab" x="48" y="324" text-anchor="middle">Model uncertainty</text>
+      <text class="esub" x="48" y="342" text-anchor="middle">material, capacity</text>
+    </g>
+    <path class="earr" d="M100 105 h44 l0-9 20 14 -20 14 0-9 h-44 z"/>
+    <path class="earr" d="M100 278 h44 l0-9 20 14 -20 14 0-9 h-44 z"/>
+
+    <rect class="ebox" x="182" y="30" width="404" height="352" rx="16"/>
+    <text class="etitle" x="384" y="20" text-anchor="middle">Coupled engine</text>
+
+    <!-- band 1: the cycle out -->
+    <text class="ecyclab" x="384" y="52" text-anchor="middle">deterministic trial</text>
+    <path class="ecyc" d="M312 96 C 346 68, 422 68, 456 96"/>
+    <polygon class="ecycHead" points="460,99 442,87 458,80"/>
+
+    <!-- band 2: the two codes -->
+    <text class="ecode" x="279" y="134" text-anchor="middle">FERUM</text>
+    <text class="esub"  x="279" y="155" text-anchor="middle">reliability analysis</text>
+    <text class="esub"  x="279" y="172" text-anchor="middle">searches for failure</text>
+
+    <text class="ecode" x="489" y="134" text-anchor="middle">ZEUS-NL</text>
+    <text class="esub"  x="489" y="155" text-anchor="middle">nonlinear structural</text>
+    <text class="esub"  x="489" y="172" text-anchor="middle">analysis</text>
+
+    <!-- band 3: the cycle back -->
+    <path class="ecyc" d="M456 200 C 422 228, 346 228, 312 200"/>
+    <polygon class="ecycHead" points="308,197 326,209 310,216"/>
+    <text class="ecyclab" x="384" y="248" text-anchor="middle">output response</text>
+
+    <!-- band 4: what each one actually produces -->
+    <!-- The reliability side, drawn as the textbook FORM picture: a limit-state
+         boundary in standard normal space, and the point on it closest to the
+         origin. That distance is beta; that point is what the loop converges to. -->
+    <g class="eside">
+      <rect class="epanel" x="204" y="264" width="150" height="100" rx="8"/>
+      <text class="eglyph" x="279" y="283" text-anchor="middle">design point</text>
+      <path class="efail" d="M243 350 C 279 350, 300 328, 306 298 L340 298 L340 350 Z"/>
+      <line class="eaxis" x1="222" y1="350" x2="342" y2="350"/>
+      <line class="eaxis" x1="232" y1="296" x2="232" y2="356"/>
+      <path class="elimit" d="M243 352 C 279 350, 300 328, 306 296"/>
+      <line class="edash" x1="232" y1="350" x2="279" y2="322"/>
+      <circle class="eorigin" cx="232" cy="350" r="2.6"/>
+      <circle class="edesign" cx="279" cy="322" r="4.6"/>
+    </g>
+
+    <!-- The structural side: the frame, and the pinched force-displacement loop
+         a cycled RC section actually traces. -->
+    <g class="eside">
+      <rect class="epanel" x="414" y="264" width="150" height="100" rx="8"/>
+      <text class="eglyph" x="489" y="283" text-anchor="middle">response history</text>
+      <g class="eframe">
+        <line x1="437" y1="348" x2="437" y2="299"/>
+        <line x1="471" y1="348" x2="471" y2="299"/>
+        <line x1="437" y1="299" x2="471" y2="299"/>
+        <line x1="437" y1="324" x2="471" y2="324"/>
+        <line x1="429" y1="348" x2="479" y2="348"/>
+      </g>
+      <line class="eaxis" x1="498" y1="324" x2="554" y2="324"/>
+      <line class="eaxis" x1="526" y1="298" x2="526" y2="350"/>
+      <path class="ehyst" d="M504 340 C 508 330, 516 320, 526 314 C 536 308, 544 304, 548 308 C 545 314, 537 322, 526 328 C 516 334, 508 340, 504 344 C 501 346, 502 342, 504 340 Z"/>
+      <path class="ehyst inner" d="M514 332 C 517 328, 521 324, 526 321 C 531 318, 535 317, 536 319 C 534 323, 530 327, 526 330 C 521 333, 517 335, 515 335 C 513 335, 513 334, 514 332 Z"/>
+    </g>
+
+    <path class="earr out" d="M600 201 h34 l0-9 20 14 -20 14 0-9 h-34 z"/>
+    <g class="eout">
+      <path class="efrag" d="M678 250 C 702 250, 708 188, 740 186 L766 185"/>
+      <line class="eaxis" x1="674" y1="250" x2="770" y2="250"/>
+      <line class="eaxis" x1="678" y1="254" x2="678" y2="178"/>
+      <text class="elab out" x="722" y="162" text-anchor="middle">Failure probability</text>
+      <text class="esub"     x="722" y="272" text-anchor="middle">at every intensity</text>
+    </g>
+  </svg>
+  <figcaption>The reliability search and the structural analysis run as a coupled loop &mdash; a trial realisation goes out, a response comes back, the search updates, and it cycles until the design point converges. After Figure 8 of the dissertation.</figcaption>
+</figure>
+  <ol class="hsteps"><li><div class="htop"><p class="hn">01</p><svg class="hglyph" viewBox="0 0 64 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><g class="acc"><rect x="8" y="10" width="9" height="9"/><rect x="21" y="10" width="9" height="9"/><rect x="34" y="10" width="9" height="9"/><rect x="47" y="10" width="9" height="9"/><rect x="8" y="23" width="9" height="9"/><rect x="21" y="23" width="9" height="9"/><rect x="34" y="23" width="9" height="9"/><rect x="47" y="23" width="9" height="9"/><rect x="8" y="36" width="9" height="9"/><rect x="21" y="36" width="9" height="9"/><rect x="34" y="36" width="9" height="9"/><rect x="47" y="36" width="9" height="9"/></g></svg></div><h3>Sweep</h3><p class="hd">The parameter space is discretised. Every combination of hazard intensity and structural configuration becomes a case to solve.</p></li><li><div class="htop"><p class="hn">02</p><svg class="hglyph" viewBox="0 0 64 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="10" x2="44" y2="10"/><line x1="4" y1="19" x2="52" y2="19"/><line x1="4" y1="28" x2="38" y2="28"/><line x1="4" y1="37" x2="48" y2="37"/><g class="acc"><polygon points="52,10 44,6.5 44,13.5"/><polygon points="60,19 52,15.5 52,22.5"/><polygon points="46,28 38,24.5 38,31.5"/><polygon points="56,37 48,33.5 48,40.5"/></g><line x1="4" y1="4" x2="4" y2="44" class="acc"/></svg></div><h3>Distribute</h3><p class="hd">Cases are independent, so they run concurrently. This is what turns weeks of sequential analysis into hours.</p></li><li><div class="htop"><p class="hn">03</p><svg class="hglyph" viewBox="0 0 64 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="19" cy="24" r="9"/><circle cx="45" cy="24" r="9"/><path d="M27 17 C 31 11, 33 11, 37 17" class="acc"/><polygon points="39,19 31,15 34,22" class="acc"/><path d="M37 31 C 33 37, 31 37, 27 31" class="acc"/><polygon points="25,29 33,33 30,26" class="acc"/></svg></div><h3>Iterate</h3><p class="hd">For each case the coupled loop above runs: a trial realisation out, a structural response back, cycling until the design point converges and a failure probability falls out.</p></li><li><div class="htop"><p class="hn">04</p><svg class="hglyph" viewBox="0 0 64 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="40" r="2.2" fill="currentColor" stroke="none"/><circle cx="22" cy="33" r="2.2" fill="currentColor" stroke="none"/><circle cx="29" cy="23" r="2.2" fill="currentColor" stroke="none"/><circle cx="37" cy="14" r="2.2" fill="currentColor" stroke="none"/><circle cx="48" cy="10" r="2.2" fill="currentColor" stroke="none"/><path d="M6 43 C 18 43, 24 10, 44 9 L58 8.4" class="acc"/><line x1="4" y1="44" x2="60" y2="44" opacity=".5"/></svg></div><h3>Fit</h3><p class="hd">The loop returns a probability at each intensity, not a curve. A lognormal fitted through those points gives the continuous fragility relationship.</p></li><li><div class="htop"><p class="hn">05</p><svg class="hglyph" viewBox="0 0 64 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 34 L22 42 L58 26 L42 18 Z" opacity=".3"/><path d="M6 24 C 16 24, 20 8, 42 8 L58 14 L22 32 Z" class="acc"/><line x1="14" y1="28" x2="30" y2="36" opacity=".45"/><line x1="26" y1="20" x2="42" y2="28" opacity=".45"/></svg></div><h3>Surface</h3><p class="hd">The fitted curves join across the parameter space into a surface. A probability now exists for configurations that were never explicitly run.</p></li><li><div class="htop"><p class="hn">06</p><svg class="hglyph" viewBox="0 0 64 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="12" width="13" height="30" opacity=".35"/><rect x="26" y="20" width="13" height="22" class="acc"/><rect x="44" y="30" width="13" height="12" opacity=".35"/><line x1="4" y1="42" x2="60" y2="42"/></svg></div><h3>Compare</h3><p class="hd">The index reduces a surface to one number, so different structures can be ranked against each other for retrofit.</p></li></ol>
+  <p class="rnote">FERUM and ZEUS-NL are established analysis codes. The contribution here is the platform around them &mdash; the coupling, the multi-hazard extension, and the sweep that turns a single probability into a surface.</p>
+</section>
+
 <section class="explorer" id="explorer">
   <div class="exp-intro">
     <p class="fignum">Interactive</p>
@@ -177,92 +269,6 @@
     </div>
 
   </div></section>
-
-<section class="howitworks">
-  <h2 class="rule">How Locus works</h2>
-  <p class="rlede">A <em>locus</em> is the set of all points satisfying a condition &mdash; exactly what a fragility surface is. Run the loop below once for one probability; run it across a parameter space, in parallel, for the whole surface.</p>
-<figure class="engine">
-  <svg viewBox="-32 0 848 396" role="img" aria-label="Coupled engine: input and model uncertainty distributions feed a reliability search, which exchanges deterministic trials and structural responses with a nonlinear analysis until convergence, returning a fragility curve">
-
-    <g class="ein">
-      <path class="epdf" d="M14 130 C 30 130, 32 90, 48 90 C 64 90, 66 130, 82 130"/>
-      <line class="eaxis" x1="10" y1="130" x2="86" y2="130"/>
-      <text class="elab" x="48" y="154" text-anchor="middle">Input uncertainty</text>
-      <text class="esub" x="48" y="172" text-anchor="middle">ground motion, geometry</text>
-    </g>
-    <g class="ein">
-      <path class="epdf" d="M14 300 C 30 300, 34 266, 48 266 C 62 266, 66 300, 82 300"/>
-      <line class="eaxis" x1="10" y1="300" x2="86" y2="300"/>
-      <text class="elab" x="48" y="324" text-anchor="middle">Model uncertainty</text>
-      <text class="esub" x="48" y="342" text-anchor="middle">material, capacity</text>
-    </g>
-    <path class="earr" d="M100 105 h44 l0-9 20 14 -20 14 0-9 h-44 z"/>
-    <path class="earr" d="M100 278 h44 l0-9 20 14 -20 14 0-9 h-44 z"/>
-
-    <rect class="ebox" x="182" y="30" width="404" height="352" rx="16"/>
-    <text class="etitle" x="384" y="20" text-anchor="middle">Coupled engine</text>
-
-    <!-- band 1: the cycle out -->
-    <text class="ecyclab" x="384" y="52" text-anchor="middle">deterministic trial</text>
-    <path class="ecyc" d="M312 96 C 346 68, 422 68, 456 96"/>
-    <polygon class="ecycHead" points="460,99 442,87 458,80"/>
-
-    <!-- band 2: the two codes -->
-    <text class="ecode" x="279" y="134" text-anchor="middle">FERUM</text>
-    <text class="esub"  x="279" y="155" text-anchor="middle">reliability analysis</text>
-    <text class="esub"  x="279" y="172" text-anchor="middle">searches for failure</text>
-
-    <text class="ecode" x="489" y="134" text-anchor="middle">ZEUS-NL</text>
-    <text class="esub"  x="489" y="155" text-anchor="middle">nonlinear structural</text>
-    <text class="esub"  x="489" y="172" text-anchor="middle">analysis</text>
-
-    <!-- band 3: the cycle back -->
-    <path class="ecyc" d="M456 200 C 422 228, 346 228, 312 200"/>
-    <polygon class="ecycHead" points="308,197 326,209 310,216"/>
-    <text class="ecyclab" x="384" y="248" text-anchor="middle">output response</text>
-
-    <!-- band 4: what each one actually produces -->
-    <g class="eside">
-      <rect class="epanel" x="204" y="264" width="150" height="100" rx="8"/>
-      <text class="eglyph" x="279" y="283" text-anchor="middle">design point</text>
-      <line class="eaxis" x1="216" y1="352" x2="344" y2="352"/>
-      <path class="ecurve" d="M218 350 C 246 350, 252 306, 294 302 L342 300"/>
-      <circle class="etrial" cx="238" cy="342" r="3" opacity=".38"/>
-      <circle class="etrial" cx="252" cy="331" r="3" opacity=".6"/>
-      <circle class="etrial" cx="266" cy="318" r="3" opacity=".8"/>
-      <line class="edash" x1="219" y1="351" x2="280" y2="307"/>
-      <circle class="edesign" cx="281" cy="306" r="4.6"/>
-    </g>
-
-    <g class="eside">
-      <rect class="epanel" x="414" y="264" width="150" height="100" rx="8"/>
-      <text class="eglyph" x="489" y="283" text-anchor="middle">response history</text>
-      <g class="eframe">
-        <line x1="437" y1="348" x2="437" y2="299"/>
-        <line x1="471" y1="348" x2="471" y2="299"/>
-        <line x1="437" y1="299" x2="471" y2="299"/>
-        <line x1="437" y1="324" x2="471" y2="324"/>
-        <line x1="429" y1="348" x2="479" y2="348"/>
-      </g>
-      <line class="eaxis" x1="500" y1="324" x2="552" y2="324"/>
-      <line class="eaxis" x1="526" y1="300" x2="526" y2="348"/>
-      <path class="ehyst" d="M506 340 C 513 328, 528 309, 541 302 C 546 299, 549 303, 545 308 C 535 320, 520 337, 511 344 C 506 347, 503 344, 506 340 Z"/>
-    </g>
-
-    <path class="earr out" d="M600 201 h34 l0-9 20 14 -20 14 0-9 h-34 z"/>
-    <g class="eout">
-      <path class="efrag" d="M678 250 C 702 250, 708 188, 740 186 L766 185"/>
-      <line class="eaxis" x1="674" y1="250" x2="770" y2="250"/>
-      <line class="eaxis" x1="678" y1="254" x2="678" y2="178"/>
-      <text class="elab out" x="722" y="162" text-anchor="middle">Failure probability</text>
-      <text class="esub"     x="722" y="272" text-anchor="middle">at every intensity</text>
-    </g>
-  </svg>
-  <figcaption>The reliability search and the structural analysis run as a coupled loop &mdash; a trial realisation goes out, a response comes back, the search updates, and it cycles until the design point converges. After Figure 8 of the dissertation.</figcaption>
-</figure>
-  <ol class="hsteps"><li><div class="htop"><p class="hn">01</p><svg class="hglyph" viewBox="0 0 64 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><g class="acc"><rect x="8" y="10" width="9" height="9"/><rect x="21" y="10" width="9" height="9"/><rect x="34" y="10" width="9" height="9"/><rect x="47" y="10" width="9" height="9"/><rect x="8" y="23" width="9" height="9"/><rect x="21" y="23" width="9" height="9"/><rect x="34" y="23" width="9" height="9"/><rect x="47" y="23" width="9" height="9"/><rect x="8" y="36" width="9" height="9"/><rect x="21" y="36" width="9" height="9"/><rect x="34" y="36" width="9" height="9"/><rect x="47" y="36" width="9" height="9"/></g></svg></div><h3>Sweep</h3><p class="hd">The parameter space is discretised. Every combination of hazard intensity and structural configuration becomes a case to solve.</p></li><li><div class="htop"><p class="hn">02</p><svg class="hglyph" viewBox="0 0 64 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="10" x2="44" y2="10"/><line x1="4" y1="19" x2="52" y2="19"/><line x1="4" y1="28" x2="38" y2="28"/><line x1="4" y1="37" x2="48" y2="37"/><g class="acc"><polygon points="52,10 44,6.5 44,13.5"/><polygon points="60,19 52,15.5 52,22.5"/><polygon points="46,28 38,24.5 38,31.5"/><polygon points="56,37 48,33.5 48,40.5"/></g><line x1="4" y1="4" x2="4" y2="44" class="acc"/></svg></div><h3>Distribute</h3><p class="hd">Cases are independent, so they run concurrently. This is what turns weeks of sequential analysis into hours.</p></li><li><div class="htop"><p class="hn">03</p><svg class="hglyph" viewBox="0 0 64 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="19" cy="24" r="9"/><circle cx="45" cy="24" r="9"/><path d="M27 17 C 31 11, 33 11, 37 17" class="acc"/><polygon points="39,19 31,15 34,22" class="acc"/><path d="M37 31 C 33 37, 31 37, 27 31" class="acc"/><polygon points="25,29 33,33 30,26" class="acc"/></svg></div><h3>Iterate</h3><p class="hd">For each case the coupled loop above runs: a trial realisation out, a structural response back, cycling until the design point converges and a failure probability falls out.</p></li><li><div class="htop"><p class="hn">04</p><svg class="hglyph" viewBox="0 0 64 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="40" r="2.2" fill="currentColor" stroke="none"/><circle cx="22" cy="33" r="2.2" fill="currentColor" stroke="none"/><circle cx="29" cy="23" r="2.2" fill="currentColor" stroke="none"/><circle cx="37" cy="14" r="2.2" fill="currentColor" stroke="none"/><circle cx="48" cy="10" r="2.2" fill="currentColor" stroke="none"/><path d="M6 43 C 18 43, 24 10, 44 9 L58 8.4" class="acc"/><line x1="4" y1="44" x2="60" y2="44" opacity=".5"/></svg></div><h3>Fit</h3><p class="hd">The loop returns a probability at each intensity, not a curve. A lognormal fitted through those points gives the continuous fragility relationship.</p></li><li><div class="htop"><p class="hn">05</p><svg class="hglyph" viewBox="0 0 64 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 34 L22 42 L58 26 L42 18 Z" opacity=".3"/><path d="M6 24 C 16 24, 20 8, 42 8 L58 14 L22 32 Z" class="acc"/><line x1="14" y1="28" x2="30" y2="36" opacity=".45"/><line x1="26" y1="20" x2="42" y2="28" opacity=".45"/></svg></div><h3>Surface</h3><p class="hd">The fitted curves join across the parameter space into a surface. A probability now exists for configurations that were never explicitly run.</p></li><li><div class="htop"><p class="hn">06</p><svg class="hglyph" viewBox="0 0 64 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="12" width="13" height="30" opacity=".35"/><rect x="26" y="20" width="13" height="22" class="acc"/><rect x="44" y="30" width="13" height="12" opacity=".35"/><line x1="4" y1="42" x2="60" y2="42"/></svg></div><h3>Compare</h3><p class="hd">The index reduces a surface to one number, so different structures can be ranked against each other for retrofit.</p></li></ol>
-  <p class="rnote">FERUM and ZEUS-NL are established analysis codes. The contribution here is the platform around them &mdash; the coupling, the multi-hazard extension, and the sweep that turns a single probability into a surface.</p>
-</section>
 
 <section class="story">
   <h2 class="rule">The work</h2>
