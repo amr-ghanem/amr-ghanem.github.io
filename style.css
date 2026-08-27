@@ -162,6 +162,13 @@ p{margin:0 0 14px;max-width:86ch}
 .evidence li{font-size:0.84rem;color:var(--ink-soft);padding-left:16px;position:relative;line-height:1.55;max-width:74ch}
 .evidence li::before{content:"";position:absolute;left:0;top:.62em;width:8px;height:1px;background:var(--accent)}
 
+/* the research page lists fragility work, so its header carries a fragility
+   figure beside the type - quiet, but not decoration: it is the subject */
+.pagehead-fig{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,0.82fr);gap:56px;align-items:center}
+.pagehead-art{opacity:.42;pointer-events:none}
+.pagehead-art svg{width:100%;height:auto;display:block}
+@media(max-width:900px){.pagehead-fig{grid-template-columns:1fr;gap:28px}.pagehead-art{display:none}}
+
 /* ---------- figures ---------- */
 svg.fragility{width:100%;height:auto;display:block}
 svg.fragility .grid line{stroke:var(--rule-soft);stroke-width:1}
@@ -340,7 +347,7 @@ figcaption p{font-size:0.95rem;color:var(--ink-soft);max-width:54ch;line-height:
 
 /* ---------- recognition ---------- */
 .recog{list-style:none;margin:0;padding:0;display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:var(--r);overflow:hidden}
-.recog li{max-width:78ch;background:var(--sheet);padding:16px 24px;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:baseline}
+.recog li{background:var(--sheet);padding:16px 24px;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:baseline}
 .recog strong{font-weight:400;font-size:1.06rem}
 .recog span{font-family:"Libre Franklin",sans-serif;font-size:0.76rem;color:var(--ink-mute);text-align:right}
 
@@ -388,7 +395,7 @@ h2.rule{display:flex;align-items:center}
 .creds li.pending .icon{color:var(--ink-mute)}
 
 /* ---------- about: bio + portrait ---------- */
-.bio-split{display:grid;grid-template-columns:1fr 260px;gap:48px;align-items:start;padding-top:32px}
+.bio-split{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:56px;align-items:start;padding-top:32px}
 .bio-portrait{margin:0}
 
 @media(max-width:860px){.bio-split{grid-template-columns:1fr;gap:32px}.bio-portrait{max-width:232px}}
