@@ -558,13 +558,18 @@ a.lw-a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
    Flex lets each mark take the width its shape needs at a shared cap height,
    which is how a logo band is actually set. Crests get a little more height
    than wordmarks, since a square mark reads lighter at identical height. */
-.logowall.bare.lw-flow{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;
-  gap:18px 20px;max-width:none}
+.logowall.bare.lw-flow{display:flex;flex-wrap:wrap;align-items:center;
+  justify-content:space-evenly;gap:20px 24px;max-width:none;width:100%}
 .logowall.bare.lw-flow .lw{flex:0 0 auto}
 .logowall.bare.lw-flow .lw-a{padding:4px 2px}
+/* Size follows the item count. A band of three can run large and still leave
+   room to breathe; the same size across five wraps to a second row. Dividing a
+   width budget by the count (emitted as --lw-n) gets both right from one rule,
+   and the clamps stop it going silly at the extremes. */
 .logowall.bare.lw-flow .lw-mark{display:inline-block;width:auto;
-  height:calc(38px * var(--lw-scale,1))}
-.logowall.bare.lw-flow .lw-mark.lw-sq{height:calc(74px * var(--lw-scale,1))}
+  height:calc(clamp(30px, 130px / var(--lw-n,4), 52px) * var(--lw-scale,1))}
+.logowall.bare.lw-flow .lw-mark.lw-sq{
+  height:calc(clamp(56px, 300px / var(--lw-n,4), 104px) * var(--lw-scale,1))}
 /* Only size here - do NOT set display. The light/dark pair is switched by
    display through --lw-light / --lw-dark, and a bare 'display:block' at this
    specificity beat those rules, so BOTH files rendered side by side and every
@@ -580,7 +585,7 @@ a.lw-a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
   min-height:calc(104px * var(--lw-scale,1));font-size:0.95rem}
 .logowall.bare.lw-flow .lw-word{min-height:calc(52px * var(--lw-scale,1));font-size:0.86rem}
 @media (max-width:620px){
-  .logowall.bare.lw-flow{gap:16px 18px}
+  .logowall.bare.lw-flow{gap:16px 18px;justify-content:center}
   .logowall.bare.lw-flow .lw-mark{height:calc(30px * var(--lw-scale,1))}
   .logowall.bare.lw-flow .lw-mark.lw-sq{height:calc(58px * var(--lw-scale,1))}
 }
