@@ -171,7 +171,11 @@ figcaption p{font-size:0.95rem;color:var(--ink-soft);max-width:54ch;line-height:
 
 /* ---------- interactive explorer ---------- */
 .explorer{padding:48px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin-top:48px}
-.exp-intro{max-width:90ch;margin-bottom:32px}
+.exp-intro{max-width:none;margin-bottom:32px;display:grid;grid-template-columns:minmax(0,0.85fr) minmax(0,1.15fr);gap:56px;align-items:start}
+.exp-intro>p{max-width:none;margin:0}
+.exp-introhead{display:flex;flex-direction:column}
+.exp-introhead h2{margin:0}
+@media(max-width:900px){.exp-intro{grid-template-columns:1fr;gap:20px}.exp-intro>p{max-width:76ch}}
 .exp-intro h2{font-family:"Newsreader",Georgia,serif;font-weight:300;font-size:clamp(1.6rem,3.6vw,2.2rem);letter-spacing:-.02em;line-height:1.16;margin:0 0 16px;text-wrap:balance}
 .exp-intro p{color:var(--ink-soft);font-size:1.06rem}
 .exp-panel{display:grid;grid-template-columns:340px 1fr;gap:36px;align-items:start;background:var(--sheet);border:1px solid var(--rule);padding:32px}
