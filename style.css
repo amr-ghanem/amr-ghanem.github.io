@@ -162,6 +162,17 @@ p{margin:0 0 14px;max-width:86ch}
 .evidence li{font-size:0.84rem;color:var(--ink-soft);padding-left:16px;position:relative;line-height:1.55;max-width:74ch}
 .evidence li::before{content:"";position:absolute;left:0;top:.62em;width:8px;height:1px;background:var(--accent)}
 
+/* publication groups: a rule and real space between types, a serif heading
+   instead of an 11px label, and a count so the shape of the record reads
+   at a glance. Six colours across six types would be arbitrary; hierarchy
+   and space are what actually separate them. */
+.pubgroup{padding-top:52px;margin-top:52px;border-top:1px solid var(--rule)}
+.pubgroup:first-of-type{border-top:none;margin-top:0;padding-top:4px}
+.pubgroup-head{display:flex;align-items:baseline;gap:14px;margin:0 0 26px;padding-bottom:14px;border-bottom:1px solid var(--rule-soft)}
+.pubgroup-head h2{font-family:"Newsreader",Georgia,serif;font-weight:300;font-size:1.7rem;letter-spacing:-.02em;line-height:1.1;color:var(--ink);margin:0}
+.pubgroup-n{font-family:"IBM Plex Mono",monospace;font-size:0.76rem;color:var(--accent);border:1px solid var(--rule);border-radius:999px;padding:3px 11px;line-height:1;font-variant-numeric:tabular-nums}
+@media(max-width:580px){.pubgroup{padding-top:36px;margin-top:36px}.pubgroup-head h2{font-size:1.4rem}}
+
 /* the research page lists fragility work, so its header carries a fragility
    figure beside the type - quiet, but not decoration: it is the subject */
 .pagehead-fig{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,0.82fr);gap:56px;align-items:center}
