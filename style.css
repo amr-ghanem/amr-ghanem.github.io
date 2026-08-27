@@ -140,6 +140,9 @@ p{margin:0 0 14px;max-width:86ch}
 .exp-wrap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px}
 .exp-wrap>h2{grid-column:1/-1;margin-bottom:0}
 .xcard{display:flex;flex-direction:column}
+.xglyph{width:64px;height:48px;color:var(--ink-mute);margin:0 0 18px;display:block}
+.xglyph .acc{stroke:var(--accent)}
+.xglyph .acc[fill]{fill:var(--accent)}
 .xcard h3{font-size:1.16rem;margin:0 0 8px;max-width:none}
 .xcard .exp-lead{font-size:0.95rem;max-width:none;margin-bottom:14px}
 .xcard .evidence li{max-width:none;font-size:0.84rem}
