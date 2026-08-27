@@ -158,8 +158,6 @@ p{margin:0 0 14px;max-width:86ch}
 }
 .stats>div{background:var(--sheet);padding:22px 16px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
 .sicon{width:34px;height:28px;color:var(--ink-mute);margin-bottom:4px;display:block}
-.stats>div:hover .sicon{color:var(--accent)}
-.sicon{transition:color .25s ease}
 .num{font-size:2.5rem;font-weight:400;line-height:1;color:var(--accent);margin:0 0 8px;font-variant-numeric:tabular-nums;letter-spacing:-.03em}
 .lab{font-size:0.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute);margin:0;line-height:1.5}
 .statsrc{font-family:"Libre Franklin",sans-serif;font-size:0.84rem;line-height:1.55;color:var(--ink-mute);margin:-8px 0 24px;max-width:80ch}
@@ -179,8 +177,7 @@ p{margin:0 0 14px;max-width:86ch}
 .exp-wrap>h2{grid-column:1/-1;margin-bottom:0}
 .xcard{display:flex;flex-direction:column;align-items:center;text-align:center}
 .xring{width:96px;height:96px;border:1px solid var(--rule);border-radius:50%;background:var(--sheet);display:grid;place-items:center;margin:0 0 22px}
-.xglyph{width:52px;height:39px;color:var(--ink-mute);display:block;transition:color .25s ease}
-.xcard:hover .xglyph{color:var(--accent)}
+.xglyph{width:52px;height:39px;color:var(--ink-mute);display:block}
 .xglyph .acc{stroke:var(--accent)}
 .xglyph .acc[fill]{fill:var(--accent)}
 .xcard h3{font-size:1.16rem;margin:0 0 8px;max-width:none}
@@ -376,8 +373,7 @@ figcaption p{font-size:0.95rem;color:var(--ink-soft);max-width:54ch;line-height:
 .hstep:first-child::before,.hstep:first-child::after{display:none}
 .hrail{display:flex;align-items:center;justify-content:center;margin-bottom:16px;position:relative;z-index:1}
 .hdot{flex:0 0 auto;width:78px;height:78px;border:1.5px solid var(--rule);border-radius:50%;background:var(--ground);display:grid;place-items:center;position:relative;z-index:1}
-.hglyph{width:44px;height:33px;color:var(--ink-mute);flex:none;transition:color .25s ease}
-.hstep:hover .hglyph{color:var(--accent)}
+.hglyph{width:44px;height:33px;color:var(--ink-mute);flex:none}
 .hglyph .acc{stroke:var(--accent)}
 .hlink{display:none}
 
@@ -551,7 +547,7 @@ a.lw-a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
   align-items:center;justify-content:center}
 .logowall.nolabels .lw-a{gap:0}
 .logowall.bare a.lw-a:hover{border:0;background:none;transform:none}
-.logowall.bare .lw-mark,.logowall.bare .lw-art{height:calc(132px * var(--lw-scale,1))}
+.logowall.bare .lw-mark,.logowall.bare .lw-art{height:calc(104px * var(--lw-scale,1))}
 .logowall.bare .lw-mark .lw-art{height:100%}
 .logowall.bare .lw-art.lw-sq{padding:0}
 
@@ -569,8 +565,20 @@ a.lw-a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .logowall.bare.lw-flow .lw-mark{display:inline-block;width:auto;
   height:calc(28px * var(--lw-scale,1))}
 .logowall.bare.lw-flow .lw-mark.lw-sq{height:calc(52px * var(--lw-scale,1))}
-.logowall.bare.lw-flow .lw-art{display:block;width:auto;height:100%}
-.logowall.bare.lw-flow .lw-note{max-width:190px}
+/* Only size here - do NOT set display. The light/dark pair is switched by
+   display through --lw-light / --lw-dark, and a bare 'display:block' at this
+   specificity beat those rules, so BOTH files rendered side by side and every
+   two-file mark appeared doubled on hover. */
+.logowall.bare.lw-flow .lw-art{width:auto;height:100%}
+.logowall.bare.lw-flow .lw-solo{display:block}
+.logowall.bare.lw-flow .lw-light{display:var(--lw-light)}
+.logowall.bare.lw-flow .lw-dark{display:var(--lw-dark)}
+.logowall.bare.lw-flow .lw-note{max-width:210px}
+/* A typographic stand-in has no artwork to size against, so it gets the band
+   height explicitly - otherwise it sits smaller than the marks beside it. */
+.logowall.bare .lw-word{display:flex;align-items:center;justify-content:center;
+  min-height:calc(104px * var(--lw-scale,1));font-size:0.95rem}
+.logowall.bare.lw-flow .lw-word{min-height:calc(52px * var(--lw-scale,1));font-size:0.86rem}
 @media (max-width:620px){
   .logowall.bare.lw-flow{gap:16px 18px}
   .logowall.bare.lw-flow .lw-mark{height:calc(24px * var(--lw-scale,1))}
@@ -589,7 +597,7 @@ a.lw-a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .logowall.bare a.lw-a:hover .lw-note{color:var(--accent)}
 @media (max-width:620px){
   .logowall.bare{gap:18px 14px;max-width:none;grid-template-columns:repeat(auto-fit,minmax(88px,1fr))}
-  .logowall.bare .lw-mark,.logowall.bare .lw-art{height:calc(76px * var(--lw-scale,1))}
+  .logowall.bare .lw-mark,.logowall.bare .lw-art{height:calc(64px * var(--lw-scale,1))}
   .logowall.bare .lw-a{padding:6px 2px}
 }
 a.lw-a:hover .lw-art{filter:none;opacity:1}
@@ -779,8 +787,19 @@ nav a.on::after{transform:scaleX(1)}
 .engine:hover .ebox{stroke:var(--accent);opacity:.7}
 
 /* glyphs answer the pointer: faster, and pulled to the accent */
-.hglyph,.xglyph{transition:color .3s ease}
-.hstep:hover .hglyph,.xcard:hover .xglyph{color:var(--accent)}
+/* Icon hover. Colour alone was not enough: ink-mute to accent is grey-green to
+   deep teal at the same stroke weight, a change you have to be looking for.
+   Weight and a small scale carry it, so the icon reacts as plainly as a logo
+   does when it takes its true colours. stroke-width is set in CSS, which beats
+   the stroke-width presentation attribute on the SVG. */
+.sicon,.hglyph,.xglyph{stroke-width:1.7;
+  transition:color .28s ease,stroke-width .28s ease,transform .28s cubic-bezier(.2,.7,.3,1)}
+.stats>div:hover .sicon,
+.hstep:hover .hglyph,
+.xcard:hover .xglyph{color:var(--accent);stroke-width:2.3;transform:scale(1.14)}
+@media (prefers-reduced-motion:reduce){
+  .stats>div:hover .sicon,.hstep:hover .hglyph,.xcard:hover .xglyph{transform:none}
+}
 .hstep:hover .hglyph *,.xcard:hover .xglyph *{animation-duration:1.15s!important}
 
 
