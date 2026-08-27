@@ -170,9 +170,9 @@ figcaption p{font-size:.87rem;color:var(--ink-soft);max-width:40ch;line-height:1
 .exp-intro{max-width:60ch;margin-bottom:32px}
 .exp-intro h2{font-family:"Newsreader",Georgia,serif;font-weight:300;font-size:clamp(1.6rem,3.6vw,2.2rem);letter-spacing:-.02em;line-height:1.16;margin:0 0 16px;text-wrap:balance}
 .exp-intro p{color:var(--ink-soft);font-size:1.04rem}
-.exp-panel{display:grid;grid-template-columns:340px 1fr;gap:36px;align-items:start;background:var(--sheet);border:1px solid var(--rule);padding:32px}
+.exp-panel{display:flex;flex-direction:column;gap:24px;background:var(--sheet);border:1px solid var(--rule);padding:32px}
 .exp-chart{margin-bottom:24px}
-.exp-controls{display:grid;grid-template-columns:1fr;gap:15px;padding-top:18px;margin-top:14px;border-top:1px solid var(--rule-soft)}
+.exp-controls{display:grid;grid-template-columns:1fr 1fr;gap:16px 28px}
 
 
 .readout{display:flex;align-items:baseline;gap:24px;flex-wrap:wrap}
@@ -233,7 +233,12 @@ figcaption p{font-size:.87rem;color:var(--ink-soft);max-width:40ch;line-height:1
 /* ---------- surface explorer ---------- */
 .mh-struct,.mh-surf{background:var(--sunk);border:1px solid var(--rule-soft)}
 .exp-panel canvas{width:100%;height:auto;display:block}
-@media(max-width:1040px){.exp-panel{grid-template-columns:1fr;padding:24px}.exp-left{max-width:420px}.exp-controls{grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:20px 28px}}
+.exp-top{display:grid;grid-template-columns:auto minmax(340px,1fr);gap:40px;align-items:start}
+.exp-side{display:flex;flex-direction:column;gap:22px}
+.exp-top .mh-struct{display:flex}
+.exp-top .mh-struct canvas{width:auto;height:360px;max-width:100%;margin:0 auto;display:block}
+.mh-surf canvas{width:auto;height:470px;max-width:100%;margin:0 auto;display:block}
+@media(max-width:1040px){.exp-panel{padding:24px}.exp-top{grid-template-columns:1fr;gap:28px}.exp-top .mh-struct canvas{height:300px}.exp-controls{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}}
 .surfwrap{background:var(--sunk);border:1px solid var(--rule-soft);padding:8px}
 #surfCanvas{width:100%;height:auto;display:block}
 
@@ -252,13 +257,13 @@ figcaption p{font-size:.87rem;color:var(--ink-soft);max-width:40ch;line-height:1
 .engine .earr.out{stroke:var(--accent)}
 .engine .elab.out{fill:var(--accent);font-size:15px}
 .engine .eaxis{stroke:var(--ink-mute);stroke-width:1;opacity:.5}
-.engine .epdf{fill:none;stroke:var(--data2);stroke-width:2}
+.engine .epdf{fill:none;stroke:var(--accent);stroke-width:2}
 .engine .ecurve{fill:none;stroke:var(--ink-mute);stroke-width:1.6}
 .engine .etrial{fill:var(--ink-mute)}
 .engine .edesign{fill:var(--data4)}
 .engine .edash{stroke:var(--data4);stroke-width:1;stroke-dasharray:3 3;opacity:.7}
 .engine .eframe line{stroke:var(--ink-soft);stroke-width:2;stroke-linecap:round}
-.engine .ehyst{fill:none;stroke:var(--data3);stroke-width:1.6}
+.engine .ehyst{fill:none;stroke:var(--ink-soft);stroke-width:1.6}
 .engine .efrag{fill:none;stroke:var(--accent);stroke-width:2.4}
 .engine .ecyc{fill:none;stroke:var(--accent);stroke-width:2.4}
 .engine .ecycHead{fill:var(--accent)}

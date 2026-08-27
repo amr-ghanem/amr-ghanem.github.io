@@ -122,64 +122,59 @@
   <div class="exp-intro">
     <p class="fignum">Interactive</p>
     <h2>Two hazards, one surface</h2>
-    <p>A subduction earthquake shakes a structure and then floods it. The tsunami arrives at a building the shaking has already weakened, so assessing the two separately understates the risk. This is the combined surface &mdash; failure probability across both demands at once, with the earthquake eroding the capacity the tsunami then has to overcome.</p>
+    <p>A subduction earthquake shakes a structure, then floods it. The tsunami meets a building the shaking has already weakened, so assessing them separately understates the risk. This surface carries both demands at once.</p>
   </div>
 
   <div class="exp-panel">
 
-    <div class="exp-left">
+    <div class="exp-top">
       <div class="mh-struct">
         <canvas id="structCanvas" width="420" height="370" role="img"
           aria-label="Structure elevation responding to earthquake damage and tsunami inundation"></canvas>
       </div>
 
+      <div class="exp-side">
       <div class="exp-controls">
         <div class="ctrl">
           <label for="sPga">Ground shaking <span id="vPga">0.35 g</span></label>
           <input type="range" id="sPga" min="0" max="1.5" step="0.01" value="0.35">
-          <p class="hint">Peak ground acceleration.</p>
         </div>
 
         <div class="ctrl">
           <label for="sDep">Inundation <span id="vDep">13.1 ft</span></label>
           <input type="range" id="sDep" min="0" max="8" step="0.1" value="4">
-          <p class="hint">Water depth at the wall.</p>
         </div>
 
         <div class="ctrl">
           <label for="sFr">Flow velocity, Fr <span id="vFr">1.40</span></label>
           <input type="range" id="sFr" min="0.4" max="2" step="0.05" value="1.4">
-          <p class="hint">Froude number &mdash; higher means faster flow.</p>
         </div>
 
         <div class="ctrl">
-          <label for="sBe">Uncertainty <span id="vBe">0.50</span></label>
+          <label for="sBe">Dispersion &beta; <span id="vBe">0.50</span></label>
           <input type="range" id="sBe" min="0.2" max="0.9" step="0.02" value="0.5">
-          <p class="hint">Lognormal dispersion &beta;.</p>
         </div>
 
         <div class="ctrl">
           <label for="sRot">View <span id="vRot">32&deg;</span></label>
           <input type="range" id="sRot" min="-180" max="180" step="1" value="32">
-          <p class="hint">Rotate the surface.</p>
+        </div>
+      </div>
+
+        <div class="readout" aria-live="polite">
+          <p class="ro-num" id="sProb">&mdash;</p>
+          <p class="ro-text" id="sText"></p>
         </div>
       </div>
     </div>
 
-    <div class="exp-right">
-      <div class="readout" aria-live="polite">
-        <p class="ro-num" id="sProb">&mdash;</p>
-        <p class="ro-text" id="sText"></p>
-      </div>
-
-      <div class="mh-surf">
-        <canvas id="surfCanvas" width="900" height="540" role="img"
-          aria-label="Fragility surface: failure probability against peak ground acceleration and tsunami inundation depth"></canvas>
-      </div>
-
-      <p class="eqn">P = 1 &minus; (1 &minus; P<sub>eq</sub>)(1 &minus; P<sub>ts</sub>) &nbsp;&middot;&nbsp; &theta;<sub>ts</sub> reduced by earthquake damage</p>
-      <p class="disclaim">Forces follow ASCE 7 Chapter 6; capacities are representative values for a mid-rise RC frame, not results from a specific study. Published analyses are on the <a href="research.html">research page</a>.</p>
+    <div class="mh-surf">
+      <canvas id="surfCanvas" width="1280" height="620" role="img"
+        aria-label="Fragility surface: failure probability against peak ground acceleration and tsunami inundation depth"></canvas>
     </div>
+
+    <p class="eqn">P = 1 &minus; (1 &minus; P<sub>eq</sub>)(1 &minus; P<sub>ts</sub>) &nbsp;&middot;&nbsp; &theta;<sub>ts</sub> reduced by earthquake damage</p>
+    <p class="disclaim">Forces follow ASCE 7 Chapter 6; capacities are representative for a mid-rise RC frame, not a specific study. See the <a href="research.html">research page</a>.</p>
 
   </div></section>
 
@@ -442,6 +437,7 @@
         fr=parseFloat(sFr.value), be=parseFloat(sBe.value), rot=parseFloat(sRot.value);
 
     var cLow=hex(css('--accent','#0A6E6E')), cMid=hex(css('--data3','#A8792B')), cHigh=hex(css('--data4','#A8482B'));
+    var TS = Math.max(0.62, Math.min(1, W/1100));
     var grid=css('--rule','#C7CFCB'), mute=css('--ink-mute','#6E7B78'),
         mark=css('--data4','#A8482B'), sheet=css('--sheet','#FAFAF8');
 
@@ -462,12 +458,12 @@
     // the probability axis rides the back corner, which moves as the view turns,
     // so its ticks have to point away from the plot rather than always left
     var zs = vb.x >= W*0.5 ? 1 : -1;
-    g1.fillStyle=mute; g1.font='14px "IBM Plex Mono", monospace';
+    g1.fillStyle=mute; g1.font=(14*TS).toFixed(1)+'px "IBM Plex Mono", monospace';
     g1.textAlign = zs>0 ? 'left' : 'right';
     for(var pz=0;pz<=1.0001;pz+=0.25){
       var tk=proj(back[0],back[1],pz,rot);
       g1.beginPath(); g1.moveTo(tk.x,tk.y); g1.lineTo(tk.x+zs*8,tk.y); g1.strokeStyle=grid; g1.stroke();
-      g1.fillText(Math.round(pz*100)+'%', tk.x+zs*13, tk.y+5);
+      g1.fillText(Math.round(pz*100)+'%', tk.x+zs*13*TS, tk.y+5*TS);
     }
 
     var quads=[];
@@ -502,14 +498,14 @@
     var vE = proj(0.5,0,0,rot).depth > proj(0.5,1,0,rot).depth ? 0 : 1;
     var uE = proj(0,0.5,0,rot).depth > proj(1,0.5,0,rot).depth ? 0 : 1;
 
-    g1.fillStyle=mute; g1.textAlign='center'; g1.font='13px "IBM Plex Mono", monospace';
-    for(var gx=0;gx<=1.0001;gx+=0.25){ var t1=proj(gx,vE,0,rot); g1.fillText((gx*MAXPGA).toFixed(2), t1.x, t1.y+19); }
+    g1.fillStyle=mute; g1.textAlign='center'; g1.font=(13*TS).toFixed(1)+'px "IBM Plex Mono", monospace';
+    for(var gx=0;gx<=1.0001;gx+=0.25){ var t1=proj(gx,vE,0,rot); g1.fillText((gx*MAXPGA).toFixed(2), t1.x, t1.y+19*TS); }
     for(var gy=0;gy<=1.0001;gy+=0.25){
       var t2=proj(uE,gy,0,rot), sg = t2.x >= W*0.5 ? 1 : -1;
       g1.textAlign = sg>0 ? 'left' : 'right';
-      g1.fillText(Math.round(gy*MAXDEP*M2FT)+' ft', t2.x+sg*12, t2.y+5);
+      g1.fillText(Math.round(gy*MAXDEP*M2FT)+' ft', t2.x+sg*12*TS, t2.y+5*TS);
     }
-    g1.textAlign='center'; g1.font='14px "Libre Franklin", sans-serif';
+    g1.textAlign='center'; g1.font=(14*TS).toFixed(1)+'px "Libre Franklin", sans-serif';
     var l1=proj(0.5,vE+(vE?0.15:-0.15),0,rot), l2=proj(uE+(uE?0.18:-0.18),0.5,0,rot), l3=proj(back[0],back[1],1.1,rot);
     // titles sit outside the plot, so at some angles they would run off the
     // canvas - clamp each one by its own measured half-width so it always lands
@@ -518,9 +514,9 @@
       var pad = g1.measureText(s).width/2 + 6;
       g1.fillText(s, Math.max(pad, Math.min(W-pad, x)), Math.max(18, Math.min(H-6, y)));
     }
-    title('PEAK GROUND ACCELERATION (g)', l1.x, l1.y+24);
-    title('INUNDATION DEPTH',             l2.x, l2.y+24);
-    title('FAILURE PROBABILITY',          l3.x, l3.y-6);
+    title('PEAK GROUND ACCELERATION (g)', l1.x, l1.y+24*TS);
+    title('INUNDATION DEPTH',             l2.x, l2.y+24*TS);
+    title('FAILURE PROBABILITY',          l3.x, l3.y-6*TS);
   }
 
   function drawStructure(){
@@ -619,11 +615,11 @@
     g2.fillStyle=ink;  g2.font='600 15px "Libre Franklin", sans-serif';
     g2.fillText('1  EARTHQUAKE', 18, 28);
     g2.fillStyle=mute; g2.font='14px "Libre Franklin", sans-serif';
-    g2.fillText('plastic hinges form, capacity drops', 18, 48);
+    g2.fillText('hinges form, capacity drops', 18, 48);
     g2.fillStyle=ink;  g2.font='600 15px "Libre Franklin", sans-serif';
     g2.fillText('2  TSUNAMI', 18, 76);
     g2.fillStyle=mute; g2.font='14px "Libre Franklin", sans-serif';
-    g2.fillText('arrives at the weakened frame', 18, 96);
+    g2.fillText('hits the weakened frame', 18, 96);
   }
   function render(){
     var pga=parseFloat(sPga.value), dep=parseFloat(sDep.value),
@@ -640,15 +636,14 @@
     var a=pEq(pga,be), b=pTs(dep,fr,be,a), tot=1-(1-a)*(1-b);
     document.getElementById('sProb').textContent = Math.round(tot*100)+'%';
 
+    // The big number already states the total and the sliders already state the
+    // inputs, so the sentence only has to carry what neither shows: the split,
+    // and how much of the tsunami risk is owed to the earthquake damage.
     var alone=pTs(dep,fr,be,0), extra=Math.round((b-alone)*100);
-    var tail = extra>1
-      ? ' Assessed alone the tsunami gives ' + Math.round(alone*100) + '%; the earthquake damage adds ' + extra + ' points.'
-      : '';
 
     document.getElementById('sText').textContent =
-      'At ' + pga.toFixed(2) + 'g and ' + (dep*M2FT).toFixed(1) + ' ft of inundation, combined failure probability is ' +
-      Math.round(tot*100) + '%. Earthquake alone ' + Math.round(a*100) + '%, tsunami on the damaged structure ' +
-      Math.round(b*100) + '%.' + tail;
+      'Earthquake alone ' + Math.round(a*100) + '%. Tsunami on the damaged frame ' + Math.round(b*100) + '%' +
+      (extra>1 ? ' — up ' + extra + ' points from ' + Math.round(alone*100) + '% undamaged.' : '.');
   }
 
   [sPga,sDep,sFr,sBe,sRot].forEach(function(el){
@@ -663,9 +658,15 @@
   // Once the panel stacks to one column the surface gets the full width but far
   // less of it, and a 900x540 plot flattens to an unreadable strip. Give the
   // narrow layout a taller drawing space so the surface keeps its relief.
+  // The canvas is laid out at width:100% with an automatic height, so its own
+  // backing store is what decides the drawn proportions. Sizing it to the space
+  // actually available means the plot lands at 1:1 pixels - no CSS height fight,
+  // and no resampling. Stacked layouts get a squarer box so the relief survives.
   function fit(){
+    var avail = (sf.parentNode && sf.parentNode.clientWidth) || 900;
+    var nw = Math.max(260, Math.round(avail));
     var narrow = window.innerWidth <= 1040;
-    var nw = narrow ? 680 : 900, nh = narrow ? 620 : 540;
+    var nh = Math.max(260, Math.min(Math.round(nw * (narrow ? 1.02 : 0.42)), 560));
     if (sf.width !== nw || sf.height !== nh) { sf.width = nw; sf.height = nh; }
     W = sf.width; H = sf.height;
   }
