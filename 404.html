@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="Amr Ghanem">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230B1211'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='17' fill='%236BBFAE' text-anchor='middle'%3EAG%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Libre+Franklin:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,200;0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&display=swap">
-<link rel="stylesheet" href="style.css?v=4312dcf3ee">
+<link rel="stylesheet" href="style.css?v=ca0b64d4ff">
 <script type="application/ld+json">
 {
     "@context":  "https://schema.org",
@@ -183,8 +183,16 @@
   function revealAll(){
     for (var k=0;k<t.length;k++){ t[k].style.transitionDelay=''; t[k].classList.remove('reveal'); }
   }
+  // Above-the-fold blocks: reveal on load, but only AFTER the browser has
+  // painted the hidden state once. Adding .reveal and .seen inside the same
+  // frame gives the engine no start value to interpolate from, so the content
+  // simply popped in with no transition at all - which is what happened on the
+  // home page. Two nested frames guarantee a paint in between.
   requestAnimationFrame(function(){
-    for (var k=0;k<t.length;k++) if (t[k].getBoundingClientRect().top < window.innerHeight) t[k].classList.add('seen');
+    requestAnimationFrame(function(){
+      for (var k=0;k<t.length;k++)
+        if (t[k].getBoundingClientRect().top < window.innerHeight) t[k].classList.add('seen');
+    });
   });
   // Safety net: hidden tabs, prerender, or any environment where the observer
   // does not fire would otherwise leave content stuck at opacity 0. Content

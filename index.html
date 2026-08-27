@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="Amr Ghanem">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230B1211'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='17' fill='%236BBFAE' text-anchor='middle'%3EAG%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Libre+Franklin:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,200;0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&display=swap">
-<link rel="stylesheet" href="style.css?v=4312dcf3ee">
+<link rel="stylesheet" href="style.css?v=ca0b64d4ff">
 <script type="application/ld+json">
 {
     "@context":  "https://schema.org",
@@ -200,8 +200,8 @@
       </g>
       <line class="eaxis" x1="498" y1="324" x2="554" y2="324"/>
       <line class="eaxis" x1="526" y1="298" x2="526" y2="350"/>
-      <path class="ehyst" d="M504 340 C 508 330, 516 320, 526 314 C 536 308, 544 304, 548 308 C 545 314, 537 322, 526 328 C 516 334, 508 340, 504 344 C 501 346, 502 342, 504 340 Z"/>
-      <path class="ehyst inner" d="M514 332 C 517 328, 521 324, 526 321 C 531 318, 535 317, 536 319 C 534 323, 530 327, 526 330 C 521 333, 517 335, 515 335 C 513 335, 513 334, 514 332 Z"/>
+      <path class="ehyst" pathLength="1" d="M504 340 C 508 330, 516 320, 526 314 C 536 308, 544 304, 548 308 C 545 314, 537 322, 526 328 C 516 334, 508 340, 504 344 C 501 346, 502 342, 504 340 Z"/>
+      <path class="ehyst inner" pathLength="1" d="M514 332 C 517 328, 521 324, 526 321 C 531 318, 535 317, 536 319 C 534 323, 530 327, 526 330 C 521 333, 517 335, 515 335 C 513 335, 513 334, 514 332 Z"/>
     </g>
 
     <path class="earr out" d="M600 201 h34 l0-9 20 14 -20 14 0-9 h-34 z"/>
@@ -870,8 +870,16 @@
   function revealAll(){
     for (var k=0;k<t.length;k++){ t[k].style.transitionDelay=''; t[k].classList.remove('reveal'); }
   }
+  // Above-the-fold blocks: reveal on load, but only AFTER the browser has
+  // painted the hidden state once. Adding .reveal and .seen inside the same
+  // frame gives the engine no start value to interpolate from, so the content
+  // simply popped in with no transition at all - which is what happened on the
+  // home page. Two nested frames guarantee a paint in between.
   requestAnimationFrame(function(){
-    for (var k=0;k<t.length;k++) if (t[k].getBoundingClientRect().top < window.innerHeight) t[k].classList.add('seen');
+    requestAnimationFrame(function(){
+      for (var k=0;k<t.length;k++)
+        if (t[k].getBoundingClientRect().top < window.innerHeight) t[k].classList.add('seen');
+    });
   });
   // Safety net: hidden tabs, prerender, or any environment where the observer
   // does not fire would otherwise leave content stuck at opacity 0. Content

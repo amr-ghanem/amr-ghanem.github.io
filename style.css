@@ -175,19 +175,12 @@ p{margin:0 0 14px;max-width:86ch}
 
 /* the research page lists fragility work, so its header carries a fragility
    figure beside the type - quiet, but not decoration: it is the subject */
-.pagehead-fig{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,0.95fr);gap:44px;align-items:center}
+.pagehead-fig{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,300px);gap:48px;align-items:center}
 /* A continuous ramp rather than a fade that finishes early: the previous mask
    reached full opacity at 42% and stayed flat, which read as a hard edge. These
    stops keep climbing all the way across, so the image never resolves into a
    rectangle - it just gets denser toward the far corner. */
-/* One diagonal ramp, not two composited ones. Intersecting two gradients
-   MULTIPLIES their alphas, so the middle of the figure landed near 5% opacity
-   and the whole thing read as empty. A single 105deg ramp fades in from the
-   text side and reaches full strength across the outer half, so the curves
-   are actually legible. */
-.pagehead-art{opacity:.9;pointer-events:none;
-  -webkit-mask-image:linear-gradient(105deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.18) 14%,rgba(0,0,0,.55) 30%,rgba(0,0,0,.85) 46%,rgba(0,0,0,1) 60%);
-  mask-image:linear-gradient(105deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.18) 14%,rgba(0,0,0,.55) 30%,rgba(0,0,0,.85) 46%,rgba(0,0,0,1) 60%)}
+.pagehead-art{opacity:1;pointer-events:none}
 .pagehead-art img{width:100%;height:auto;display:block}
 .pagehead-art svg{width:100%;height:auto;display:block}
 @media(max-width:900px){.pagehead-fig{grid-template-columns:1fr;gap:28px}.pagehead-art{display:none}}
@@ -533,6 +526,14 @@ nav a.on::after{transform:scaleX(1)}
 .xcard:nth-child(4) .xglyph circle:nth-child(7){animation-delay:0.6s}
 .xcard:nth-child(4) .xglyph path.acc{stroke-dasharray:140;animation:gTrace 4s ease-in-out infinite}
 
+
+/* The response history is a CYCLIC record, so it draws itself over and over:
+   the outer loop traces, the inner loop follows half a beat later. Base state
+   is the finished loop for the no-animation case. */
+@keyframes hystTrace{0%{stroke-dashoffset:1}55%,88%{stroke-dashoffset:0}100%{stroke-dashoffset:-1}}
+.engine .ehyst{stroke-dasharray:1;stroke-dashoffset:0;animation:hystTrace 4.2s ease-in-out infinite}
+.engine .ehyst.inner{animation-delay:.9s;animation-duration:4.2s}
+.engine:hover .ehyst{animation-duration:1.9s}
 
 /* ---------- hover motion ----------
    The engine diagram is static until you point at it, then the exchange it
