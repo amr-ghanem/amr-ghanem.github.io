@@ -176,12 +176,16 @@ p{margin:0 0 14px;max-width:86ch}
 /* the research page lists fragility work, so its header carries a fragility
    figure beside the type - quiet, but not decoration: it is the subject */
 .pagehead-fig{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,0.95fr);gap:44px;align-items:center}
-.pagehead-art{opacity:.62;pointer-events:none;
-  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 42%),linear-gradient(to top,transparent 0,#000 38%);
+/* A continuous ramp rather than a fade that finishes early: the previous mask
+   reached full opacity at 42% and stayed flat, which read as a hard edge. These
+   stops keep climbing all the way across, so the image never resolves into a
+   rectangle - it just gets denser toward the far corner. */
+.pagehead-art{opacity:.55;pointer-events:none;
+  -webkit-mask-image:linear-gradient(to right,rgba(0,0,0,0) 0%,rgba(0,0,0,.06) 16%,rgba(0,0,0,.20) 34%,rgba(0,0,0,.45) 55%,rgba(0,0,0,.74) 78%,rgba(0,0,0,1) 100%),linear-gradient(to top,rgba(0,0,0,0) 0%,rgba(0,0,0,.10) 15%,rgba(0,0,0,.38) 38%,rgba(0,0,0,.72) 68%,rgba(0,0,0,1) 100%);
   -webkit-mask-composite:source-in;
-  mask-image:linear-gradient(to right,transparent 0,#000 42%),linear-gradient(to top,transparent 0,#000 38%);
+  mask-image:linear-gradient(to right,rgba(0,0,0,0) 0%,rgba(0,0,0,.06) 16%,rgba(0,0,0,.20) 34%,rgba(0,0,0,.45) 55%,rgba(0,0,0,.74) 78%,rgba(0,0,0,1) 100%),linear-gradient(to top,rgba(0,0,0,0) 0%,rgba(0,0,0,.10) 15%,rgba(0,0,0,.38) 38%,rgba(0,0,0,.72) 68%,rgba(0,0,0,1) 100%);
   mask-composite:intersect}
-.pagehead-art img{width:100%;height:auto;display:block;border-radius:var(--r)}
+.pagehead-art img{width:100%;height:auto;display:block}
 .pagehead-art svg{width:100%;height:auto;display:block}
 @media(max-width:900px){.pagehead-fig{grid-template-columns:1fr;gap:28px}.pagehead-art{display:none}}
 

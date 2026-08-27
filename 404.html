@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="Amr Ghanem">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230B1211'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='17' fill='%236BBFAE' text-anchor='middle'%3EAG%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Libre+Franklin:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,200;0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&display=swap">
-<link rel="stylesheet" href="style.css?v=7d18484580">
+<link rel="stylesheet" href="style.css?v=dcbcf4de13">
 <script type="application/ld+json">
 {
     "@context":  "https://schema.org",
@@ -142,14 +142,38 @@
   // prefers-reduced-motion.
   var rm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (rm || !('IntersectionObserver' in window)) return;
-  var t = document.querySelectorAll('main > section, main > div.exp-wrap, .xcard, .work, .entry, .pubgroup');
+  // Reveal the content blocks themselves rather than whole sections, so text
+  // arrives line-group by line-group. Nesting a reveal inside a reveal would
+  // multiply the two opacities and read as a flicker, so these are all leaves.
+  var sel = [
+    '.hero-text > *', '.pagehead-text > *', '.exp-intro > *',
+    'h2.rule', '.pubgroup-head', '.chapter', '.xcard', '.hstep',
+    '.work', '.entry', '.engine', '.exp-panel',
+    '.recog li', '.creds li', '.svc li', '.touch li', '.funders li',
+    '.stats > div', '.venues', '.rnote', '.statsrc', '.more',
+    'main figure', 'main > section > p'
+  ].join(',');
+  var t = document.querySelectorAll(sel);
   if (!t.length) return;
-  for (var i=0;i<t.length;i++) t[i].classList.add('reveal');
+  // stagger siblings so a group cascades instead of appearing all at once
+  var seen = new Map();
+  for (var i=0;i<t.length;i++) {
+    var el = t[i], p = el.parentNode;
+    var n = (seen.get(p) || 0); seen.set(p, n+1);
+    if (n) el.style.transitionDelay = Math.min(n*55, 330) + 'ms';
+    el.classList.add('reveal');
+  }
   var io = new IntersectionObserver(function(es){
     es.forEach(function(e){ if(!e.isIntersecting) return; e.target.classList.add('seen'); io.unobserve(e.target); });
   }, {rootMargin:'0px 0px -8% 0px', threshold:0.06});
   for (var j=0;j<t.length;j++) io.observe(t[j]);
-  function revealAll(){ for (var k=0;k<t.length;k++) t[k].classList.add('seen'); }
+  // Strip the class outright rather than adding .seen: .seen still relies on a
+  // transition running to completion, and in a throttled or non-compositing
+  // context that transition can stall at opacity 0, leaving text invisible.
+  // Removing .reveal drops the initial state entirely - instantly readable.
+  function revealAll(){
+    for (var k=0;k<t.length;k++){ t[k].style.transitionDelay=''; t[k].classList.remove('reveal'); }
+  }
   requestAnimationFrame(function(){
     for (var k=0;k<t.length;k++) if (t[k].getBoundingClientRect().top < window.innerHeight) t[k].classList.add('seen');
   });
