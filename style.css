@@ -418,7 +418,9 @@ footer.site{border-top:1px solid var(--rule);padding-top:32px;padding-bottom:48p
 .fcols a{font-size:0.95rem;text-decoration:none}
 .fcols a:hover{text-decoration:underline}
 .fplain{font-size:0.95rem;color:var(--ink-mute);margin:0}
-.colophon{font-size:0.76rem;color:var(--ink-mute);margin-top:32px;letter-spacing:.06em}
+.footbar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 32px;margin-top:36px;padding-top:20px;border-top:1px solid var(--rule-soft)}
+.colophon{font-size:0.76rem;color:var(--ink-mute);margin:0;letter-spacing:.06em}
+.fdisc{letter-spacing:0}
 
 /* ---------- responsive ---------- */
 @media(max-width:860px){
