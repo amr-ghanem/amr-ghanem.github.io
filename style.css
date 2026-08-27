@@ -325,12 +325,15 @@ figcaption p{font-size:0.95rem;color:var(--ink-soft);max-width:54ch;line-height:
 @media(max-width:900px){.engine{padding:12px;overflow-x:auto}.engine svg{min-width:660px}}
 .hsteps{list-style:none;margin:0 0 68px;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0 18px}
 .hstep{display:flex;flex-direction:column;align-items:center;text-align:center;position:relative}
-.hstep::before{content:"";position:absolute;top:39px;left:calc(-50% - 9px);width:calc(100% + 18px);height:1px;background:var(--rule)}
-.hstep:first-child::before{display:none}
-.hstep::after{content:"";position:absolute;top:36px;left:calc(-50% - 9px);border-left:5px solid var(--rule);border-top:3px solid transparent;border-bottom:3px solid transparent}
-.hstep:first-child::after{display:none}
+/* The connector runs node-edge to node-edge and ends in an arrowhead pointing
+   INTO the next node, so the row reads as one sequence rather than six
+   separate circles. Previously it was a hairline spanning centre-to-centre
+   with its arrow at the wrong end. */
+.hstep::before{content:"";position:absolute;top:38px;left:calc(-50% + 30px);width:calc(100% - 60px);height:2px;background:var(--rule)}
+.hstep::after{content:"";position:absolute;top:32px;left:calc(50% - 48px);border-left:9px solid var(--rule);border-top:6px solid transparent;border-bottom:6px solid transparent}
+.hstep:first-child::before,.hstep:first-child::after{display:none}
 .hrail{display:flex;align-items:center;justify-content:center;margin-bottom:16px;position:relative;z-index:1}
-.hdot{flex:0 0 auto;width:78px;height:78px;border:1px solid var(--rule);border-radius:50%;background:var(--sheet);display:grid;place-items:center}
+.hdot{flex:0 0 auto;width:78px;height:78px;border:1.5px solid var(--rule);border-radius:50%;background:var(--ground);display:grid;place-items:center;position:relative;z-index:1}
 .hglyph{width:44px;height:33px;color:var(--ink-mute);flex:none}
 .hglyph .acc{stroke:var(--accent)}
 .hlink{display:none}
@@ -444,6 +447,10 @@ a,.btn,.xcard,.work,.entry,.recog li,.hdot,.icon{transition:color .22s ease,back
 .xcard:hover .xring{transform:translateY(-4px);border-color:var(--accent)}
 .xring{transition:transform .3s cubic-bezier(.2,.6,.2,1),border-color .3s ease}
 .hstep:hover .hdot{border-color:var(--accent);transform:translateY(-3px)}
+.hsteps:hover .hstep::before{background:var(--rule-soft)}
+.hstep:hover::before{background:var(--accent)}
+.hstep:hover::after{border-left-color:var(--accent)}
+.hstep::before,.hstep::after{transition:background-color .3s ease,border-left-color .3s ease}
 .hdot{transition:transform .3s cubic-bezier(.2,.6,.2,1),border-color .3s ease}
 .work:hover h3 a,.entry:hover h3 a{color:var(--accent)}
 .recog li{transition:background-color .25s ease}
