@@ -534,8 +534,9 @@ a.lw-a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
    chose bare over legible-at-any-cost */
 .logowall.bare .lw-art.lw-solo{background:none;padding:0}
 .logowall.bare .lw-mark.lw-sq::before{inset:0}
-.logowall.bare .lw-note{font-size:0.76rem}
-.logowall.bare a.lw-a:hover .lw-note{color:var(--ink)}
+/* logos only - the organisation name still travels in the link title and the
+   image alt, so nothing is lost to assistive tech */
+.logowall.bare .lw-note{display:none}
 @media (max-width:620px){
   .logowall.bare .lw-mark,.logowall.bare .lw-art{height:72px}
 }
