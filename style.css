@@ -463,6 +463,76 @@ nav a::after{content:"";position:absolute;left:0;right:0;bottom:-5px;height:1px;
 nav a:hover::after{transform:scaleX(1)}
 nav a.on::after{transform:scaleX(1)}
 
+
+/* ---------- icon motion ----------
+   Every glyph animates the thing it depicts: the sweep fills cell by cell, the
+   distribute arrows advance, the loop cycles, the fit points land along the
+   curve, the surface drifts, the bars rank. Small amplitudes and long periods -
+   these sit beside body text and must not pull the eye off it. All of it is
+   killed by the global prefers-reduced-motion rule. */
+@keyframes gPulse{0%,72%,100%{opacity:.28}12%,50%{opacity:1}}
+@keyframes gAdvance{0%,100%{transform:translateX(0)}45%{transform:translateX(5px)}}
+@keyframes gSpin{to{transform:rotate(360deg)}}
+@keyframes gDot{0%,70%,100%{opacity:.25;transform:scale(.8)}18%,46%{opacity:1;transform:scale(1)}}
+@keyframes gDrift{0%,100%{transform:translateY(0)}50%{transform:translateY(-2.5px)}}
+@keyframes gRise{0%,100%{transform:scaleY(.82)}50%{transform:scaleY(1)}}
+@keyframes gTrace{0%{stroke-dashoffset:120}55%,100%{stroke-dashoffset:0}}
+@keyframes gSlide{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+
+/* 01 sweep - the parameter space filling in */
+.hstep:nth-child(1) .hglyph rect{animation:gPulse 3.4s ease-in-out infinite}
+.hstep:nth-child(1) .hglyph rect:nth-child(1){animation-delay:0s}
+.hstep:nth-child(1) .hglyph rect:nth-child(2){animation-delay:0.18s}
+.hstep:nth-child(1) .hglyph rect:nth-child(3){animation-delay:0.36s}
+.hstep:nth-child(1) .hglyph rect:nth-child(4){animation-delay:0.54s}
+.hstep:nth-child(1) .hglyph rect:nth-child(5){animation-delay:0.72s}
+.hstep:nth-child(1) .hglyph rect:nth-child(6){animation-delay:0.9s}
+.hstep:nth-child(1) .hglyph rect:nth-child(7){animation-delay:1.08s}
+.hstep:nth-child(1) .hglyph rect:nth-child(8){animation-delay:1.26s}
+.hstep:nth-child(1) .hglyph rect:nth-child(9){animation-delay:1.44s}
+.hstep:nth-child(1) .hglyph rect:nth-child(10){animation-delay:1.62s}
+.hstep:nth-child(1) .hglyph rect:nth-child(11){animation-delay:1.8s}
+.hstep:nth-child(1) .hglyph rect:nth-child(12){animation-delay:1.98s}
+
+/* 02 distribute - cases going out concurrently */
+.hstep:nth-child(2) .hglyph polygon{animation:gAdvance 2.6s ease-in-out infinite}
+.hstep:nth-child(2) .hglyph polygon:nth-child(1){animation-delay:0s}
+.hstep:nth-child(2) .hglyph polygon:nth-child(2){animation-delay:0.16s}
+.hstep:nth-child(2) .hglyph polygon:nth-child(3){animation-delay:0.32s}
+.hstep:nth-child(2) .hglyph polygon:nth-child(4){animation-delay:0.48s}
+
+/* 03 iterate - the two arms of the loop firing in turn. Spinning the whole
+   glyph would orbit its two circles around each other, which is not what a
+   coupled loop does; alternating the arrows shows the exchange. */
+.hstep:nth-child(3) .hglyph path.acc,.hstep:nth-child(3) .hglyph polygon.acc{animation:gPulse 2.8s ease-in-out infinite}
+.hstep:nth-child(3) .hglyph path.acc:nth-of-type(2),.hstep:nth-child(3) .hglyph polygon.acc:nth-of-type(2){animation-delay:1.4s}
+
+/* 04 fit - points landing, then the curve through them */
+.hstep:nth-child(4) .hglyph circle{animation:gDot 3.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.hstep:nth-child(4) .hglyph circle:nth-child(1){animation-delay:0s}
+.hstep:nth-child(4) .hglyph circle:nth-child(2){animation-delay:0.22s}
+.hstep:nth-child(4) .hglyph circle:nth-child(3){animation-delay:0.44s}
+.hstep:nth-child(4) .hglyph circle:nth-child(4){animation-delay:0.66s}
+.hstep:nth-child(4) .hglyph circle:nth-child(5){animation-delay:0.88s}
+.hstep:nth-child(4) .hglyph path.acc{stroke-dasharray:120;animation:gTrace 3.2s ease-in-out infinite}
+
+/* 05 surface - sheets settling into one */
+.hstep:nth-child(5) .hglyph path.acc{animation:gDrift 4.4s ease-in-out infinite}
+
+/* 06 compare - structures ranked against each other */
+.hstep:nth-child(6) .hglyph rect{transform-box:fill-box;transform-origin:bottom;animation:gRise 3.6s ease-in-out infinite}
+.hstep:nth-child(6) .hglyph rect:nth-child(2){animation-delay:.4s}
+.hstep:nth-child(6) .hglyph rect:nth-child(3){animation-delay:.8s}
+
+/* expertise: the located point, the index marker, the sensor array */
+.xcard:nth-child(2) .xglyph circle{transform-box:fill-box;transform-origin:center;animation:gDot 3.6s ease-in-out infinite}
+.xcard:nth-child(3) .xglyph circle{animation:gSlide 4.6s ease-in-out infinite}
+.xcard:nth-child(4) .xglyph circle{transform-box:fill-box;transform-origin:center;animation:gDot 3s ease-in-out infinite}
+.xcard:nth-child(4) .xglyph circle:nth-child(5){animation-delay:0s}
+.xcard:nth-child(4) .xglyph circle:nth-child(6){animation-delay:0.3s}
+.xcard:nth-child(4) .xglyph circle:nth-child(7){animation-delay:0.6s}
+.xcard:nth-child(4) .xglyph path.acc{stroke-dasharray:140;animation:gTrace 4s ease-in-out infinite}
+
 /* ---------- responsive ---------- */
 @media(max-width:860px){
   .hero{grid-template-columns:1fr;gap:32px}
