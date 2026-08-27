@@ -375,6 +375,8 @@ figcaption p{font-size:0.95rem;color:var(--ink-soft);max-width:54ch;line-height:
 .engine .ehyst{fill:none;stroke:var(--accent);stroke-width:1.8;stroke-linejoin:round}
 .engine .ehyst.inner{stroke-width:1.2;opacity:.5}
 .engine .efrag{fill:none;stroke:var(--accent);stroke-width:2.4}
+.engine:hover .efrag{stroke:var(--data3)}
+.engine:hover .elab.out{fill:var(--data3)}
 .engine .efit circle{fill:var(--accent);stroke:none}
 .engine .ecyc{fill:none;stroke:var(--accent);stroke-width:2.4}
 .engine .ecycHead{fill:var(--accent)}
@@ -389,19 +391,20 @@ figcaption p{font-size:0.95rem;color:var(--ink-soft);max-width:54ch;line-height:
 .engine .efit circle,.engine .ecyc,.engine .ecycHead,.engine .ecyclab,
 .engine .elab{transition:stroke .35s ease,fill .35s ease,opacity .35s ease}
 
-.engine:hover .earr,.engine:hover .eaxis,.engine:hover .emode,
+.engine:hover .earr,.engine:hover .eaxis,
 .engine:hover .edash,.engine:hover .ecurve{stroke:var(--ink-mute)}
+.engine:hover .emode{stroke:var(--accent)}
 .engine:hover .etrial,.engine:hover .eorigin{fill:var(--ink-mute)}
-.engine:hover .earr.out{stroke:var(--accent)}
-.engine:hover .epdf{stroke:var(--accent)}
+.engine:hover .earr.out{stroke:var(--data3)}
+.engine:hover .epdf{stroke:var(--data3)}
 .engine:hover .ecyc.ecyc-back{stroke:var(--data3)}
 .engine:hover .ecycHead.ecyc-back{fill:var(--data3)}
 .engine:hover .ecyclab.lab-back{fill:var(--data3)}
 .engine:hover .ecyclab.lab-out{fill:var(--accent)}
 .engine:hover .elimit{stroke:var(--data3)}
 .engine:hover .efail{fill:var(--data3)}
-.engine:hover .edesign{fill:var(--data3)}
-.engine:hover .eframe line{stroke:var(--ink-soft)}
+.engine:hover .edesign{fill:var(--accent)}
+.engine:hover .eframe line{stroke:var(--accent)}
 .engine:hover .ehyst{stroke:var(--data3)}
 .engine:hover .efit circle{fill:var(--accent)}
 .engine figcaption{font-family:"Libre Franklin",sans-serif;font-size:0.84rem;line-height:1.6;color:var(--ink-mute);margin-top:16px;max-width:none}
@@ -840,7 +843,9 @@ nav a.on::after{transform:scaleX(1)}
    the travel its arrowhead points to. The old eFlowBack override reversed the
    return arc against its own arrowhead. */
 .engine:hover .ecyc{stroke-dasharray:10 6;animation:eFlowFwd 1.15s linear infinite}
-.engine .ecycHead{opacity:1}
+@keyframes eHeadPulse{0%,100%{opacity:.42}45%{opacity:1}}
+.engine:hover .ecycHead{animation:eHeadPulse 1.15s ease-in-out infinite}
+.engine:hover .ecycHead.ecyc-back{animation-delay:.575s}
 .engine:hover .edesign{transform-box:fill-box;transform-origin:center;animation:gDot 1.5s ease-in-out infinite}
 .engine:hover .efrag{stroke-dasharray:210;animation:gTrace 2s ease-in-out infinite}
 /* the two feed arrows advance toward the engine, staggered */
@@ -883,13 +888,16 @@ nav a.on::after{transform:scaleX(1)}
              stroke-width .3s ease,transform .3s cubic-bezier(.2,.7,.3,1)}
 .sicon .acc,.hglyph .acc,.xglyph .acc{transition:stroke .3s ease,fill .3s ease}
 
-/* Every icon reveals the SAME colour - the gold of the engine's return arrow.
-   Two colours across the whole site: theme teal at rest, that gold on hover.
-   Earlier this cycled green/rust/gold per card, which made the palette look
-   accidental rather than chosen. */
+/* Hover mixes the two palette colours rather than flooding the glyph with one:
+   the body takes the engine's gold, the .acc shapes hold the theme teal. Two
+   colours, the same two the cycle arrows use, on every icon. */
 .stats>div:hover .sicon,
 .hstep:hover .hglyph,
 .xcard:hover .xglyph{opacity:1;stroke-width:2.4;transform:scale(1.16);color:var(--data3)}
+.stats>div:hover .sicon .acc,
+.hstep:hover .hglyph .acc,
+.xcard:hover .xglyph .acc{stroke:var(--accent)}
+.xcard:hover .xglyph .acc[fill]{fill:var(--accent)}
 
 .hicons a .icon{opacity:.85;transition:color .3s ease,opacity .3s ease,transform .3s ease}
 .hicons a:hover .icon{opacity:1;transform:scale(1.12)}
