@@ -525,9 +525,10 @@ a.lw-a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
    The hover still does the work of a boundary: the mark takes its true colours
    and the note lifts to full ink. */
 .logowall.bare{max-width:calc(var(--lw-n,3) * 300px);gap:8px 28px}
-.logowall.bare .lw-a{border:0;background:none;min-height:0;padding:10px 4px;gap:12px}
+.logowall.bare .lw-a{border:0;background:none;min-height:0;padding:10px 4px;gap:0;
+  align-items:center;justify-content:center}
 .logowall.bare a.lw-a:hover{border:0;background:none;transform:none}
-.logowall.bare .lw-mark,.logowall.bare .lw-art{height:96px}
+.logowall.bare .lw-mark,.logowall.bare .lw-art{height:132px}
 .logowall.bare .lw-mark .lw-art{height:100%}
 .logowall.bare .lw-art.lw-sq{padding:0}
 /* no light chip behind the artwork on hover, dark theme included - the user
@@ -538,7 +539,7 @@ a.lw-a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
    image alt, so nothing is lost to assistive tech */
 .logowall.bare .lw-note{display:none}
 @media (max-width:620px){
-  .logowall.bare .lw-mark,.logowall.bare .lw-art{height:72px}
+  .logowall.bare .lw-mark,.logowall.bare .lw-art{height:96px}
 }
 a.lw-a:hover .lw-art{filter:none;opacity:1}
 .lw-light{display:var(--lw-light)}
