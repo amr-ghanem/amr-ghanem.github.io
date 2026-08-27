@@ -145,7 +145,7 @@ p{margin:0 0 14px;max-width:86ch}
 
 /* ---------- expertise ---------- */
 .exp-wrap{padding-bottom:0}
-.exp-wrap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px}
+.exp-wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:40px 32px}
 .exp-wrap>h2{grid-column:1/-1;margin-bottom:0}
 .xcard{display:flex;flex-direction:column;align-items:center;text-align:center}
 .xring{width:96px;height:96px;border:1px solid var(--rule);border-radius:50%;background:var(--sheet);display:grid;place-items:center;margin:0 0 22px}
@@ -155,7 +155,7 @@ p{margin:0 0 14px;max-width:86ch}
 .xcard h3{font-size:1.16rem;margin:0 0 8px;max-width:none}
 .xcard .exp-lead{font-size:0.95rem;max-width:none;margin-bottom:14px}
 .xcard .evidence li{max-width:none;font-size:0.84rem}
-@media(max-width:900px){.exp-wrap{grid-template-columns:1fr;gap:32px}}
+@media(max-width:640px){.exp-wrap{grid-template-columns:1fr;gap:32px}}
 .idx{font-size:0.76rem;color:var(--ink-mute);margin:8px 0 0;font-variant-numeric:tabular-nums}
 .exp-lead{font-size:1.06rem;color:var(--ink-soft);max-width:72ch;margin-bottom:16px}
 .evidence{list-style:none;margin:0;padding:0;display:grid;gap:8px}
@@ -511,6 +511,12 @@ nav a.on::after{transform:scaleX(1)}
 .hstep:nth-child(6) .hglyph rect{transform-box:fill-box;transform-origin:bottom;animation:gRise 3.6s ease-in-out infinite}
 .hstep:nth-child(6) .hglyph rect:nth-child(2){animation-delay:.4s}
 .hstep:nth-child(6) .hglyph rect:nth-child(3){animation-delay:.8s}
+
+/* practice: the specification filling in beside the frame */
+.xcard:nth-child(5) .xglyph line.acc{animation:gPulse 3.4s ease-in-out infinite}
+.xcard:nth-child(5) .xglyph line.acc:nth-of-type(2){animation-delay:.35s}
+.xcard:nth-child(5) .xglyph line.acc:nth-of-type(3){animation-delay:.7s}
+.xcard:nth-child(5) .xglyph polygon.acc{animation:gAdvance 3.4s ease-in-out infinite}
 
 /* expertise: the located point, the index marker, the sensor array */
 .xcard:nth-child(2) .xglyph circle{transform-box:fill-box;transform-origin:center;animation:gDot 3.6s ease-in-out infinite}
