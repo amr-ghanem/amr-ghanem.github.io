@@ -27,7 +27,7 @@
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}.reveal{opacity:1!important;transform:none!important}}
 
 body{
   background:var(--ground); color:var(--ink);
@@ -175,8 +175,13 @@ p{margin:0 0 14px;max-width:86ch}
 
 /* the research page lists fragility work, so its header carries a fragility
    figure beside the type - quiet, but not decoration: it is the subject */
-.pagehead-fig{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,0.82fr);gap:56px;align-items:center}
-.pagehead-art{opacity:.42;pointer-events:none}
+.pagehead-fig{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,0.95fr);gap:44px;align-items:center}
+.pagehead-art{opacity:.62;pointer-events:none;
+  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 42%),linear-gradient(to top,transparent 0,#000 38%);
+  -webkit-mask-composite:source-in;
+  mask-image:linear-gradient(to right,transparent 0,#000 42%),linear-gradient(to top,transparent 0,#000 38%);
+  mask-composite:intersect}
+.pagehead-art img{width:100%;height:auto;display:block;border-radius:var(--r)}
 .pagehead-art svg{width:100%;height:auto;display:block}
 @media(max-width:900px){.pagehead-fig{grid-template-columns:1fr;gap:28px}.pagehead-art{display:none}}
 
@@ -425,6 +430,31 @@ footer.site{border-top:1px solid var(--rule);padding-top:32px;padding-bottom:48p
 .touch .tl{font-family:"Libre Franklin",sans-serif;font-size:0.76rem;color:var(--ink-mute)}
 .touch a{display:inline-flex;align-items:center;gap:8px;font-size:0.95rem;text-decoration:none}
 .touch a:hover{text-decoration:underline}
+
+/* ---------- motion ----------
+   Sections lift in once as they enter view; interactive things respond to the
+   pointer. Everything here is additive - the page is complete and readable
+   before any of it runs, and all of it is switched off under
+   prefers-reduced-motion by the rule at the top of this sheet. */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .62s cubic-bezier(.2,.6,.2,1),transform .62s cubic-bezier(.2,.6,.2,1)}
+.reveal.seen{opacity:1;transform:none}
+
+a,.btn,.xcard,.work,.entry,.recog li,.touch li,.hdot,.icon{transition:color .22s ease,background-color .22s ease,border-color .22s ease,transform .28s cubic-bezier(.2,.6,.2,1),opacity .22s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0)}
+.xcard:hover .xring{transform:translateY(-4px);border-color:var(--accent)}
+.xring{transition:transform .3s cubic-bezier(.2,.6,.2,1),border-color .3s ease}
+.hstep:hover .hdot{border-color:var(--accent);transform:translateY(-3px)}
+.hdot{transition:transform .3s cubic-bezier(.2,.6,.2,1),border-color .3s ease}
+.work:hover h3 a,.entry:hover h3 a{color:var(--accent)}
+.recog li,.touch li{transition:background-color .25s ease}
+.recog li:hover,.touch li:hover{background:var(--sunk)}
+.hicons a:hover .icon{transform:translateY(-2px)}
+.pagehead-art img{transition:opacity .8s ease}
+nav a{position:relative}
+nav a::after{content:"";position:absolute;left:0;right:0;bottom:-5px;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .28s cubic-bezier(.2,.6,.2,1)}
+nav a:hover::after{transform:scaleX(1)}
+nav a.on::after{transform:scaleX(1)}
 
 /* ---------- responsive ---------- */
 @media(max-width:860px){
