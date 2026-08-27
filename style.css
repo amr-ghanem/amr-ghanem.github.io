@@ -177,7 +177,7 @@ figcaption p{font-size:0.95rem;color:var(--ink-soft);max-width:54ch;line-height:
 .exp-introhead h2{margin:0}
 @media(max-width:900px){.exp-intro{grid-template-columns:1fr;gap:20px}.exp-intro>p{max-width:76ch}}
 .exp-intro h2{font-family:"Newsreader",Georgia,serif;font-weight:300;font-size:clamp(1.6rem,3.6vw,2.2rem);letter-spacing:-.02em;line-height:1.16;margin:0 0 16px;text-wrap:balance}
-.exp-intro p{color:var(--ink-soft);font-size:1.06rem}
+.exp-intro>p{color:var(--ink-soft);font-size:1.06rem}
 .exp-panel{display:grid;grid-template-columns:340px 1fr;gap:36px;align-items:start;background:var(--sheet);border:1px solid var(--rule);padding:32px}
 .exp-chart{margin-bottom:24px}
 .exp-controls{display:grid;grid-template-columns:1fr;gap:14px;padding-top:18px;margin-top:16px;border-top:1px solid var(--rule-soft)}
@@ -256,14 +256,14 @@ figcaption p{font-size:0.95rem;color:var(--ink-soft);max-width:54ch;line-height:
 .engine svg{width:100%;height:auto;display:block;overflow:visible}
 .engine .ebox{fill:none;stroke:var(--rule);stroke-width:1.6}
 .engine .epanel{fill:var(--sunk);stroke:none}
-.engine .etitle{font-family:"Libre Franklin",sans-serif;font-size:12px;letter-spacing:.16em;text-transform:uppercase;fill:var(--ink-mute)}
-.engine .ecode{font-family:"Newsreader",Georgia,serif;font-size:26px;fill:var(--ink)}
-.engine .esub{font-family:"Libre Franklin",sans-serif;font-size:12.5px;fill:var(--ink-mute)}
-.engine .elab{font-family:"Libre Franklin",sans-serif;font-size:14.5px;fill:var(--ink-soft)}
-.engine .eglyph{font-family:"Libre Franklin",sans-serif;font-size:11px;letter-spacing:.08em;text-transform:uppercase;fill:var(--ink-mute)}
+.engine .etitle{font-family:"Libre Franklin",sans-serif;font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;fill:var(--ink-mute)}
+.engine .ecode{font-family:"Newsreader",Georgia,serif;font-size:17px;fill:var(--ink)}
+.engine .esub{font-family:"Libre Franklin",sans-serif;font-size:9.5px;fill:var(--ink-mute)}
+.engine .elab{font-family:"Libre Franklin",sans-serif;font-size:12px;fill:var(--ink-soft)}
+.engine .eglyph{font-family:"Libre Franklin",sans-serif;font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;fill:var(--ink-mute)}
 .engine .earr{fill:none;stroke:var(--ink-mute);stroke-width:1.5}
 .engine .earr.out{stroke:var(--accent)}
-.engine .elab.out{fill:var(--accent);font-size:15px}
+.engine .elab.out{fill:var(--accent);font-size:12px}
 .engine .eaxis{stroke:var(--ink-mute);stroke-width:1;opacity:.5}
 .engine .epdf{fill:none;stroke:var(--accent);stroke-width:2}
 .engine .emode{stroke:var(--ink-mute);stroke-width:1;stroke-dasharray:2 3;opacity:.65}
@@ -280,10 +280,10 @@ figcaption p{font-size:0.95rem;color:var(--ink-soft);max-width:54ch;line-height:
 .engine .efrag{fill:none;stroke:var(--accent);stroke-width:2.4}
 .engine .ecyc{fill:none;stroke:var(--accent);stroke-width:2.4}
 .engine .ecycHead{fill:var(--accent)}
-.engine .ecyclab{font-family:"Libre Franklin",sans-serif;font-size:12.5px;fill:var(--ink-mute)}
+.engine .ecyclab{font-family:"Libre Franklin",sans-serif;font-size:9.5px;fill:var(--ink-mute)}
 .engine figcaption{font-family:"Libre Franklin",sans-serif;font-size:0.84rem;line-height:1.6;color:var(--ink-mute);margin-top:16px;max-width:88ch}
 .rnote{font-family:"Libre Franklin",sans-serif;font-size:0.84rem;line-height:1.6;color:var(--ink-mute);margin:24px 0 0;max-width:88ch}
-@media(max-width:580px){.engine{padding:12px}.engine .ecode{font-size:21px}}
+@media(max-width:900px){.engine{padding:12px;overflow-x:auto}.engine svg{min-width:660px}}
 .hsteps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0 18px}
 .hstep{display:flex;flex-direction:column}
 .hrail{display:flex;align-items:center;gap:10px;margin-bottom:16px}

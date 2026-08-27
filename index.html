@@ -256,8 +256,8 @@
         </div>
 
         <div class="ctrl">
-          <label for="sRot">View <span id="vRot">32&deg;</span></label>
-          <input type="range" id="sRot" min="-180" max="180" step="1" value="32">
+          <label for="sRot">View <span id="vRot">-135&deg;</span></label>
+          <input type="range" id="sRot" min="-180" max="180" step="1" value="-135">
         </div>
       </div>
     </div>
@@ -453,7 +453,11 @@
         quads.push({p:[A,B,C,D], z:(z00+z10+z11+z01)/4, d:(A.depth+C.depth)/2});
       }
     }
+    // The surface is drawn slightly translucent so the probability axis and the
+    // marker's drop line behind it stay readable - without it the z scale simply
+    // disappears under the sheet at most view angles.
     quads.sort(function(a,b){ return a.d-b.d; });
+    g1.globalAlpha = 0.84;
     quads.forEach(function(q){
       g1.beginPath(); g1.moveTo(q.p[0].x,q.p[0].y);
       for(var k=1;k<4;k++) g1.lineTo(q.p[k].x,q.p[k].y);
@@ -461,6 +465,20 @@
       g1.fillStyle = q.z<0.5 ? mix(cLow,cMid,q.z*2) : mix(cMid,cHigh,(q.z-0.5)*2);
       g1.fill();
     });
+    g1.globalAlpha = 1;
+
+    // redraw the probability axis over the sheet, faintly, so it reads as seen
+    // through the surface rather than floating in front of it
+    g1.globalAlpha = 0.5; g1.strokeStyle = grid; g1.lineWidth = 1;
+    g1.beginPath(); g1.moveTo(vb.x,vb.y); g1.lineTo(vt.x,vt.y); g1.stroke();
+    g1.fillStyle = mute; g1.font=(14*TS).toFixed(1)+'px "IBM Plex Mono", monospace';
+    g1.textAlign = zs>0 ? 'left' : 'right';
+    for(var pz2=0;pz2<=1.0001;pz2+=0.25){
+      var tk2=proj(back[0],back[1],pz2,rot);
+      g1.beginPath(); g1.moveTo(tk2.x,tk2.y); g1.lineTo(tk2.x+zs*8,tk2.y); g1.stroke();
+      g1.fillText(Math.round(pz2*100)+'%', tk2.x+zs*13*TS, tk2.y+5*TS);
+    }
+    g1.globalAlpha = 1;
 
     var z=pAll(pga,dep,fr,be);
     var pt=proj(pga/MAXPGA,dep/MAXDEP,z,rot), bs=proj(pga/MAXPGA,dep/MAXDEP,0,rot);
