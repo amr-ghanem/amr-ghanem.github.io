@@ -786,25 +786,34 @@
   // prefers-reduced-motion.
   var rm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (rm || !('IntersectionObserver' in window)) return;
-  // Reveal the content blocks themselves rather than whole sections, so text
-  // arrives line-group by line-group. Nesting a reveal inside a reveal would
-  // multiply the two opacities and read as a flicker, so these are all leaves.
-  var sel = [
-    '.hero-text > *', '.pagehead-text > *', '.exp-intro > *',
-    'h2.rule', '.pubgroup-head', '.chapter', '.xcard', '.hstep',
-    '.work', '.entry', '.engine', '.exp-panel',
-    '.recog li', '.creds li', '.svc li', '.touch li', '.funders li',
-    '.stats > div', '.venues', '.rnote', '.statsrc', '.more',
-    'main figure', 'main > section > p'
+  // Cast a wide net, then keep only the innermost blocks. An explicit list of
+  // selectors always misses something and the coverage looks arbitrary; this
+  // way every content block on every page animates, and nothing animates
+  // inside something else that is also animating (which would compound the two
+  // opacities and read as a flicker).
+  var SEL = [
+    'main > section > *', 'main > div > *',
+    '.hero-text > *', '.pagehead-text > *', '.exp-intro > *', '.exp-panel', '.engine',
+    '.chapter', '.xcard', '.hstep', '.work', '.entry', '.pub',
+    '.pubgroup-head', '.recog li', '.creds li', '.svc li', '.touch li',
+    '.funders li', '.roles li', '.stats > div', '.herostats > div',
+    'main figure'
   ].join(',');
-  var t = document.querySelectorAll(sel);
+
+  var cand = [].slice.call(document.querySelectorAll(SEL));
+  // keep leaves: drop any candidate that contains another candidate
+  var t = cand.filter(function(el){
+    for (var q=0;q<cand.length;q++) if (cand[q] !== el && el.contains(cand[q])) return false;
+    return true;
+  });
   if (!t.length) return;
-  // stagger siblings so a group cascades instead of appearing all at once
-  var seen = new Map();
+
+  // stagger siblings so a group cascades rather than appearing all at once
+  var counts = new Map();
   for (var i=0;i<t.length;i++) {
     var el = t[i], p = el.parentNode;
-    var n = (seen.get(p) || 0); seen.set(p, n+1);
-    if (n) el.style.transitionDelay = Math.min(n*55, 330) + 'ms';
+    var n = (counts.get(p) || 0); counts.set(p, n+1);
+    if (n) el.style.transitionDelay = Math.min(n*50, 300) + 'ms';
     el.classList.add('reveal');
   }
   var io = new IntersectionObserver(function(es){
