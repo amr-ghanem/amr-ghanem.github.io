@@ -702,7 +702,7 @@ a.lw-a:hover .lw-note{color:var(--accent-deep)}
 .icon{width:1em;height:1em;flex:none;vertical-align:-0.12em;opacity:.85}
 .fcols a{display:inline-flex;align-items:center;gap:8px}
 .fcols a .icon{color:var(--accent)}
-.fcols a:hover .icon{color:var(--data3)}
+.fcols a:hover .icon,.fcols a:focus-visible .icon{color:var(--data3)}
 .fplain{display:flex;align-items:center;gap:8px}
 h2.rule .icon{width:1.5em;height:1.5em;margin-right:8px;opacity:.75}
 h2.rule{display:flex;align-items:center}
@@ -720,11 +720,15 @@ footer.site{border-top:1px solid var(--rule);padding-top:32px;padding-bottom:48p
 .fcols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px}
 .fcols div{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
 .flab{font-size:0.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);margin:0 0 8px}
-.fcols a{font-size:0.95rem;text-decoration:none}
-.fcols a:hover{text-decoration:underline}
+/* Every footer link behaves the same: theme teal at rest, gold and underlined
+   on hover, icon following the text. The email link used to change only its
+   icon while the text stayed teal, so hovering it looked different from
+   hovering the location right beneath it. */
+.fcols a{font-size:0.95rem;text-decoration:none;color:var(--accent)}
+.fcols a:hover,.fcols a:focus-visible{color:var(--data3);text-decoration:underline}
 .fplain{font-size:0.95rem;color:var(--ink-mute);margin:0}
 .fplain a{display:inline-flex;align-items:center;gap:8px;color:var(--accent);text-decoration:none}
-.fplain a:hover{color:var(--data3);text-decoration:underline}
+.fplain a:hover,.fplain a:focus-visible{color:var(--data3);text-decoration:underline}
 .fplain a .icon{color:var(--accent);transition:color .28s ease}
 .fplain a:hover .icon{color:var(--data3)}
 .footbar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 32px;margin-top:36px;padding-top:20px;border-top:1px solid var(--rule-soft)}
