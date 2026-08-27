@@ -491,6 +491,34 @@ a.lw-a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .lw-art{width:100%;height:62px;object-fit:contain;object-position:center;box-sizing:border-box;
   filter:grayscale(1);opacity:var(--lw-mute);transition:filter .28s ease,opacity .28s ease}
 .lw-art.lw-sq{padding:6px 0}
+
+/* Themed at rest, true colours on hover.
+   The tint is the mark's own alpha channel used as a mask over a block of the
+   site's accent - so it is the real logo silhouette in the site's colour, not a
+   filter approximation. The colour artwork sits underneath at opacity 0 and
+   cross-fades in on hover or keyboard focus. Both layers share the same 62px
+   slot and the same contain geometry, so nothing shifts during the swap.
+   Browsers without mask-image get the plain colour logo, which is a fine
+   fallback rather than a broken one. */
+.lw-mark{position:relative;display:block;width:100%;height:62px}
+.lw-mark .lw-art{opacity:0}
+@supports (mask-image:url("")) or (-webkit-mask-image:url("")){
+  .lw-mark::before{content:"";position:absolute;inset:0;background:var(--accent);
+    -webkit-mask-image:var(--lw-mask);mask-image:var(--lw-mask);
+    -webkit-mask-size:contain;mask-size:contain;
+    -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+    -webkit-mask-position:center;mask-position:center;
+    opacity:1;transition:opacity .3s ease}
+  .lw-mark.lw-sq::before{inset:6px 0}
+  a.lw-a:hover .lw-mark::before,
+  a.lw-a:focus-visible .lw-mark::before{opacity:0}
+  a.lw-a:hover .lw-mark .lw-art,
+  a.lw-a:focus-visible .lw-mark .lw-art{opacity:1}
+}
+@supports not ((mask-image:url("")) or (-webkit-mask-image:url(""))){
+  .lw-mark .lw-art{opacity:var(--lw-mute);filter:grayscale(1)}
+  a.lw-a:hover .lw-mark .lw-art{opacity:1;filter:none}
+}
 a.lw-a:hover .lw-art{filter:none;opacity:1}
 .lw-light{display:var(--lw-light)}
 .lw-dark{display:var(--lw-dark)}
