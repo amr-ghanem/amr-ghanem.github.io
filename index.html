@@ -467,17 +467,51 @@
     });
     g1.globalAlpha = 1;
 
-    // redraw the probability axis over the sheet, faintly, so it reads as seen
-    // through the surface rather than floating in front of it
-    g1.globalAlpha = 0.5; g1.strokeStyle = grid; g1.lineWidth = 1;
+    // Redraw the probability axis over the sheet. The line stays faint so it
+    // reads as seen *through* the surface, but the numbers get a halo in the
+    // panel colour and full opacity - a 50% grey number on an orange sheet is
+    // not readable, and the scale is the point of the axis.
+    var sunk = css('--sunk','#E4E8E5');
+    g1.strokeStyle = grid; g1.lineWidth = 1; g1.globalAlpha = 0.55;
     g1.beginPath(); g1.moveTo(vb.x,vb.y); g1.lineTo(vt.x,vt.y); g1.stroke();
-    g1.fillStyle = mute; g1.font=(14*TS).toFixed(1)+'px "IBM Plex Mono", monospace';
+    g1.globalAlpha = 1;
+
+    g1.font=(14*TS).toFixed(1)+'px "IBM Plex Mono", monospace';
     g1.textAlign = zs>0 ? 'left' : 'right';
+    g1.lineJoin = 'round';
     for(var pz2=0;pz2<=1.0001;pz2+=0.25){
       var tk2=proj(back[0],back[1],pz2,rot);
+      g1.globalAlpha = 0.55; g1.strokeStyle = grid; g1.lineWidth = 1;
       g1.beginPath(); g1.moveTo(tk2.x,tk2.y); g1.lineTo(tk2.x+zs*8,tk2.y); g1.stroke();
-      g1.fillText(Math.round(pz2*100)+'%', tk2.x+zs*13*TS, tk2.y+5*TS);
+      g1.globalAlpha = 1;
+      var lbl = Math.round(pz2*100)+'%';
+      g1.strokeStyle = sunk; g1.lineWidth = 3.5;
+      g1.strokeText(lbl, tk2.x+zs*13*TS, tk2.y+5*TS);
+      g1.fillStyle = mute;
+      g1.fillText(lbl, tk2.x+zs*13*TS, tk2.y+5*TS);
     }
+
+    // The marked point is where two ordinary fragility curves cross: one cut
+    // through the surface at the current inundation depth (varying shaking),
+    // one at the current shaking (varying depth). Drawing both makes the point
+    // read as an intersection rather than a dot floating on a sheet.
+    var ink = css('--ink','#131E1C'), NC = 120;
+    g1.lineWidth = 2.2; g1.lineJoin = 'round'; g1.lineCap = 'round';
+
+    g1.strokeStyle = ink; g1.globalAlpha = 0.92;
+    g1.beginPath();
+    for (var ci=0; ci<=NC; ci++) {
+      var cu = ci/NC, cz = pAll(cu*MAXPGA, dep, fr, be), cp = proj(cu, dep/MAXDEP, cz, rot);
+      if (ci===0) g1.moveTo(cp.x,cp.y); else g1.lineTo(cp.x,cp.y);
+    }
+    g1.stroke();
+
+    g1.beginPath();
+    for (var cj=0; cj<=NC; cj++) {
+      var cv2 = cj/NC, cz2 = pAll(pga, cv2*MAXDEP, fr, be), cp2 = proj(pga/MAXPGA, cv2, cz2, rot);
+      if (cj===0) g1.moveTo(cp2.x,cp2.y); else g1.lineTo(cp2.x,cp2.y);
+    }
+    g1.stroke();
     g1.globalAlpha = 1;
 
     var z=pAll(pga,dep,fr,be);
@@ -501,17 +535,42 @@
       g1.fillText(Math.round(gy*MAXDEP*M2FT)+' ft', t2.x+sg*12*TS, t2.y+5*TS);
     }
     g1.textAlign='center'; g1.font=(14*TS).toFixed(1)+'px "Libre Franklin", sans-serif';
-    var l1=proj(0.5,vE+(vE?0.15:-0.15),0,rot), l2=proj(uE+(uE?0.18:-0.18),0.5,0,rot), l3=proj(back[0],back[1],1.1,rot);
-    // titles sit outside the plot, so at some angles they would run off the
-    // canvas - clamp each one by its own measured half-width so it always lands
-    // on the sheet, whatever the view angle or canvas size
-    function title(s,x,y){
-      var pad = g1.measureText(s).width/2 + 6;
-      g1.fillText(s, Math.max(pad, Math.min(W-pad, x)), Math.max(18, Math.min(H-6, y)));
+
+    // Each base axis title is set ALONG its own edge, so it stays parallel to
+    // the axis it names at every view angle instead of sitting flat while the
+    // plot turns underneath it. The text is kept upright (flipped when the edge
+    // points left) and pushed to whichever side faces away from the plot centre.
+    var cc = proj(0.5,0.5,0,rot);
+    function axisTitle(s, p0, p1, off){
+      var ang = Math.atan2(p1.y-p0.y, p1.x-p0.x);
+      if (ang >  Math.PI/2) ang -= Math.PI;
+      if (ang < -Math.PI/2) ang += Math.PI;
+      var mx=(p0.x+p1.x)/2, my=(p0.y+p1.y)/2;
+      // local (0,d) lands at (-d sin, d cos); pick the sign pointing outward
+      var sx=-Math.sin(ang), sy=Math.cos(ang);
+      var d = ((mx+sx*off-cc.x)*(mx+sx*off-cc.x)+(my+sy*off-cc.y)*(my+sy*off-cc.y)) >
+              ((mx-sx*off-cc.x)*(mx-sx*off-cc.x)+(my-sy*off-cc.y)*(my-sy*off-cc.y)) ? off : -off;
+      g1.save();
+      g1.translate(mx + sx*d, my + sy*d);
+      g1.rotate(ang);
+      g1.textAlign='center'; g1.textBaseline='middle';
+      g1.fillText(s, 0, 0);
+      g1.restore();
+      g1.textBaseline='alphabetic';
     }
-    title('PEAK GROUND ACCELERATION (g)', l1.x, l1.y+24*TS);
-    title('INUNDATION DEPTH',             l2.x, l2.y+24*TS);
-    title('FAILURE PROBABILITY',          l3.x, l3.y-6*TS);
+
+    axisTitle('PEAK GROUND ACCELERATION (g)',
+              proj(0, vE, 0, rot), proj(1, vE, 0, rot), 42*TS);
+    axisTitle('INUNDATION DEPTH',
+              proj(uE, 0, 0, rot), proj(uE, 1, 0, rot), 52*TS);
+
+    // the probability axis is vertical on screen at every angle, so its title
+    // stays horizontal above the axis - clamped so it cannot run off the sheet
+    var l3=proj(back[0],back[1],1.1,rot);
+    var pad3 = g1.measureText('FAILURE PROBABILITY').width/2 + 6;
+    g1.fillText('FAILURE PROBABILITY',
+                Math.max(pad3, Math.min(W-pad3, l3.x)),
+                Math.max(18, Math.min(H-6, l3.y-6*TS)));
   }
 
   function drawStructure(){
