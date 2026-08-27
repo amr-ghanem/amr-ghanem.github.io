@@ -141,7 +141,21 @@ p{margin:0 0 14px;max-width:86ch}
 .chapter p:last-child{margin-bottom:0}
 
 /* ---------- contribution ---------- */
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:32px;border-radius:var(--r);overflow:hidden}
+.stats{display:grid;grid-template-columns:repeat(var(--st-n,5),minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:32px;border-radius:var(--r);overflow:hidden}
+/* When the row wraps, the leftover cell is empty - and the container's own
+   background shows through it as a solid block. Stretching the last item over
+   the remainder fills the grid instead. The nth-child tests are count-agnostic:
+   :nth-child(odd) as the last item means one cell short of a pair, and 3n+1 /
+   3n+2 mean the final row of three holds one or two. */
+@media (max-width:1040px){
+  .stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .stats>div:last-child:nth-child(3n+1){grid-column:span 3}
+  .stats>div:last-child:nth-child(3n+2){grid-column:span 2}
+}
+@media (max-width:560px){
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stats>div:last-child:nth-child(odd){grid-column:span 2}
+}
 .stats>div{background:var(--sheet);padding:22px 16px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
 .sicon{width:34px;height:28px;color:var(--ink-mute);margin-bottom:4px;display:block}
 .stats>div:hover .sicon{color:var(--accent)}
@@ -165,7 +179,8 @@ p{margin:0 0 14px;max-width:86ch}
 .exp-wrap>h2{grid-column:1/-1;margin-bottom:0}
 .xcard{display:flex;flex-direction:column;align-items:center;text-align:center}
 .xring{width:96px;height:96px;border:1px solid var(--rule);border-radius:50%;background:var(--sheet);display:grid;place-items:center;margin:0 0 22px}
-.xglyph{width:52px;height:39px;color:var(--ink-mute);display:block}
+.xglyph{width:52px;height:39px;color:var(--ink-mute);display:block;transition:color .25s ease}
+.xcard:hover .xglyph{color:var(--accent)}
 .xglyph .acc{stroke:var(--accent)}
 .xglyph .acc[fill]{fill:var(--accent)}
 .xcard h3{font-size:1.16rem;margin:0 0 8px;max-width:none}
@@ -361,7 +376,8 @@ figcaption p{font-size:0.95rem;color:var(--ink-soft);max-width:54ch;line-height:
 .hstep:first-child::before,.hstep:first-child::after{display:none}
 .hrail{display:flex;align-items:center;justify-content:center;margin-bottom:16px;position:relative;z-index:1}
 .hdot{flex:0 0 auto;width:78px;height:78px;border:1.5px solid var(--rule);border-radius:50%;background:var(--ground);display:grid;place-items:center;position:relative;z-index:1}
-.hglyph{width:44px;height:33px;color:var(--ink-mute);flex:none}
+.hglyph{width:44px;height:33px;color:var(--ink-mute);flex:none;transition:color .25s ease}
+.hstep:hover .hglyph{color:var(--accent)}
 .hglyph .acc{stroke:var(--accent)}
 .hlink{display:none}
 
@@ -473,7 +489,7 @@ figcaption p{font-size:0.95rem;color:var(--ink-soft);max-width:54ch;line-height:
    from stretching to 380px each. Between them, every wall lands on one row on
    desktop and degrades to two-up on a phone with no breakpoint doing the work. */
 .logowall{list-style:none;padding:0;margin:0 auto;
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr));gap:12px;
   max-width:calc(var(--lw-n,3) * 244px)}
 .lw{margin:0}
 .lw-a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;
@@ -524,22 +540,57 @@ a.lw-a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
    on the page ground, and a larger slot since there is no chrome to hold it.
    The hover still does the work of a boundary: the mark takes its true colours
    and the note lifts to full ink. */
-.logowall.bare{max-width:calc(var(--lw-n,3) * 300px);gap:8px 28px}
+/* The bare wall has a wider column gap, and auto-fit counts tracks as
+   (space + gap) / (min + gap) - so the same 150px minimum that fits five on the
+   research page fits only four in the narrower About column. A lower minimum
+   restores one row without letting cells shrink in practice, since 1fr still
+   shares out all the space. */
+.logowall.bare{max-width:calc(var(--lw-n,3) * 300px);gap:8px 28px;
+  grid-template-columns:repeat(auto-fit,minmax(min(120px,100%),1fr))}
 .logowall.bare .lw-a{border:0;background:none;min-height:0;padding:10px 4px;gap:0;
   align-items:center;justify-content:center}
+.logowall.nolabels .lw-a{gap:0}
 .logowall.bare a.lw-a:hover{border:0;background:none;transform:none}
 .logowall.bare .lw-mark,.logowall.bare .lw-art{height:calc(132px * var(--lw-scale,1))}
 .logowall.bare .lw-mark .lw-art{height:100%}
 .logowall.bare .lw-art.lw-sq{padding:0}
+
+/* Walls containing a wordmark lay out by CONTENT, not in equal columns. In a
+   uniform grid a 7.7:1 wordmark is limited by cell width and lands ~20px tall -
+   beside a square crest at ~90px that is a 5x gap, and insetting the crest
+   barely dents it, because the problem is the wordmark being starved of width.
+   Flex lets each mark take the width its shape needs at a shared cap height,
+   which is how a logo band is actually set. Crests get a little more height
+   than wordmarks, since a square mark reads lighter at identical height. */
+.logowall.bare.lw-flow{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;
+  gap:18px 20px;max-width:none}
+.logowall.bare.lw-flow .lw{flex:0 0 auto}
+.logowall.bare.lw-flow .lw-a{padding:4px 2px}
+.logowall.bare.lw-flow .lw-mark{display:inline-block;width:auto;
+  height:calc(28px * var(--lw-scale,1))}
+.logowall.bare.lw-flow .lw-mark.lw-sq{height:calc(52px * var(--lw-scale,1))}
+.logowall.bare.lw-flow .lw-art{display:block;width:auto;height:100%}
+.logowall.bare.lw-flow .lw-note{max-width:190px}
+@media (max-width:620px){
+  .logowall.bare.lw-flow{gap:16px 18px}
+  .logowall.bare.lw-flow .lw-mark{height:calc(24px * var(--lw-scale,1))}
+  .logowall.bare.lw-flow .lw-mark.lw-sq{height:calc(46px * var(--lw-scale,1))}
+}
 /* no light chip behind the artwork on hover, dark theme included - the user
    chose bare over legible-at-any-cost */
 .logowall.bare .lw-art.lw-solo{background:none;padding:0}
 .logowall.bare .lw-mark.lw-sq::before{inset:0}
-/* logos only - the organisation name still travels in the link title and the
-   image alt, so nothing is lost to assistive tech */
-.logowall.bare .lw-note{display:none}
+/* Logos only, where the mark alone identifies the organisation. The name still
+   travels in the link title and the image alt, so nothing is lost to assistive
+   tech. Walls whose marks do NOT identify the entry - journals showing a
+   publisher's wordmark, funders showing a seal - keep their caption. */
+.logowall.nolabels .lw-note{display:none}
+.logowall.bare .lw-note{margin-top:10px;font-size:0.74rem;color:var(--ink-mute);transition:color .25s ease}
+.logowall.bare a.lw-a:hover .lw-note{color:var(--accent)}
 @media (max-width:620px){
-  .logowall.bare .lw-mark,.logowall.bare .lw-art{height:calc(96px * var(--lw-scale,1))}
+  .logowall.bare{gap:18px 14px;max-width:none;grid-template-columns:repeat(auto-fit,minmax(88px,1fr))}
+  .logowall.bare .lw-mark,.logowall.bare .lw-art{height:calc(76px * var(--lw-scale,1))}
+  .logowall.bare .lw-a{padding:6px 2px}
 }
 a.lw-a:hover .lw-art{filter:none;opacity:1}
 .lw-light{display:var(--lw-light)}
