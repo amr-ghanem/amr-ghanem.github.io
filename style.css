@@ -118,7 +118,7 @@ p{margin:0 0 14px;max-width:86ch}
 .hstatsrc{font-family:"Libre Franklin",sans-serif;font-size:0.72rem;color:var(--ink-mute);margin:0 0 24px}
 .hstatsrc a{color:var(--ink-mute);text-decoration-color:var(--rule)}
 .hstatsrc a:hover{color:var(--accent)}
-.hero-claim{font-family:"Newsreader",Georgia,serif;font-weight:300;font-size:clamp(1.35rem,2.1vw,1.72rem);line-height:1.22;letter-spacing:-.015em;color:var(--ink-soft);margin:0 0 20px;max-width:none}
+.hero-claim{font-family:"Newsreader",Georgia,serif;font-weight:300;font-size:clamp(1.35rem,2.1vw,1.72rem);line-height:1.22;letter-spacing:-.015em;color:var(--accent);margin:0 0 20px;max-width:none}
 .hero .lede{font-size:1.16rem;font-style:italic;font-weight:300;max-width:64ch;margin:0 0 24px}
 .roles{list-style:none;margin:0 0 22px;padding:0;display:grid;gap:13px}
 .roles li{display:block;font-size:0.95rem;line-height:1.45}
