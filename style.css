@@ -8,7 +8,10 @@
   --ink:#131E1C; --ink-soft:#3B4A47; --ink-mute:#6E7B78;
   --rule:#C7CFCB; --rule-soft:#DCE2DE;
   --accent:#14574E; --accent-soft:#DCE9E5; --accent-deep:#0B3B35;
-  --data1:#14574E; --data2:#4A8C6B; --data3:#A8792B; --data4:#A8482B;
+  /* data3 darkened from #A8792B: at 1.8:1 on the light ground it was too pale
+     to carry text and marginal even as a graphic. #8A6119 reads ~4.8:1 and is
+     still unmistakably the same gold. */
+  --data1:#14574E; --data2:#4A8C6B; --data3:#8A6119; --data4:#A8482B;
   --lw-light:block; --lw-dark:none; --lw-plate:transparent; --lw-pad:0; --lw-mute:.66;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
@@ -115,7 +118,10 @@ p{margin:0 0 14px;max-width:86ch}
 .roles{list-style:none;margin:0 0 22px;padding:0;display:grid;gap:5px}
 .roles li{display:block;font-size:0.95rem;line-height:1.45}
 .rl{font-family:"Libre Franklin",sans-serif;font-size:0.88rem;color:var(--ink-mute)}
-.ro{font-family:"Libre Franklin",sans-serif;font-size:0.88rem;color:var(--ink)}
+/* The two organisation names carry the gold, so the palette's second colour
+   appears in the hero type and not only on hover. The role titles beside them
+   stay muted, which lets the institutions read first. */
+.ro{font-family:"Libre Franklin",sans-serif;font-size:0.88rem;font-weight:500;color:var(--data3)}
 .rsep{color:var(--rule);margin:0 7px}
 .herostats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;background:none;border:none;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin:0 0 10px;padding:16px 0;max-width:440px}
 .herostats>div{background:none;padding:0;text-align:left}
@@ -212,7 +218,7 @@ p{margin:0 0 14px;max-width:86ch}
 .pubgroup{padding-top:52px;margin-top:52px;border-top:1px solid var(--rule)}
 .pubgroup:first-of-type{border-top:none;margin-top:0;padding-top:4px}
 .pubgroup-head{display:flex;align-items:baseline;gap:14px;margin:0 0 26px;padding-bottom:14px;border-bottom:1px solid var(--rule-soft)}
-.pubgroup-head h2{font-family:"Newsreader",Georgia,serif;font-weight:300;font-size:1.7rem;letter-spacing:-.02em;line-height:1.1;color:var(--ink);margin:0}
+.pubgroup-head h2{font-family:"Newsreader",Georgia,serif;font-weight:300;font-size:1.7rem;letter-spacing:-.02em;line-height:1.1;color:var(--accent);margin:0}
 .pubgroup-n{font-family:"IBM Plex Mono",monospace;font-size:0.76rem;color:var(--accent);border:1px solid var(--rule);border-radius:999px;padding:3px 11px;line-height:1;font-variant-numeric:tabular-nums}
 @media(max-width:580px){.pubgroup{padding-top:36px;margin-top:36px}.pubgroup-head h2{font-size:1.4rem}}
 
