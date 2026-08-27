@@ -298,13 +298,13 @@ figcaption p{font-size:0.95rem;color:var(--ink-soft);max-width:54ch;line-height:
 @media(max-width:900px){.engine{padding:12px;overflow-x:auto}.engine svg{min-width:660px}}
 .hsteps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0 18px}
 .hstep{display:flex;flex-direction:column;align-items:center;text-align:center;position:relative}
-.hstep::before{content:"";position:absolute;top:29px;left:calc(-50% - 9px);width:calc(100% + 18px);height:1px;background:var(--rule)}
+.hstep::before{content:"";position:absolute;top:39px;left:calc(-50% - 9px);width:calc(100% + 18px);height:1px;background:var(--rule)}
 .hstep:first-child::before{display:none}
-.hstep::after{content:"";position:absolute;top:26px;left:calc(-50% - 9px);border-left:5px solid var(--rule);border-top:3px solid transparent;border-bottom:3px solid transparent}
+.hstep::after{content:"";position:absolute;top:36px;left:calc(-50% - 9px);border-left:5px solid var(--rule);border-top:3px solid transparent;border-bottom:3px solid transparent}
 .hstep:first-child::after{display:none}
 .hrail{display:flex;align-items:center;justify-content:center;margin-bottom:16px;position:relative;z-index:1}
-.hdot{flex:0 0 auto;width:58px;height:58px;border:1px solid var(--rule);border-radius:50%;background:var(--sheet);display:grid;place-items:center}
-.hglyph{width:32px;height:24px;color:var(--ink-mute);flex:none}
+.hdot{flex:0 0 auto;width:78px;height:78px;border:1px solid var(--rule);border-radius:50%;background:var(--sheet);display:grid;place-items:center}
+.hglyph{width:44px;height:33px;color:var(--ink-mute);flex:none}
 .hglyph .acc{stroke:var(--accent)}
 .hlink{display:none}
 
