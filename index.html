@@ -913,7 +913,17 @@
     //     says "this is an earthquake", and its amplitude carries the PGA.
     var sy = GY + 30, cxb = BX + BW/2;
     var amp2 = Math.min(pga, 1.5) / 1.5 * 15;
-    if (pga > 0.005) {
+    var quakeOver = (PHASE === 'ts');
+    if (quakeOver) {
+      // Shaking has stopped. A flat trace and a dimmed value: the intensity
+      // explains why the frame is damaged, it is not still happening.
+      g2.strokeStyle = mute; g2.globalAlpha = 0.28; g2.lineWidth = 1.4;
+      g2.beginPath(); g2.moveTo(0, sy); g2.lineTo(w, sy); g2.stroke();
+      g2.globalAlpha = 0.4; g2.fillStyle = mute;
+      g2.font = '600 17px "IBM Plex Mono", monospace'; g2.textAlign = 'center';
+      g2.fillText(pga.toFixed(2) + ' g', cxb, sy + 34);
+      g2.globalAlpha = 1;
+    } else if (pga > 0.005) {
       g2.strokeStyle = ink; g2.lineWidth = 1.7; g2.globalAlpha = 0.85;
       g2.lineJoin = 'round'; g2.lineCap = 'round';
       // the record scrolls right to left, like a live seismograph drum
@@ -934,9 +944,11 @@
       g2.strokeStyle = mute; g2.globalAlpha = 0.4; g2.lineWidth = 1.4;
       g2.beginPath(); g2.moveTo(0, sy); g2.lineTo(w, sy); g2.stroke(); g2.globalAlpha = 1;
     }
-    g2.fillStyle = ink;
-    g2.font = '600 17px "IBM Plex Mono", monospace'; g2.textAlign = 'center';
-    g2.fillText(pga.toFixed(2) + ' g', cxb, sy + 34);
+    if (!quakeOver) {
+      g2.fillStyle = ink;
+      g2.font = '600 17px "IBM Plex Mono", monospace'; g2.textAlign = 'center';
+      g2.fillText(pga.toFixed(2) + ' g', cxb, sy + 34);
+    }
 
     // --- The sequence, as a graphic rather than four stacked lines of prose.
     //     The old caption block ran to y=104 with the frame starting at y=106,
@@ -944,7 +956,7 @@
     //     with a gap between them for the delay, and whichever stage the current
     //     state represents is lit while the other recedes.
     (function(){
-      var by=26, x1=20, x2=176;
+      var by=27, x1=20, x2=190;
       var stage2 = (PHASE === 'ts');
       function stage(x, on, kind){
         g2.globalAlpha = on ? 1 : 0.3;
@@ -978,14 +990,14 @@
       g2.beginPath(); g2.moveTo(x2-4,by); g2.lineTo(x2-12,by-4); g2.lineTo(x2-12,by+4);
       g2.closePath(); g2.fill();
 
-      g2.font='600 10.5px "Libre Franklin", sans-serif'; g2.textAlign='center';
-      g2.fillText('MINUTES LATER', (x1+20+x2-12)/2, by-11);
+      g2.font='700 13px "Libre Franklin", sans-serif'; g2.textAlign='center';
+      g2.fillText('MINUTES LATER', (x1+20+x2-12)/2, by-12);
 
-      g2.textAlign='left'; g2.font='600 12px "Libre Franklin", sans-serif';
-      g2.globalAlpha = stage2?0.35:1; g2.fillStyle = stage2?mute:ink;
-      g2.fillText('SHAKING', x1+21, by+4);
-      g2.globalAlpha = stage2?1:0.35; g2.fillStyle = stage2?acc:mute;
-      g2.fillText('INUNDATION', x2+21, by+4);
+      g2.textAlign='left'; g2.font='700 15px "Libre Franklin", sans-serif';
+      g2.globalAlpha = stage2?0.5:1; g2.fillStyle = stage2?mute:ink;
+      g2.fillText('SHAKING', x1+21, by+5);
+      g2.globalAlpha = stage2?1:0.5; g2.fillStyle = stage2?acc:mute;
+      g2.fillText('INUNDATION', x2+21, by+5);
       g2.globalAlpha=1;
     })();
   }
