@@ -732,9 +732,13 @@
     if(dep>0.02){
       var amp = 2.5 + Math.min(1,(fr-0.4)/1.6)*5.5;
       var lam = 74;
-      // the surface travels: faster Froude number, faster-moving crests
+      // The surface travels in the SAME direction as the flow it represents.
+      // With a +ph phase a crest sits where x/lam*2pi + ph = pi/2, so rising ph
+      // moves crests to the LEFT - the water ran one way while the drag arrows
+      // it produces pointed the other. Subtracting the phase sends the crests
+      // left-to-right, with the load.
       var ph = ANIM ? T/1000 * (0.5 + fr*1.4) : 0;
-      function waveY(x){ return wy + Math.sin(x/lam*Math.PI*2 + ph)*amp + Math.sin(x/(lam*0.43)*Math.PI*2 + ph*1.7)*amp*0.35; }
+      function waveY(x){ return wy + Math.sin(x/lam*Math.PI*2 - ph)*amp + Math.sin(x/(lam*0.43)*Math.PI*2 - ph*1.7)*amp*0.35; }
 
       // The water is a body, not a backdrop: a surface plane running back into
       // depth, and a front face below it. Drawn last and translucent, so the
@@ -780,6 +784,20 @@
         if (wx3===0) g2.moveTo(wx3,yy); else g2.lineTo(wx3,yy);
       }
       g2.stroke(); g2.globalAlpha=1;
+
+      // State the flow direction outright rather than leaving it to be inferred
+      // from the animation - a still frame should be unambiguous, and the
+      // direction has to agree with the drag arrows on the windward columns.
+      if (GY - wy > 26){
+        var fy = wy + (GY-wy)*0.30, fx0 = 14, fx1 = Math.max(48, BX-58);
+        g2.strokeStyle=acc; g2.fillStyle=acc; g2.globalAlpha=0.75; g2.lineWidth=2;
+        g2.beginPath(); g2.moveTo(fx0,fy); g2.lineTo(fx1-9,fy); g2.stroke();
+        g2.beginPath(); g2.moveTo(fx1,fy); g2.lineTo(fx1-10,fy-5); g2.lineTo(fx1-10,fy+5);
+        g2.closePath(); g2.fill();
+        g2.font='600 10.5px "Libre Franklin", sans-serif'; g2.textAlign='left';
+        g2.fillText('FLOW', fx0+1, fy-8);
+        g2.globalAlpha=1;
+      }
     }
 
     // --- moment frame in isometric: two bays of frame, front and back, tied by
