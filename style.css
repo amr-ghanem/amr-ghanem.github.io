@@ -222,7 +222,7 @@ figcaption p{font-size:0.95rem;color:var(--ink-soft);max-width:54ch;line-height:
 .exp-controls{display:grid;grid-template-columns:1fr;gap:14px;padding-top:18px;margin-top:16px;border-top:1px solid var(--rule-soft)}
 /* stage selector: the two hazards are separated in time, so the figure shows
    one at a time and this chooses which */
-.phase{display:grid;grid-template-columns:auto 1fr;gap:8px;margin-top:16px}
+.phase{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:16px}
 .ph{font-family:"Libre Franklin",sans-serif;font-size:0.76rem;letter-spacing:.06em;
     padding:9px 12px;border:1px solid var(--rule);border-radius:var(--r-sm);
     background:none;color:var(--ink-mute);cursor:pointer;text-align:center;
