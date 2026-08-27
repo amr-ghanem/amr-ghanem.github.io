@@ -644,12 +644,62 @@
     var lean = Math.min(1,dam)*12 + sway;
     var storey=BH/N;
 
-    // --- ground
-    g2.strokeStyle=mute; g2.lineWidth=1.6; g2.globalAlpha=0.8;
-    g2.beginPath(); g2.moveTo(0,GY); g2.lineTo(w,GY); g2.stroke();
-    g2.lineWidth=1; g2.globalAlpha=0.3;
-    for(var hx=-30;hx<w;hx+=15){ g2.beginPath(); g2.moveTo(hx,GY+26); g2.lineTo(hx+22,GY); g2.stroke(); }
+    // --- the whole scene is isometric, not just the frame: a ground plane
+    //     receding into depth, soil shown in section at the cut face, and a
+    //     footing under each column with a grade beam tying them.
+    var DX = 32, DY = -17;
+
+    // ground plane
+    g2.beginPath();
+    g2.moveTo(-40, GY); g2.lineTo(w+40, GY);
+    g2.lineTo(w+40+DX, GY+DY); g2.lineTo(-40+DX, GY+DY);
+    g2.closePath();
+    g2.fillStyle=sheet; g2.globalAlpha=0.5; g2.fill(); g2.globalAlpha=1;
+
+    // receding grid on the plane, so depth reads
+    g2.strokeStyle=mute; g2.lineWidth=1; g2.globalAlpha=0.16;
+    for(var gx=-40; gx<w+40; gx+=26){
+      g2.beginPath(); g2.moveTo(gx,GY); g2.lineTo(gx+DX,GY+DY); g2.stroke();
+    }
+    g2.beginPath(); g2.moveTo(-40+DX*0.5,GY+DY*0.5); g2.lineTo(w+40+DX*0.5,GY+DY*0.5); g2.stroke();
     g2.globalAlpha=1;
+
+    // grade line at the front, then soil in section beneath it
+    g2.strokeStyle=mute; g2.lineWidth=1.6; g2.globalAlpha=0.85;
+    g2.beginPath(); g2.moveTo(0,GY); g2.lineTo(w,GY); g2.stroke();
+    g2.lineWidth=1; g2.globalAlpha=0.28;
+    for(var hx=-30;hx<w;hx+=15){ g2.beginPath(); g2.moveTo(hx,GY+30); g2.lineTo(hx+24,GY); g2.stroke(); }
+    g2.globalAlpha=1;
+
+    // --- foundation: a pad under each column plus the grade beam between them
+    var FBW = 26, FBH = 13, FD = 20;   // footing width, thickness, embedment
+    function footing(cx){
+      var x0 = BX + cx - FBW/2, x1 = BX + cx + FBW/2, yTop = GY + FD - FBH;
+      // top face
+      g2.beginPath();
+      g2.moveTo(x0,yTop); g2.lineTo(x1,yTop);
+      g2.lineTo(x1+DX*0.55, yTop+DY*0.55); g2.lineTo(x0+DX*0.55, yTop+DY*0.55);
+      g2.closePath();
+      g2.fillStyle=sunk; g2.globalAlpha=0.95; g2.fill();
+      g2.strokeStyle=mute; g2.lineWidth=1.3; g2.globalAlpha=0.75; g2.stroke();
+      // front face
+      g2.beginPath(); g2.rect(x0, yTop, FBW, FBH);
+      g2.fillStyle=sunk; g2.globalAlpha=0.95; g2.fill();
+      g2.globalAlpha=0.75; g2.stroke();
+      // right return
+      g2.beginPath();
+      g2.moveTo(x1,yTop); g2.lineTo(x1+DX*0.55, yTop+DY*0.55);
+      g2.lineTo(x1+DX*0.55, yTop+DY*0.55+FBH); g2.lineTo(x1, yTop+FBH);
+      g2.closePath(); g2.fillStyle=sunk; g2.fill(); g2.stroke();
+      // stub connecting footing to column base
+      g2.beginPath(); g2.moveTo(BX+cx, GY); g2.lineTo(BX+cx, yTop); g2.stroke();
+      g2.globalAlpha=1;
+    }
+    // grade beam tying the two footings
+    g2.strokeStyle=mute; g2.globalAlpha=0.5; g2.lineWidth=1.2;
+    g2.beginPath(); g2.rect(BX, GY+FD-FBH+3, BW, FBH-6); g2.stroke();
+    g2.globalAlpha=1;
+    footing(0); footing(BW);
 
     // --- water behind, with a wave surface rather than a ruled line. Amplitude
     //     grows with the flow so a fast surge visibly breaks rougher.
@@ -661,20 +711,43 @@
       var ph = ANIM ? T/1000 * (0.5 + fr*1.4) : 0;
       function waveY(x){ return wy + Math.sin(x/lam*Math.PI*2 + ph)*amp + Math.sin(x/(lam*0.43)*Math.PI*2 + ph*1.7)*amp*0.35; }
 
+      // The water is a body, not a backdrop: a surface plane running back into
+      // depth, and a front face below it. Drawn last and translucent, so the
+      // frame and footings read as standing in it rather than behind it.
+      g2.lineJoin='round';
+
+      // surface plane - front wave edge, receding to a back wave edge
       g2.beginPath();
       g2.moveTo(0, waveY(0));
       for(var wx=2; wx<=w; wx+=2) g2.lineTo(wx, waveY(wx));
-      g2.lineTo(w, GY); g2.lineTo(0, GY); g2.closePath();
-      g2.fillStyle=acc; g2.globalAlpha=0.20; g2.fill(); g2.globalAlpha=1;
+      g2.lineTo(w+DX, waveY(w)+DY);
+      for(var wb=w; wb>=0; wb-=2) g2.lineTo(wb+DX, waveY(wb)+DY);
+      g2.closePath();
+      g2.fillStyle=acc; g2.globalAlpha=0.26; g2.fill(); g2.globalAlpha=1;
 
-      g2.strokeStyle=acc; g2.lineWidth=2; g2.lineJoin='round';
+      // front face of the water body
+      g2.beginPath();
+      g2.moveTo(0, waveY(0));
+      for(var wf=2; wf<=w; wf+=2) g2.lineTo(wf, waveY(wf));
+      g2.lineTo(w, GY); g2.lineTo(0, GY); g2.closePath();
+      g2.fillStyle=acc; g2.globalAlpha=0.17; g2.fill(); g2.globalAlpha=1;
+
+      // the crest line itself
+      g2.strokeStyle=acc; g2.lineWidth=2;
       g2.beginPath();
       g2.moveTo(0, waveY(0));
       for(var wx2=2; wx2<=w; wx2+=2) g2.lineTo(wx2, waveY(wx2));
       g2.stroke();
 
-      // a second crest below the surface reads as moving water, not a filled box
-      g2.globalAlpha=0.30; g2.lineWidth=1.4;
+      // back crest, dimmer, to close the volume
+      g2.globalAlpha=0.4; g2.lineWidth=1.4;
+      g2.beginPath();
+      g2.moveTo(DX, waveY(0)+DY);
+      for(var wk=2; wk<=w; wk+=2) g2.lineTo(wk+DX, waveY(wk)+DY);
+      g2.stroke();
+
+      // a trailing crest inside the body reads as moving water
+      g2.globalAlpha=0.28; g2.lineWidth=1.3;
       g2.beginPath();
       for(var wx3=0; wx3<=w; wx3+=2){
         var yy = waveY(wx3+lam*0.5) + 13;
@@ -688,7 +761,7 @@
     //     transverse beams at every floor. Sway is applied per-point rather than
     //     by a shear transform, because the back frame has to lean with the
     //     front one at the same height, not at the same screen y.
-    var DX = 32, DY = -17;                       // depth vector to the back frame
+    // depth vector DX/DY is declared once for the whole scene above
     function sx(h){ return lean * (h/BH); }      // lateral offset at height h
     function P(cx, h, back){                     // frame point -> screen point
       return { x: BX + cx + sx(h) + (back?DX:0), y: GY - h + (back?DY:0) };
