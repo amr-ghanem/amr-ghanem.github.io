@@ -178,8 +178,14 @@ p{margin:0 0 14px;max-width:86ch}
 .xcard{display:flex;flex-direction:column;align-items:center;text-align:center}
 .xring{width:96px;height:96px;border:1px solid var(--rule);border-radius:50%;background:var(--sheet);display:grid;place-items:center;margin:0 0 22px}
 .xglyph{width:52px;height:39px;color:var(--ink-mute);display:block}
-.xglyph .acc{stroke:var(--accent)}
-.xglyph .acc[fill]{fill:var(--accent)}
+/* .acc marks the emphasised part of a glyph. It used to pin those shapes to
+   the accent colour outright, which meant a glyph whose shapes are ALL .acc -
+   step 01 "Sweep" is entirely one .acc group - was already accent at rest and
+   could not change on hover; only its size moved. Following currentColor
+   instead lets every glyph go muted-to-accent together, and the two-tone
+   emphasis survives through the opacity attributes already in the artwork. */
+.xglyph .acc{stroke:currentColor}
+.xglyph .acc[fill]{fill:currentColor}
 .xcard h3{font-size:1.16rem;margin:0 0 8px;max-width:none}
 .xcard .exp-lead{font-size:0.95rem;max-width:none;margin-bottom:14px}
 .xcard .evidence li{max-width:none;font-size:0.84rem}
@@ -374,7 +380,7 @@ figcaption p{font-size:0.95rem;color:var(--ink-soft);max-width:54ch;line-height:
 .hrail{display:flex;align-items:center;justify-content:center;margin-bottom:16px;position:relative;z-index:1}
 .hdot{flex:0 0 auto;width:78px;height:78px;border:1.5px solid var(--rule);border-radius:50%;background:var(--ground);display:grid;place-items:center;position:relative;z-index:1}
 .hglyph{width:44px;height:33px;color:var(--ink-mute);flex:none}
-.hglyph .acc{stroke:var(--accent)}
+.hglyph .acc{stroke:currentColor}
 .hlink{display:none}
 
 
