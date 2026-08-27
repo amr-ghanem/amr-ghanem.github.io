@@ -9,6 +9,7 @@
   --rule:#C7CFCB; --rule-soft:#DCE2DE;
   --accent:#14574E; --accent-soft:#DCE9E5; --accent-deep:#0B3B35;
   --data1:#14574E; --data2:#4A8C6B; --data3:#A8792B; --data4:#A8482B;
+  --lw-light:block; --lw-dark:none; --lw-plate:transparent; --lw-pad:0; --lw-mute:.66;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --ground:#0B1211; --sheet:#111A18; --sunk:#080E0D;
@@ -23,6 +24,18 @@
   --rule:#26332F; --rule-soft:#1A2422;
   --accent:#6BBFAE; --accent-soft:#123029; --accent-deep:#9AD8C9;
   --data1:#6BBFAE; --data2:#8FCC9F; --data3:#D8AB57; --data4:#DE8163;
+}
+
+/* Logo art on a dark ground. Almost every official mark is dark ink drawn for
+   white paper, so it vanishes here. Two answers, in order of preference: use
+   the organisation's own reversed file when one exists (.lw-dark), or set the
+   single file on a small light plate - a chip, obviously deliberate, rather
+   than an inverted mark in the wrong colours. Never invert a colour logo. */
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --lw-light:none; --lw-dark:block; --lw-plate:#F2F3F0; --lw-pad:7px 9px; --lw-mute:.78;
+}}
+:root[data-theme="dark"]{
+  --lw-light:none; --lw-dark:block; --lw-plate:#F2F3F0; --lw-pad:7px 9px; --lw-mute:.78;
 }
 
 *{box-sizing:border-box}
@@ -448,6 +461,51 @@ figcaption p{font-size:0.95rem;color:var(--ink-soft);max-width:54ch;line-height:
 .creds span{font-family:"Libre Franklin",sans-serif;font-size:0.72rem;color:var(--ink-mute);letter-spacing:.1em;text-transform:uppercase}
 .creds li.pending strong{color:var(--ink-soft);font-style:italic}
 .affil{font-size:0.95rem;color:var(--ink-soft);max-width:78ch}
+
+/* Logo wall. Cells are a fixed height so marks of wildly different aspect
+   ratios still line up on a common baseline - the thing that separates a
+   considered logo band from a row of pasted images. Art is muted at rest and
+   comes up to full colour on hover, so the band reads as one texture rather
+   than seven competing brand palettes. */
+.logowall{list-style:none;padding:0;margin:0;justify-content:center;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,236px));gap:12px}
+.logowall.tight{grid-template-columns:repeat(auto-fit,minmax(146px,206px))}
+.lw{margin:0}
+.lw-a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;
+  height:100%;min-height:104px;padding:18px 16px;text-align:center;text-decoration:none;
+  border:1px solid var(--rule);border-radius:var(--r);background:var(--sheet);
+  transition:border-color .28s ease,background-color .28s ease,transform .28s ease}
+a.lw-a:hover{border-color:var(--accent);background:var(--accent-soft);transform:translateY(-3px)}
+a.lw-a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+.lw-art{max-height:44px;max-width:100%;width:auto;height:auto;object-fit:contain;
+  filter:grayscale(1);opacity:var(--lw-mute);transition:filter .28s ease,opacity .28s ease}
+a.lw-a:hover .lw-art{filter:none;opacity:1}
+.lw-light{display:var(--lw-light)}
+.lw-dark{display:var(--lw-dark)}
+.lw-solo{background:var(--lw-plate);padding:var(--lw-pad);border-radius:var(--r-sm);box-sizing:content-box}
+
+/* The wordmark stands in for missing artwork. It says the name straight rather
+   than imitating a mark, which would be a worse answer than no logo at all. */
+.lw-word{font-family:"Libre Franklin",sans-serif;font-weight:600;font-size:0.84rem;
+  line-height:1.25;letter-spacing:.04em;color:var(--ink-soft);text-wrap:balance;
+  transition:color .28s ease}
+a.lw-a:hover .lw-word{color:var(--accent)}
+.lw-note{font-family:"IBM Plex Mono",monospace;font-size:0.72rem;letter-spacing:.04em;
+  color:var(--ink-mute);transition:color .28s ease}
+a.lw-a:hover .lw-note{color:var(--accent-deep)}
+
+.affilband{margin:0 0 12px}
+.affil-gap{margin-top:26px}
+.affilband .rl{margin:0 0 16px}
+
+@media (prefers-reduced-motion:reduce){
+  a.lw-a:hover{transform:none}
+}
+@media (max-width:520px){
+  .logowall,.logowall.tight{grid-template-columns:repeat(2,minmax(0,1fr));justify-content:stretch}
+  .lw-a{min-height:92px;padding:14px 10px}
+}
 
 /* ---------- icons ---------- */
 .icon{width:1em;height:1em;flex:none;vertical-align:-0.12em;opacity:.85}
