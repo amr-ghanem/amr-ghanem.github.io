@@ -530,6 +530,9 @@ a.lw-a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .logowall.bare .lw-mark,.logowall.bare .lw-art{height:96px}
 .logowall.bare .lw-mark .lw-art{height:100%}
 .logowall.bare .lw-art.lw-sq{padding:0}
+/* no light chip behind the artwork on hover, dark theme included - the user
+   chose bare over legible-at-any-cost */
+.logowall.bare .lw-art.lw-solo{background:none;padding:0}
 .logowall.bare .lw-mark.lw-sq::before{inset:0}
 .logowall.bare .lw-note{font-size:0.76rem}
 .logowall.bare a.lw-a:hover .lw-note{color:var(--ink)}
