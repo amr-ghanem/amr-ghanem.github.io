@@ -563,8 +563,8 @@ a.lw-a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .logowall.bare.lw-flow .lw{flex:0 0 auto}
 .logowall.bare.lw-flow .lw-a{padding:4px 2px}
 .logowall.bare.lw-flow .lw-mark{display:inline-block;width:auto;
-  height:calc(28px * var(--lw-scale,1))}
-.logowall.bare.lw-flow .lw-mark.lw-sq{height:calc(52px * var(--lw-scale,1))}
+  height:calc(38px * var(--lw-scale,1))}
+.logowall.bare.lw-flow .lw-mark.lw-sq{height:calc(74px * var(--lw-scale,1))}
 /* Only size here - do NOT set display. The light/dark pair is switched by
    display through --lw-light / --lw-dark, and a bare 'display:block' at this
    specificity beat those rules, so BOTH files rendered side by side and every
@@ -581,8 +581,8 @@ a.lw-a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .logowall.bare.lw-flow .lw-word{min-height:calc(52px * var(--lw-scale,1));font-size:0.86rem}
 @media (max-width:620px){
   .logowall.bare.lw-flow{gap:16px 18px}
-  .logowall.bare.lw-flow .lw-mark{height:calc(24px * var(--lw-scale,1))}
-  .logowall.bare.lw-flow .lw-mark.lw-sq{height:calc(46px * var(--lw-scale,1))}
+  .logowall.bare.lw-flow .lw-mark{height:calc(30px * var(--lw-scale,1))}
+  .logowall.bare.lw-flow .lw-mark.lw-sq{height:calc(58px * var(--lw-scale,1))}
 }
 /* no light chip behind the artwork on hover, dark theme included - the user
    chose bare over legible-at-any-cost */
@@ -629,6 +629,8 @@ a.lw-a:hover .lw-note{color:var(--accent-deep)}
 /* ---------- icons ---------- */
 .icon{width:1em;height:1em;flex:none;vertical-align:-0.12em;opacity:.85}
 .fcols a{display:inline-flex;align-items:center;gap:8px}
+.fcols a .icon{color:var(--ink-mute)}
+.fcols a:hover .icon{color:var(--accent)}
 .fplain{display:flex;align-items:center;gap:8px}
 h2.rule .icon{width:1.5em;height:1.5em;margin-right:8px;opacity:.75}
 h2.rule{display:flex;align-items:center}
@@ -792,11 +794,13 @@ nav a.on::after{transform:scaleX(1)}
    Weight and a small scale carry it, so the icon reacts as plainly as a logo
    does when it takes its true colours. stroke-width is set in CSS, which beats
    the stroke-width presentation attribute on the SVG. */
-.sicon,.hglyph,.xglyph{stroke-width:1.7;
-  transition:color .28s ease,stroke-width .28s ease,transform .28s cubic-bezier(.2,.7,.3,1)}
+.sicon,.hglyph,.xglyph{stroke-width:1.7;opacity:.7;
+  transition:color .28s ease,opacity .28s ease,stroke-width .28s ease,transform .28s cubic-bezier(.2,.7,.3,1)}
 .stats>div:hover .sicon,
 .hstep:hover .hglyph,
-.xcard:hover .xglyph{color:var(--accent);stroke-width:2.3;transform:scale(1.14)}
+.xcard:hover .xglyph{color:var(--accent);opacity:1;stroke-width:2.4;transform:scale(1.16)}
+.hicons a .icon{opacity:.7;transition:opacity .28s ease,transform .28s ease}
+.hicons a:hover .icon{opacity:1;transform:scale(1.12)}
 @media (prefers-reduced-motion:reduce){
   .stats>div:hover .sicon,.hstep:hover .hglyph,.xcard:hover .xglyph{transform:none}
 }
