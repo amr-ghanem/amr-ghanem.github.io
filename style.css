@@ -425,11 +425,6 @@ footer.site{border-top:1px solid var(--rule);padding-top:32px;padding-bottom:48p
 .fplain{font-size:0.95rem;color:var(--ink-mute);margin:0}
 .footbar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 32px;margin-top:36px;padding-top:20px;border-top:1px solid var(--rule-soft)}
 .colophon{font-size:0.76rem;color:var(--ink-mute);margin:0;letter-spacing:.06em}
-.touch{list-style:none;margin:0 0 20px;padding:0;display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:var(--r);overflow:hidden}
-.touch li{background:var(--sheet);padding:16px 24px;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:baseline}
-.touch .tl{font-family:"Libre Franklin",sans-serif;font-size:0.76rem;color:var(--ink-mute)}
-.touch a{display:inline-flex;align-items:center;gap:8px;font-size:0.95rem;text-decoration:none}
-.touch a:hover{text-decoration:underline}
 
 /* ---------- motion ----------
    Sections lift in once as they enter view; interactive things respond to the
@@ -439,7 +434,7 @@ footer.site{border-top:1px solid var(--rule);padding-top:32px;padding-bottom:48p
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .62s cubic-bezier(.2,.6,.2,1),transform .62s cubic-bezier(.2,.6,.2,1)}
 .reveal.seen{opacity:1;transform:none}
 
-a,.btn,.xcard,.work,.entry,.recog li,.touch li,.hdot,.icon{transition:color .22s ease,background-color .22s ease,border-color .22s ease,transform .28s cubic-bezier(.2,.6,.2,1),opacity .22s ease}
+a,.btn,.xcard,.work,.entry,.recog li,.hdot,.icon{transition:color .22s ease,background-color .22s ease,border-color .22s ease,transform .28s cubic-bezier(.2,.6,.2,1),opacity .22s ease}
 .btn:hover{transform:translateY(-2px)}
 .btn:active{transform:translateY(0)}
 .xcard:hover .xring{transform:translateY(-4px);border-color:var(--accent)}
@@ -447,8 +442,8 @@ a,.btn,.xcard,.work,.entry,.recog li,.touch li,.hdot,.icon{transition:color .22s
 .hstep:hover .hdot{border-color:var(--accent);transform:translateY(-3px)}
 .hdot{transition:transform .3s cubic-bezier(.2,.6,.2,1),border-color .3s ease}
 .work:hover h3 a,.entry:hover h3 a{color:var(--accent)}
-.recog li,.touch li{transition:background-color .25s ease}
-.recog li:hover,.touch li:hover{background:var(--sunk)}
+.recog li{transition:background-color .25s ease}
+.recog li:hover{background:var(--sunk)}
 .hicons a:hover .icon{transform:translateY(-2px)}
 .pagehead-art img{transition:opacity .8s ease}
 nav a{position:relative}
