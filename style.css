@@ -71,9 +71,13 @@ header.site{display:flex;justify-content:space-between;align-items:center;gap:24
 .wordmark strong{font-weight:400;font-size:1.5rem;letter-spacing:-.014em}
 .wordmark span{font-family:"IBM Plex Mono",monospace;font-size:0.72rem;letter-spacing:.16em;color:var(--ink-mute);text-transform:uppercase}
 nav{display:flex;gap:24px;font-size:0.82rem;letter-spacing:.07em;text-transform:uppercase}
-nav a{color:var(--ink-mute);text-decoration:none;padding-bottom:3px;border-bottom:1px solid transparent}
-nav a.active{color:var(--ink);border-bottom-color:var(--accent)}
-nav a:hover{color:var(--accent)}
+/* Same two-colour rule as the icons and the engine: theme teal at rest, the
+   engine's gold when a page is current or being pointed at. The underline
+   follows, so the marker never disagrees with the label it sits under. */
+nav a{color:var(--accent);text-decoration:none;padding-bottom:3px;border-bottom:1px solid transparent;
+  transition:color .28s ease,border-color .28s ease}
+nav a.active,nav a:hover,nav a:focus-visible{color:var(--data3)}
+nav a.active{border-bottom-color:var(--data3)}
 
 /* ---------- sticky header ---------- */
 header.site{
@@ -747,9 +751,9 @@ a,.btn,.xcard,.work,.entry,.recog li,.hdot,.icon{transition:color .22s ease,back
 .hicons a:hover .icon{transform:translateY(-2px)}
 .pagehead-art img{transition:opacity .8s ease}
 nav a{position:relative}
-nav a::after{content:"";position:absolute;left:0;right:0;bottom:-5px;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .28s cubic-bezier(.2,.6,.2,1)}
+nav a::after{content:"";position:absolute;left:0;right:0;bottom:-5px;height:1px;background:var(--data3);transform:scaleX(0);transform-origin:left;transition:transform .28s cubic-bezier(.2,.6,.2,1)}
 nav a:hover::after{transform:scaleX(1)}
-nav a.on::after{transform:scaleX(1)}
+nav a.active::after{transform:scaleX(1)}   /* the build emits .active, not .on - this rule never matched */
 
 
 /* ---------- icon motion ----------
