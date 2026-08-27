@@ -84,8 +84,8 @@ header.site{
 }
 .headright{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
 .hicons{display:flex;align-items:center;gap:16px;padding-left:24px;border-left:1px solid var(--rule)}
-.hicons a{color:var(--ink-mute);display:flex;text-decoration:none}
-.hicons a:hover{color:var(--accent)}
+.hicons a{color:var(--accent);display:flex;text-decoration:none}
+.hicons a:hover{color:var(--data2)}
 .hicons .icon{width:1.15rem;height:1.15rem;opacity:1}
 /* anchor targets must clear the sticky header */
 :target,[id]{scroll-margin-top:96px}
@@ -157,7 +157,7 @@ p{margin:0 0 14px;max-width:86ch}
   .stats>div:last-child:nth-child(odd){grid-column:span 2}
 }
 .stats>div{background:var(--sheet);padding:22px 16px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
-.sicon{width:34px;height:28px;color:var(--ink-mute);margin-bottom:4px;display:block}
+.sicon{width:34px;height:28px;color:var(--accent);margin-bottom:4px;display:block}
 .num{font-size:2.5rem;font-weight:400;line-height:1;color:var(--accent);margin:0 0 8px;font-variant-numeric:tabular-nums;letter-spacing:-.03em}
 .lab{font-size:0.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute);margin:0;line-height:1.5}
 .statsrc{font-family:"Libre Franklin",sans-serif;font-size:0.84rem;line-height:1.55;color:var(--ink-mute);margin:-8px 0 24px;max-width:80ch}
@@ -177,7 +177,7 @@ p{margin:0 0 14px;max-width:86ch}
 .exp-wrap>h2{grid-column:1/-1;margin-bottom:0}
 .xcard{display:flex;flex-direction:column;align-items:center;text-align:center}
 .xring{width:96px;height:96px;border:1px solid var(--rule);border-radius:50%;background:var(--sheet);display:grid;place-items:center;margin:0 0 22px}
-.xglyph{width:52px;height:39px;color:var(--ink-mute);display:block}
+.xglyph{width:52px;height:39px;color:var(--accent);display:block}
 /* .acc marks the emphasised part of a glyph. It used to pin those shapes to
    the accent colour outright, which meant a glyph whose shapes are ALL .acc -
    step 01 "Sweep" is entirely one .acc group - was already accent at rest and
@@ -379,7 +379,7 @@ figcaption p{font-size:0.95rem;color:var(--ink-soft);max-width:54ch;line-height:
 .hstep:first-child::before,.hstep:first-child::after{display:none}
 .hrail{display:flex;align-items:center;justify-content:center;margin-bottom:16px;position:relative;z-index:1}
 .hdot{flex:0 0 auto;width:78px;height:78px;border:1.5px solid var(--rule);border-radius:50%;background:var(--ground);display:grid;place-items:center;position:relative;z-index:1}
-.hglyph{width:44px;height:33px;color:var(--ink-mute);flex:none}
+.hglyph{width:44px;height:33px;color:var(--accent);flex:none}
 .hglyph .acc{stroke:currentColor}
 .hlink{display:none}
 
@@ -640,8 +640,8 @@ a.lw-a:hover .lw-note{color:var(--accent-deep)}
 /* ---------- icons ---------- */
 .icon{width:1em;height:1em;flex:none;vertical-align:-0.12em;opacity:.85}
 .fcols a{display:inline-flex;align-items:center;gap:8px}
-.fcols a .icon{color:var(--ink-mute)}
-.fcols a:hover .icon{color:var(--accent)}
+.fcols a .icon{color:var(--accent)}
+.fcols a:hover .icon{color:var(--data2)}
 .fplain{display:flex;align-items:center;gap:8px}
 h2.rule .icon{width:1.5em;height:1.5em;margin-right:8px;opacity:.75}
 h2.rule{display:flex;align-items:center}
@@ -805,12 +805,30 @@ nav a.on::after{transform:scaleX(1)}
    Weight and a small scale carry it, so the icon reacts as plainly as a logo
    does when it takes its true colours. stroke-width is set in CSS, which beats
    the stroke-width presentation attribute on the SVG. */
-.sicon,.hglyph,.xglyph{stroke-width:1.7;opacity:.7;
-  transition:color .28s ease,opacity .28s ease,stroke-width .28s ease,transform .28s cubic-bezier(.2,.7,.3,1)}
+/* Icons behave like the logo walls: one flat theme colour at rest, their own
+   colours on hover. A line glyph has no "real" colours of its own, so the
+   reveal uses the site's data palette - the same tokens the charts use, so it
+   is a colour the page already owns rather than a decoration bolted on.
+   .acc marks the emphasised part of a glyph and takes the second colour. */
+.sicon,.hglyph,.xglyph{stroke-width:1.7;opacity:.88;
+  transition:color .3s ease,stroke .3s ease,fill .3s ease,opacity .3s ease,
+             stroke-width .3s ease,transform .3s cubic-bezier(.2,.7,.3,1)}
+.sicon .acc,.hglyph .acc,.xglyph .acc{transition:stroke .3s ease,fill .3s ease}
+
 .stats>div:hover .sicon,
 .hstep:hover .hglyph,
-.xcard:hover .xglyph{color:var(--accent);opacity:1;stroke-width:2.4;transform:scale(1.16)}
-.hicons a .icon{opacity:.7;transition:opacity .28s ease,transform .28s ease}
+.xcard:hover .xglyph{opacity:1;stroke-width:2.4;transform:scale(1.16);color:var(--data2)}
+.hstep:hover .hglyph .acc,
+.xcard:hover .xglyph .acc{stroke:var(--data3)}
+.xcard:hover .xglyph .acc[fill]{fill:var(--data3)}
+
+/* each Contribution card reveals a different colour, so the row is not one note */
+.stats>div:nth-child(2):hover .sicon{color:var(--data3)}
+.stats>div:nth-child(3):hover .sicon{color:var(--data4)}
+.stats>div:nth-child(4):hover .sicon{color:var(--data4)}
+.stats>div:nth-child(5):hover .sicon{color:var(--data3)}
+
+.hicons a .icon{opacity:.85;transition:color .3s ease,opacity .3s ease,transform .3s ease}
 .hicons a:hover .icon{opacity:1;transform:scale(1.12)}
 @media (prefers-reduced-motion:reduce){
   .stats>div:hover .sicon,.hstep:hover .hglyph,.xcard:hover .xglyph{transform:none}
