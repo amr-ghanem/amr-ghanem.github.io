@@ -654,13 +654,19 @@
     // by which time the ground motion has stopped. So the sway only runs while
     // the site is dry - once water is up, the earthquake is over and what
     // remains of it is the permanent damage: residual lean and plastic hinges.
-    var sway = 0;
-    if (ANIM && pga > 0.005 && PHASE === 'eq') {
-      var soft = 1 + dam*0.9;                       // period grows with damage
-      var quiet = 1 - Math.min(1, dep/0.35);        // fades out as water arrives
-      sway = Math.sin(T/(430*soft)) * Math.min(pga,1.5)/1.5 * 9 * (0.55+dam*0.45);
+    // Amplitude is deliberately exaggerated - a real frame's peak drift is a
+    // fraction of a percent of its height and would be invisible here. It is
+    // scaled as pgaN^0.7 rather than linearly so the middle of the slider,
+    // where most of the interesting behaviour is, actually moves; and the
+    // period is short enough that a full cycle reads at a glance.
+    var leanRes = Math.min(1,dam)*12;                // permanent set from damage
+    var swayPeak = 0, sway = 0;
+    if (pga > 0.005 && PHASE === 'eq') {
+      var soft = 1 + dam*0.9;                        // period grows with damage
+      swayPeak = Math.pow(Math.min(pga,1.5)/1.5, 0.7) * 18 * (0.70+dam*0.30);
+      if (ANIM) sway = Math.sin(T/(300*soft)) * swayPeak;
     }
-    var lean = Math.min(1,dam)*12 + sway;            // residual lean always stays
+    var lean = leanRes + sway;                       // residual lean always stays
     var storey=BH/N;
 
     // --- the whole scene is isometric, not just the frame: a ground plane
@@ -809,6 +815,27 @@
       return { x: BX + cx + sx(h) + (back?DX:0), y: GY - h + (back?DY:0) };
     }
     function seg(a,b){ g2.beginPath(); g2.moveTo(a.x,a.y); g2.lineTo(b.x,b.y); g2.stroke(); }
+
+    // The swept envelope: the frame's position at each extreme of the swing,
+    // drawn faintly behind it. Without this the motion is only legible while
+    // it is actually animating - with it, the amplitude is readable in a
+    // still frame, and under prefers-reduced-motion it is the whole story.
+    if (swayPeak > 0.4) {
+      g2.save();
+      g2.strokeStyle=ink; g2.globalAlpha=0.22; g2.lineWidth=1.5;
+      g2.setLineDash([3,4]); g2.lineCap='butt';
+      [leanRes+swayPeak, leanRes-swayPeak].forEach(function(tip){
+        [0,BW].forEach(function(cx){
+          g2.beginPath();
+          g2.moveTo(BX+cx, GY);
+          g2.lineTo(BX+cx+tip, GY-BH);
+          g2.stroke();
+        });
+        g2.beginPath();                              // roof line at that extreme
+        g2.moveTo(BX+tip, GY-BH); g2.lineTo(BX+BW+tip, GY-BH); g2.stroke();
+      });
+      g2.restore();
+    }
 
     g2.lineCap='round'; g2.strokeStyle=ink;
 
