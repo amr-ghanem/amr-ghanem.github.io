@@ -358,7 +358,7 @@ figcaption p{font-size:0.95rem;color:var(--ink-soft);max-width:54ch;line-height:
   .hstep::before{content:"";top:78px;left:38px;width:2px;height:calc(100% - 78px);background:var(--rule);display:block}
   .hstep:first-child::before{display:block}
   .hstep:last-child::before{display:none}
-  .hstep::after{content:"";top:auto;bottom:20px;left:31px;border-left:7px solid transparent;border-right:7px solid transparent;border-top:9px solid var(--rule);border-bottom:0;display:block}
+  .hstep::after{content:"";top:auto;bottom:20px;left:32px;border-left:7px solid transparent;border-right:7px solid transparent;border-top:9px solid var(--rule);border-bottom:0;display:block}
   .hstep:first-child::after{display:block}
   .hstep:last-child::after{display:none}
 }
@@ -367,7 +367,7 @@ figcaption p{font-size:0.95rem;color:var(--ink-soft);max-width:54ch;line-height:
   .hdot{width:58px;height:58px}
   .hglyph{width:34px;height:26px}
   .hstep::before{top:58px;left:28px;height:calc(100% - 58px)}
-  .hstep::after{left:21px}
+  .hstep::after{left:22px}
 }
 
 /* ---------- research images ---------- */
