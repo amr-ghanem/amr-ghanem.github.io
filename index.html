@@ -684,37 +684,70 @@
       g2.stroke(); g2.globalAlpha=1;
     }
 
-    // --- moment frame: two columns, N floor beams. Damage shows as plastic
-    //     hinges at member ends, which is how engineers actually draw it.
-    //     Symmetric X marks read as bracing, not damage.
-    g2.save();
-    g2.translate(BX,GY);
-    g2.transform(1,0,-lean/BH,1,0,0);
-
-    g2.strokeStyle=ink; g2.lineWidth=2.4; g2.lineCap='round';
-    g2.beginPath(); g2.moveTo(0,0);  g2.lineTo(0,-BH);  g2.stroke();
-    g2.beginPath(); g2.moveTo(BW,0); g2.lineTo(BW,-BH); g2.stroke();
-    for(var f=0;f<=N;f++){
-      var fy=-storey*f;
-      g2.beginPath(); g2.moveTo(0,fy); g2.lineTo(BW,fy); g2.stroke();
+    // --- moment frame in isometric: two bays of frame, front and back, tied by
+    //     transverse beams at every floor. Sway is applied per-point rather than
+    //     by a shear transform, because the back frame has to lean with the
+    //     front one at the same height, not at the same screen y.
+    var DX = 32, DY = -17;                       // depth vector to the back frame
+    function sx(h){ return lean * (h/BH); }      // lateral offset at height h
+    function P(cx, h, back){                     // frame point -> screen point
+      return { x: BX + cx + sx(h) + (back?DX:0), y: GY - h + (back?DY:0) };
     }
+    function seg(a,b){ g2.beginPath(); g2.moveTo(a.x,a.y); g2.lineTo(b.x,b.y); g2.stroke(); }
+
+    g2.lineCap='round'; g2.strokeStyle=ink;
+
+    // back frame first (painter's order), dimmed to sit behind
+    g2.globalAlpha=0.38; g2.lineWidth=1.8;
+    seg(P(0,0,1),  P(0,BH,1));
+    seg(P(BW,0,1), P(BW,BH,1));
+    for(var fb=0; fb<=N; fb++){ var hb=storey*fb; seg(P(0,hb,1), P(BW,hb,1)); }
+
+    // transverse beams tying the two frames
+    g2.globalAlpha=0.55; g2.lineWidth=1.6;
+    for(var ft=0; ft<=N; ft++){
+      var ht=storey*ft;
+      seg(P(0,ht,0),  P(0,ht,1));
+      seg(P(BW,ht,0), P(BW,ht,1));
+    }
+
+    // front frame
+    g2.globalAlpha=1; g2.lineWidth=2.4;
+    seg(P(0,0,0),  P(0,BH,0));
+    seg(P(BW,0,0), P(BW,BH,0));
+    for(var ff=0; ff<=N; ff++){ var hf=storey*ff; seg(P(0,hf,0), P(BW,hf,0)); }
     g2.lineCap='butt';
 
-    // plastic hinges - form at the base first, work upward
+    // Plastic hinges where capacity design puts them: BEAM ends at each floor,
+    // and COLUMN bases at the foundation. The previous version marked column
+    // ends at every storey, which is a weak-column soft-storey mechanism -
+    // the failure a strong-column/weak-beam frame is detailed to avoid.
     if(dam>0.05){
-      for(var s2=0;s2<N;s2++){
-        var inten=Math.min(1, dam*1.7 - s2*0.28);
+      var inset = 11;
+      for(var s2=1; s2<=N; s2++){                       // floor beams, low to high
+        var inten=Math.min(1, dam*1.7 - (s2-1)*0.28);
         if(inten<=0.06) continue;
-        var yb=-storey*s2, yt=-storey*(s2+1);
-        var r=3.2+inten*2.6;
-        g2.fillStyle=mark; g2.globalAlpha=0.35+inten*0.65;
-        [[0,yb+9],[BW,yb+9],[0,yt-9],[BW,yt-9]].forEach(function(pt){
-          g2.beginPath(); g2.arc(pt[0],pt[1],r,0,Math.PI*2); g2.fill();
-        });
-        g2.globalAlpha=1;
+        var h2=storey*s2, r=3.0+inten*2.4;
+        g2.fillStyle=mark;
+        // back frame beam ends, faint
+        g2.globalAlpha=(0.35+inten*0.65)*0.4;
+        [P(inset,h2,1), P(BW-inset,h2,1)].forEach(function(pt){
+          g2.beginPath(); g2.arc(pt.x,pt.y,r*0.85,0,Math.PI*2); g2.fill(); });
+        // front frame beam ends
+        g2.globalAlpha=0.35+inten*0.65;
+        [P(inset,h2,0), P(BW-inset,h2,0)].forEach(function(pt){
+          g2.beginPath(); g2.arc(pt.x,pt.y,r,0,Math.PI*2); g2.fill(); });
       }
+      // column bases - the one place columns are expected to hinge
+      var baseInt=Math.min(1,dam*1.7), rb=3.0+baseInt*2.4;
+      g2.globalAlpha=(0.35+baseInt*0.65)*0.4;
+      [P(0,0,1),P(BW,0,1)].forEach(function(pt){
+        g2.beginPath(); g2.arc(pt.x,pt.y,rb*0.85,0,Math.PI*2); g2.fill(); });
+      g2.globalAlpha=0.35+baseInt*0.65;
+      [P(0,0,0),P(BW,0,0)].forEach(function(pt){
+        g2.beginPath(); g2.arc(pt.x,pt.y,rb,0,Math.PI*2); g2.fill(); });
+      g2.globalAlpha=1;
     }
-    g2.restore();
 
     // --- tsunami drag onto the wetted face
     if(dep>0.02){
