@@ -149,6 +149,7 @@ p{margin:0 0 14px;max-width:86ch}
 .lede{font-size:var(--t-lg);font-weight:300;font-style:italic;line-height:1.42;color:var(--ink-soft);max-width:62ch}
 
 /* ---------- hero ---------- */
+.hero picture{display:block}
 .hero{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:72px;align-items:start;padding:var(--s-4) 0 var(--s-3)}
 .hero-side{display:block}
 .hero-text h1{font-size:var(--t-display);line-height:1.04;letter-spacing:-.03em;margin:0 0 12px;max-width:14ch;text-wrap:balance}
