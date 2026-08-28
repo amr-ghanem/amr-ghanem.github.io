@@ -3,29 +3,56 @@
    labels; IBM Plex Mono only where digits need to line up.
    Palette: near-black with a green bias, cool paper, deep pine-teal accent.
    Amber and rust are reserved strictly for data marks. */
+/* ============================================================ THEME
+   Two colours and two greys, deliberately. The palette used to run five
+   near-identical greys (ground/sheet/sunk, rule/rule-soft) because cards
+   needed fills and borders. Without cards, a surface is just the ground with
+   space around it, so the extra tones have nothing to do.
+
+   Ground is near-white rather than the old tinted #EFF1EF: when the page
+   itself is faintly green, the accent reads as a darker shade of the
+   background instead of a decision.
+
+   --data2 (green) and --data4 (rust) are retained ONLY for the research
+   figures, which encode multiple series. Interface colour is teal and gold. */
 :root{
-  --ground:#EFF1EF; --sheet:#FAFAF8; --sunk:#E4E8E5;
-  --ink:#131E1C; --ink-soft:#3B4A47; --ink-mute:#6E7B78;
-  --rule:#C7CFCB; --rule-soft:#DCE2DE;
-  --accent:#14574E; --accent-soft:#DCE9E5; --accent-deep:#0B3B35;
-  /* data3 darkened from #A8792B: at 1.8:1 on the light ground it was too pale
-     to carry text and marginal even as a graphic. #8A6119 reads ~4.8:1 and is
-     still unmistakably the same gold. */
+  --ground:#FBFBFA; --sheet:#FBFBFA; --sunk:#F2F3F1;
+  --ink:#14201E; --ink-soft:#46534F; --ink-mute:#6A7571;
+  --rule:#C4CBC6; --rule-soft:#D9DED9;
+  --accent:#14574E; --accent-soft:#E4EDEA; --accent-deep:#0B3B35;
+  /* gold darkened from #A8792B: 1.8:1 on a light ground was too pale for text
+     and marginal as a graphic. #8A6119 reads ~4.8:1 and is the same gold. */
   --data1:#14574E; --data2:#4A8C6B; --data3:#8A6119; --data4:#A8482B;
   --lw-light:block; --lw-dark:none; --lw-plate:transparent; --lw-pad:0; --lw-mute:.66;
+
+  /* one type scale, seven steps. Everything picks from these. */
+  --t-xs:0.74rem; --t-sm:0.85rem; --t-base:0.96rem; --t-md:1.1rem;
+  --t-lg:1.36rem; --t-xl:2.05rem; --t-display:clamp(2.7rem,5.4vw,4.2rem);
+  /* one spacing scale */
+  --measure:68ch;--s-1:8px; --s-2:16px; --s-3:28px; --s-4:48px; --s-5:80px; --s-6:128px;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --ground:#0B1211; --sheet:#111A18; --sunk:#080E0D;
-  --ink:#E8EBE8; --ink-soft:#B2BEBA; --ink-mute:#7D8A86;
-  --rule:#26332F; --rule-soft:#1A2422;
-  --accent:#6BBFAE; --accent-soft:#123029; --accent-deep:#9AD8C9;
+  /* Dark is not the light theme inverted. The ground lifts off pure black so
+     large areas do not smear on OLED, the ink stops short of pure white to cut
+     halation on a serif at display size, and the rules are only just visible -
+     on a dark ground a hairline reads far heavier than the same value does on
+     a light one. */
+  --ground:#0D1413; --sheet:#0D1413; --sunk:#151E1C;
+  --ink:#E9ECE9; --ink-soft:#B6C1BD; --ink-mute:#828D89;
+  --rule:#333F3C; --rule-soft:#252F2D;
+  --accent:#6BBFAE; --accent-soft:#122A26; --accent-deep:#9AD8C9;
   --data1:#6BBFAE; --data2:#8FCC9F; --data3:#D8AB57; --data4:#DE8163;
 }}
 :root[data-theme="dark"]{
-  --ground:#0B1211; --sheet:#111A18; --sunk:#080E0D;
-  --ink:#E8EBE8; --ink-soft:#B2BEBA; --ink-mute:#7D8A86;
-  --rule:#26332F; --rule-soft:#1A2422;
-  --accent:#6BBFAE; --accent-soft:#123029; --accent-deep:#9AD8C9;
+  /* Dark is not the light theme inverted. The ground lifts off pure black so
+     large areas do not smear on OLED, the ink stops short of pure white to cut
+     halation on a serif at display size, and the rules are only just visible -
+     on a dark ground a hairline reads far heavier than the same value does on
+     a light one. */
+  --ground:#0D1413; --sheet:#0D1413; --sunk:#151E1C;
+  --ink:#E9ECE9; --ink-soft:#B6C1BD; --ink-mute:#828D89;
+  --rule:#333F3C; --rule-soft:#252F2D;
+  --accent:#6BBFAE; --accent-soft:#122A26; --accent-deep:#9AD8C9;
   --data1:#6BBFAE; --data2:#8FCC9F; --data3:#D8AB57; --data4:#DE8163;
 }
 
@@ -48,14 +75,16 @@ html{scroll-behavior:smooth;font-size:17.5px}
 body{
   background:var(--ground); color:var(--ink);
   font-family:"Newsreader",Georgia,"Times New Roman",serif;
-  font-size:19px; font-weight:400; line-height:1.56; margin:0;
+  font-size:19px; font-weight:400; line-height:1.62; margin:0;
   -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
 }
 .skip{position:absolute;left:-9999px}
 .skip:focus{left:12px;top:12px;background:var(--accent);color:#fff;padding:8px 16px;z-index:99}
 
 :root{--r-lg:14px;--r:10px;--r-sm:6px}
-main,header.site,footer.site{max-width:1240px;margin:0 auto;padding:0 40px}
+main,header.site,footer.site{max-width:1180px;margin:0 auto;padding:0 40px}
+main>section,main>div.exp-wrap,main>figure{margin:0 0 var(--s-6)}
+main>section:last-child{margin-bottom:var(--s-5)}
 a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:2px}
 a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:1px}
 
@@ -63,14 +92,16 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
 .eyebrow,h2.rule,.lab,.flabel,nav,.btn,.credit,.evidence,.legend,.meta,.idx,.when,.colophon,.flab,.fignum,.axt{
   font-family:"Libre Franklin",-apple-system,Segoe UI,sans-serif;
 }
-.num,.cites,.meta,.idx,.when,.fignum{font-family:"IBM Plex Mono",monospace}
+/* Mono is for things that are actually machine-readable: counts, years, DOIs.
+   It was on sixteen rules, which made it texture rather than signal. */
+.num,.idx,.when,.fignum{font-family:"IBM Plex Mono",monospace}
 
 /* ---------- header ---------- */
 header.site{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
 .wordmark{text-decoration:none;color:var(--ink);display:flex;align-items:baseline;gap:8px}
 .wordmark strong{font-weight:400;font-size:1.5rem;letter-spacing:-.014em}
-.wordmark span{font-family:"IBM Plex Mono",monospace;font-size:0.72rem;letter-spacing:.16em;color:var(--ink-mute);text-transform:uppercase}
-nav{display:flex;gap:24px;font-size:0.82rem;letter-spacing:.07em;text-transform:uppercase}
+.wordmark span{font-family:"IBM Plex Mono",monospace;font-size:var(--t-xs);letter-spacing:.16em;color:var(--ink-mute);text-transform:uppercase}
+nav{display:flex;flex-wrap:wrap;gap:8px 28px;font-size:var(--t-sm);letter-spacing:.07em;text-transform:uppercase}
 /* Same two-colour rule as the icons and the engine: theme teal at rest, the
    engine's gold when a page is current or being pointed at. The underline
    follows, so the marker never disagrees with the label it sits under. */
@@ -91,7 +122,7 @@ header.site{
   header.site{background:color-mix(in srgb, var(--ground) 88%, transparent);backdrop-filter:blur(8px)}
 }
 .headright{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
-.hicons{display:flex;align-items:center;gap:16px;padding-left:24px;border-left:1px solid var(--rule)}
+.hicons{display:flex;align-items:center;gap:5px;padding-left:20px;border-left:1px solid var(--rule)}
 .hicons a{color:var(--accent);display:flex;text-decoration:none}
 .hicons a:hover{color:var(--data3)}
 .hicons .icon{width:1.15rem;height:1.15rem;opacity:1}
@@ -102,48 +133,54 @@ header.site{
   .headright{gap:16px}
 }
 /* ---------- type ---------- */
-section,.exp-wrap{padding:48px 0 0}
-.eyebrow{font-size:0.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-mute);margin:0 0 24px;line-height:1.9}
+section,.exp-wrap{padding:0}
+.eyebrow{font-size:var(--t-xs);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-mute);margin:0 0 24px;line-height:1.9}
 .eyebrow span{color:var(--accent)}
-h1{font-weight:200;font-size:clamp(2.5rem,6.8vw,4.4rem);line-height:1.03;letter-spacing:-.026em;margin:0 0 24px;text-wrap:balance}
-h2.rule{font-weight:500;font-size:0.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin:0 0 24px;padding-bottom:12px;border-bottom:1px solid var(--rule)}
-h3{font-weight:400;font-size:1.32rem;line-height:1.3;letter-spacing:-.012em;margin:0 0 8px}
+h1{font-weight:200;font-size:var(--t-display);line-height:1.04;letter-spacing:-.028em;margin:0 0 var(--s-3);text-wrap:balance}
+/* Section headings become serif and large. They were 0.72rem uppercase sans
+   with a rule under them - a label, not a heading. The serif was carrying five
+   rules against the sans's twenty-six, which is why the page never read as a
+   serif site. */
+h2.rule{font-family:"Newsreader",Georgia,serif;font-weight:300;font-size:var(--t-xl);
+  letter-spacing:-.02em;text-transform:none;color:var(--ink);
+  margin:0 0 var(--s-3);padding-bottom:0;border-bottom:0;line-height:1.14;text-wrap:balance}
+h3{font-family:"Newsreader",Georgia,serif;font-weight:400;font-size:var(--t-lg);line-height:1.28;letter-spacing:-.012em;margin:0 0 var(--s-1)}
 p{margin:0 0 14px;max-width:86ch}
-.lede{font-size:1.28rem;font-weight:300;font-style:italic;line-height:1.42;color:var(--ink-soft);max-width:62ch}
+.lede{font-size:var(--t-lg);font-weight:300;font-style:italic;line-height:1.42;color:var(--ink-soft);max-width:62ch}
 
 /* ---------- hero ---------- */
-.hero{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:72px;align-items:start;padding:48px 0 32px}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:72px;align-items:start;padding:var(--s-4) 0 var(--s-3)}
 .hero-side{display:block}
-.hero-text h1{font-size:clamp(2.6rem,5.2vw,4rem);line-height:1.04;letter-spacing:-.03em;margin:0 0 12px;max-width:14ch;text-wrap:balance}
-.hstatsrc{font-family:"Libre Franklin",sans-serif;font-size:0.72rem;color:var(--ink-mute);margin:0 0 24px}
+.hero-text h1{font-size:var(--t-display);line-height:1.04;letter-spacing:-.03em;margin:0 0 12px;max-width:14ch;text-wrap:balance}
+.hstatsrc{font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);color:var(--ink-mute);margin:0 0 24px}
 .hstatsrc a{color:var(--ink-mute);text-decoration-color:var(--rule)}
 .hstatsrc a:hover{color:var(--accent)}
 .hero-claim{font-family:"Newsreader",Georgia,serif;font-weight:300;font-size:clamp(1.35rem,2.1vw,1.72rem);line-height:1.22;letter-spacing:-.015em;color:var(--accent);margin:0 0 20px;max-width:none}
-.hero .lede{font-size:1.16rem;font-style:italic;font-weight:300;max-width:64ch;margin:0 0 24px}
+.hero .lede{font-size:var(--t-md);font-style:italic;font-weight:300;max-width:64ch;margin:0 0 24px}
 .roles{list-style:none;margin:0 0 22px;padding:0;display:grid;gap:13px}
-.roles li{display:block;font-size:0.95rem;line-height:1.45}
+.roles li{display:block;font-size:var(--t-base);line-height:1.45}
 /* Both roles take the same shape: title, then organisation beneath it. Running
    them inline with a middot meant one role fitted on a line and the other did
    not, so the pair never looked like a pair. */
-.rl{font-family:"Libre Franklin",sans-serif;font-size:0.88rem;color:var(--ink-mute);display:block}
+.rl{font-family:"Libre Franklin",sans-serif;font-size:var(--t-sm);color:var(--ink-mute);display:block}
 /* The two organisation names carry the gold, so the palette's second colour
    appears in the hero type and not only on hover. The role titles beside them
    stay muted, which lets the institutions read first. */
-.ro{font-family:"Libre Franklin",sans-serif;font-size:0.88rem;font-weight:500;color:var(--data3);
+.ro{font-family:"Libre Franklin",sans-serif;font-size:var(--t-sm);font-weight:500;color:var(--data3);
   display:block;white-space:nowrap}
 .roles li{display:block}
 .herostats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;background:none;border:none;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin:0 0 10px;padding:16px 0;max-width:440px}
 .herostats>div{background:none;padding:0;text-align:left}
 .herostats>div+div{border-left:1px solid var(--rule-soft);padding-left:20px}
 .herostats>div:not(:last-child){padding-right:20px}
-.herostats dt{font-family:"Libre Franklin",sans-serif;font-size:0.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute);margin:0 0 4px;line-height:1.35}
-.herostats dd{font-family:"IBM Plex Mono",monospace;font-size:1.28rem;color:var(--accent);margin:0;font-variant-numeric:tabular-nums;line-height:1}
+.herostats dt{font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute);margin:0 0 4px;line-height:1.35}
+.herostats dd{font-family:"IBM Plex Mono",monospace;font-size:var(--t-lg);color:var(--accent);margin:0;font-variant-numeric:tabular-nums;line-height:1}
 .hero-portrait{margin:0}
-.portrait{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;border:1px solid var(--rule);border-radius:var(--r)}
+.portrait{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;border-radius:var(--r)}
 .monogram{display:flex;align-items:center;justify-content:center;background:var(--sunk);border:1px solid var(--rule);border-radius:var(--r)}
 .monogram span{font-weight:200;font-size:4.8rem;color:var(--ink-mute);letter-spacing:.05em}
 .cta{display:flex;gap:16px;flex-wrap:wrap;margin-top:32px}
-.btn{display:inline-block;font-size:0.84rem;letter-spacing:.11em;text-transform:uppercase;text-decoration:none;padding:12px 24px;background:var(--accent);color:var(--sheet);border:1px solid var(--accent);border-radius:var(--r-sm)}
+.btn{display:inline-block;font-size:var(--t-sm);letter-spacing:.11em;text-transform:uppercase;text-decoration:none;padding:12px 24px;background:var(--accent);color:var(--sheet);border:1px solid var(--accent);border-radius:var(--r-sm)}
 .btn:hover{background:var(--accent-deep);border-color:var(--accent-deep)}
 .btn.ghost{background:transparent;color:var(--accent);border-color:var(--rule)}
 .btn.ghost:hover{border-color:var(--accent);background:var(--accent-soft)}
@@ -151,12 +188,12 @@ p{margin:0 0 14px;max-width:86ch}
 /* ---------- story ---------- */
 .chapter{display:grid;grid-template-columns:210px 1fr;gap:32px;padding:24px 0;border-top:1px solid var(--rule-soft)}
 .chapter:first-of-type{border-top:none;padding-top:0}
-.chapter h3{font-style:italic;font-weight:300;color:var(--accent);font-size:1.2rem;margin:0}
-.chapter p{font-size:1.06rem;color:var(--ink-soft);max-width:86ch}
+.chapter h3{font-style:italic;font-weight:300;color:var(--accent);font-size:var(--t-md);margin:0}
+.chapter p{font-size:var(--t-md);color:var(--ink-soft);max-width:86ch}
 .chapter p:last-child{margin-bottom:0}
 
 /* ---------- contribution ---------- */
-.stats{display:grid;grid-template-columns:repeat(var(--st-n,5),minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:32px;border-radius:var(--r);overflow:hidden}
+.stats{display:grid;grid-template-columns:repeat(var(--st-n,3),minmax(0,1fr));gap:var(--s-4);margin-bottom:var(--s-4)}
 /* When the row wraps, the leftover cell is empty - and the container's own
    background shows through it as a solid block. Stretching the last item over
    the remainder fills the grid instead. The nth-child tests are count-agnostic:
@@ -179,27 +216,27 @@ p{margin:0 0 14px;max-width:86ch}
   .stats>div{grid-column:span 2}
   .stats>div:last-child:nth-child(odd){grid-column:span 4}
 }
-.stats>div{background:var(--sheet);padding:22px 16px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
+.stats>div{padding:0;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:var(--s-1)}
 .sicon{width:34px;height:28px;color:var(--accent);margin-bottom:4px;display:block}
-.num{font-size:2.5rem;font-weight:400;line-height:1;color:var(--accent);margin:0 0 8px;font-variant-numeric:tabular-nums;letter-spacing:-.03em}
-.lab{font-size:0.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute);margin:0;line-height:1.5}
-.statsrc{font-family:"Libre Franklin",sans-serif;font-size:0.84rem;line-height:1.55;color:var(--ink-mute);margin:-8px 0 24px;max-width:80ch}
+.num{font-size:var(--t-xl);font-weight:400;line-height:1;color:var(--accent);margin:0 0 8px;font-variant-numeric:tabular-nums;letter-spacing:-.03em}
+.lab{font-size:var(--t-xs);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute);margin:0;line-height:1.5}
+.statsrc{font-family:"Libre Franklin",sans-serif;font-size:var(--t-sm);line-height:1.55;color:var(--ink-mute);margin:-8px 0 24px;max-width:80ch}
 .statsrc strong{color:var(--ink-soft);font-weight:500}
 .funders{margin-bottom:24px}
-.flabel{font-size:0.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);margin:0 0 16px}
+.flabel{font-size:var(--t-xs);letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);margin:0 0 16px}
 .funders ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
 .funders li{display:grid;grid-template-columns:92px 1fr;gap:16px;align-items:baseline}
-.funders strong{font-weight:500;font-size:0.95rem;color:var(--accent)}
-.funders span{font-size:0.95rem;color:var(--ink-soft)}
-.venues{font-size:0.95rem;color:var(--ink-soft);max-width:none;padding-top:24px;border-top:1px solid var(--rule-soft)}
-.venues span{font-family:"Libre Franklin",sans-serif;font-size:0.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-mute);margin-right:12px}
+.funders strong{font-weight:500;font-size:var(--t-base);color:var(--accent)}
+.funders span{font-size:var(--t-base);color:var(--ink-soft)}
+.venues{font-size:var(--t-base);color:var(--ink-soft);max-width:var(--measure);padding-top:24px;border-top:1px solid var(--rule-soft)}
+.venues span{font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-mute);margin-right:12px}
 
 /* ---------- expertise ---------- */
 .exp-wrap{padding-bottom:0}
 .exp-wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:40px 32px}
 .exp-wrap>h2{grid-column:1/-1;margin-bottom:0}
 .xcard{display:flex;flex-direction:column;align-items:center;text-align:center}
-.xring{width:96px;height:96px;border:1px solid var(--rule);border-radius:50%;background:var(--sheet);display:grid;place-items:center;margin:0 0 22px}
+.xring{width:96px;height:96px;display:grid;place-items:center;margin:0 0 var(--s-2)}
 .xglyph{width:52px;height:39px;color:var(--accent);display:block}
 /* .acc marks the emphasised part of a glyph. It used to pin those shapes to
    the accent colour outright, which meant a glyph whose shapes are ALL .acc -
@@ -209,15 +246,17 @@ p{margin:0 0 14px;max-width:86ch}
    emphasis survives through the opacity attributes already in the artwork. */
 .xglyph .acc{stroke:currentColor}
 .xglyph .acc[fill]{fill:currentColor}
-.xcard h3{font-size:1.16rem;margin:0 0 8px;max-width:none}
-.xcard .exp-lead{font-size:0.95rem;max-width:none;margin-bottom:14px}
-.xcard .evidence li{max-width:none;font-size:0.84rem}
+.xcard h3{font-size:var(--t-md);margin:0 0 8px;max-width:none}
+.xcard h3 a{color:inherit;text-decoration:none;border-bottom:1px solid var(--rule)}
+.xcard h3 a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+.xcard .exp-lead{font-size:var(--t-base);max-width:var(--measure);margin-bottom:14px}
+.xcard .evidence li{max-width:none;font-size:var(--t-sm)}
 @media(max-width:1200px){.exp-wrap{grid-template-columns:repeat(2,minmax(0,1fr));gap:44px 40px}}
 @media(max-width:620px){.exp-wrap{grid-template-columns:1fr;gap:34px}}
-.idx{font-size:0.76rem;color:var(--ink-mute);margin:8px 0 0;font-variant-numeric:tabular-nums}
-.exp-lead{font-size:1.06rem;color:var(--ink-soft);max-width:72ch;margin-bottom:16px}
+.idx{font-size:var(--t-xs);color:var(--ink-mute);margin:8px 0 0;font-variant-numeric:tabular-nums}
+.exp-lead{font-size:var(--t-md);color:var(--ink-soft);max-width:72ch;margin-bottom:16px}
 .evidence{list-style:none;margin:0;padding:0;display:grid;gap:8px}
-.evidence li{font-size:0.84rem;color:var(--ink-soft);padding-left:16px;position:relative;line-height:1.55;max-width:74ch}
+.evidence li{font-size:var(--t-sm);color:var(--ink-soft);padding-left:16px;position:relative;line-height:1.55;max-width:74ch}
 .evidence li::before{content:"";position:absolute;left:0;top:.62em;width:8px;height:1px;background:var(--accent)}
 
 /* publication groups: a rule and real space between types, a serif heading
@@ -227,9 +266,9 @@ p{margin:0 0 14px;max-width:86ch}
 .pubgroup{padding-top:52px;margin-top:52px;border-top:1px solid var(--rule)}
 .pubgroup:first-of-type{border-top:none;margin-top:0;padding-top:4px}
 .pubgroup-head{display:flex;align-items:baseline;gap:14px;margin:0 0 26px;padding-bottom:14px;border-bottom:1px solid var(--rule-soft)}
-.pubgroup-head h2{font-family:"Newsreader",Georgia,serif;font-weight:300;font-size:1.7rem;letter-spacing:-.02em;line-height:1.1;color:var(--accent);margin:0}
-.pubgroup-n{font-family:"IBM Plex Mono",monospace;font-size:0.76rem;color:var(--accent);border:1px solid var(--rule);border-radius:999px;padding:3px 11px;line-height:1;font-variant-numeric:tabular-nums}
-@media(max-width:580px){.pubgroup{padding-top:36px;margin-top:36px}.pubgroup-head h2{font-size:1.4rem}}
+.pubgroup-head h2{font-family:"Newsreader",Georgia,serif;font-weight:300;font-size:var(--t-xl);letter-spacing:-.02em;line-height:1.1;color:var(--accent);margin:0}
+.pubgroup-n{font-family:"IBM Plex Mono",monospace;font-size:var(--t-xs);color:var(--accent);border:1px solid var(--rule);border-radius:999px;padding:3px 11px;line-height:1;font-variant-numeric:tabular-nums}
+@media(max-width:580px){.pubgroup{padding-top:36px;margin-top:36px}.pubgroup-head h2{font-size:var(--t-lg)}}
 
 /* the research page lists fragility work, so its header carries a fragility
    figure beside the type - quiet, but not decoration: it is the subject */
@@ -253,31 +292,31 @@ svg.fragility .c1{stroke:var(--data1)} svg.fragility .c2{stroke:var(--data2)}
 svg.fragility .c3{stroke:var(--data3)} svg.fragility .c4{stroke:var(--data4)}
 svg.fragility .dot.c1{fill:var(--data1)} svg.fragility .dot.c2{fill:var(--data2)}
 svg.fragility .dot.c3{fill:var(--data3)} svg.fragility .dot.c4{fill:var(--data4)}
-figcaption p{font-size:0.95rem;color:var(--ink-soft);max-width:54ch;line-height:1.5}
-.fignum{font-size:0.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0 0 12px}
+figcaption p{font-size:var(--t-base);color:var(--ink-soft);max-width:54ch;line-height:1.5}
+.fignum{font-size:var(--t-xs);letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0 0 12px}
 .legend{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
-.legend li{font-family:"IBM Plex Mono",monospace;font-size:0.72rem;color:var(--ink-soft);display:flex;align-items:center;gap:8px}
+.legend li{font-family:"IBM Plex Mono",monospace;font-size:var(--t-xs);color:var(--ink-soft);display:flex;align-items:center;gap:8px}
 .legend em{color:var(--ink-mute);font-style:normal}
 .legend .sw{width:15px;height:2px;flex:none}
 .legend .c1 .sw{background:var(--data1)} .legend .c2 .sw{background:var(--data2)}
 .legend .c3 .sw{background:var(--data3)} .legend .c4 .sw{background:var(--data4)}
 
 /* ---------- interactive explorer ---------- */
-.explorer{padding:48px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin-top:48px}
+.explorer{padding:0}
 .exp-intro{max-width:none;margin-bottom:32px}
-.exp-intro>p{max-width:none;margin:16px 0 0}
+.exp-intro>p{max-width:var(--measure);margin:16px 0 0}
 .exp-introhead{display:block}
 .exp-introhead h2{margin:0}
 
-.exp-intro h2{font-family:"Newsreader",Georgia,serif;font-weight:300;font-size:clamp(1.6rem,3.6vw,2.2rem);letter-spacing:-.02em;line-height:1.16;margin:0 0 16px;text-wrap:balance}
-.exp-intro>p{color:var(--ink-soft);font-size:1.06rem}
-.exp-panel{display:grid;grid-template-columns:340px 1fr;gap:36px;align-items:start;background:var(--sheet);border:1px solid var(--rule);padding:32px;border-radius:var(--r-lg)}
+.exp-intro h2{font-family:"Newsreader",Georgia,serif;font-weight:300;font-size:clamp(1.6rem,3.6vw,2.05rem);letter-spacing:-.02em;line-height:1.16;margin:0 0 16px;text-wrap:balance}
+.exp-intro>p{color:var(--ink-soft);font-size:var(--t-md)}
+.exp-panel{display:grid;grid-template-columns:340px 1fr;gap:var(--s-4);align-items:start;padding:0}
 .exp-chart{margin-bottom:24px}
 .exp-controls{display:grid;grid-template-columns:1fr;gap:14px;padding-top:18px;margin-top:16px;border-top:1px solid var(--rule-soft)}
 /* stage selector: the two hazards are separated in time, so the figure shows
    one at a time and this chooses which */
 .phase{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:16px}
-.ph{font-family:"Libre Franklin",sans-serif;font-size:0.76rem;letter-spacing:.06em;
+.ph{font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);letter-spacing:.06em;
     padding:9px 12px;border:1px solid var(--rule);border-radius:var(--r-sm);
     background:none;color:var(--ink-mute);cursor:pointer;text-align:center;
     transition:color .28s ease,border-color .28s ease,background-color .28s ease}
@@ -298,16 +337,15 @@ figcaption p{font-size:0.95rem;color:var(--ink-soft);max-width:54ch;line-height:
 #fragChart .mark{stroke:var(--data4);stroke-width:1.2;stroke-dasharray:3 3}
 #fragChart .markdot{fill:var(--data4);stroke:var(--sheet);stroke-width:2}
 #fragChart .medline{stroke:var(--ink-mute);stroke-width:1;stroke-dasharray:2 3;opacity:.5}
-#fragChart .medline{stroke:var(--ink-mute);stroke-width:1;stroke-dasharray:2 3;opacity:.5}
 #fragChart .medlabel{font-family:"IBM Plex Mono",monospace;font-size:9px;fill:var(--ink-mute)}
 
-.readout{border-left:3px solid var(--data4);padding:2px 0 2px 16px;margin-bottom:24px}
-.ro-num{font-family:"IBM Plex Mono",monospace;font-size:2.6rem;line-height:1;color:var(--data4);margin:0 0 12px;font-variant-numeric:tabular-nums;letter-spacing:-.03em}
-.ro-text{font-size:0.95rem;color:var(--ink-soft);margin:0;line-height:1.65;flex:1 1 340px;max-width:none}
+.readout{border-left:3px solid var(--accent);padding:2px 0 2px 16px;margin-bottom:24px}
+.ro-num{font-family:"IBM Plex Mono",monospace;font-size:2.6rem;line-height:1;color:var(--accent);margin:0 0 12px;font-variant-numeric:tabular-nums;letter-spacing:-.03em}
+.ro-text{font-size:var(--t-base);color:var(--ink-soft);margin:0;line-height:1.65;flex:1 1 340px;max-width:var(--measure)}
 
 .ctrl{margin-bottom:0}
-.ctrl label{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-family:"Libre Franklin",sans-serif;font-size:0.72rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:6px}
-.ctrl label span{font-family:"IBM Plex Mono",monospace;font-size:0.88rem;letter-spacing:0;text-transform:none;color:var(--accent);font-variant-numeric:tabular-nums}
+.ctrl label{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);letter-spacing:.13em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:6px}
+.ctrl label span{font-family:"IBM Plex Mono",monospace;font-size:var(--t-sm);letter-spacing:0;text-transform:none;color:var(--accent);font-variant-numeric:tabular-nums}
 .ctrl input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:2px;background:var(--rule);outline:none;margin:0 0 5px}
 .ctrl input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:16px;height:16px;border-radius:50%;background:var(--accent);cursor:grab;border:none}
 .ctrl input[type=range]::-webkit-slider-thumb:active{cursor:grabbing}
@@ -316,11 +354,11 @@ figcaption p{font-size:0.95rem;color:var(--ink-soft);max-width:54ch;line-height:
 .ctrl input[type=range]:disabled{cursor:not-allowed}
 .ctrl input[type=range]:disabled::-webkit-slider-thumb{background:var(--ink-mute);cursor:not-allowed}
 .ctrl input[type=range]:disabled::-moz-range-thumb{background:var(--ink-mute);cursor:not-allowed}
-.hint{font-size:0.84rem;color:var(--ink-mute);margin:0;line-height:1.4;max-width:none}
-.disclaim{font-family:"Libre Franklin",sans-serif;font-size:0.84rem;line-height:1.65;color:var(--ink-mute);margin:16px 0 0;grid-column:1/-1;max-width:88ch}
-.eqn{font-family:"IBM Plex Mono",monospace;font-size:0.84rem;color:var(--ink-mute);margin:16px 0 0;padding-top:16px;border-top:1px solid var(--rule-soft)}
+.hint{font-size:var(--t-sm);color:var(--ink-mute);margin:0;line-height:1.4;max-width:none}
+.disclaim{font-family:"Libre Franklin",sans-serif;font-size:var(--t-sm);line-height:1.65;color:var(--ink-mute);margin:16px 0 0;grid-column:1/-1;max-width:var(--measure)}
+.eqn{font-family:"IBM Plex Mono",monospace;font-size:var(--t-sm);color:var(--ink-mute);margin:16px 0 0;padding-top:16px;border-top:1px solid var(--rule-soft)}
 
-@media(max-width:860px){.exp-panel{grid-template-columns:1fr;gap:32px;padding:24px}}
+@media(max-width:860px){.exp-panel{grid-template-columns:1fr;gap:32px;padding:0}}
 /* ---------- tsunami explorer ---------- */
 .tsu-panel{}
 .tsu-views{display:grid;grid-template-columns:0.75fr 1fr;gap:32px;align-items:center;margin-bottom:24px}
@@ -346,23 +384,23 @@ figcaption p{font-size:0.95rem;color:var(--ink-soft);max-width:54ch;line-height:
 @media(max-width:860px){.tsu-views{grid-template-columns:0.8fr 1fr;gap:16px}}
 @media(max-width:580px){.tsu-views{grid-template-columns:1fr;gap:24px}}
 /* ---------- surface explorer ---------- */
-.mh-struct,.mh-surf{background:var(--sunk);border:1px solid var(--rule-soft);border-radius:var(--r);overflow:hidden}
+.mh-struct,.mh-surf{overflow:hidden}
 .exp-panel canvas{width:100%;height:auto;display:block}
 .exp-top{display:grid;grid-template-columns:auto minmax(340px,1fr);gap:40px;align-items:start}
 .exp-side{display:flex;flex-direction:column;gap:22px}
 .exp-top .mh-struct{display:flex}
 .exp-top .mh-struct canvas{width:auto;height:360px;max-width:100%;margin:0 auto;display:block}
 .mh-surf canvas{width:auto;height:470px;max-width:100%;margin:0 auto;display:block}
-@media(max-width:1040px){.exp-panel{padding:24px}.exp-top{grid-template-columns:1fr;gap:28px}.exp-top .mh-struct canvas{height:300px}.exp-controls{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}}
-.surfwrap{background:var(--sunk);border:1px solid var(--rule-soft);padding:8px;border-radius:var(--r)}
+@media(max-width:1040px){.exp-panel{padding:0}.exp-top{grid-template-columns:1fr;gap:28px}.exp-top .mh-struct canvas{height:300px}.exp-controls{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}}
+.surfwrap{padding:0}
 #surfCanvas{width:100%;height:auto;display:block}
 
 /* ---------- how it works ---------- */
 /* ---------- coupled engine diagram ---------- */
-.engine{margin:0 0 32px;background:var(--sheet);border:1px solid var(--rule);padding:24px;border-radius:var(--r-lg)}
+.engine{margin:0 0 var(--s-4);padding:0}
 .engine svg{width:100%;height:auto;display:block;overflow:visible}
 .engine .ebox{fill:none;stroke:var(--rule);stroke-width:1.6}
-.engine .epanel{fill:var(--sunk);stroke:none}
+.engine .epanel{fill:none;stroke:none}
 .engine .etitle{font-family:"Libre Franklin",sans-serif;font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;fill:var(--ink-mute)}
 .engine .ecode{font-family:"Newsreader",Georgia,serif;font-size:17px;fill:var(--ink)}
 .engine .esub{font-family:"Libre Franklin",sans-serif;font-size:9.5px;fill:var(--ink-mute)}
@@ -422,9 +460,9 @@ figcaption p{font-size:0.95rem;color:var(--ink-soft);max-width:54ch;line-height:
 .engine:hover .eframe line{stroke:var(--accent)}
 .engine:hover .ehyst{stroke:var(--data3)}
 .engine:hover .efit circle{fill:var(--accent)}
-.engine figcaption{font-family:"Libre Franklin",sans-serif;font-size:0.84rem;line-height:1.6;color:var(--ink-mute);margin-top:16px;max-width:none}
-.rnote{font-family:"Libre Franklin",sans-serif;font-size:0.84rem;line-height:1.6;color:var(--ink-mute);margin:24px 0 0;max-width:none}
-@media(max-width:900px){.engine{padding:12px;overflow-x:auto}.engine svg{min-width:660px}}
+.engine figcaption{font-family:"Libre Franklin",sans-serif;font-size:var(--t-sm);line-height:1.6;color:var(--ink-mute);margin-top:16px;max-width:none}
+.rnote{font-family:"Libre Franklin",sans-serif;font-size:var(--t-sm);line-height:1.6;color:var(--ink-mute);margin:24px 0 0;max-width:var(--measure)}
+@media(max-width:900px){.engine{padding:0;overflow-x:auto}.engine svg{min-width:660px}}
 .hsteps{list-style:none;margin:0 0 68px;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0 18px}
 .hstep{display:flex;flex-direction:column;align-items:center;text-align:center;position:relative}
 /* The connector runs node-edge to node-edge and ends in an arrowhead pointing
@@ -441,9 +479,9 @@ figcaption p{font-size:0.95rem;color:var(--ink-soft);max-width:54ch;line-height:
 .hlink{display:none}
 
 
-.hn{font-family:"IBM Plex Mono",monospace;font-size:0.76rem;color:var(--accent);margin:0 0 6px;font-variant-numeric:tabular-nums}
-.hsteps h3{font-size:1.06rem;margin:0 0 8px}
-.hd{font-size:0.84rem;color:var(--ink-soft);margin:0;line-height:1.55;max-width:none}
+.hn{font-family:"IBM Plex Mono",monospace;font-size:var(--t-xs);color:var(--accent);margin:0 0 6px;font-variant-numeric:tabular-nums}
+.hsteps h3{font-size:var(--t-md);margin:0 0 8px}
+.hd{font-size:var(--t-sm);color:var(--ink-soft);margin:0;line-height:1.55;max-width:none}
 /* Six across only when there is genuinely room for it. Below that the old
    layout dropped to three columns and stretched each connector across ~240px
    of empty line - sparse dots on a wire. A vertical timeline keeps the steps
@@ -475,14 +513,14 @@ figcaption p{font-size:0.95rem;color:var(--ink-soft);max-width:54ch;line-height:
 }
 
 /* ---------- research images ---------- */
-.rlede{font-size:1.06rem;color:var(--ink-soft);max-width:90ch;margin:0 0 16px}
-.rstep{display:flex;align-items:baseline;gap:12px;margin:0 0 12px;font-family:"Libre Franklin",sans-serif;font-size:0.72rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-mute)}
-.ryear{font-family:"IBM Plex Mono",monospace;font-size:0.76rem;letter-spacing:0;color:var(--accent);font-variant-numeric:tabular-nums}
+.rlede{font-size:var(--t-md);color:var(--ink-soft);max-width:var(--measure);margin:0 0 16px}
+.rstep{display:flex;align-items:baseline;gap:12px;margin:0 0 12px;font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);letter-spacing:.13em;text-transform:uppercase;color:var(--ink-mute)}
+.ryear{font-family:"IBM Plex Mono",monospace;font-size:var(--t-xs);letter-spacing:0;color:var(--accent);font-variant-numeric:tabular-nums}
 .rgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(264px,1fr));gap:24px}
 .rfig{margin:0}
-.rfig img{width:100%;aspect-ratio:4/3;object-fit:contain;display:block;border:1px solid var(--rule);background:#fff;padding:8px;border-radius:var(--r)}
-.rfig figcaption{font-size:0.84rem;color:var(--ink-soft);margin-top:12px;line-height:1.55}
-.credit{display:block;font-size:0.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute);margin-top:8px}
+.rfig img{width:100%;aspect-ratio:4/3;object-fit:contain;display:block;padding:0;border:1px solid var(--rule)}
+.rfig figcaption{font-size:var(--t-sm);color:var(--ink-soft);margin-top:12px;line-height:1.55}
+.credit{display:block;font-size:var(--t-xs);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute);margin-top:8px}
 
 /* ---------- selected work ---------- */
 .work{display:grid;grid-template-columns:56px 1fr;gap:24px;padding:24px 0;border-top:1px solid var(--rule-soft)}
@@ -490,56 +528,109 @@ figcaption p{font-size:0.95rem;color:var(--ink-soft);max-width:54ch;line-height:
 .work h3{max-width:74ch}
 .work h3 a{color:var(--ink);text-decoration:none}
 .work h3 a:hover{color:var(--accent);text-decoration:underline}
-.meta{font-size:0.76rem;color:var(--ink-mute);margin:8px 0 0;display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.meta{font-size:var(--t-xs);color:var(--ink-mute);margin:8px 0 0;display:flex;gap:16px;flex-wrap:wrap;align-items:center}
 .venue{color:var(--ink-soft)}
 .cites{font-variant-numeric:tabular-nums}
-.tag{font-family:"Libre Franklin",sans-serif;padding:2px 8px;font-size:0.72rem;letter-spacing:.1em;text-transform:uppercase}
-.tag.oa{background:var(--accent-soft);color:var(--accent);border-radius:var(--r-sm)}
-.plain{font-size:0.95rem;color:var(--ink-soft);margin:12px 0 0;max-width:86ch}
-.more{font-family:"Libre Franklin",sans-serif;font-size:0.84rem;letter-spacing:.08em;text-transform:uppercase;margin-top:32px}
+.repnum{font-family:"IBM Plex Mono",monospace;font-size:var(--t-xs);color:var(--ink-mute);letter-spacing:.02em}
+.tag{font-family:"Libre Franklin",sans-serif;padding:2px 8px;font-size:var(--t-xs);letter-spacing:.1em;text-transform:uppercase}
+.tag.oa{background:none;color:var(--accent);border:1px solid var(--rule);border-radius:999px}
+main p,main li{max-width:var(--measure)}
+/* --- writing. No cards: a hairline between entries, same as the publication
+   list, so the two indexes read as one system. */
+main>section.writinghead{margin-bottom:var(--s-5)}
+.posts{display:flex;flex-direction:column}
+.post{padding:var(--s-3) 0;border-bottom:1px solid var(--rule-soft)}
+.post:first-child{border-top:1px solid var(--rule-soft)}
+.post h2{font-family:"Newsreader",Georgia,serif;font-weight:300;font-size:var(--t-lg);line-height:1.18;letter-spacing:-.015em;margin:6px 0 0;max-width:30ch;color:var(--ink)}
+.post h2 a{color:var(--ink);text-decoration:none}
+.post h2 a:hover{color:var(--accent)}
+.post .meta{margin:0}
+.post .plain{margin-top:10px}
+.post .more{margin-top:14px}
+.post .tag{letter-spacing:.14em;color:var(--accent);padding:0}
+/* --- a single post. Narrower than the grid: this page is only ever read. */
+.postpage .pagehead{border-bottom:1px solid var(--rule-soft);padding-bottom:var(--s-3)}
+.postpage .pagehead .meta{margin-top:var(--s-2)}
+.prose{margin-top:var(--s-4)}
+.prose p{font-size:var(--t-md);line-height:1.72;color:var(--ink-soft);margin:0 0 var(--s-2);max-width:var(--measure);overflow-wrap:break-word}
+.prose p.source{font-family:"Libre Franklin",sans-serif;font-size:var(--t-sm);line-height:1.6;color:var(--ink-mute);margin-top:var(--s-3);padding-top:var(--s-2);border-top:1px solid var(--rule-soft);overflow-wrap:anywhere}
+.prose p.source + p.source{margin-top:0;padding-top:0;border-top:0}
+.prose h2.rule{margin:var(--s-4) 0 var(--s-2);font-size:var(--t-lg)}
+.prose strong{font-weight:500;color:var(--ink)}
+.prose em{font-style:italic}
+.postfoot{margin-top:var(--s-5);padding-top:var(--s-3);border-top:1px solid var(--rule);display:flex;flex-wrap:wrap;gap:var(--s-1) var(--s-4)}
+.postfoot p{margin:0}
+.plain{font-size:var(--t-base);color:var(--ink-soft);margin:12px 0 0;max-width:var(--measure)}
+.more{font-family:"Libre Franklin",sans-serif;font-size:var(--t-sm);letter-spacing:.08em;text-transform:uppercase;margin-top:32px}
 
 /* ---------- recognition ---------- */
-.recog{list-style:none;margin:0;padding:0;display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:var(--r);overflow:hidden}
-.recog li{background:var(--sheet);padding:16px 24px;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:baseline}
-.recog strong{font-weight:400;font-size:1.06rem}
-.recog span{font-family:"Libre Franklin",sans-serif;font-size:0.76rem;color:var(--ink-mute);text-align:right}
+/* Teaching and collaborators follow the same deboxed row pattern as
+   Recognition: a hairline between entries, no container, no fill. */
+.teaching,.collab{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.teaching li{padding:var(--s-2) 0;border-bottom:1px solid var(--rule);display:flex;
+  justify-content:space-between;gap:var(--s-3);flex-wrap:wrap;align-items:baseline}
+.teaching li:first-child{border-top:1px solid var(--rule)}
+.tcourse{margin:0;font-size:var(--t-base)}
+.tinst{margin:0;font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);color:var(--ink-mute)}
+.tright{display:flex;align-items:baseline;gap:var(--s-2);flex-wrap:wrap;
+  font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs)}
+.trole{color:var(--accent);font-weight:500}
+.tterm,.tmeta{color:var(--ink-mute);font-family:"IBM Plex Mono",monospace}
+.collab li{padding:var(--s-2) 0;border-bottom:1px solid var(--rule);display:flex;
+  align-items:baseline;gap:var(--s-2);flex-wrap:wrap}
+.collab li:first-child{border-top:1px solid var(--rule)}
+.cname{font-size:var(--t-base)}
+.crel,.caff{font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);color:var(--ink-mute)}
+.crel{color:var(--accent)}
+.langs{font-family:"Libre Franklin",sans-serif;font-size:var(--t-sm);color:var(--ink-mute);margin-top:var(--s-3)}
+@media(max-width:620px){
+  .teaching li,.collab li{flex-direction:column;gap:6px;align-items:flex-start}
+}
+
+.recog{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.recog li{padding:var(--s-2) 0;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;gap:var(--s-3);flex-wrap:wrap;align-items:baseline}
+.recog li:first-child{border-top:1px solid var(--rule)}
+.recog strong{font-weight:400;font-size:var(--t-md)}
+.recog span{font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);color:var(--ink-mute);text-align:right}
 
 /* ---------- research + about ---------- */
 .pagehead{padding:48px 0 8px}
 .pub.haspic{display:grid;grid-template-columns:1fr 220px;gap:32px;align-items:start}
 .pubfig{margin:0}
-.pubfig img{width:100%;aspect-ratio:4/3;object-fit:contain;background:#fff;border:1px solid var(--rule);padding:8px;display:block;border-radius:var(--r)}
-.pubfig figcaption{font-family:"Libre Franklin",sans-serif;font-size:0.84rem;letter-spacing:.06em;color:var(--ink-mute);margin-top:8px;line-height:1.4}
+.pubfig img{width:100%;aspect-ratio:4/3;object-fit:contain;padding:0;display:block;border:1px solid var(--rule)}
+.pubfig figcaption{font-family:"Libre Franklin",sans-serif;font-size:var(--t-sm);letter-spacing:.06em;color:var(--ink-mute);margin-top:8px;line-height:1.4}
 @media(max-width:700px){.pub.haspic{grid-template-columns:1fr;gap:16px}.pubfig{max-width:280px}}
 .pub{padding:24px 0;border-bottom:1px solid var(--rule-soft)}
 .pub:last-child{border-bottom:none}
 .pub h3 a{color:var(--ink);text-decoration:none}
 .pub h3 a:hover{color:var(--accent);text-decoration:underline}
-.authors{font-size:0.84rem;color:var(--ink-mute);margin:0;font-style:italic}
-.bio p{font-size:1.16rem;font-weight:300;line-height:1.54;max-width:82ch}
+.authors{font-size:var(--t-sm);color:var(--ink-mute);margin:0;font-style:italic;max-width:var(--measure)}
+.bio p{font-size:var(--t-md);font-weight:300;line-height:1.54;max-width:82ch}
 .entry{display:grid;grid-template-columns:118px 1fr;gap:32px;padding:24px 0;border-top:1px solid var(--rule-soft)}
-.when{font-size:0.76rem;color:var(--ink-mute);margin:8px 0 0;font-variant-numeric:tabular-nums;line-height:1.7}
+.when{font-size:var(--t-xs);color:var(--ink-mute);margin:8px 0 0;font-variant-numeric:tabular-nums;line-height:1.7}
 .when span{opacity:.7}
 /* Employers and institutions carry the gold here exactly as they do in the home
    hero - same information, same treatment. Upright rather than italic for the
    same reason: the hero sets the pattern and the About page should not restate
    it differently. */
-.org{color:var(--data3);font-weight:500;font-size:0.95rem;margin:0 0 12px}
-.thesis{font-size:0.95rem;font-style:italic;color:var(--ink-soft);margin:0}
+.org{color:var(--data3);font-weight:500;font-size:var(--t-base);margin:0 0 12px;max-width:var(--measure)}
+.thesis{font-size:var(--t-base);font-style:italic;color:var(--ink-soft);margin:0;max-width:var(--measure)}
 .entry ul{margin:12px 0 0;padding-left:16px}
-.entry li{font-size:0.95rem;color:var(--ink-soft);margin-bottom:8px}
-.svc{list-style:none;margin:0;padding:0;display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:var(--r);overflow:hidden}
-.svc li{background:var(--sheet);padding:16px 24px;display:grid;grid-template-columns:1fr auto;gap:4px 24px;align-items:baseline}
-.svc strong{font-family:"Newsreader",Georgia,serif;font-weight:400;font-size:1.06rem}
-.svc span{grid-column:1;font-size:0.95rem;color:var(--ink-mute)}
-.svc em{grid-row:1;grid-column:2;font-family:"Libre Franklin",sans-serif;font-style:normal;font-size:0.72rem;letter-spacing:.13em;text-transform:uppercase;color:var(--accent)}
+.entry li{font-size:var(--t-base);color:var(--ink-soft);margin-bottom:8px}
+.svc{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.svc li{padding:var(--s-2) 0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:1fr auto;gap:4px var(--s-3);align-items:baseline}
+.svc li:first-child{border-top:1px solid var(--rule)}
+.svc strong{font-family:"Newsreader",Georgia,serif;font-weight:400;font-size:var(--t-md)}
+.svc span{grid-column:1;font-size:var(--t-base);color:var(--ink-mute)}
+.svc em{grid-row:1;grid-column:2;font-family:"Libre Franklin",sans-serif;font-style:normal;font-size:var(--t-xs);letter-spacing:.13em;text-transform:uppercase;color:var(--accent)}
 @media(max-width:580px){.svc li{grid-template-columns:1fr}.svc em{grid-row:auto;grid-column:1}}
-.creds{list-style:none;margin:0;padding:0;display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:var(--r);overflow:hidden}
-.creds li{background:var(--sheet);padding:16px 24px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:baseline}
-.creds strong{font-weight:400;font-size:1.06rem}
-.creds span{font-family:"Libre Franklin",sans-serif;font-size:0.72rem;color:var(--ink-mute);letter-spacing:.1em;text-transform:uppercase}
+.creds{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.creds li{padding:var(--s-2) 0;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;gap:var(--s-2);flex-wrap:wrap;align-items:baseline}
+.creds li:first-child{border-top:1px solid var(--rule)}
+.creds strong{font-weight:400;font-size:var(--t-md)}
+.creds span{font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);color:var(--ink-mute);letter-spacing:.1em;text-transform:uppercase}
 .creds li.pending strong{color:var(--ink-soft);font-style:italic}
-.affil{font-size:0.95rem;color:var(--ink-soft);max-width:78ch}
+.affil{font-size:var(--t-base);color:var(--ink-soft);max-width:78ch}
 
 /* Logo wall. Cells are a fixed height so marks of wildly different aspect
    ratios still line up on a common baseline - the thing that separates a
@@ -649,8 +740,8 @@ a.lw-a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 /* A typographic stand-in has no artwork to size against, so it gets the band
    height explicitly - otherwise it sits smaller than the marks beside it. */
 .logowall.bare .lw-word{display:flex;align-items:center;justify-content:center;
-  min-height:calc(104px * var(--lw-scale,1));font-size:0.95rem}
-.logowall.bare.lw-flow .lw-word{min-height:calc(52px * var(--lw-scale,1));font-size:0.86rem}
+  min-height:calc(104px * var(--lw-scale,1));font-size:var(--t-base)}
+.logowall.bare.lw-flow .lw-word{min-height:calc(52px * var(--lw-scale,1));font-size:var(--t-sm)}
 @media (max-width:620px){
   .logowall.bare.lw-flow{gap:16px 18px;justify-content:center}
   .logowall.bare.lw-flow .lw-mark{height:calc(30px * var(--lw-scale,1))}
@@ -665,7 +756,7 @@ a.lw-a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
    tech. Walls whose marks do NOT identify the entry - journals showing a
    publisher's wordmark, funders showing a seal - keep their caption. */
 .logowall.nolabels .lw-note{display:none}
-.logowall.bare .lw-note{margin-top:10px;font-size:0.74rem;color:var(--ink-mute);transition:color .28s ease}
+.logowall.bare .lw-note{margin-top:10px;font-size:var(--t-xs);color:var(--ink-mute);transition:color .28s ease}
 .logowall.bare a.lw-a:hover .lw-note{color:var(--accent)}
 @media (max-width:620px){
   .logowall.bare{gap:18px 14px;max-width:none;grid-template-columns:repeat(auto-fit,minmax(88px,1fr))}
@@ -679,11 +770,11 @@ a.lw-a:hover .lw-art{filter:none;opacity:1}
 
 /* The wordmark stands in for missing artwork. It says the name straight rather
    than imitating a mark, which would be a worse answer than no logo at all. */
-.lw-word{font-family:"Libre Franklin",sans-serif;font-weight:600;font-size:0.84rem;
+.lw-word{font-family:"Libre Franklin",sans-serif;font-weight:600;font-size:var(--t-sm);
   line-height:1.25;letter-spacing:.04em;color:var(--ink-soft);text-wrap:balance;
   transition:color .28s ease}
 a.lw-a:hover .lw-word{color:var(--accent)}
-.lw-note{font-family:"IBM Plex Mono",monospace;font-size:0.72rem;letter-spacing:.04em;
+.lw-note{font-family:"IBM Plex Mono",monospace;font-size:var(--t-xs);letter-spacing:.04em;
   color:var(--ink-mute);transition:color .28s ease}
 a.lw-a:hover .lw-note{color:var(--accent-deep)}
 
@@ -696,6 +787,42 @@ a.lw-a:hover .lw-note{color:var(--accent-deep)}
 }
 @media (max-width:620px){
   .lw-a{min-height:92px;padding:14px 10px}
+}
+
+/* ---------- phone ----------
+   Three things the desktop layout got wrong on a small screen: a four-item nav
+   that ran 19px past a 320px viewport, wide logos ignoring their container, and
+   128px section gaps. With the card borders gone that much empty ground reads
+   as "page ended" rather than "next section", so the rhythm tightens here. */
+@media (max-width:820px){
+  main>section,main>div.exp-wrap,main>figure{margin-bottom:var(--s-5)}
+}
+@media (max-width:560px){
+  main,header.site,footer.site{padding:0 22px}
+  main>section,main>div.exp-wrap,main>figure{margin-bottom:var(--s-4)}
+  nav{gap:6px 18px;font-size:var(--t-xs)}
+  .hicons{flex-wrap:wrap;gap:2px;padding-left:12px}
+  .lab{letter-spacing:.06em;overflow-wrap:break-word}
+  h2.rule{font-size:var(--t-lg)}
+}
+@media (max-width:400px){
+  nav{gap:4px 14px}
+}
+/* a 1000x200 logo was scaling to 308px inside a 272px container and breaking
+   out of both sides - height alone does not constrain a wide aspect ratio */
+.lw-art,.logowall img{max-width:100%}
+
+/* ---------- touch targets ----------
+   The explorer sliders had a 2px hit box, which is the page's main interaction
+   and effectively undraggable by thumb. The input keeps its 2px visual track;
+   the height and padding give it something to hit. */
+.ctrl input[type=range]{height:44px;padding:21px 0;background:transparent;background-clip:content-box;margin:0}
+.ctrl input[type=range]::-webkit-slider-runnable-track{height:2px;background:var(--rule)}
+.ctrl input[type=range]::-moz-range-track{height:2px;background:var(--rule)}
+.hicons a{padding:9px}
+@media (max-width:820px){
+  .headright nav a{padding:6px 0}
+  .fcols a{padding:5px 0}
 }
 
 /* ---------- icons ---------- */
@@ -719,20 +846,20 @@ h2.rule{display:flex;align-items:center}
 footer.site{border-top:1px solid var(--rule);padding-top:32px;padding-bottom:48px;margin-top:48px}
 .fcols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px}
 .fcols div{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
-.flab{font-size:0.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);margin:0 0 8px}
+.flab{font-size:var(--t-xs);letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);margin:0 0 8px}
 /* Every footer link behaves the same: theme teal at rest, gold and underlined
    on hover, icon following the text. The email link used to change only its
    icon while the text stayed teal, so hovering it looked different from
    hovering the location right beneath it. */
-.fcols a{font-size:0.95rem;text-decoration:none;color:var(--accent)}
+.fcols a{font-size:var(--t-base);text-decoration:none;color:var(--accent)}
 .fcols a:hover,.fcols a:focus-visible{color:var(--data3);text-decoration:underline}
-.fplain{font-size:0.95rem;color:var(--ink-mute);margin:0}
+.fplain{font-size:var(--t-base);color:var(--ink-mute);margin:0}
 .fplain a{display:inline-flex;align-items:center;gap:8px;color:var(--accent);text-decoration:none}
 .fplain a:hover,.fplain a:focus-visible{color:var(--data3);text-decoration:underline}
 .fplain a .icon{color:var(--accent);transition:color .28s ease}
 .fplain a:hover .icon{color:var(--data3)}
 .footbar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 32px;margin-top:36px;padding-top:20px;border-top:1px solid var(--rule-soft)}
-.colophon{font-size:0.76rem;color:var(--ink-mute);margin:0;letter-spacing:.06em}
+.colophon{font-size:var(--t-xs);color:var(--ink-mute);margin:0;letter-spacing:.06em}
 
 /* ---------- motion ----------
    Sections lift in once as they enter view; interactive things respond to the
@@ -742,17 +869,17 @@ footer.site{border-top:1px solid var(--rule);padding-top:32px;padding-bottom:48p
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .62s cubic-bezier(.2,.6,.2,1),transform .62s cubic-bezier(.2,.6,.2,1)}
 .reveal.seen{opacity:1;transform:none}
 
-a,.btn,.xcard,.work,.entry,.recog li,.hdot,.icon{transition:color .28s ease,background-color .28s ease,border-color .28s ease,transform .28s ease,.6 .28s ease,.2 .28s ease,1) .28s ease,opacity .28s ease}
+a,.btn,.xcard,.work,.entry,.recog li,.hdot,.icon{transition:color .28s ease,background-color .28s ease,border-color .28s ease,transform .28s cubic-bezier(.2,.6,.2,1),opacity .28s ease}
 .btn:hover{transform:translateY(-2px)}
 .btn:active{transform:translateY(0)}
 .xcard:hover .xring{transform:translateY(-4px);border-color:var(--accent)}
-.xring{transition:transform .28s ease,.6 .28s ease,.2 .28s ease,1) .28s ease,border-color .28s ease}
+.xring{transition:transform .28s cubic-bezier(.2,.6,.2,1),border-color .28s ease}
 .hstep:hover .hdot{border-color:var(--accent);transform:translateY(-3px)}
 .hsteps:hover .hstep::before{background:var(--rule-soft)}
 .hstep:hover::before{background:var(--accent)}
 @media(min-width:1200px){.hstep:hover::after{border-left-color:var(--accent)}}
 .hstep::before,.hstep::after{transition:background-color .28s ease,border-left-color .28s ease}
-.hdot{transition:transform .28s ease,.6 .28s ease,.2 .28s ease,1) .28s ease,border-color .28s ease}
+.hdot{transition:transform .28s cubic-bezier(.2,.6,.2,1),border-color .28s ease}
 .work:hover h3 a,.entry:hover h3 a{color:var(--accent)}
 .recog li{transition:background-color .28s ease}
 .recog li:hover{background:var(--sunk)}
@@ -846,7 +973,6 @@ nav a.active::after{transform:scaleX(1)}   /* the build emits .active, not .on -
 @keyframes hystTrace{0%{stroke-dashoffset:1}55%,88%{stroke-dashoffset:0}100%{stroke-dashoffset:-1}}
 .engine .ehyst{stroke-dasharray:1;stroke-dashoffset:0;animation:hystTrace 4.2s ease-in-out infinite}
 .engine .ehyst.inner{animation-delay:.9s;animation-duration:4.2s}
-.engine:hover .ehyst{animation-duration:1.9s}
 
 /* ---------- hover motion ----------
    The engine diagram is static until you point at it, then the exchange it
@@ -891,8 +1017,6 @@ nav a.active::after{transform:scaleX(1)}   /* the build emits .active, not .on -
 .engine:hover .efit circle:nth-child(4){animation-delay:.36s}
 .engine:hover .efit circle:nth-child(5){animation-delay:.48s}
 .engine:hover .efit circle:nth-child(6){animation-delay:.60s}
-.engine:hover .epdf{animation:gDrift 2.2s ease-in-out infinite}
-.engine:hover .earr.out{animation:gAdvance 1.7s ease-in-out infinite}
 .engine:hover .ebox{stroke:var(--accent);opacity:.7}
 
 /* glyphs answer the pointer: faster, and pulled to the accent */

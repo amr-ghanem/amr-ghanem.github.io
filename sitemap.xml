@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://amr-ghanem.github.io/index.html</loc><lastmod>2026-08-28</lastmod><priority>1.0</priority></url>
+  <url><loc>https://amr-ghanem.github.io/locus.html</loc><lastmod>2026-08-28</lastmod><priority>0.8</priority></url>
   <url><loc>https://amr-ghanem.github.io/research.html</loc><lastmod>2026-08-28</lastmod><priority>0.8</priority></url>
   <url><loc>https://amr-ghanem.github.io/about.html</loc><lastmod>2026-08-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://amr-ghanem.github.io/writing.html</loc><lastmod>2026-08-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://amr-ghanem.github.io/the-angle-is-not-a-detail.html</loc><lastmod>2026-08-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://amr-ghanem.github.io/change-the-use-change-the-risk.html</loc><lastmod>2026-08-28</lastmod><priority>0.8</priority></url>
+  <url><loc>https://amr-ghanem.github.io/earthquake-plus-tsunami-is-not-arithmetic.html</loc><lastmod>2026-08-28</lastmod><priority>0.8</priority></url>
 </urlset>
