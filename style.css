@@ -150,7 +150,10 @@ p{margin:0 0 14px;max-width:86ch}
 
 /* ---------- hero ---------- */
 .hero picture{display:block}
-.hero{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:72px;align-items:start;padding:var(--s-4) 0 var(--s-3)}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:72px;align-items:start;padding:var(--s-4) 0 0}
+/* The hero opens the page rather than sitting in the section rhythm, so it
+   closes tighter than the 128px used between peer sections. */
+main>section.hero{margin-bottom:var(--s-5)}
 .hero-side{display:block}
 .hero-text h1{font-size:var(--t-display);line-height:1.04;letter-spacing:-.03em;margin:0 0 12px;max-width:14ch;text-wrap:balance}
 .hstatsrc{font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);color:var(--ink-mute);margin:0 0 24px}
