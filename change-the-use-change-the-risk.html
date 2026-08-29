@@ -26,7 +26,7 @@
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <link rel="manifest" href="site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Libre+Franklin:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,200;0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&display=swap">
-<link rel="stylesheet" href="style.css?v=9b1f6181eb">
+<link rel="stylesheet" href="style.css?v=a53f175376">
 <script type="application/ld+json">
 {"inLanguage":"en","datePublished":"2026-08-05","description":"A building is designed once. Its mass distribution is not fixed for life — and the codes that check for irregularity only ever looked at it once.","@type":"BlogPosting","dateModified":"2026-08-05","headline":"Change the use, change the risk","author":{"url":"https://amr-ghanem.github.io","name":"Amr Ghanem","@type":"Person","sameAs":["https://orcid.org/0000-0002-1855-5421","https://scholar.google.com/citations?user=Y_kH3ooAAAAJ","https://www.webofscience.com/wos/author/record/PLC-4161-2026","https://www.linkedin.com/in/amr-ghanem","https://www.researchgate.net/profile/Amr-Ghanem","https://openalex.org/works?filter=author.orcid:0000-0002-1855-5421","https://github.com/amr-ghanem"]},"@context":"https://schema.org","mainEntityOfPage":{"@type":"WebPage","@id":"https://amr-ghanem.github.io/change-the-use-change-the-risk.html"},"publisher":{"name":"Amr Ghanem","@type":"Person"},"wordCount":766}
 </script>
@@ -199,6 +199,37 @@
   // being visible always wins over the animation - but only for content the
   // reader has actually reached.
   setTimeout(rescueInView, 2500);
+  // Printing is not scrolling: nothing below the fold has been revealed, and a
+  // print snapshot of opacity 0 is a blank page. Clear every pending reveal
+  // before the dialog opens, whichever way the reader got there - the CV
+  // button, Ctrl+P, or Save as PDF.
+  // The screen keeps its reveals exactly as they were: whatever is cleared for
+  // the dialog is put back the moment it closes.
+  var parked = [];
+  function revealAllForPrint(){
+    parked = [];
+    for (var k=0;k<t.length;k++){
+      if (!t[k].classList.contains('reveal')) continue;
+      parked.push([t[k], t[k].style.transitionDelay]);
+      t[k].style.transitionDelay = '';
+      t[k].classList.remove('reveal');
+    }
+  }
+  function restoreAfterPrint(){
+    for (var k=0;k<parked.length;k++){
+      parked[k][0].classList.add('reveal');
+      parked[k][0].style.transitionDelay = parked[k][1];
+    }
+    parked = [];
+  }
+  window.addEventListener('beforeprint', revealAllForPrint);
+  window.addEventListener('afterprint', restoreAfterPrint);
+  if (window.matchMedia) {
+    var mqPrint = window.matchMedia('print');
+    var onPrint = function(e){ if (e.matches) revealAllForPrint(); else restoreAfterPrint(); };
+    if (mqPrint.addEventListener) mqPrint.addEventListener('change', onPrint);
+    else if (mqPrint.addListener) mqPrint.addListener(onPrint);
+  }
   document.addEventListener('visibilitychange', function(){
     if (!document.hidden) setTimeout(rescueInView, 400);
   });

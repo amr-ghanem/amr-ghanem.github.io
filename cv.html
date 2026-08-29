@@ -26,7 +26,7 @@
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <link rel="manifest" href="site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Libre+Franklin:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,200;0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&display=swap">
-<link rel="stylesheet" href="style.css?v=9b1f6181eb">
+<link rel="stylesheet" href="style.css?v=a53f175376">
 <script type="application/ld+json">
 {
     "@context":  "https://schema.org",
@@ -159,7 +159,11 @@
     var b = document.getElementById('cvprint');
     if (!b || typeof window.print !== 'function') return;
     b.parentNode.hidden = false;
-    b.addEventListener('click', function(){ window.print(); });
+    b.addEventListener('click', function(){
+      // beforeprint clears the pending reveals; give the browser a frame to
+      // apply that before it takes the snapshot.
+      requestAnimationFrame(function(){ requestAnimationFrame(function(){ window.print(); }); });
+    });
   })();
 </script>
 
@@ -465,6 +469,37 @@
   // being visible always wins over the animation - but only for content the
   // reader has actually reached.
   setTimeout(rescueInView, 2500);
+  // Printing is not scrolling: nothing below the fold has been revealed, and a
+  // print snapshot of opacity 0 is a blank page. Clear every pending reveal
+  // before the dialog opens, whichever way the reader got there - the CV
+  // button, Ctrl+P, or Save as PDF.
+  // The screen keeps its reveals exactly as they were: whatever is cleared for
+  // the dialog is put back the moment it closes.
+  var parked = [];
+  function revealAllForPrint(){
+    parked = [];
+    for (var k=0;k<t.length;k++){
+      if (!t[k].classList.contains('reveal')) continue;
+      parked.push([t[k], t[k].style.transitionDelay]);
+      t[k].style.transitionDelay = '';
+      t[k].classList.remove('reveal');
+    }
+  }
+  function restoreAfterPrint(){
+    for (var k=0;k<parked.length;k++){
+      parked[k][0].classList.add('reveal');
+      parked[k][0].style.transitionDelay = parked[k][1];
+    }
+    parked = [];
+  }
+  window.addEventListener('beforeprint', revealAllForPrint);
+  window.addEventListener('afterprint', restoreAfterPrint);
+  if (window.matchMedia) {
+    var mqPrint = window.matchMedia('print');
+    var onPrint = function(e){ if (e.matches) revealAllForPrint(); else restoreAfterPrint(); };
+    if (mqPrint.addEventListener) mqPrint.addEventListener('change', onPrint);
+    else if (mqPrint.addListener) mqPrint.addListener(onPrint);
+  }
   document.addEventListener('visibilitychange', function(){
     if (!document.hidden) setTimeout(rescueInView, 400);
   });

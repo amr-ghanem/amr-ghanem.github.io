@@ -638,6 +638,9 @@ main>section.cvsec{margin-bottom:var(--s-4)}
 @page{margin:16mm 15mm}
 @media print{
   header,nav,footer,.biocta,.cvprint{display:none!important}
+  /* Content the reader never scrolled to is still at opacity 0. It must not
+     reach paper that way. This is the guarantee; beforeprint below is belt. */
+  .reveal{opacity:1!important;transform:none!important;transition:none!important}
   body{background:#fff;color:#000;font-size:10pt;line-height:1.45;
        -webkit-print-color-adjust:exact;print-color-adjust:exact}
   main{max-width:none;padding:0}
