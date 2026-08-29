@@ -758,6 +758,7 @@ a.lw-a:hover .lw-note{color:var(--accent-deep)}
 .affilband{margin:0 0 var(--s-4)}
 .affil-gap{margin-top:26px}
 .affilband .rl{margin:0 0 16px}
+h2.rule + .rl{margin-top:-20px;margin-bottom:var(--s-3)}
 
 @media (prefers-reduced-motion:reduce){
   a.lw-a:hover{transform:none}
