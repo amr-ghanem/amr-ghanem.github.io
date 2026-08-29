@@ -101,7 +101,11 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
 header.site{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
 .wordmark{text-decoration:none;color:var(--ink);display:flex;align-items:baseline;gap:8px}
 .wordmark strong{font-weight:400;font-size:1.5rem;letter-spacing:-.014em}
-.wordmark span{font-family:"IBM Plex Mono",monospace;font-size:var(--t-xs);letter-spacing:.16em;color:var(--ink-mute);text-transform:uppercase}
+/* NOT uppercased. "Ph.D." is an abbreviation whose capitalisation is part of
+   how it is spelled; "PH.D." is simply wrong, and the periods make it read as
+   a typo rather than a styling choice. Tracking eases off too - letter-spacing
+   is an all-caps device and looks loose on mixed case. */
+.wordmark span{font-family:"IBM Plex Mono",monospace;font-size:var(--t-xs);letter-spacing:.06em;color:var(--ink-mute)}
 nav{display:flex;flex-wrap:wrap;gap:8px 28px;font-size:var(--t-sm);letter-spacing:.07em;text-transform:uppercase}
 /* Same two-colour rule as the icons and the engine: theme teal at rest, the
    engine's gold when a page is current or being pointed at. The underline
