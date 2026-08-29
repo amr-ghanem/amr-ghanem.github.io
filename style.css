@@ -55,12 +55,13 @@
   --accent:#6BBFAE; --accent-soft:#122A26; --accent-deep:#9AD8C9;
   --data1:#6BBFAE; --data2:#8FCC9F; --data3:#D8AB57; --data4:#DE8163;
 }
-
 /* Logo art on a dark ground. Almost every official mark is dark ink drawn for
    white paper, so it vanishes here. Two answers, in order of preference: use
-   the organisation's own reversed file when one exists (.lw-dark), or set the
-   single file on a small light plate - a chip, obviously deliberate, rather
-   than an inverted mark in the wrong colours. Never invert a colour logo. */
+   the organisation's own reversed file when one exists, or set the single file
+   on a small light plate - a chip, obviously deliberate, rather than an
+   inverted mark in the wrong colours. Never invert a colour logo.
+   The media block matters more than the toggle block: this site has no theme
+   button, so system-dark is the ONLY way a reader gets dark mode. */
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --lw-light:none; --lw-dark:block; --lw-plate:#F2F3F0; --lw-pad:7px 9px; --lw-mute:.78;
 }}
@@ -198,7 +199,6 @@ main>section.pagehead{margin-bottom:var(--s-4)}
 .chapter p:last-child{margin-bottom:0}
 
 /* ---------- contribution ---------- */
-.stats{display:grid;grid-template-columns:repeat(var(--st-n,3),minmax(0,1fr));gap:var(--s-4);margin-bottom:var(--s-4)}
 /* When the row wraps, the leftover cell is empty - and the container's own
    background shows through it as a solid block. Stretching the last item over
    the remainder fills the grid instead. The nth-child tests are count-agnostic:
@@ -210,29 +210,10 @@ main>section.pagehead{margin-bottom:var(--s-4)}
    twice its neighbour. The nth-child tests read the remainder: 3n+2 as the last
    item means two cards on the final row, 3n+1 means one. */
 @media (min-width:561px) and (max-width:1040px){
-  .stats{grid-template-columns:repeat(6,minmax(0,1fr))}
-  .stats>div{grid-column:span 2}
-  .stats>div:last-child:nth-child(3n+1){grid-column:span 6}
   .stats>div:last-child:nth-child(3n+2),
-  .stats>div:nth-last-child(2):nth-child(3n+1){grid-column:span 3}
 }
-@media (max-width:560px){
-  .stats{grid-template-columns:repeat(4,minmax(0,1fr))}
-  .stats>div{grid-column:span 2}
-  .stats>div:last-child:nth-child(odd){grid-column:span 4}
-}
-.stats>div{padding:0;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:var(--s-1)}
 .sicon{width:34px;height:28px;color:var(--accent);margin-bottom:4px;display:block}
-.num{font-size:var(--t-xl);font-weight:400;line-height:1;color:var(--accent);margin:0 0 8px;font-variant-numeric:tabular-nums;letter-spacing:-.03em}
 .lab{font-size:var(--t-xs);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute);margin:0;line-height:1.5}
-.statsrc{font-family:"Libre Franklin",sans-serif;font-size:var(--t-sm);line-height:1.55;color:var(--ink-mute);margin:-8px 0 24px;max-width:80ch}
-.statsrc strong{color:var(--ink-soft);font-weight:500}
-.funders{margin-bottom:24px}
-.flabel{font-size:var(--t-xs);letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);margin:0 0 16px}
-.funders ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
-.funders li{display:grid;grid-template-columns:92px 1fr;gap:16px;align-items:baseline}
-.funders strong{font-weight:500;font-size:var(--t-base);color:var(--accent)}
-.funders span{font-size:var(--t-base);color:var(--ink-soft)}
 .venues{font-size:var(--t-base);color:var(--ink-soft);max-width:var(--measure);padding-top:24px;border-top:1px solid var(--rule-soft)}
 .venues span{font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-mute);margin-right:12px}
 
@@ -262,9 +243,6 @@ main>section.pagehead{margin-bottom:var(--s-4)}
 @media(max-width:620px){.exp-wrap{gap:34px}.exp-wrap>.xcard{flex:0 1 100%}}
 .idx{font-size:var(--t-xs);color:var(--ink-mute);margin:8px 0 0;font-variant-numeric:tabular-nums}
 .exp-lead{font-size:var(--t-md);color:var(--ink-soft);max-width:72ch;margin-bottom:16px}
-.evidence{list-style:none;margin:0;padding:0;display:grid;gap:8px}
-.evidence li{font-size:var(--t-sm);color:var(--ink-soft);padding-left:16px;position:relative;line-height:1.55;max-width:74ch}
-.evidence li::before{content:"";position:absolute;left:0;top:.62em;width:8px;height:1px;background:var(--accent)}
 
 /* publication groups: a rule and real space between types, a serif heading
    instead of an 11px label, and a count so the shape of the record reads
@@ -274,7 +252,6 @@ main>section.pagehead{margin-bottom:var(--s-4)}
 .pubgroup:first-of-type{border-top:none;margin-top:0;padding-top:4px}
 .pubgroup-head{display:flex;align-items:baseline;gap:14px;margin:0 0 var(--s-3);padding-bottom:14px;border-bottom:1px solid var(--rule-soft)}
 .pubgroup-head h2{font-family:"Newsreader",Georgia,serif;font-weight:300;font-size:var(--t-xl);letter-spacing:-.02em;line-height:1.1;color:var(--accent);margin:0}
-.pubgroup-n{font-family:"IBM Plex Mono",monospace;font-size:var(--t-xs);color:var(--accent);border:1px solid var(--rule);border-radius:999px;padding:3px 11px;line-height:1;font-variant-numeric:tabular-nums}
 @media(max-width:580px){.pubgroup{padding-top:36px;margin-top:36px}.pubgroup-head h2{font-size:var(--t-lg)}}
 
 /* the research page lists fragility work, so its header carries a fragility
@@ -318,7 +295,6 @@ figcaption p{font-size:var(--t-base);color:var(--ink-soft);max-width:54ch;line-h
 .exp-intro h2{font-family:"Newsreader",Georgia,serif;font-weight:300;font-size:clamp(1.6rem,3.6vw,2.05rem);letter-spacing:-.02em;line-height:1.16;margin:0 0 16px;text-wrap:balance}
 .exp-intro>p{color:var(--ink-soft);font-size:var(--t-md)}
 .exp-panel{display:grid;grid-template-columns:340px 1fr;gap:var(--s-4);align-items:start;padding:0}
-.exp-chart{margin-bottom:24px}
 .exp-controls{display:grid;grid-template-columns:1fr;gap:14px;padding-top:18px;margin-top:16px;border-top:1px solid var(--rule-soft)}
 /* stage selector: the two hazards are separated in time, so the figure shows
    one at a time and this chooses which */
@@ -335,7 +311,6 @@ figcaption p{font-size:var(--t-base);color:var(--ink-soft);max-width:54ch;line-h
 
 .readout{display:flex;align-items:baseline;gap:24px;flex-wrap:wrap}
 .ro-num{margin:0!important;flex:none}
-.exp-chart svg{width:100%;height:auto;display:block}
 
 .readout{border-left:3px solid var(--accent);padding:2px 0 2px 16px;margin-bottom:24px}
 .ro-num{font-family:"IBM Plex Mono",monospace;font-size:2.6rem;line-height:1;color:var(--accent);margin:0 0 12px;font-variant-numeric:tabular-nums;letter-spacing:-.03em}
@@ -352,25 +327,19 @@ figcaption p{font-size:var(--t-base);color:var(--ink-soft);max-width:54ch;line-h
 .ctrl input[type=range]:disabled{cursor:not-allowed}
 .ctrl input[type=range]:disabled::-webkit-slider-thumb{background:var(--ink-mute);cursor:not-allowed}
 .ctrl input[type=range]:disabled::-moz-range-thumb{background:var(--ink-mute);cursor:not-allowed}
-.hint{font-size:var(--t-sm);color:var(--ink-mute);margin:0;line-height:1.4;max-width:none}
 .disclaim{font-family:"Libre Franklin",sans-serif;font-size:var(--t-sm);line-height:1.65;color:var(--ink-mute);margin:16px 0 0;grid-column:1/-1;max-width:var(--measure)}
 .eqn{font-family:"IBM Plex Mono",monospace;font-size:var(--t-sm);color:var(--ink-mute);margin:16px 0 0;padding-top:16px;border-top:1px solid var(--rule-soft)}
 
 @media(max-width:860px){.exp-panel{grid-template-columns:1fr;gap:32px;padding:0}}
 /* ---------- tsunami explorer ---------- */
 .eqn sub{font-size:.8em}
-@media(max-width:860px){.tsu-views{grid-template-columns:0.8fr 1fr;gap:16px}}
-@media(max-width:580px){.tsu-views{grid-template-columns:1fr;gap:24px}}
 /* ---------- surface explorer ---------- */
 .mh-struct,.mh-surf{overflow:hidden}
 .exp-panel canvas{width:100%;height:auto;display:block}
-.exp-top{display:grid;grid-template-columns:auto minmax(340px,1fr);gap:40px;align-items:start}
-.exp-side{display:flex;flex-direction:column;gap:22px}
 .exp-top .mh-struct{display:flex}
 .exp-top .mh-struct canvas{width:auto;height:360px;max-width:100%;margin:0 auto;display:block}
 .mh-surf canvas{width:auto;height:470px;max-width:100%;margin:0 auto;display:block}
-@media(max-width:1040px){.exp-panel{padding:0}.exp-top{grid-template-columns:1fr;gap:28px}.exp-top .mh-struct canvas{height:300px}.exp-controls{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}}
-.surfwrap{padding:0}
+@media(max-width:1040px){.exp-panel{padding:0}.exp-top .mh-struct canvas{height:300px}.exp-controls{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}}
 #surfCanvas{width:100%;height:auto;display:block}
 
 /* ---------- how it works ---------- */
@@ -508,7 +477,6 @@ figcaption p{font-size:var(--t-base);color:var(--ink-soft);max-width:54ch;line-h
 .work h3 a:hover{color:var(--accent);text-decoration:underline}
 .meta{font-size:var(--t-xs);color:var(--ink-mute);margin:8px 0 0;display:flex;gap:16px;flex-wrap:wrap;align-items:center}
 .venue{color:var(--ink-soft)}
-.cites{font-variant-numeric:tabular-nums}
 .repnum{font-family:"IBM Plex Mono",monospace;font-size:var(--t-xs);color:var(--ink-mute);letter-spacing:.02em}
 .tag{font-family:"Libre Franklin",sans-serif;padding:2px 8px;font-size:var(--t-xs);letter-spacing:.1em;text-transform:uppercase}
 .tag.oa{background:none;color:var(--accent);border:1px solid var(--rule);border-radius:999px}
@@ -562,7 +530,7 @@ main>section.writinghead{margin-bottom:var(--s-5)}
 .cvrow .when,.cvlist .when{margin:0;white-space:nowrap}
 .biocta{margin:var(--s-3) 0 0}
 @media print{
-  header,nav,footer,.themebtn{display:none!important}
+  header,nav,footer{display:none!important}
   body{background:#fff;color:#000;font-size:10.5pt}
   main{max-width:none;padding:0}
   a{color:#000;border-bottom:0;text-decoration:none}
@@ -629,7 +597,6 @@ main>section.writinghead{margin-bottom:var(--s-5)}
 .org{color:var(--data3);font-weight:500;font-size:var(--t-base);margin:0 0 12px;max-width:var(--measure)}
 .entry ul{margin:12px 0 0;padding-left:16px}
 .entry li{font-size:var(--t-base);color:var(--ink-soft);margin-bottom:8px}
-@media(max-width:580px){.svc li{grid-template-columns:1fr}.svc em{grid-row:auto;grid-column:1}}
 
 /* Logo wall. Cells are a fixed height so marks of wildly different aspect
    ratios still line up on a common baseline - the thing that separates a
@@ -763,8 +730,6 @@ a.lw-a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
   .logowall.bare .lw-a{padding:6px 2px}
 }
 a.lw-a:hover .lw-art{filter:none;opacity:1}
-.lw-light{display:var(--lw-light)}
-.lw-dark{display:var(--lw-dark)}
 .lw-solo{background:var(--lw-plate);padding:var(--lw-pad);border-radius:var(--r-sm)}
 
 /* The wordmark stands in for missing artwork. It says the name straight rather
@@ -1088,5 +1053,4 @@ svg.fragility .dot{animation:fragPt 13s ease-in-out infinite}
   main,header.site,footer.site{padding:0 24px}
   .entry,.work,.exp-head{grid-template-columns:1fr;gap:8px}
   .idx{display:none}
-  .funders li{grid-template-columns:1fr;gap:2px}
 }
