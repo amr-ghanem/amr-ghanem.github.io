@@ -497,6 +497,15 @@ main>section.writinghead{margin-bottom:var(--s-4)}
 .newslist a:hover{color:var(--accent);border-bottom-color:var(--accent)}
 @media(max-width:560px){.newslist li{grid-template-columns:1fr;gap:2px}}
 .postsources{margin-top:var(--s-4)}
+/* A reference list, not a year-indexed table: the year belongs after the
+   authors, where a citation puts it. Used by the CV and by every essay, from
+   one builder, so the same paper reads identically in both places. */
+.reflist{list-style:none;margin:0;padding:0;display:grid;gap:13px}
+.reflist li{font-size:var(--t-sm);line-height:1.62;color:var(--ink-soft);
+  padding-left:24px;text-indent:-24px}
+.reflist a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--rule)}
+.reflist a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+.reflist .srcdoi{color:var(--ink-mute);border-bottom-color:var(--rule-soft);word-break:break-word}
 .postthumb{margin:0}
 .postthumb.art,.postfig.art{border:0;padding:0;background:none}
 /* A 420-wide drawing stretched to the full text column renders at 2.6x,
