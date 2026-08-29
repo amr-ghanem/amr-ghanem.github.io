@@ -542,6 +542,57 @@ main>section.writinghead{margin-bottom:var(--s-4)}
 .cvlist .when:empty::before{content:" a0"}
 .cvhead .lede{margin-bottom:10px}
 .cvcontact{margin:0}
+
+/* ---------- drawn research figures ----------
+   Everything takes its colour from the stylesheet, so the figures follow the
+   theme instead of being baked into pixels the way the MATLAB exports were. */
+.figsvg{width:100%;height:auto;display:block;overflow:visible}
+.figsvg text{font-family:"Libre Franklin",sans-serif;fill:var(--ink-mute)}
+.figsvg .flab,.figsvg .plab{font-size:12px;letter-spacing:.04em}
+.figsvg .fnote,.figsvg .pnote{font-size:11.5px;font-style:italic;fill:var(--ink-mute)}
+.figsvg .pnote.acc,.figsvg .plab.acc{fill:var(--data3)}
+.figsvg .faxis,.figsvg .fgrid line{stroke:var(--rule);stroke-width:1;fill:none}
+.figsvg .fgrid line{stroke:var(--rule-soft)}
+.figsvg .fmesh path{fill:none;stroke:var(--data3);stroke-width:.85}
+.figsvg .fscale line{stroke:var(--rule);stroke-width:1}
+.figsvg .ftk{font-size:11px;fill:var(--ink-mute)}
+.figsvg .flead{stroke:var(--rule);stroke-width:1}
+.figsvg .fslice{fill:none;stroke:var(--ink);stroke-width:2.6;stroke-linecap:round}
+
+.figsvg .pwall{fill:none;stroke:var(--ink-mute);stroke-width:1.6}
+.figsvg .pcore{fill:var(--sunk);stroke:var(--rule);stroke-width:1}
+.figsvg .pexit{stroke:var(--data3);stroke-width:3.4;fill:none;stroke-linecap:round}
+.figsvg .proute{fill:none;stroke-width:2.2;stroke-linecap:round}
+.figsvg .proute.direct{stroke:var(--data1)}
+.figsvg .proute.step{stroke:var(--data3);stroke-dasharray:5 4}
+.figsvg .pnode{fill:var(--ink);stroke:none}
+.figsvg .ppinch line{stroke:var(--ink-mute);stroke-width:2.4}
+.figsvg .ppinch circle{fill:none;stroke:var(--data3);stroke-width:1.4;stroke-dasharray:3 3}
+
+.figsvg .msec{fill:var(--sunk);stroke:var(--rule);stroke-width:1}
+.figsvg .magg{fill:var(--rule);stroke:none}
+.figsvg .magg.plastic{fill:var(--data3);fill-opacity:.75}
+.figsvg .mcurve{fill:none;stroke:var(--data1);stroke-width:2.2}
+.figsvg .mcurve.dim{stroke:var(--rule);stroke-dasharray:4 4;stroke-width:1.6}
+.figsvg .mmark{fill:var(--data3);stroke:none}
+.figsvg .mdrop{stroke:var(--rule);stroke-width:1;stroke-dasharray:3 3}
+
+.figsvg .bdeck,.figsvg .btruss,.figsvg .bpier{fill:none;stroke:var(--ink-mute);stroke-width:1.8}
+.figsvg .bground{stroke:var(--rule);stroke-width:1}
+.figsvg .bsensor circle{fill:var(--data3);stroke:none}
+.figsvg .bwave{fill:none;stroke:var(--data1);stroke-width:1.6}
+.figsvg .barrow{fill:var(--rule);stroke:none}
+
+.figsvg .sframe path{fill:none;stroke:var(--ink-mute);stroke-width:1.8}
+.figsvg .sframe .sbrace{stroke:var(--data1);stroke-width:1.6}
+.figsvg .sframe .slink{stroke:var(--data3);stroke-width:4;stroke-linecap:round}
+.figsvg .sframe .sground{stroke:var(--rule);stroke-width:1}
+
+.projfig.art,.locusfig.art{border:0;padding:0}
+.projfig.art .figsvg{max-width:100%}
+.locusfig.art .figsvg{max-width:620px;margin:0 auto}
+.adv .advh{display:flex;align-items:center;gap:12px}
+.adv .hglyph{color:var(--data3)}
 /* The 80px section step is for pages carrying figures and prose. Ten dense
    list sections at that rhythm is 720px of air, so the CV drops one step. */
 main>section.cvsec{margin-bottom:var(--s-4)}
