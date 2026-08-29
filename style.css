@@ -83,7 +83,7 @@ body{
 
 :root{--r-lg:14px;--r:10px;--r-sm:6px}
 main,header.site,footer.site{max-width:1180px;margin:0 auto;padding:0 40px}
-main>section,main>div.exp-wrap,main>figure{margin:0 0 var(--s-6)}
+main>section,main>div.exp-wrap,main>figure{margin:0 0 var(--s-5)}
 main>section:last-child{margin-bottom:var(--s-5)}
 a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:2px}
 a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:1px}
@@ -240,7 +240,7 @@ main>section.hero{margin-bottom:var(--s-5)}
 .exp-wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:40px 32px}
 .exp-wrap>h2{grid-column:1/-1;margin-bottom:0}
 .xcard{display:flex;flex-direction:column;align-items:center;text-align:center}
-.xring{width:96px;height:96px;display:grid;place-items:center;margin:0 0 var(--s-2)}
+.xring{width:96px;height:96px;display:grid;place-items:center;margin:0 0 var(--s-2);border:1px solid var(--rule);border-radius:50%}
 .xglyph{width:52px;height:39px;color:var(--accent);display:block}
 /* .acc marks the emphasised part of a glyph. It used to pin those shapes to
    the accent colour outright, which meant a glyph whose shapes are ALL .acc -
@@ -342,7 +342,7 @@ figcaption p{font-size:var(--t-base);color:var(--ink-soft);max-width:54ch;line-h
 .ctrl label{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);letter-spacing:.13em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:6px}
 .ctrl label span{font-family:"IBM Plex Mono",monospace;font-size:var(--t-sm);letter-spacing:0;text-transform:none;color:var(--accent);font-variant-numeric:tabular-nums}
 .ctrl input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:2px;background:var(--rule);outline:none;margin:0 0 5px}
-.ctrl input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:16px;height:16px;border-radius:50%;background:var(--accent);cursor:grab;border:none}
+.ctrl input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:16px;height:16px;border-radius:50%;background:var(--accent);cursor:grab;border:none;margin-top:-7px}
 .ctrl input[type=range]::-webkit-slider-thumb:active{cursor:grabbing}
 .ctrl input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--accent);cursor:grab;border:none}
 .ctrl input[type=range]:focus-visible{outline:2px solid var(--accent);outline-offset:6px}
@@ -591,7 +591,7 @@ main>section.writinghead{margin-bottom:var(--s-5)}
 .pub h3 a:hover{color:var(--accent);text-decoration:underline}
 .authors{font-size:var(--t-sm);color:var(--ink-mute);margin:0;font-style:italic;max-width:var(--measure)}
 .bio p{font-size:var(--t-md);font-weight:300;line-height:1.54;max-width:82ch}
-.entry{display:grid;grid-template-columns:118px 1fr;gap:32px;padding:24px 0;border-top:1px solid var(--rule-soft)}
+.entry{display:grid;grid-template-columns:118px 1fr;gap:32px;padding:24px 0;border-top:1px solid var(--rule-soft);align-items:baseline}
 .when{font-size:var(--t-xs);color:var(--ink-mute);margin:8px 0 0;font-variant-numeric:tabular-nums;line-height:1.7}
 .when span{opacity:.7}
 /* Employers and institutions carry the gold here exactly as they do in the home
