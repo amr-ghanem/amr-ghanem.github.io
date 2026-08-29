@@ -271,7 +271,7 @@ main>section.pagehead{margin-bottom:var(--s-4)}
    and space are what actually separate them. */
 .pubgroup{padding-top:52px;margin-top:52px;border-top:1px solid var(--rule)}
 .pubgroup:first-of-type{border-top:none;margin-top:0;padding-top:4px}
-.pubgroup-head{display:flex;align-items:baseline;gap:14px;margin:0 0 26px;padding-bottom:14px;border-bottom:1px solid var(--rule-soft)}
+.pubgroup-head{display:flex;align-items:baseline;gap:14px;margin:0 0 var(--s-3);padding-bottom:14px;border-bottom:1px solid var(--rule-soft)}
 .pubgroup-head h2{font-family:"Newsreader",Georgia,serif;font-weight:300;font-size:var(--t-xl);letter-spacing:-.02em;line-height:1.1;color:var(--accent);margin:0}
 .pubgroup-n{font-family:"IBM Plex Mono",monospace;font-size:var(--t-xs);color:var(--accent);border:1px solid var(--rule);border-radius:999px;padding:3px 11px;line-height:1;font-variant-numeric:tabular-nums}
 @media(max-width:580px){.pubgroup{padding-top:36px;margin-top:36px}.pubgroup-head h2{font-size:var(--t-lg)}}
@@ -816,10 +816,10 @@ h2.rule{display:flex;align-items:center}
 .creds li.pending .icon{color:var(--ink-mute)}
 
 /* ---------- about: bio + portrait ---------- */
-.bio-split{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:56px;align-items:start;padding-top:32px}
+.bio-split{display:grid;grid-template-columns:minmax(0,1fr) clamp(200px,24vw,300px);gap:56px;align-items:start}
 .bio-portrait{margin:0}
 
-@media(max-width:860px){.bio-split{grid-template-columns:1fr;gap:32px}.bio-portrait{max-width:232px}}
+@media(max-width:860px){.bio-split{grid-template-columns:1fr;gap:32px}.bio-portrait{width:100%;max-width:280px}}
 /* ---------- footer ---------- */
 footer.site{border-top:1px solid var(--rule);padding-top:32px;padding-bottom:48px;margin-top:48px}
 .fcols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px}
