@@ -548,6 +548,32 @@ main>section.writinghead{margin-bottom:var(--s-5)}
 .locusfig{margin:0}
 .locusfig img{width:100%;height:auto;max-height:460px;object-fit:contain;display:block;border:1px solid var(--rule)}
 .locusfig figcaption{font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);color:var(--ink-mute);margin-top:12px;max-width:var(--measure)}
+.cvrow{display:grid;grid-template-columns:118px minmax(0,1fr);gap:32px;padding:18px 0;border-top:1px solid var(--rule-soft);align-items:baseline}
+.cvrow h3{font-family:"Newsreader",Georgia,serif;font-weight:400;font-size:var(--t-md);margin:0 0 4px;color:var(--ink)}
+.cvrow .org{color:var(--data3);font-weight:500;font-size:var(--t-sm);margin:0 0 8px}
+.cvrow ul{margin:8px 0 0;padding-left:16px}
+.cvrow li{font-size:var(--t-sm);color:var(--ink-soft);margin-bottom:5px;line-height:1.55}
+.cvlist{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.cvlist li{display:grid;grid-template-columns:118px minmax(0,1fr);gap:32px;align-items:baseline;font-size:var(--t-sm);line-height:1.55;color:var(--ink-soft)}
+.cvlist a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--rule)}
+.cvlist a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+/* .when is shared with the news log, where it carries a top margin. In a
+   baseline-aligned CV grid that margin pushes every date off its row. */
+.cvrow .when,.cvlist .when{margin:0;white-space:nowrap}
+.biocta{margin:var(--s-3) 0 0}
+@media print{
+  header,nav,footer,.themebtn{display:none!important}
+  body{background:#fff;color:#000;font-size:10.5pt}
+  main{max-width:none;padding:0}
+  a{color:#000;border-bottom:0;text-decoration:none}
+  section{page-break-inside:auto;margin:0 0 14pt}
+  .cvrow,.cvlist li{page-break-inside:avoid}
+  h2.rule{page-break-after:avoid;font-size:12pt}
+  .pagehead .lede,.eyebrow{color:#333}
+}
+.cvsub{font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);margin:var(--s-3) 0 12px;font-weight:400}
+.cvsub:first-of-type{margin-top:0}
+@media(max-width:640px){.cvrow,.cvlist li{grid-template-columns:1fr;gap:4px}}
 .posts{display:flex;flex-direction:column}
 .post{padding:var(--s-3) 0;border-bottom:1px solid var(--rule-soft)}
 .post:first-child{border-top:1px solid var(--rule-soft)}
@@ -576,32 +602,9 @@ main>section.writinghead{margin-bottom:var(--s-5)}
 /* ---------- recognition ---------- */
 /* Teaching and collaborators follow the same deboxed row pattern as
    Recognition: a hairline between entries, no container, no fill. */
-.teaching,.collab{list-style:none;margin:0;padding:0;display:grid;gap:0}
-.teaching li{padding:var(--s-2) 0;border-bottom:1px solid var(--rule);display:flex;
-  justify-content:space-between;gap:var(--s-3);flex-wrap:wrap;align-items:baseline}
-.teaching li:first-child{border-top:1px solid var(--rule)}
-.tcourse{margin:0;font-size:var(--t-base)}
-.tinst{margin:0;font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);color:var(--ink-mute)}
-.tright{display:flex;align-items:baseline;gap:var(--s-2);flex-wrap:wrap;
-  font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs)}
-.trole{color:var(--accent);font-weight:500}
-.tterm,.tmeta{color:var(--ink-mute);font-family:"IBM Plex Mono",monospace}
-.collab li{padding:var(--s-2) 0;border-bottom:1px solid var(--rule);display:flex;
-  align-items:baseline;gap:var(--s-2);flex-wrap:wrap}
-.collab li:first-child{border-top:1px solid var(--rule)}
-.cname{font-size:var(--t-base)}
-.crel,.caff{font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);color:var(--ink-mute)}
-.crel{color:var(--accent)}
-.langs{font-family:"Libre Franklin",sans-serif;font-size:var(--t-sm);color:var(--ink-mute);margin-top:var(--s-3)}
 @media(max-width:620px){
-  .teaching li,.collab li{flex-direction:column;gap:6px;align-items:flex-start}
 }
 
-.recog{list-style:none;margin:0;padding:0;display:grid;gap:0}
-.recog li{padding:var(--s-2) 0;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;gap:var(--s-3);flex-wrap:wrap;align-items:baseline}
-.recog li:first-child{border-top:1px solid var(--rule)}
-.recog strong{font-weight:400;font-size:var(--t-md)}
-.recog span{font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);color:var(--ink-mute);text-align:right}
 
 /* ---------- research + about ---------- */
 .pagehead{padding:48px 0 8px}
@@ -624,23 +627,9 @@ main>section.writinghead{margin-bottom:var(--s-5)}
    same reason: the hero sets the pattern and the About page should not restate
    it differently. */
 .org{color:var(--data3);font-weight:500;font-size:var(--t-base);margin:0 0 12px;max-width:var(--measure)}
-.thesis{font-size:var(--t-base);font-style:italic;color:var(--ink-soft);margin:0;max-width:var(--measure)}
 .entry ul{margin:12px 0 0;padding-left:16px}
 .entry li{font-size:var(--t-base);color:var(--ink-soft);margin-bottom:8px}
-.svc{list-style:none;margin:0;padding:0;display:grid;gap:0}
-.svc li{padding:var(--s-2) 0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:1fr auto;gap:4px var(--s-3);align-items:baseline}
-.svc li:first-child{border-top:1px solid var(--rule)}
-.svc strong{font-family:"Newsreader",Georgia,serif;font-weight:400;font-size:var(--t-md)}
-.svc span{grid-column:1;font-size:var(--t-base);color:var(--ink-mute)}
-.svc em{grid-row:1;grid-column:2;font-family:"Libre Franklin",sans-serif;font-style:normal;font-size:var(--t-xs);letter-spacing:.13em;text-transform:uppercase;color:var(--accent)}
 @media(max-width:580px){.svc li{grid-template-columns:1fr}.svc em{grid-row:auto;grid-column:1}}
-.creds{list-style:none;margin:0;padding:0;display:grid;gap:0}
-.creds li{padding:var(--s-2) 0;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;gap:var(--s-2);flex-wrap:wrap;align-items:baseline}
-.creds li:first-child{border-top:1px solid var(--rule)}
-.creds strong{font-weight:400;font-size:var(--t-md)}
-.creds span{font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);color:var(--ink-mute);letter-spacing:.1em;text-transform:uppercase}
-.creds li.pending strong{color:var(--ink-soft);font-style:italic}
-.affil{font-size:var(--t-base);color:var(--ink-soft);max-width:78ch}
 
 /* Logo wall. Cells are a fixed height so marks of wildly different aspect
    ratios still line up on a common baseline - the thing that separates a
@@ -845,7 +834,6 @@ h2.rule + .rl{margin-top:-20px;margin-bottom:var(--s-3)}
 .fplain{display:flex;align-items:center;gap:8px}
 h2.rule .icon{width:1.5em;height:1.5em;margin-right:8px;opacity:.75}
 h2.rule{display:flex;align-items:center}
-.creds li{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px}
 .creds .icon{width:1.15rem;height:1.15rem;color:var(--accent)}
 .creds li.pending .icon{color:var(--ink-mute)}
 
@@ -878,6 +866,7 @@ footer.site{border-top:1px solid var(--rule);padding-top:32px;padding-bottom:48p
    pointer. Everything here is additive - the page is complete and readable
    before any of it runs, and all of it is switched off under
    prefers-reduced-motion by the rule at the top of this sheet. */
+
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .62s cubic-bezier(.2,.6,.2,1),transform .62s cubic-bezier(.2,.6,.2,1)}
 .reveal.seen{opacity:1;transform:none}
 
@@ -893,8 +882,6 @@ a,.btn,.xcard,.work,.entry,.recog li,.hdot,.icon{transition:color .28s ease,back
 .hstep::before,.hstep::after{transition:background-color .28s ease,border-left-color .28s ease}
 .hdot{transition:transform .28s cubic-bezier(.2,.6,.2,1),border-color .28s ease}
 .work:hover h3 a,.entry:hover h3 a{color:var(--accent)}
-.recog li{transition:background-color .28s ease}
-.recog li:hover{background:var(--sunk)}
 .hicons a:hover .icon{transform:translateY(-2px)}
 .pagehead-art img{transition:opacity .8s ease}
 nav a{position:relative}
@@ -1102,6 +1089,4 @@ svg.fragility .dot{animation:fragPt 13s ease-in-out infinite}
   .entry,.work,.exp-head{grid-template-columns:1fr;gap:8px}
   .idx{display:none}
   .funders li{grid-template-columns:1fr;gap:2px}
-  .recog li,.creds li{flex-direction:column;gap:4px}
-  .recog span{text-align:left}
 }
