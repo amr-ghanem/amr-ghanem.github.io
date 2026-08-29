@@ -548,7 +548,7 @@ main>section.cvsec{margin-bottom:var(--s-4)}
 .adv p{font-size:var(--t-sm);color:var(--ink-soft);margin:0;line-height:1.6;max-width:none}
 @media(max-width:760px){.adv{grid-template-columns:1fr}}
 .cvstamp{font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);color:var(--ink-mute);margin:10px 0 0}
-.biocta{margin:var(--s-3) 0 0}
+.biocta{margin:var(--s-3) 0 0;display:flex;flex-wrap:wrap;gap:12px}
 @page{margin:16mm 15mm}
 @media print{
   header,nav,footer,.biocta{display:none!important}
