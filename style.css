@@ -509,6 +509,15 @@ main>section.writinghead{margin-bottom:var(--s-4)}
 /* A note following a reference list is a new thought, not the next entry.
    Sibling rule, so it needs no class and covers wherever this recurs. */
 .reflist + .rl,.reflist + p{margin-top:var(--s-3)}
+/* "What to try" prompts. Lived only in the demo's own stylesheet, so the
+   list rendered unstyled the moment the Locus page carried it too. It is
+   shared content now, so it is shared style. Measure cap dropped with the
+   rest of them. */
+.tryl{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.tryl li{font-size:var(--t-sm);color:var(--ink-soft);line-height:1.6;
+  padding-left:16px;position:relative}
+.tryl li::before{content:"";position:absolute;left:0;top:.68em;width:8px;height:1px;
+  background:var(--data3)}
 .postthumb{margin:0}
 .postthumb.art,.postfig.art{border:0;padding:0;background:none}
 /* A 420-wide drawing stretched to the full text column renders at 2.6x,
