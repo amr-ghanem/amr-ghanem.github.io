@@ -862,6 +862,10 @@ a.lw-a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .logowall.bare.lw-flow{display:flex;flex-wrap:wrap;align-items:center;
   justify-content:space-evenly;gap:20px 24px;max-width:none;width:100%}
 .logowall.bare.lw-flow .lw{flex:0 0 auto}
+/* Forces the next mark onto a new line, so the build controls where a band
+   wraps without touching how any mark is sized. Each row still centres itself
+   through justify-content. */
+.logowall.bare.lw-flow .lw-break{flex:0 0 100%;height:0;margin:0;padding:0;list-style:none}
 .logowall.bare.lw-flow .lw-a{padding:4px 2px}
 /* Size follows the item count. A band of three can run large and still leave
    room to breathe; the same size across five wraps to a second row. Dividing a
