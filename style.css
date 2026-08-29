@@ -827,7 +827,8 @@ h2.rule + .rl{margin-top:-20px;margin-bottom:var(--s-3)}
    The explorer sliders had a 2px hit box, which is the page's main interaction
    and effectively undraggable by thumb. The input keeps its 2px visual track;
    the height and padding give it something to hit. */
-.ctrl input[type=range]{height:44px;padding:21px 0;background:transparent;background-clip:content-box;margin:0}
+.ctrl input[type=range]{height:22px;padding:10px 0;background:transparent;background-clip:content-box;margin:0}
+@media(pointer:coarse),(max-width:820px){.ctrl input[type=range]{height:44px;padding:21px 0}}
 .ctrl input[type=range]::-webkit-slider-runnable-track{height:2px;background:var(--rule)}
 .ctrl input[type=range]::-moz-range-track{height:2px;background:var(--rule)}
 .hicons a{padding:9px}
