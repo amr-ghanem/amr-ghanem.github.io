@@ -218,7 +218,7 @@ main>section.pagehead{margin-bottom:var(--s-4)}
 /* ---------- expertise ---------- */
 .exp-wrap{padding-bottom:0}
 .exp-wrap{display:flex;flex-wrap:wrap;justify-content:center;gap:40px 32px}
-.exp-wrap>.xcard{flex:0 1 calc((100% - 3 * 32px) / 4)}
+.exp-wrap>.xcard{flex:0 1 calc((100% - 2 * 32px) / 3)}
 .exp-wrap>h2{flex:0 0 100%;margin-bottom:0}
 .xcard{display:flex;flex-direction:column;align-items:center;text-align:center}
 .xring{width:96px;height:96px;display:grid;place-items:center;margin:0 0 var(--s-2);border:1px solid var(--rule);border-radius:50%}
@@ -234,10 +234,10 @@ main>section.pagehead{margin-bottom:var(--s-4)}
 .xcard h3{font-size:var(--t-md);margin:0 0 8px;max-width:none}
 .xcard h3 a{color:inherit;text-decoration:none;border-bottom:1px solid var(--rule)}
 .xcard h3 a:hover{color:var(--accent);border-bottom-color:var(--accent)}
-.xcard .exp-lead{font-size:var(--t-base);max-width:var(--measure);margin-bottom:14px}
+.xcard .exp-lead{font-size:var(--t-base);margin-bottom:14px}
 .xcard .evidence li{max-width:none;font-size:var(--t-sm);padding-left:0;text-align:center}
 .xcard .evidence li::before{display:none}
-@media(max-width:1200px){.exp-wrap{gap:44px 40px}.exp-wrap>.xcard{flex:0 1 calc((100% - 40px) / 2)}}
+@media(max-width:1200px){.exp-wrap{gap:44px 32px}}
 @media(max-width:620px){.exp-wrap{gap:34px}.exp-wrap>.xcard{flex:0 1 100%}}
 .idx{font-size:var(--t-xs);color:var(--ink-mute);margin:8px 0 0;font-variant-numeric:tabular-nums}
 .exp-lead{font-size:var(--t-md);color:var(--ink-soft);max-width:72ch;margin-bottom:16px}
@@ -288,7 +288,7 @@ figcaption p{font-size:var(--t-base);color:var(--ink-soft);max-width:54ch;line-h
 /* ---------- interactive explorer ---------- */
 .explorer{padding:0}
 .exp-intro{max-width:none;margin-bottom:32px}
-.exp-intro>p{max-width:var(--measure);margin:16px 0 0}
+.exp-intro>p{margin:16px 0 0}
 .exp-introhead{display:block}
 .exp-introhead h2{margin:0}
 
@@ -314,7 +314,7 @@ figcaption p{font-size:var(--t-base);color:var(--ink-soft);max-width:54ch;line-h
 
 .readout{border-left:3px solid var(--accent);padding:2px 0 2px 16px;margin-bottom:24px}
 .ro-num{font-family:"IBM Plex Mono",monospace;font-size:2.6rem;line-height:1;color:var(--accent);margin:0 0 12px;font-variant-numeric:tabular-nums;letter-spacing:-.03em}
-.ro-text{font-size:var(--t-base);color:var(--ink-soft);margin:0;line-height:1.65;flex:1 1 340px;max-width:var(--measure)}
+.ro-text{font-size:var(--t-base);color:var(--ink-soft);margin:0;line-height:1.65;flex:1 1 340px}
 
 .ctrl{margin-bottom:0}
 .ctrl label{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);letter-spacing:.13em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:6px}
@@ -327,7 +327,7 @@ figcaption p{font-size:var(--t-base);color:var(--ink-soft);max-width:54ch;line-h
 .ctrl input[type=range]:disabled{cursor:not-allowed}
 .ctrl input[type=range]:disabled::-webkit-slider-thumb{background:var(--ink-mute);cursor:not-allowed}
 .ctrl input[type=range]:disabled::-moz-range-thumb{background:var(--ink-mute);cursor:not-allowed}
-.disclaim{font-family:"Libre Franklin",sans-serif;font-size:var(--t-sm);line-height:1.65;color:var(--ink-mute);margin:16px 0 0;grid-column:1/-1;max-width:var(--measure)}
+.disclaim{font-family:"Libre Franklin",sans-serif;font-size:var(--t-sm);line-height:1.65;color:var(--ink-mute);margin:16px 0 0;grid-column:1/-1}
 .eqn{font-family:"IBM Plex Mono",monospace;font-size:var(--t-sm);color:var(--ink-mute);margin:16px 0 0;padding-top:16px;border-top:1px solid var(--rule-soft)}
 
 @media(max-width:860px){.exp-panel{grid-template-columns:1fr;gap:32px;padding:0}}
@@ -376,7 +376,8 @@ figcaption p{font-size:var(--t-base);color:var(--ink-soft);max-width:54ch;line-h
 .engine .ehyst.inner{stroke-width:1.2;opacity:.5}
 .engine .emesh path{fill:none;stroke:var(--accent);stroke-width:.8;opacity:.7}
 .engine .espread line{stroke:var(--accent);stroke-width:1.1;opacity:.55}
-.engine:hover .emesh path{stroke:var(--data3)}
+.engine:hover .emesh path.r{stroke:var(--accent)}
+.engine:hover .emesh path.c{stroke:var(--data3)}
 .engine:hover .elab.out{fill:var(--data3)}
 .engine .ecyc{fill:none;stroke:var(--accent);stroke-width:2.4}
 .engine .ecycHead{fill:var(--accent)}
@@ -408,7 +409,7 @@ figcaption p{font-size:var(--t-base);color:var(--ink-soft);max-width:54ch;line-h
 .engine:hover .ehyst{stroke:var(--data3)}
 .engine:hover .efit circle{fill:var(--accent)}
 .engine figcaption{font-family:"Libre Franklin",sans-serif;font-size:var(--t-sm);line-height:1.6;color:var(--ink-mute);margin-top:16px;max-width:none}
-.rnote{font-family:"Libre Franklin",sans-serif;font-size:var(--t-sm);line-height:1.6;color:var(--ink-mute);margin:24px 0 0;max-width:var(--measure)}
+.rnote{font-family:"Libre Franklin",sans-serif;font-size:var(--t-sm);line-height:1.6;color:var(--ink-mute);margin:24px 0 0}
 @media(max-width:900px){.engine{padding:0;overflow-x:auto}.engine svg{min-width:660px}}
 .hsteps{list-style:none;margin:0 0 68px;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0 18px}
 .hstep{display:flex;flex-direction:column;align-items:center;text-align:center;position:relative}
@@ -460,7 +461,7 @@ figcaption p{font-size:var(--t-base);color:var(--ink-soft);max-width:54ch;line-h
 }
 
 /* ---------- research images ---------- */
-.rlede{font-size:var(--t-md);color:var(--ink-soft);max-width:var(--measure);margin:0 0 16px}
+.rlede{font-size:var(--t-md);color:var(--ink-soft);margin:0 0 16px}
 .rstep{display:flex;align-items:baseline;gap:12px;margin:0 0 12px;font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);letter-spacing:.13em;text-transform:uppercase;color:var(--ink-mute)}
 .ryear{font-family:"IBM Plex Mono",monospace;font-size:var(--t-xs);letter-spacing:0;color:var(--accent);font-variant-numeric:tabular-nums}
 .rgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(264px,1fr));gap:24px}
@@ -480,15 +481,14 @@ figcaption p{font-size:var(--t-base);color:var(--ink-soft);max-width:54ch;line-h
 .repnum{font-family:"IBM Plex Mono",monospace;font-size:var(--t-xs);color:var(--ink-mute);letter-spacing:.02em}
 .tag{font-family:"Libre Franklin",sans-serif;padding:2px 8px;font-size:var(--t-xs);letter-spacing:.1em;text-transform:uppercase}
 .tag.oa{background:none;color:var(--accent);border:1px solid var(--rule);border-radius:999px}
-main p,main li{max-width:var(--measure)}
-/* --- writing. No cards: a hairline between entries, same as the publication
+main p,/* --- writing. No cards: a hairline between entries, same as the publication
    list, so the two indexes read as one system. */
 main>section.writinghead{margin-bottom:var(--s-4)}
 /* --- activity log: date column, one line each, no cards. */
 .newslist{list-style:none;margin:0;padding:0;display:grid;gap:var(--s-2)}
 .newslist li{display:grid;grid-template-columns:96px minmax(0,1fr);gap:var(--s-2);align-items:baseline}
 .newslist .when{white-space:nowrap}
-.newslist span:last-child{font-size:var(--t-base);color:var(--ink-soft);line-height:1.6;max-width:var(--measure)}
+.newslist span:last-child{font-size:var(--t-base);color:var(--ink-soft);line-height:1.6}
 .newslist a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--rule)}
 .newslist a:hover{color:var(--accent);border-bottom-color:var(--accent)}
 @media(max-width:560px){.newslist li{grid-template-columns:1fr;gap:2px}}
@@ -520,7 +520,7 @@ main>section.writinghead{margin-bottom:var(--s-4)}
 @media(max-width:700px){.proj.haspic{grid-template-columns:1fr}.projfig{order:-1}.projpubs li{grid-template-columns:44px minmax(0,1fr);gap:10px}}
 .locusfig{margin:0}
 .locusfig img{width:100%;height:auto;max-height:460px;object-fit:contain;display:block;border:1px solid var(--rule)}
-.locusfig figcaption{font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);color:var(--ink-mute);margin-top:12px;max-width:var(--measure)}
+.locusfig figcaption{font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);color:var(--ink-mute);margin-top:12px}
 .cvrow{display:grid;grid-template-columns:118px minmax(0,1fr);gap:32px;padding:18px 0;border-top:1px solid var(--rule-soft);align-items:baseline}
 .cvrow h3{font-family:"Newsreader",Georgia,serif;font-weight:400;font-size:var(--t-md);margin:0 0 4px;color:var(--ink)}
 /* Gold marks WHERE: the employer, the institution, the journal, the active nav
@@ -608,7 +608,7 @@ main>section.writinghead{margin-bottom:var(--s-4)}
 .figsvg .sframe .slink{stroke:var(--data3);stroke-width:4;stroke-linecap:round}
 .figsvg .sframe .sground{stroke:var(--rule);stroke-width:1}
 
-.projfig.art figcaption{font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);line-height:1.55;color:var(--ink-mute);margin-top:10px;max-width:46ch}
+.projfig.art figcaption{font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);line-height:1.55;color:var(--ink-mute);margin-top:10px}
 .projfig.art,.locusfig.art{border:0;padding:0}
 .projfig.art .figsvg{max-width:100%}
 .locusfig.art .figsvg{max-width:620px;margin:0 auto}
@@ -690,7 +690,7 @@ main>section.cvsec{margin-bottom:var(--s-4)}
 .prose em{font-style:italic}
 .postfoot{margin-top:var(--s-5);padding-top:var(--s-3);border-top:1px solid var(--rule);display:flex;flex-wrap:wrap;gap:var(--s-1) var(--s-4)}
 .postfoot p{margin:0}
-.plain{font-size:var(--t-base);color:var(--ink-soft);margin:12px 0 0;max-width:var(--measure)}
+.plain{font-size:var(--t-base);color:var(--ink-soft);margin:12px 0 0}
 .more{font-family:"Libre Franklin",sans-serif;font-size:var(--t-sm);letter-spacing:.08em;text-transform:uppercase;margin-top:32px}
 
 /* ---------- recognition ---------- */
@@ -711,7 +711,7 @@ main>section.cvsec{margin-bottom:var(--s-4)}
 .pub:last-child{border-bottom:none}
 .pub h3 a{color:var(--ink);text-decoration:none}
 .pub h3 a:hover{color:var(--accent);text-decoration:underline}
-.authors{font-size:var(--t-sm);color:var(--ink-mute);margin:0;font-style:italic;max-width:var(--measure)}
+.authors{font-size:var(--t-sm);color:var(--ink-mute);margin:0;font-style:italic}
 .authors strong{font-weight:500;color:var(--ink-soft);font-style:normal}
 .work .authors{margin:2px 0 6px}
 .bio p:not(.eyebrow){font-size:var(--t-md);font-weight:300;line-height:1.54;max-width:var(--measure)}
@@ -722,7 +722,7 @@ main>section.cvsec{margin-bottom:var(--s-4)}
    hero - same information, same treatment. Upright rather than italic for the
    same reason: the hero sets the pattern and the About page should not restate
    it differently. */
-.org{color:var(--data3);font-weight:500;font-size:var(--t-base);margin:0 0 12px;max-width:var(--measure)}
+.org{color:var(--data3);font-weight:500;font-size:var(--t-base);margin:0 0 12px}
 .entry ul{margin:12px 0 0;padding-left:16px}
 .entry li{font-size:var(--t-base);color:var(--ink-soft);margin-bottom:8px}
 
