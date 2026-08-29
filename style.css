@@ -848,7 +848,7 @@ h2.rule{display:flex;align-items:center}
 .creds li.pending .icon{color:var(--ink-mute)}
 
 /* ---------- about: bio + portrait ---------- */
-.bio-split{display:grid;grid-template-columns:minmax(0,1fr) clamp(200px,24vw,300px);gap:56px;align-items:start}
+.bio-split{display:grid;grid-template-columns:minmax(0,1fr) clamp(200px,24vw,300px);gap:56px;align-items:start;padding-top:var(--s-4)}
 .bio-portrait{margin:0}
 
 @media(max-width:860px){.bio-split{grid-template-columns:1fr;gap:32px}.bio-portrait{width:100%;max-width:280px}}
