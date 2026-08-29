@@ -254,6 +254,8 @@ main>section.pagehead{margin-bottom:var(--s-4)}
 
 /* the research page lists fragility work, so its header carries a fragility
    figure beside the type - quiet, but not decoration: it is the subject */
+.headnote{font-family:"Libre Franklin",sans-serif;font-size:0.9rem;line-height:1.65;color:var(--ink-mute);max-width:52ch}
+.headnote em{font-style:italic}
 .pagehead-fig{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,0.8fr);gap:40px;align-items:center}
 /* A continuous ramp rather than a fade that finishes early: the previous mask
    reached full opacity at 42% and stayed flat, which read as a hard edge. These
