@@ -515,6 +515,14 @@ main p,main li{max-width:var(--measure)}
 /* --- writing. No cards: a hairline between entries, same as the publication
    list, so the two indexes read as one system. */
 main>section.writinghead{margin-bottom:var(--s-5)}
+/* --- activity log: date column, one line each, no cards. */
+.newslist{list-style:none;margin:0;padding:0;display:grid;gap:var(--s-2)}
+.newslist li{display:grid;grid-template-columns:96px minmax(0,1fr);gap:var(--s-2);align-items:baseline}
+.newslist .when{white-space:nowrap}
+.newslist span:last-child{font-size:var(--t-base);color:var(--ink-soft);line-height:1.6;max-width:var(--measure)}
+.newslist a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--rule)}
+.newslist a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+@media(max-width:560px){.newslist li{grid-template-columns:1fr;gap:2px}}
 .posts{display:flex;flex-direction:column}
 .post{padding:var(--s-3) 0;border-bottom:1px solid var(--rule-soft)}
 .post:first-child{border-top:1px solid var(--rule-soft)}
