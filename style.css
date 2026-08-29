@@ -286,7 +286,7 @@ main>section.pagehead{margin-bottom:var(--s-4)}
    rectangle - it just gets denser toward the far corner. */
 .pagehead-art{opacity:1;pointer-events:none;display:flex;align-items:center;justify-content:center}
 .pagehead-art img{width:100%;height:auto;display:block}
-.pagehead-art svg{width:100%;height:auto;max-width:430px;display:block;margin:0 auto}
+.pagehead-art svg{width:100%;height:auto;max-width:430px;max-height:280px;display:block;margin:0 auto}
 @media(max-width:900px){.pagehead-fig{grid-template-columns:1fr;gap:28px}.pagehead-art{display:none}}
 
 /* ---------- figures ---------- */
