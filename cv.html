@@ -26,7 +26,7 @@
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <link rel="manifest" href="site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Libre+Franklin:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,200;0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&display=swap">
-<link rel="stylesheet" href="style.css?v=296d5e7280">
+<link rel="stylesheet" href="style.css?v=9f071f9715">
 <script type="application/ld+json">
 {
     "@context":  "https://schema.org",
@@ -151,7 +151,17 @@
   <p class="lede">Structural Engineer &amp; Multi-Hazard Resilience Researcher</p>
   <p class="rl cvcontact"><a href="mailto:aghanem@hawaii.edu">aghanem@hawaii.edu</a> &middot; Honolulu, Hawaiʻi &middot; <a href="https://orcid.org/0000-0002-1855-5421" rel="noopener noreferrer" target="_blank">ORCID 0000-0002-1855-5421</a> &middot; <a href="https://amr-ghanem.github.io">amr-ghanem.github.io</a></p>
   <p class="cvstamp">Last updated 29 August 2026</p>
+  <div class="cvprint" hidden><button type="button" id="cvprint">Print or save as PDF</button></div>
 </section>
+<script>
+  // Only offer it if it can work. Label says both things the dialog does.
+  (function(){
+    var b = document.getElementById('cvprint');
+    if (!b || typeof window.print !== 'function') return;
+    b.parentNode.hidden = false;
+    b.addEventListener('click', function(){ window.print(); });
+  })();
+</script>
 
 <section class="cvsec">
   <h2 class="rule">Experience</h2>
