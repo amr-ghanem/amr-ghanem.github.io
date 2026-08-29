@@ -544,6 +544,9 @@ main>section.writinghead{margin-bottom:var(--s-5)}
 .projpubs a:hover{color:var(--accent);border-bottom-color:var(--accent)}
 .proj .more{margin-top:var(--s-2)}
 @media(max-width:700px){.proj.haspic{grid-template-columns:1fr}.projfig{order:-1}.projpubs li{grid-template-columns:44px minmax(0,1fr);gap:10px}}
+.locusfig{margin:0}
+.locusfig img{width:100%;height:auto;max-height:460px;object-fit:contain;display:block;border:1px solid var(--rule)}
+.locusfig figcaption{font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);color:var(--ink-mute);margin-top:12px;max-width:var(--measure)}
 .posts{display:flex;flex-direction:column}
 .post{padding:var(--s-3) 0;border-bottom:1px solid var(--rule-soft)}
 .post:first-child{border-top:1px solid var(--rule-soft)}
