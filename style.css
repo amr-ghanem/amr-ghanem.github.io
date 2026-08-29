@@ -483,7 +483,7 @@ figcaption p{font-size:var(--t-base);color:var(--ink-soft);max-width:54ch;line-h
 main p,main li{max-width:var(--measure)}
 /* --- writing. No cards: a hairline between entries, same as the publication
    list, so the two indexes read as one system. */
-main>section.writinghead{margin-bottom:var(--s-5)}
+main>section.writinghead{margin-bottom:var(--s-4)}
 /* --- activity log: date column, one line each, no cards. */
 .newslist{list-style:none;margin:0;padding:0;display:grid;gap:var(--s-2)}
 .newslist li{display:grid;grid-template-columns:96px minmax(0,1fr);gap:var(--s-2);align-items:baseline}
@@ -528,16 +528,53 @@ main>section.writinghead{margin-bottom:var(--s-5)}
 /* .when is shared with the news log, where it carries a top margin. In a
    baseline-aligned CV grid that margin pushes every date off its row. */
 .cvrow .when,.cvlist .when{margin:0;white-space:nowrap}
+/* An undated row still has to hold its baseline: an empty span collapses to
+   zero height and drags the whole row up by a line. */
+.cvlist .when:empty::before{content:" a0"}
+.cvhead .lede{margin-bottom:10px}
+.cvcontact{margin:0}
+/* The 80px section step is for pages carrying figures and prose. Ten dense
+   list sections at that rhythm is 720px of air, so the CV drops one step. */
+main>section.cvsec{margin-bottom:var(--s-4)}
+.cvsec h2.rule{margin-top:var(--s-4)}
+.cvnote{font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);color:var(--ink-mute);margin:0 0 14px;max-width:var(--measure)}
+.cvstamp{font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);color:var(--ink-mute);margin:10px 0 0}
 .biocta{margin:var(--s-3) 0 0}
+@page{margin:16mm 15mm}
 @media print{
-  header,nav,footer{display:none!important}
-  body{background:#fff;color:#000;font-size:10.5pt}
+  header,nav,footer,.biocta{display:none!important}
+  body{background:#fff;color:#000;font-size:10pt;line-height:1.45}
   main{max-width:none;padding:0}
   a{color:#000;border-bottom:0;text-decoration:none}
-  section{page-break-inside:auto;margin:0 0 14pt}
+  section{page-break-inside:auto;margin:0 0 13pt}
   .cvrow,.cvlist li{page-break-inside:avoid}
-  h2.rule{page-break-after:avoid;font-size:12pt}
-  .pagehead .lede,.eyebrow{color:#333}
+  .cvrow{padding:8pt 0;grid-template-columns:88pt minmax(0,1fr);gap:16pt}
+  .cvlist li{grid-template-columns:88pt minmax(0,1fr);gap:16pt}
+  .cvlist{gap:5pt}
+
+  /* Masthead: name, role, one contact line, one rule. Nothing else. */
+  .cvhead{padding:0 0 10pt;margin:0 0 16pt;border-bottom:1.2pt solid #000;
+          position:relative;display:block}
+  .cvhead .eyebrow{font-size:6.6pt;letter-spacing:.24em;color:#555;margin:0 0 4pt}
+  .cvhead h1{font-size:23pt;line-height:1;letter-spacing:-.015em;font-weight:400;
+             margin:0 0 3pt;color:#000}
+  .cvhead .lede{font-size:10.5pt;font-style:normal;color:#222;margin:0 0 7pt;
+                max-width:none;letter-spacing:.005em}
+  .cvcontact{font-size:8.6pt;color:#333;margin:0;max-width:none;letter-spacing:.01em}
+  /* The stamp belongs on the same line as the rule, out of the way. */
+  .cvstamp{position:absolute;top:0;right:0;font-size:7.4pt;color:#666;margin:0}
+
+  h2.rule{page-break-after:avoid;font-size:10.5pt;letter-spacing:.14em;
+          text-transform:uppercase;color:#000;margin:0 0 7pt;padding-bottom:2pt;
+          border-bottom:.5pt solid #999}
+  h2.rule svg,h2.rule img{display:none}
+  .cvrow h3{font-size:11pt;margin:0 0 1pt}
+  .cvrow .org{font-size:9.4pt;color:#333;margin:0 0 3pt}
+  .cvrow .plain,.cvrow li,.cvlist li{color:#222}
+  .cvrow li{margin-bottom:2pt}
+  .cvsub{font-size:8pt;color:#444;margin:9pt 0 5pt}
+  .cvnote{font-size:8pt;color:#555;margin:-3pt 0 6pt;max-width:none}
+  .when{color:#555}
 }
 .cvsub{font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);margin:var(--s-3) 0 12px;font-weight:400}
 .cvsub:first-of-type{margin-top:0}
