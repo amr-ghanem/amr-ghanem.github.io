@@ -26,7 +26,7 @@
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <link rel="manifest" href="site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Libre+Franklin:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,200;0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&display=swap">
-<link rel="stylesheet" href="style.css?v=31d64a02c3">
+<link rel="stylesheet" href="style.css?v=55f3e071b0">
 <script type="application/ld+json">
 {
     "@context":  "https://schema.org",
@@ -267,6 +267,12 @@
 
       <p class="eqn">P = 1 &minus; (1 &minus; P<sub>eq</sub>)(1 &minus; P<sub>ts</sub>) &nbsp;&middot;&nbsp; &theta;<sub>ts</sub> reduced by earthquake damage</p>
       <p class="disclaim">Forces follow ASCE 7 Chapter 6; capacities are representative for a mid-rise RC frame, not a specific study. See the <a href="research.html">research page</a>.</p>
+      <div class="exp-share" hidden>
+        <button type="button" id="expShare">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.1 0l3-3a5 5 0 0 0-7.1-7.1l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.1 0l-3 3A5 5 0 0 0 11 21.1l1.7-1.7"/></svg><span id="expShareLabel">Copy link to this state</span>
+        </button>
+        <p class="rl" id="expShareNote">A link that reopens the surface exactly as you have set it.</p>
+      </div>
     </div>
 
   </div></section>
@@ -1044,15 +1050,95 @@
     if (ANIM) startLoop();
   }
   phaseBtns.forEach(function(b){
-    b.addEventListener('click', function(){ setPhase(b.getAttribute('data-phase')); });
+    b.addEventListener('click', function(){ setPhase(b.getAttribute('data-phase')); writeState(); });
   });
+
+  // ---- shareable state -----------------------------------------------
+  // A reader who finds an interesting combination should be able to send it,
+  // not describe it. The five demands and the stage go in the hash, which is
+  // written with replaceState so dragging a slider never adds history entries
+  // and never scrolls the page.
+  var FIELDS = [['pga',sPga],['dep',sDep],['fr',sFr],['be',sBe],['rot',sRot]];
+  var writeTimer = null;
+
+  function writeState(){
+    if (!window.history || !history.replaceState) return;
+    var parts = FIELDS.map(function(f){ return f[0] + '=' + f[1].value; });
+    parts.push('ph=' + PHASE);
+    try { history.replaceState(null, '', location.pathname + location.search + '#' + parts.join('&')); }
+    catch (e) { /* file:// and some embeddings refuse; sharing is optional */ }
+  }
+  function queueWrite(){
+    if (writeTimer) clearTimeout(writeTimer);
+    writeTimer = setTimeout(writeState, 220);
+  }
+
+  function readState(){
+    var h = (location.hash || '').replace(/^#/, '');
+    if (!h || h.indexOf('=') < 0) return false;
+    var q = {};
+    h.split('&').forEach(function(kv){
+      var i = kv.indexOf('='); if (i > 0) q[kv.slice(0, i)] = kv.slice(i + 1);
+    });
+    var touched = false;
+    FIELDS.forEach(function(f){
+      var v = parseFloat(q[f[0]]);
+      if (isNaN(v)) return;
+      // clamp to the control's own range - a hand-edited URL must not be able
+      // to drive the model outside what the sliders allow
+      var lo = parseFloat(f[1].min), hi = parseFloat(f[1].max);
+      f[1].value = Math.min(hi, Math.max(lo, v));
+      touched = true;
+    });
+    if (q.ph === 'eq' || q.ph === 'ts') { setPhase(q.ph); touched = true; }
+    return touched;
+  }
 
   [sPga,sDep,sFr,sBe,sRot].forEach(function(el){
     el.addEventListener('input', function(){
-      render();
+      render(); queueWrite();
     });
-    el.addEventListener('change', render);
+    el.addEventListener('change', function(){ render(); queueWrite(); });
   });
+
+  var shareBtn = document.getElementById('expShare');
+  if (shareBtn && navigator.clipboard && navigator.clipboard.writeText) {
+    shareBtn.parentNode.hidden = false;
+    var shareLabel = document.getElementById('expShareLabel'), shareT = null;
+    shareBtn.addEventListener('click', function(){
+      writeState();
+      navigator.clipboard.writeText(location.href).then(function(){
+        shareLabel.textContent = 'Link copied';
+        if (shareT) clearTimeout(shareT);
+        shareT = setTimeout(function(){ shareLabel.textContent = 'Copy link to this state'; }, 2000);
+      }, function(){
+        shareLabel.textContent = 'Press Ctrl+C to copy the address bar';
+      });
+    });
+  }
+
+  // A shared link should land on the thing it is sharing, not the top of the
+  // page. Only scrolls when the URL actually carried a state.
+  if (readState()) {
+    render();
+    // The browser restores its own scroll position after load, which was
+    // undoing an early scrollIntoView. Take that over, and jump rather than
+    // glide: html has scroll-behavior:smooth, and animating 2000px on arrival
+    // reads as the page running away from the reader.
+    if ('scrollRestoration' in history) { try { history.scrollRestoration = 'manual'; } catch (e) {} }
+    var landOnPanel = function(){
+      var panel = document.querySelector('.exp-panel');
+      if (!panel) return;
+      var y = panel.getBoundingClientRect().top + window.pageYOffset - 80;
+      var root = document.documentElement, prev = root.style.scrollBehavior;
+      root.style.scrollBehavior = 'auto';
+      window.scrollTo(0, y);
+      root.style.scrollBehavior = prev;
+    };
+    if (document.readyState === 'complete') setTimeout(landOnPanel, 60);
+    else window.addEventListener('load', function(){ setTimeout(landOnPanel, 60); });
+  }
+
   if (window.matchMedia) {
     var mq=window.matchMedia('(prefers-color-scheme: dark)');
     if (mq.addEventListener) mq.addEventListener('change', render);
@@ -1098,6 +1184,26 @@
 })();
 </script>
 <script>
+// One handler for every [data-share] control on the site. The button ships
+// hidden and is only revealed where the clipboard API exists, so it is never a
+// control that does nothing when pressed.
+(function(){
+  var btns = [].slice.call(document.querySelectorAll('[data-share]'));
+  if (!btns.length) return;
+  if (!navigator.clipboard || !navigator.clipboard.writeText) return;
+  btns.forEach(function(b){
+    if (b.parentNode) b.parentNode.hidden = false;
+    var lab = b.querySelector('span'), t = null, was = lab ? lab.textContent : '';
+    b.addEventListener('click', function(){
+      navigator.clipboard.writeText(location.href).then(function(){
+        if (!lab) return;
+        lab.textContent = 'Link copied';
+        if (t) clearTimeout(t);
+        t = setTimeout(function(){ lab.textContent = was; }, 2000);
+      }, function(){ if (lab) lab.textContent = 'Copy failed'; });
+    });
+  });
+})();
 (function(){
   // Progressive enhancement: nothing carries .reveal in the HTML, so if this
   // never runs the page is simply fully visible. Also a no-op under

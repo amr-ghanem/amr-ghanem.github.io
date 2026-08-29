@@ -563,7 +563,27 @@ main>section.writinghead{margin-bottom:var(--s-4)}
 .cvlist .when:empty::before{content:" a0"}
 .cvhead .lede{margin-bottom:10px}
 .cvcontact{margin:0}
-.cvprint{margin:18px 0 0}
+.exp-share{margin:18px 0 0;display:flex;flex-wrap:wrap;align-items:center;gap:14px}
+.exp-share button{display:inline-flex;align-items:center;gap:10px;
+  font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);
+  letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);
+  background:none;border:1px solid var(--rule);border-radius:var(--r);
+  padding:9px 16px;cursor:pointer;transition:border-color .2s ease,color .2s ease}
+.exp-share button:hover{border-color:var(--accent);color:var(--accent)}
+.exp-share button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.exp-share svg{width:15px;height:15px;flex:none}
+.exp-share .rl{margin:0}
+.postshare{margin:0 0 18px}
+.sharebtn{display:inline-flex;align-items:center;gap:10px;
+  font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);
+  letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);
+  background:none;border:1px solid var(--rule);border-radius:var(--r);
+  padding:9px 16px;cursor:pointer;transition:border-color .2s ease,color .2s ease}
+.sharebtn:hover{border-color:var(--accent);color:var(--accent)}
+.sharebtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.sharebtn svg{width:15px;height:15px;flex:none}
+@media print{.postshare{display:none!important}}
+.cvprint{margin:18px 0 0;display:flex;flex-wrap:wrap;gap:10px}
 .cvprint button{display:inline-flex;align-items:center;gap:10px;
   font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);
   letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);

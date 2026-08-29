@@ -26,7 +26,7 @@
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <link rel="manifest" href="site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Libre+Franklin:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,200;0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&display=swap">
-<link rel="stylesheet" href="style.css?v=31d64a02c3">
+<link rel="stylesheet" href="style.css?v=55f3e071b0">
 <script type="application/ld+json">
 {"inLanguage":"en","datePublished":"2026-08-05","description":"A building is designed once. Its mass distribution is not fixed for life — and the codes that check for irregularity only ever looked at it once.","@type":"BlogPosting","dateModified":"2026-08-05","headline":"Change the use, change the risk","author":{"url":"https://amr-ghanem.github.io","name":"Amr Ghanem","@type":"Person","sameAs":["https://orcid.org/0000-0002-1855-5421","https://scholar.google.com/citations?user=Y_kH3ooAAAAJ","https://www.webofscience.com/wos/author/record/PLC-4161-2026","https://www.linkedin.com/in/amr-ghanem","https://www.researchgate.net/profile/Amr-Ghanem","https://openalex.org/works?filter=author.orcid:0000-0002-1855-5421","https://github.com/amr-ghanem"]},"@context":"https://schema.org","mainEntityOfPage":{"@type":"WebPage","@id":"https://amr-ghanem.github.io/change-the-use-change-the-risk.html"},"publisher":{"name":"Amr Ghanem","@type":"Person"},"wordCount":766}
 </script>
@@ -103,6 +103,7 @@
     <li><strong>Ghanem, A.</strong>, Lee, Y.-J., &amp; Moon, D.-S. (2024). &ldquo;<a href="https://doi.org/10.1061/JSENDH.STENG-12440" rel="noopener noreferrer" target="_blank">Seismic vulnerability of reinforced concrete frame structures: Obtaining plan or vertical mass irregularity from structure use change</a>&rdquo; <em class="venue">Journal of Structural Engineering</em>, 150(3), Article 04023243. <a href="https://doi.org/10.1061/JSENDH.STENG-12440" class="srcdoi" rel="noopener noreferrer" target="_blank">https://doi.org/10.1061/JSENDH.STENG-12440</a></li>
     </ul>
   </section>  <section class="postfoot">
+    <div class="postshare" hidden><button type="button" class="sharebtn" data-share><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.1 0l3-3a5 5 0 0 0-7.1-7.1l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.1 0l-3 3A5 5 0 0 0 11 21.1l1.7-1.7"/></svg><span>Copy link</span></button></div>
 <p class="rl">Next: <a href="earthquake-plus-tsunami-is-not-arithmetic.html">Earthquake plus tsunami is not arithmetic &rarr;</a></p><p class="rl"><a href="writing.html">All writing</a></p>  </section>
 </article>
 </main>
@@ -131,6 +132,26 @@
 </footer>
 
 <script>
+// One handler for every [data-share] control on the site. The button ships
+// hidden and is only revealed where the clipboard API exists, so it is never a
+// control that does nothing when pressed.
+(function(){
+  var btns = [].slice.call(document.querySelectorAll('[data-share]'));
+  if (!btns.length) return;
+  if (!navigator.clipboard || !navigator.clipboard.writeText) return;
+  btns.forEach(function(b){
+    if (b.parentNode) b.parentNode.hidden = false;
+    var lab = b.querySelector('span'), t = null, was = lab ? lab.textContent : '';
+    b.addEventListener('click', function(){
+      navigator.clipboard.writeText(location.href).then(function(){
+        if (!lab) return;
+        lab.textContent = 'Link copied';
+        if (t) clearTimeout(t);
+        t = setTimeout(function(){ lab.textContent = was; }, 2000);
+      }, function(){ if (lab) lab.textContent = 'Copy failed'; });
+    });
+  });
+})();
 (function(){
   // Progressive enhancement: nothing carries .reveal in the HTML, so if this
   // never runs the page is simply fully visible. Also a no-op under
