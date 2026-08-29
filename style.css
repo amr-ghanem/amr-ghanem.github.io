@@ -496,7 +496,9 @@ main>section.writinghead{margin-bottom:var(--s-4)}
 .newslist a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--rule)}
 .newslist a:hover{color:var(--accent);border-bottom-color:var(--accent)}
 @media(max-width:560px){.newslist li{grid-template-columns:1fr;gap:2px}}
-.postsources{margin-top:var(--s-4)}
+.postsources{margin:var(--s-3) 0 var(--s-4);padding-top:var(--s-2);
+  border-top:1px solid var(--rule-soft)}
+.srchead{margin:0 0 14px}
 /* A reference list, not a year-indexed table: the year belongs after the
    authors, where a citation puts it. Used by the CV and by every essay, from
    one builder, so the same paper reads identically in both places. */
