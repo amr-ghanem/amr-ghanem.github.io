@@ -214,8 +214,6 @@ main>section.pagehead{margin-bottom:var(--s-4)}
 }
 .sicon{width:34px;height:28px;color:var(--accent);margin-bottom:4px;display:block}
 .lab{font-size:var(--t-xs);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute);margin:0;line-height:1.5}
-.venues{font-size:var(--t-base);color:var(--ink-soft);max-width:var(--measure);padding-top:24px;border-top:1px solid var(--rule-soft)}
-.venues span{font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-mute);margin-right:12px}
 
 /* ---------- expertise ---------- */
 .exp-wrap{padding-bottom:0}
