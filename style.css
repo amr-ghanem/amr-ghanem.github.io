@@ -514,16 +514,6 @@ main p,main li{max-width:var(--measure)}
 /* --- writing. No cards: a hairline between entries, same as the publication
    list, so the two indexes read as one system. */
 main>section.writinghead{margin-bottom:var(--s-5)}
-/* --- progression gallery: figure left, its step and caption right. */
-.progression{}
-.pstep{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:var(--s-3) var(--s-4);align-items:start;margin:0 0 var(--s-4);padding-bottom:var(--s-4);border-bottom:1px solid var(--rule-soft)}
-.pstep:last-child{border-bottom:0;margin-bottom:0}
-.pstep img{width:100%;height:auto;display:block;border:1px solid var(--rule)}
-.pstep figcaption{margin:0}
-.pstep-h{font-family:"Newsreader",Georgia,serif;font-weight:300;font-size:var(--t-lg);line-height:1.2;color:var(--ink);margin:0 0 10px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
-.pstep .plain{margin:0}
-.pcred{display:block;font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);color:var(--ink-mute);margin-top:12px}
-@media(max-width:700px){.pstep{grid-template-columns:1fr;gap:var(--s-2)}}
 .posts{display:flex;flex-direction:column}
 .post{padding:var(--s-3) 0;border-bottom:1px solid var(--rule-soft)}
 .post:first-child{border-top:1px solid var(--rule-soft)}
@@ -581,9 +571,9 @@ main>section.writinghead{margin-bottom:var(--s-5)}
 
 /* ---------- research + about ---------- */
 .pagehead{padding:48px 0 8px}
-.pub.haspic{display:grid;grid-template-columns:1fr 220px;gap:32px;align-items:start}
+.pub.haspic{display:grid;grid-template-columns:1fr 260px;gap:32px;align-items:start}
 .pubfig{margin:0}
-.pubfig img{width:100%;height:auto;aspect-ratio:4/3;object-fit:contain;padding:0;display:block;border:1px solid var(--rule)}
+.pubfig img{width:100%;height:200px;object-fit:contain;padding:0;display:block;border:1px solid var(--rule)}
 .pubfig figcaption{font-family:"Libre Franklin",sans-serif;font-size:var(--t-sm);letter-spacing:.06em;color:var(--ink-mute);margin-top:8px;line-height:1.4}
 @media(max-width:700px){.pub.haspic{grid-template-columns:1fr;gap:16px}.pubfig{max-width:280px}}
 .pub{padding:24px 0;border-bottom:1px solid var(--rule-soft)}
