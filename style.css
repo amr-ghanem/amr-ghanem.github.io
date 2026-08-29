@@ -597,7 +597,7 @@ main>section.writinghead{margin-bottom:var(--s-5)}
 .pub h3 a{color:var(--ink);text-decoration:none}
 .pub h3 a:hover{color:var(--accent);text-decoration:underline}
 .authors{font-size:var(--t-sm);color:var(--ink-mute);margin:0;font-style:italic;max-width:var(--measure)}
-.bio p{font-size:var(--t-md);font-weight:300;line-height:1.54;max-width:82ch}
+.bio p:not(.eyebrow){font-size:var(--t-md);font-weight:300;line-height:1.54;max-width:var(--measure)}
 .entry{display:grid;grid-template-columns:118px 1fr;gap:32px;padding:24px 0;border-top:1px solid var(--rule-soft);align-items:baseline}
 .when{font-size:var(--t-xs);color:var(--ink-mute);margin:8px 0 0;font-variant-numeric:tabular-nums;line-height:1.7}
 .when span{opacity:.7}
