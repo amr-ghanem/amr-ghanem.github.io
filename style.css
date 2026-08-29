@@ -497,10 +497,6 @@ main>section.writinghead{margin-bottom:var(--s-4)}
 .newslist a:hover{color:var(--accent);border-bottom-color:var(--accent)}
 @media(max-width:560px){.newslist li{grid-template-columns:1fr;gap:2px}}
 .postsources{margin-top:var(--s-4)}
-.srclist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:20px}
-.srclist .srctitle{font-size:var(--t-base);line-height:1.5;margin:0 0 4px}
-.srclist .authors{margin:0 0 4px}
-.srclist .meta{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:0}
 .postthumb{margin:0}
 .postthumb.art,.postfig.art{border:0;padding:0;background:none}
 /* A 420-wide drawing stretched to the full text column renders at 2.6x,
