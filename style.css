@@ -538,6 +538,11 @@ main>section.writinghead{margin-bottom:var(--s-4)}
 main>section.cvsec{margin-bottom:var(--s-4)}
 .cvsec h2.rule{margin-top:var(--s-4)}
 .cvnote{font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);color:var(--ink-mute);margin:0 0 14px;max-width:var(--measure)}
+.adv{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s-3) var(--s-4)}
+.adv li{border-top:1px solid var(--rule);padding-top:14px}
+.adv .advh{font-family:"Newsreader",Georgia,serif;font-size:var(--t-md);color:var(--accent);margin:0 0 6px;font-weight:400}
+.adv p{font-size:var(--t-sm);color:var(--ink-soft);margin:0;line-height:1.6;max-width:none}
+@media(max-width:760px){.adv{grid-template-columns:1fr}}
 .cvstamp{font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);color:var(--ink-mute);margin:10px 0 0}
 .biocta{margin:var(--s-3) 0 0}
 @page{margin:16mm 15mm}
