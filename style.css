@@ -532,6 +532,11 @@ main>section.writinghead{margin-bottom:var(--s-4)}
 /* .when is shared with the news log, where it carries a top margin. In a
    baseline-aligned CV grid that margin pushes every date off its row. */
 .cvrow .when,.cvlist .when{margin:0;white-space:nowrap}
+/* `main p,main li` caps text at the 68ch prose measure. That is right for
+   running prose and wrong for a CV, whose rows are scanned, not read: it was
+   stopping every row ~370px short of its own column. `main`'s own width cap
+   keeps the longest line near 88 characters, which is fine for structured rows. */
+.cvrow li,.cvrow .plain,.cvlist li,.cvlist li>span,.cvnote{max-width:none}
 /* An undated row still has to hold its baseline: an empty span collapses to
    zero height and drags the whole row up by a line. */
 .cvlist .when:empty::before{content:" a0"}
@@ -541,7 +546,7 @@ main>section.writinghead{margin-bottom:var(--s-4)}
    list sections at that rhythm is 720px of air, so the CV drops one step. */
 main>section.cvsec{margin-bottom:var(--s-4)}
 .cvsec h2.rule{margin-top:var(--s-4)}
-.cvnote{font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);color:var(--ink-mute);margin:0 0 14px;max-width:var(--measure)}
+.cvnote{font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);color:var(--ink-mute);margin:0 0 14px;max-width:none}
 .adv{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s-3) var(--s-4)}
 .adv li{border-top:1px solid var(--rule);padding-top:14px}
 .adv .advh{font-family:"Newsreader",Georgia,serif;font-size:var(--t-md);color:var(--accent);margin:0 0 6px;font-weight:400}
