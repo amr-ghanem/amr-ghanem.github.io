@@ -525,6 +525,10 @@ main>section.writinghead{margin-bottom:var(--s-4)}
 .cvlist li{display:grid;grid-template-columns:118px minmax(0,1fr);gap:32px;align-items:baseline;font-size:var(--t-sm);line-height:1.55;color:var(--ink-soft)}
 .cvlist a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--rule)}
 .cvlist a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+/* Only `.prose strong` had a weight, so every <strong> in these lists fell
+   through to the browser's 700 - heavier than anything else on the site,
+   and heavier than the h3 job titles doing the same job at 400. */
+.cvlist strong,.cvrow strong{font-weight:500;color:var(--ink)}
 /* .when is shared with the news log, where it carries a top margin. In a
    baseline-aligned CV grid that margin pushes every date off its row. */
 .cvrow .when,.cvlist .when{margin:0;white-space:nowrap}
@@ -578,6 +582,7 @@ main>section.cvsec{margin-bottom:var(--s-4)}
   .cvrow .plain,.cvrow li,.cvlist li{color:#222}
   .cvrow li{margin-bottom:2pt}
   .cvsub{font-size:8pt;color:#444;margin:9pt 0 5pt}
+  .cvlist strong,.cvrow strong{font-weight:500;color:#000}
   .cvnote{font-size:8pt;color:#555;margin:-3pt 0 6pt;max-width:none}
   .when{color:#555}
 }
