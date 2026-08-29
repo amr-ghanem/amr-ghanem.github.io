@@ -26,7 +26,7 @@
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <link rel="manifest" href="site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Libre+Franklin:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,200;0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&display=swap">
-<link rel="stylesheet" href="style.css?v=de408f30c3">
+<link rel="stylesheet" href="style.css?v=bc3582458a">
 <script type="application/ld+json">
 {"inLanguage":"en","datePublished":"2026-08-05","description":"A building is designed once. Its mass distribution is not fixed for life — and the codes that check for irregularity only ever looked at it once.","@type":"BlogPosting","dateModified":"2026-08-05","headline":"Change the use, change the risk","author":{"url":"https://amr-ghanem.github.io","name":"Amr Ghanem","@type":"Person","sameAs":["https://orcid.org/0000-0002-1855-5421","https://scholar.google.com/citations?user=Y_kH3ooAAAAJ","https://www.webofscience.com/wos/author/record/PLC-4161-2026","https://www.linkedin.com/in/amr-ghanem","https://www.researchgate.net/profile/Amr-Ghanem","https://openalex.org/works?filter=author.orcid:0000-0002-1855-5421","https://github.com/amr-ghanem"]},"@context":"https://schema.org","mainEntityOfPage":{"@type":"WebPage","@id":"https://amr-ghanem.github.io/change-the-use-change-the-risk.html"},"publisher":{"name":"Amr Ghanem","@type":"Person"},"wordCount":766}
 </script>
@@ -51,7 +51,28 @@
     <p class="meta"><time class="when" datetime="2026-08-05">5 August 2026</time><span class="when">3 min read</span></p>
   </section>
 
-  <figure class="postfig"><img src="research/irregularity-effect.jpg" alt="Two fragility curves compared with an inset zoom showing a ten point difference in failure probability" loading="lazy" decoding="async"><figcaption>Ghanem &amp; Moon — Seismic Fragility Analysis of 3D Vertical Irregular RC Structures. Engineering Archive, CC BY 4.0</figcaption></figure>
+  <figure class="postfig art"><svg class="figsvg use-fig" viewBox="0 0 420 300" role="img" aria-label="A building elevation with the mass of each storey drawn beside it, one storey far heavier after a change of use, and the fragility curve shifting so the same building fails at lower shaking" xmlns="http://www.w3.org/2000/svg">  <g class="sframe">
+    <path d="M34 220 v-152 M104 220 v-152"/>
+    <path d="M34 190 h70 M34 160 h70 M34 130 h70 M34 100 h70 M34 68 h70"/>
+    <path class="sground" d="M22 220 h94"/>
+  </g>
+  <rect class="ubar" x="112" y="185" width="26" height="10"/>
+  <rect class="ubar" x="112" y="155" width="24" height="10"/>
+  <rect class="ubar hot" x="112" y="125" width="58" height="10"/>
+  <rect class="ubar" x="112" y="95" width="25" height="10"/>
+  <rect class="ubar" x="112" y="63" width="19" height="10"/>
+  <text class="pnote acc" x="176" y="134">use changed here</text>
+  <text class="plab" x="112" y="248">storey mass</text>
+  <g class="mplot">
+    <line class="faxis" x1="256" y1="214" x2="398" y2="214"/>
+    <line class="faxis" x1="256" y1="214" x2="256" y2="66"/>
+    <path class="mcurve dim" d="M258 211 C 300 208, 312 104, 348 88 L396 84"/>
+    <path class="mcurve" d="M258 211 C 286 206, 296 98, 328 84 L396 78"/>
+    <path class="barrow" d="M344 152 h-30 l0-6 -14 9 14 9 0-6 h30 z"/>
+    <text class="pnote acc" x="350" y="156">fails sooner</text>
+    <text class="plab" x="398" y="234" text-anchor="end">shaking</text>
+    <text class="plab" x="252" y="62" text-anchor="end">P(failure)</text>
+  </g></svg></figure>
   <div class="prose">
 <p>Seismic codes carry provisions for mass irregularity. ASCE 7 defines a vertical mass irregularity where the effective mass of any storey exceeds 150% of an adjacent storey, excepting a roof lighter than the floor below. Find one, and you lose the right to use the simpler analysis procedures; you are pushed toward a modal or a response-history analysis, and the detailing requirements tighten.</p>
 <p>That check happens at design. It happens once.</p>

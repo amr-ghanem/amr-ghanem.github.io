@@ -254,14 +254,14 @@ main>section.pagehead{margin-bottom:var(--s-4)}
 
 /* the research page lists fragility work, so its header carries a fragility
    figure beside the type - quiet, but not decoration: it is the subject */
-.pagehead-fig{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,0.62fr);gap:48px;align-items:start}
+.pagehead-fig{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,0.8fr);gap:40px;align-items:center}
 /* A continuous ramp rather than a fade that finishes early: the previous mask
    reached full opacity at 42% and stayed flat, which read as a hard edge. These
    stops keep climbing all the way across, so the image never resolves into a
    rectangle - it just gets denser toward the far corner. */
 .pagehead-art{opacity:1;pointer-events:none;display:flex;align-items:center;justify-content:center}
 .pagehead-art img{width:100%;height:auto;display:block}
-.pagehead-art svg{width:100%;height:auto;max-width:430px;max-height:280px;display:block;margin:0 auto}
+.pagehead-art svg{width:100%;height:auto;max-width:520px;max-height:345px;display:block;margin:0 auto}
 @media(max-width:900px){.pagehead-fig{grid-template-columns:1fr;gap:28px}.pagehead-art{display:none}}
 
 /* ---------- figures ---------- */
@@ -372,10 +372,10 @@ figcaption p{font-size:var(--t-base);color:var(--ink-soft);max-width:54ch;line-h
 .engine .eframe line{stroke:var(--accent);stroke-width:2;stroke-linecap:round}
 .engine .ehyst{fill:none;stroke:var(--accent);stroke-width:1.8;stroke-linejoin:round}
 .engine .ehyst.inner{stroke-width:1.2;opacity:.5}
-.engine .efrag{fill:none;stroke:var(--accent);stroke-width:2.4}
-.engine:hover .efrag{stroke:var(--data3)}
+.engine .emesh path{fill:none;stroke:var(--accent);stroke-width:.8;opacity:.7}
+.engine .espread line{stroke:var(--accent);stroke-width:1.1;opacity:.55}
+.engine:hover .emesh path{stroke:var(--data3)}
 .engine:hover .elab.out{fill:var(--data3)}
-.engine .efit circle{fill:var(--accent);stroke:none}
 .engine .ecyc{fill:none;stroke:var(--accent);stroke-width:2.4}
 .engine .ecycHead{fill:var(--accent)}
 .engine .ecyclab{font-family:"Libre Franklin",sans-serif;font-size:9.5px;fill:var(--ink-mute)}
@@ -385,8 +385,8 @@ figcaption p{font-size:var(--t-base);color:var(--ink-soft);max-width:54ch;line-h
    search goes rust, and the plumbing recedes to grey so the data reads first. */
 .engine .earr,.engine .eaxis,.engine .epdf,.engine .emode,.engine .ecurve,
 .engine .etrial,.engine .elimit,.engine .efail,.engine .eorigin,.engine .edesign,
-.engine .edash,.engine .eframe line,.engine .ehyst,.engine .efrag,
-.engine .efit circle,.engine .ecyc,.engine .ecycHead,.engine .ecyclab,
+.engine .edash,.engine .eframe line,.engine .ehyst,
+.engine .emesh path,.engine .ecyc,.engine .ecycHead,.engine .ecyclab,
 .engine .elab{transition:stroke .28s ease,fill .28s ease,opacity .28s ease}
 
 .engine:hover .earr,.engine:hover .eaxis,
@@ -491,8 +491,13 @@ main>section.writinghead{margin-bottom:var(--s-4)}
 .newslist a:hover{color:var(--accent);border-bottom-color:var(--accent)}
 @media(max-width:560px){.newslist li{grid-template-columns:1fr;gap:2px}}
 .postthumb{margin:0}
+.postthumb.art,.postfig.art{border:0;padding:0;background:none}
+/* A 420-wide drawing stretched to the full text column renders at 2.6x,
+   which makes a diagram look like a poster. Cap it and centre it. */
+.postfig.art .figsvg{max-width:600px;margin:0 auto}
+.postthumb.art .figsvg{width:100%;height:auto;max-height:none}
 .postthumb img{width:100%;height:150px;object-fit:contain;display:block;border:1px solid var(--rule)}
-.post.haspic{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:var(--s-3);align-items:start}
+.post.haspic{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:var(--s-3);align-items:center}
 .postfig{margin:var(--s-4) 0 0}
 .postfig img{width:100%;height:auto;max-height:420px;object-fit:contain;display:block;border:1px solid var(--rule)}
 .postfig figcaption{font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);color:var(--ink-mute);margin-top:12px}
@@ -557,7 +562,20 @@ main>section.writinghead{margin-bottom:var(--s-4)}
 .figsvg .fscale line{stroke:var(--rule);stroke-width:1}
 .figsvg .ftk{font-size:11px;fill:var(--ink-mute)}
 .figsvg .flead{stroke:var(--rule);stroke-width:1}
-.figsvg .fslice{fill:none;stroke:var(--ink);stroke-width:2.6;stroke-linecap:round}
+.figsvg .fslice{fill:none;stroke:var(--accent);stroke-width:2.6;stroke-linecap:round}
+/* Axis names are scaffolding. Quieter than the surface they describe. */
+.figsvg.surf .flab{font-size:10.5px;opacity:.68}
+.figsvg .kwater{fill:var(--sunk);stroke:none}
+.figsvg .kbank{fill:none;stroke:var(--rule);stroke-width:1.2}
+/* opaque, so the deck reads as passing OVER what it crosses */
+.figsvg .kroad{fill:var(--sheet);stroke:var(--ink-mute);stroke-width:1.6}
+.figsvg .kmid{fill:none;stroke:var(--rule);stroke-width:1;stroke-dasharray:8 7}
+.figsvg .kref{fill:none;stroke:var(--rule);stroke-width:1}
+.figsvg .karc{fill:none;stroke:var(--data3);stroke-width:1.4}
+.figsvg .karr{fill:none;stroke:var(--data3);stroke-width:2.2;stroke-linecap:round}
+.figsvg .kah{fill:var(--data3);stroke:none}
+.figsvg .ubar{fill:var(--rule);stroke:none}
+.figsvg .ubar.hot{fill:var(--data3)}
 
 .figsvg .pwall{fill:none;stroke:var(--ink-mute);stroke-width:1.6}
 .figsvg .pcore{fill:var(--sunk);stroke:var(--rule);stroke-width:1}
@@ -575,7 +593,7 @@ main>section.writinghead{margin-bottom:var(--s-4)}
 .figsvg .mcurve{fill:none;stroke:var(--data1);stroke-width:2.2}
 .figsvg .mcurve.dim{stroke:var(--rule);stroke-dasharray:4 4;stroke-width:1.6}
 .figsvg .mmark{fill:var(--data3);stroke:none}
-.figsvg .mdrop{stroke:var(--rule);stroke-width:1;stroke-dasharray:3 3}
+.figsvg .mdrop{fill:none;stroke:var(--rule);stroke-width:1;stroke-dasharray:3 3}
 
 .figsvg .bdeck,.figsvg .btruss,.figsvg .bpier{fill:none;stroke:var(--ink-mute);stroke-width:1.8}
 .figsvg .bground{stroke:var(--rule);stroke-width:1}
@@ -588,6 +606,7 @@ main>section.writinghead{margin-bottom:var(--s-4)}
 .figsvg .sframe .slink{stroke:var(--data3);stroke-width:4;stroke-linecap:round}
 .figsvg .sframe .sground{stroke:var(--rule);stroke-width:1}
 
+.projfig.art figcaption{font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);line-height:1.55;color:var(--ink-mute);margin-top:10px;max-width:46ch}
 .projfig.art,.locusfig.art{border:0;padding:0}
 .projfig.art .figsvg{max-width:100%}
 .locusfig.art .figsvg{max-width:620px;margin:0 auto}
@@ -1067,7 +1086,12 @@ nav a.active::after{transform:scaleX(1)}   /* the build emits .active, not .on -
 .engine:hover .ecycHead{animation:eHeadPulse 1.15s ease-in-out infinite}
 .engine:hover .ecycHead.ecyc-back{animation-delay:.575s}
 .engine:hover .edesign{transform-box:fill-box;transform-origin:center;animation:gDot 1.5s ease-in-out infinite}
-.engine:hover .efrag{stroke-dasharray:210;animation:gTrace 2s ease-in-out infinite}
+/* The mesh builds itself line by line on hover. Rows and columns carry the
+   same --i, so the two families sweep across together and meet at the far
+   corner, which is how you would actually draw the thing by hand. */
+@keyframes meshDraw{0%{stroke-dashoffset:1}38%{stroke-dashoffset:0}100%{stroke-dashoffset:0}}
+.engine:hover .emesh path{stroke-dasharray:1;stroke-dashoffset:1;
+  animation:meshDraw 3.6s ease-out infinite;animation-delay:calc(var(--i,0) * .11s)}
 /* the two feed arrows advance toward the engine, staggered */
 .engine:hover .earr{animation:gAdvance 1.7s ease-in-out infinite}
 .engine:hover .earr:nth-of-type(2){animation-delay:.35s}
