@@ -506,6 +506,9 @@ main>section.writinghead{margin-bottom:var(--s-4)}
 .reflist a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--rule)}
 .reflist a:hover{color:var(--accent);border-bottom-color:var(--accent)}
 .reflist .srcdoi{color:var(--ink-mute);border-bottom-color:var(--rule-soft);word-break:break-word}
+/* A note following a reference list is a new thought, not the next entry.
+   Sibling rule, so it needs no class and covers wherever this recurs. */
+.reflist + .rl,.reflist + p{margin-top:var(--s-3)}
 .postthumb{margin:0}
 .postthumb.art,.postfig.art{border:0;padding:0;background:none}
 /* A 420-wide drawing stretched to the full text column renders at 2.6x,
