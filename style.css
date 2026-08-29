@@ -563,7 +563,10 @@ main>section.writinghead{margin-bottom:var(--s-4)}
 .cvlist .when:empty::before{content:" a0"}
 .cvhead .lede{margin-bottom:10px}
 .cvcontact{margin:0}
-.exp-share{margin:18px 0 0;display:flex;flex-wrap:wrap;align-items:center;gap:14px}
+/* A row under both columns: it shares the panel, not the plot. */
+.exp-share{grid-column:1/-1;margin:4px 0 0;padding-top:22px;
+  border-top:1px solid var(--rule-soft);
+  display:flex;flex-wrap:wrap;align-items:center;gap:14px}
 .exp-share button{display:inline-flex;align-items:center;gap:10px;
   font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);
   letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);
