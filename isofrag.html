@@ -1,0 +1,1436 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Isofrag &mdash; multi-hazard resilience assessment tool</title>
+<meta name="description" content="Isofrag computes fragility surfaces for buildings and infrastructure under sequential multi-hazard loading, coupling reliability with nonlinear structural analysis.">
+<meta name="author" content="Amr Ghanem">
+<meta name="google-site-verification" content="N7SfwrwoC02l1aEcuYJvm5LP5YG1cOPz4i0i2Lr4dgA">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://amr-ghanem.github.io/isofrag.html">
+<meta property="og:title" content="Isofrag &mdash; multi-hazard resilience assessment tool">
+<meta property="og:description" content="Isofrag computes fragility surfaces for buildings and infrastructure under sequential multi-hazard loading, coupling reliability with nonlinear structural analysis.">
+<meta property="og:type" content="profile">
+<meta property="og:url" content="https://amr-ghanem.github.io/isofrag.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Isofrag &mdash; multi-hazard resilience assessment tool">
+<meta name="twitter:description" content="Isofrag computes fragility surfaces for buildings and infrastructure under sequential multi-hazard loading, coupling reliability with nonlinear structural analysis.">
+<meta name="twitter:image" content="https://amr-ghanem.github.io/og-card.jpg">
+<meta property="og:image" content="https://amr-ghanem.github.io/og-card.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Amr Ghanem">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Libre+Franklin:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,200;0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&display=swap">
+<link rel="stylesheet" href="style.css?v=4a5e3db9c3">
+<script type="application/ld+json">
+{
+    "@context":  "https://schema.org",
+    "@id":  "https://amr-ghanem.github.io/#person",
+    "@type":  "Person",
+    "name":  "Amr Ghanem",
+    "givenName":  "Amr",
+    "familyName":  "Ghanem",
+    "honorificSuffix":  "Ph.D.",
+    "jobTitle":  [
+                     "Associate Researcher",
+                     "Advanced Structural Designer and Analyst"
+                 ],
+    "description":  "Amr Ghanem, Ph.D. — structural engineer in Honolulu and author of Isofrag, a hazard-agnostic multi-hazard assessment tool computing fragility surfaces for infrastructure.",
+    "email":  "mailto:aghanem@hawaii.edu",
+    "url":  "https://amr-ghanem.github.io",
+    "image":  {
+                  "height":  630,
+                  "url":  "https://amr-ghanem.github.io/og-card.jpg",
+                  "width":  1200,
+                  "@type":  "ImageObject"
+              },
+    "alternateName":  [
+                          "Amr M. Ghanem",
+                          "Amr Mohamed Ghanem",
+                          "A. Ghanem"
+                      ],
+    "identifier":  {
+                       "value":  "https://orcid.org/0000-0002-1855-5421",
+                       "@type":  "PropertyValue",
+                       "propertyID":  "ORCID"
+                   },
+    "worksFor":  [
+                     {
+                         "name":  "University of Hawaiʻi at Mānoa",
+                         "@type":  "Organization",
+                         "address":  {
+                                         "addressRegion":  "Hawaiʻi",
+                                         "addressLocality":  "Honolulu",
+                                         "@type":  "PostalAddress",
+                                         "addressCountry":  "US"
+                                     }
+                     },
+                     {
+                         "name":  "Martin, Chock \u0026 Carden, Inc.",
+                         "@type":  "Organization",
+                         "address":  {
+                                         "addressRegion":  "Hawaiʻi",
+                                         "addressLocality":  "Honolulu",
+                                         "@type":  "PostalAddress",
+                                         "addressCountry":  "US"
+                                     }
+                     }
+                 ],
+    "alumniOf":  [
+                     {
+                         "name":  "University of Hawaiʻi at Mānoa",
+                         "@type":  "CollegeOrUniversity"
+                     },
+                     {
+                         "name":  "Cairo University",
+                         "@type":  "CollegeOrUniversity"
+                     }
+                 ],
+    "knowsAbout":  [
+                       "Nonlinear dynamic analysis",
+                       "Fragility analysis",
+                       "Finite element analysis",
+                       "Pushover analysis",
+                       "Time-history analysis",
+                       "Structural dynamics",
+                       "Seismic",
+                       "Tsunami",
+                       "Multi-hazard",
+                       "ASCE 7",
+                       "IBC seismic provisions",
+                       "Resilience assessment",
+                       "Hazard assessment",
+                       "Mitigation planning",
+                       "Python",
+                       "MATLAB",
+                       "Simulink",
+                       "Deep learning",
+                       "Image processing",
+                       "SAP2000",
+                       "Zeus-NL",
+                       "Autodesk Revit",
+                       "Advance Steel",
+                       "Navisworks",
+                       "AutoCAD",
+                       "AISC",
+                       "ACI",
+                       "Eurocode",
+                       "IBC"
+                   ],
+    "sameAs":  [
+                   "https://orcid.org/0000-0002-1855-5421",
+                   "https://scholar.google.com/citations?user=Y_kH3ooAAAAJ",
+                   "https://www.webofscience.com/wos/author/record/PLC-4161-2026",
+                   "https://www.linkedin.com/in/amr-ghanem",
+                   "https://www.researchgate.net/profile/Amr-Ghanem",
+                   "https://github.com/amr-ghanem",
+                   "https://www.wikidata.org/wiki/Q141226716"
+               ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site">
+  <a class="wordmark" href="index.html"><strong>Amr Ghanem</strong><span>Ph.D.</span></a>
+  <div class="headright">
+    <nav><a href="index.html">Home</a><a href="isofrag.html" class="active" aria-current="page">Isofrag</a><a href="research.html">Research</a><a href="writing.html">Writing</a><a href="about.html">About</a><a href="cv.html">CV</a></nav>
+    <div class="hicons">
+      <a href="https://orcid.org/0000-0002-1855-5421" rel="noopener noreferrer" title="ORCID" aria-label="ORCID" target="_blank"><svg class="icon" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="10" cy="10" r="9" /><text x="10" y="13.6" text-anchor="middle" font-family="Libre Franklin, Segoe UI, sans-serif" font-size="9.5" font-weight="600" letter-spacing="0" fill="currentColor" stroke="none">iD</text></svg></a><a href="https://scholar.google.com/citations?user=Y_kH3ooAAAAJ" rel="noopener noreferrer" title="Google Scholar" aria-label="Google Scholar" target="_blank"><svg class="icon" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2.6 19 7 10 11.4 1 7z" fill="currentColor" stroke="none"/><path d="M4.8 9v4.1c0 1.6 2.3 2.9 5.2 2.9s5.2-1.3 5.2-2.9V9"/><path d="M18.4 8.1v4.6"/><circle cx="18.4" cy="13.6" r="1.1" fill="currentColor" stroke="none"/></svg></a><a href="https://www.webofscience.com/wos/author/record/PLC-4161-2026" rel="noopener noreferrer" title="Web of Science" aria-label="Web of Science" target="_blank"><svg class="icon" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1" y="1" width="18" height="18" rx="3" /><text x="10" y="12.8" text-anchor="middle" font-family="Libre Franklin, Segoe UI, sans-serif" font-size="6.6" font-weight="600" letter-spacing="-.02em" fill="currentColor" stroke="none">WoS</text></svg></a><a href="https://www.linkedin.com/in/amr-ghanem" rel="noopener noreferrer" title="LinkedIn" aria-label="LinkedIn" target="_blank"><svg class="icon" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1" y="1" width="18" height="18" rx="3" /><text x="10" y="13.6" text-anchor="middle" font-family="Libre Franklin, Segoe UI, sans-serif" font-size="9.5" font-weight="600" letter-spacing="0" fill="currentColor" stroke="none">in</text></svg></a>
+    </div>
+  </div>
+</header>
+<main id="main">
+
+<section class="pagehead pagehead-fig">
+  <div class="pagehead-text">
+  <p class="eyebrow">Amr Ghanem &middot; The tool</p>
+  <h1>Isofrag</h1>
+  <p class="lede">A multi-hazard assessment tool. The hazard is an input, not a built-in assumption: Isofrag predicts how likely a structure is to fail under hazards acting in sequence, and returns a resilience index rather than a pass or a fail.</p>
+  <p class="headnote">An <em>iso</em>-line joins points of equal value &mdash; and this one joins points of equal fragility, which is exactly what a fragility surface is. The tool computes one.</p>
+  </div>
+  <div class="pagehead-art"><svg class="figsvg surf" viewBox="0 0 470 320" role="img" aria-label="A fragility surface drawn as a wireframe: failure probability rising across two hazards together, with two ordinary fragility curves marked on it as slices that cross" xmlns="http://www.w3.org/2000/svg"><g class="fgrid"><line x1="190" y1="284" x2="80.9" y2="232"/><line x1="190" y1="284" x2="366" y2="250"/><line x1="234" y1="275.5" x2="124.9" y2="223.5"/><line x1="162.7" y1="271" x2="338.7" y2="237"/><line x1="278" y1="267" x2="168.9" y2="215"/><line x1="135.4" y1="258" x2="311.4" y2="224"/><line x1="322" y1="258.5" x2="212.9" y2="206.5"/><line x1="108.2" y1="245" x2="284.2" y2="211"/><line x1="366" y1="250" x2="256.9" y2="198"/><line x1="80.9" y1="232" x2="256.9" y2="198"/></g><g class="fmesh"><path class="m" opacity="0.6" d="M190 284 L201 281.8 L212 277.7 L223 267 L234 249.8 L245 229.4 L256 208.9 L267 190.2 L278 174 L289 160.2 L300 148.8 L311 139.2 L322 131.2 L333 124.5 L344 118.8 L355 113.9 L366 109.5"/><path class="m" opacity="0.6" d="M183.2 280.7 L194.2 278.6 L205.2 274.4 L216.2 263.7 L227.2 246.5 L238.2 226.1 L249.2 205.6 L260.2 186.9 L271.2 170.7 L282.2 157 L293.2 145.5 L304.2 135.9 L315.2 128 L326.2 121.3 L337.2 115.5 L348.2 110.6 L359.2 106.3"/><path class="m" opacity="0.6" d="M176.4 277 L187.4 274.8 L198.4 270.7 L209.4 259.9 L220.4 242.6 L231.4 222.1 L242.4 201.5 L253.4 182.7 L264.4 166.5 L275.4 152.7 L286.4 141.3 L297.4 131.8 L308.4 124 L319.4 117.4 L330.4 111.8 L341.4 106.9 L352.4 102.7"/><path class="m" opacity="0.61" d="M169.5 270.5 L180.5 268.3 L191.5 264.1 L202.5 253.3 L213.5 235.7 L224.5 214.9 L235.5 194.2 L246.5 175.4 L257.5 159.3 L268.5 145.9 L279.5 134.9 L290.5 125.9 L301.5 118.4 L312.5 112.2 L323.5 106.9 L334.5 102.4 L345.5 98.3"/><path class="m" opacity="0.64" d="M162.7 259.7 L173.7 257.5 L184.7 253.3 L195.7 242.3 L206.7 224.5 L217.7 203.7 L228.7 183.3 L239.7 165 L250.7 149.7 L261.7 137.1 L272.7 126.9 L283.7 118.7 L294.7 111.9 L305.7 106.3 L316.7 101.5 L327.7 97.4 L338.7 93.7"/><path class="m" opacity="0.67" d="M155.9 245.1 L166.9 242.9 L177.9 238.7 L188.9 227.7 L199.9 210.2 L210.9 189.9 L221.9 170.3 L232.9 153.1 L243.9 139 L254.9 127.7 L265.9 118.6 L276.9 111.3 L287.9 105.4 L298.9 100.4 L309.9 96.2 L320.9 92.4 L331.9 89.1"/><path class="m" opacity="0.7" d="M149.1 228.3 L160.1 226.1 L171.1 222 L182.1 211.2 L193.1 194.3 L204.1 175.1 L215.1 156.9 L226.1 141.3 L237.1 128.6 L248.1 118.7 L259.1 110.8 L270.1 104.4 L281.1 99.3 L292.1 94.9 L303.1 91.1 L314.1 87.8 L325.1 84.7"/><path class="m" opacity="0.73" d="M142.3 210.8 L153.3 208.6 L164.3 204.6 L175.3 194.4 L186.3 178.4 L197.3 160.7 L208.3 144.1 L219.3 130.2 L230.3 119.2 L241.3 110.5 L252.3 103.7 L263.3 98.2 L274.3 93.7 L285.3 89.9 L296.3 86.5 L307.3 83.4 L318.3 80.6"/><path class="m" opacity="0.76" d="M135.4 193.7 L146.4 191.6 L157.4 187.7 L168.4 178.1 L179.4 163.4 L190.4 147.3 L201.4 132.5 L212.4 120.3 L223.4 110.7 L234.4 103.3 L245.4 97.4 L256.4 92.7 L267.4 88.7 L278.4 85.3 L289.4 82.2 L300.4 79.4 L311.4 76.7"/><path class="m" opacity="0.78" d="M128.6 177.8 L139.6 175.7 L150.6 171.9 L161.6 163 L172.6 149.7 L183.6 135.2 L194.6 122.2 L205.6 111.6 L216.6 103.4 L227.6 96.9 L238.6 91.8 L249.6 87.7 L260.6 84.1 L271.6 81 L282.6 78.2 L293.6 75.5 L304.6 73"/><path class="m" opacity="0.8" d="M121.8 163.3 L132.8 161.2 L143.8 157.6 L154.8 149.4 L165.8 137.4 L176.8 124.6 L187.8 113.2 L198.8 104 L209.8 96.8 L220.8 91.3 L231.8 86.8 L242.8 83.1 L253.8 79.9 L264.8 77 L275.8 74.3 L286.8 71.8 L297.8 69.4"/><path class="m" opacity="0.82" d="M115 150.3 L126 148.1 L137 144.7 L148 137.3 L159 126.5 L170 115.2 L181 105.2 L192 97.3 L203 91.1 L214 86.2 L225 82.2 L236 78.9 L247 75.9 L258 73.2 L269 70.7 L280 68.3 L291 65.9"/><path class="m" opacity="0.83" d="M108.2 138.7 L119.2 136.5 L130.2 133.3 L141.2 126.5 L152.2 116.9 L163.2 106.9 L174.2 98.2 L185.2 91.3 L196.2 85.8 L207.2 81.5 L218.2 78 L229.2 74.9 L240.2 72.1 L251.2 69.5 L262.2 67.1 L273.2 64.8 L284.2 62.5"/><path class="m" opacity="0.85" d="M101.3 128.4 L112.3 126.2 L123.3 123.1 L134.3 117 L145.3 108.4 L156.3 99.6 L167.3 92 L178.3 85.9 L189.3 81.1 L200.3 77.2 L211.3 73.9 L222.3 71.1 L233.3 68.5 L244.3 66 L255.3 63.6 L266.3 61.4 L277.3 59.1"/><path class="m" opacity="0.86" d="M94.5 119.2 L105.5 117.1 L116.5 114.1 L127.5 108.5 L138.5 100.8 L149.5 93 L160.5 86.3 L171.5 81 L182.5 76.7 L193.5 73.1 L204.5 70.1 L215.5 67.4 L226.5 64.9 L237.5 62.5 L248.5 60.2 L259.5 58 L270.5 55.8"/><path class="m" opacity="0.86" d="M87.7 111 L98.7 108.9 L109.7 106 L120.7 100.9 L131.7 94 L142.7 87.1 L153.7 81.2 L164.7 76.4 L175.7 72.5 L186.7 69.3 L197.7 66.4 L208.7 63.9 L219.7 61.4 L230.7 59.1 L241.7 56.9 L252.7 54.6 L263.7 52.5"/><path class="m" opacity="0.87" d="M80.9 103.6 L91.9 101.5 L102.9 98.7 L113.9 94 L124.9 87.9 L135.9 81.7 L146.9 76.4 L157.9 72.1 L168.9 68.6 L179.9 65.5 L190.9 62.9 L201.9 60.4 L212.9 58 L223.9 55.8 L234.9 53.5 L245.9 51.3 L256.9 49.2"/><path class="m" opacity="0.52" d="M190 284 L183.2 280.7 L176.4 277 L169.5 270.5 L162.7 259.7 L155.9 245.1 L149.1 228.3 L142.3 210.8 L135.4 193.7 L128.6 177.8 L121.8 163.3 L115 150.3 L108.2 138.7 L101.3 128.4 L94.5 119.2 L87.7 111 L80.9 103.6"/><path class="m" opacity="0.52" d="M201 281.8 L194.2 278.6 L187.4 274.8 L180.5 268.3 L173.7 257.5 L166.9 242.9 L160.1 226.1 L153.3 208.6 L146.4 191.6 L139.6 175.7 L132.8 161.2 L126 148.1 L119.2 136.5 L112.3 126.2 L105.5 117.1 L98.7 108.9 L91.9 101.5"/><path class="m" opacity="0.53" d="M212 277.7 L205.2 274.4 L198.4 270.7 L191.5 264.1 L184.7 253.3 L177.9 238.7 L171.1 222 L164.3 204.6 L157.4 187.7 L150.6 171.9 L143.8 157.6 L137 144.7 L130.2 133.3 L123.3 123.1 L116.5 114.1 L109.7 106 L102.9 98.7"/><path class="m" opacity="0.56" d="M223 267 L216.2 263.7 L209.4 259.9 L202.5 253.3 L195.7 242.3 L188.9 227.7 L182.1 211.2 L175.3 194.4 L168.4 178.1 L161.6 163 L154.8 149.4 L148 137.3 L141.2 126.5 L134.3 117 L127.5 108.5 L120.7 100.9 L113.9 94"/><path class="m" opacity="0.61" d="M234 249.8 L227.2 246.5 L220.4 242.6 L213.5 235.7 L206.7 224.5 L199.9 210.2 L193.1 194.3 L186.3 178.4 L179.4 163.4 L172.6 149.7 L165.8 137.4 L159 126.5 L152.2 116.9 L145.3 108.4 L138.5 100.8 L131.7 94 L124.9 87.9"/><path class="m" opacity="0.66" d="M245 229.4 L238.2 226.1 L231.4 222.1 L224.5 214.9 L217.7 203.7 L210.9 189.9 L204.1 175.1 L197.3 160.7 L190.4 147.3 L183.6 135.2 L176.8 124.6 L170 115.2 L163.2 106.9 L156.3 99.6 L149.5 93 L142.7 87.1 L135.9 81.7"/><path class="m" opacity="0.71" d="M256 208.9 L249.2 205.6 L242.4 201.5 L235.5 194.2 L228.7 183.3 L221.9 170.3 L215.1 156.9 L208.3 144.1 L201.4 132.5 L194.6 122.2 L187.8 113.2 L181 105.2 L174.2 98.2 L167.3 92 L160.5 86.3 L153.7 81.2 L146.9 76.4"/><path class="m" opacity="0.76" d="M267 190.2 L260.2 186.9 L253.4 182.7 L246.5 175.4 L239.7 165 L232.9 153.1 L226.1 141.3 L219.3 130.2 L212.4 120.3 L205.6 111.6 L198.8 104 L192 97.3 L185.2 91.3 L178.3 85.9 L171.5 81 L164.7 76.4 L157.9 72.1"/><path class="m" opacity="0.79" d="M278 174 L271.2 170.7 L264.4 166.5 L257.5 159.3 L250.7 149.7 L243.9 139 L237.1 128.6 L230.3 119.2 L223.4 110.7 L216.6 103.4 L209.8 96.8 L203 91.1 L196.2 85.8 L189.3 81.1 L182.5 76.7 L175.7 72.5 L168.9 68.6"/><path class="m" opacity="0.82" d="M289 160.2 L282.2 157 L275.4 152.7 L268.5 145.9 L261.7 137.1 L254.9 127.7 L248.1 118.7 L241.3 110.5 L234.4 103.3 L227.6 96.9 L220.8 91.3 L214 86.2 L207.2 81.5 L200.3 77.2 L193.5 73.1 L186.7 69.3 L179.9 65.5"/><path class="m" opacity="0.84" d="M300 148.8 L293.2 145.5 L286.4 141.3 L279.5 134.9 L272.7 126.9 L265.9 118.6 L259.1 110.8 L252.3 103.7 L245.4 97.4 L238.6 91.8 L231.8 86.8 L225 82.2 L218.2 78 L211.3 73.9 L204.5 70.1 L197.7 66.4 L190.9 62.9"/><path class="m" opacity="0.85" d="M311 139.2 L304.2 135.9 L297.4 131.8 L290.5 125.9 L283.7 118.7 L276.9 111.3 L270.1 104.4 L263.3 98.2 L256.4 92.7 L249.6 87.7 L242.8 83.1 L236 78.9 L229.2 74.9 L222.3 71.1 L215.5 67.4 L208.7 63.9 L201.9 60.4"/><path class="m" opacity="0.86" d="M322 131.2 L315.2 128 L308.4 124 L301.5 118.4 L294.7 111.9 L287.9 105.4 L281.1 99.3 L274.3 93.7 L267.4 88.7 L260.6 84.1 L253.8 79.9 L247 75.9 L240.2 72.1 L233.3 68.5 L226.5 64.9 L219.7 61.4 L212.9 58"/><path class="m" opacity="0.87" d="M333 124.5 L326.2 121.3 L319.4 117.4 L312.5 112.2 L305.7 106.3 L298.9 100.4 L292.1 94.9 L285.3 89.9 L278.4 85.3 L271.6 81 L264.8 77 L258 73.2 L251.2 69.5 L244.3 66 L237.5 62.5 L230.7 59.1 L223.9 55.8"/><path class="m" opacity="0.88" d="M344 118.8 L337.2 115.5 L330.4 111.8 L323.5 106.9 L316.7 101.5 L309.9 96.2 L303.1 91.1 L296.3 86.5 L289.4 82.2 L282.6 78.2 L275.8 74.3 L269 70.7 L262.2 67.1 L255.3 63.6 L248.5 60.2 L241.7 56.9 L234.9 53.5"/><path class="m" opacity="0.88" d="M355 113.9 L348.2 110.6 L341.4 106.9 L334.5 102.4 L327.7 97.4 L320.9 92.4 L314.1 87.8 L307.3 83.4 L300.4 79.4 L293.6 75.5 L286.8 71.8 L280 68.3 L273.2 64.8 L266.3 61.4 L259.5 58 L252.7 54.6 L245.9 51.3"/><path class="m" opacity="0.89" d="M366 109.5 L359.2 106.3 L352.4 102.7 L345.5 98.3 L338.7 93.7 L331.9 89.1 L325.1 84.7 L318.3 80.6 L311.4 76.7 L304.6 73 L297.8 69.4 L291 65.9 L284.2 62.5 L277.3 59.1 L270.5 55.8 L263.7 52.5 L256.9 49.2"/></g><path class="fslice" d="M146.4 221.3 L148.8 220.8 L151.2 220.3 L153.7 219.9 L156.1 219.4 L158.6 218.8 L161 218.2 L163.5 217.4 L165.9 216.4 L168.4 215 L170.8 213.3 L173.2 211.2 L175.7 208.8 L178.1 206 L180.6 202.9 L183 199.4 L185.5 195.8 L187.9 191.9 L190.4 187.9 L192.8 183.8 L195.2 179.6 L197.7 175.5 L200.1 171.3 L202.6 167.2 L205 163.1 L207.5 159.2 L209.9 155.3 L212.4 151.6 L214.8 148.1 L217.2 144.6 L219.7 141.4 L222.1 138.2 L224.6 135.2 L227 132.4 L229.5 129.7 L231.9 127.1 L234.4 124.7 L236.8 122.4 L239.2 120.2 L241.7 118.2 L244.1 116.2 L246.6 114.4 L249 112.6 L251.5 110.9 L253.9 109.3 L256.4 107.8 L258.8 106.4 L261.2 105 L263.7 103.7 L266.1 102.5 L268.6 101.3 L271 100.1 L273.5 99 L275.9 98 L278.4 97 L280.8 96 L283.2 95.1 L285.7 94.2 L288.1 93.3 L290.6 92.4 L293 91.6 L295.5 90.8 L297.9 90 L300.4 89.2 L302.8 88.5 L305.2 87.8 L307.7 87.1 L310.1 86.4 L312.6 85.7 L315 85 L317.5 84.3 L319.9 83.7 L322.4 83.1"/><path class="fslice" d="M278 174 L276.5 173.2 L275 172.5 L273.5 171.8 L271.9 171.1 L270.4 170.3 L268.9 169.5 L267.4 168.6 L265.9 167.6 L264.4 166.5 L262.8 165.1 L261.3 163.7 L259.8 162 L258.3 160.3 L256.8 158.3 L255.3 156.3 L253.8 154.2 L252.2 151.9 L250.7 149.7 L249.2 147.3 L247.7 145 L246.2 142.6 L244.7 140.2 L243.1 137.8 L241.6 135.5 L240.1 133.2 L238.6 130.9 L237.1 128.6 L235.6 126.4 L234 124.3 L232.5 122.2 L231 120.2 L229.5 118.2 L228 116.2 L226.5 114.3 L225 112.5 L223.4 110.7 L221.9 109 L220.4 107.3 L218.9 105.7 L217.4 104.1 L215.9 102.6 L214.3 101.1 L212.8 99.6 L211.3 98.2 L209.8 96.8 L208.3 95.5 L206.8 94.2 L205.3 92.9 L203.7 91.7 L202.2 90.5 L200.7 89.3 L199.2 88.1 L197.7 87 L196.2 85.8 L194.6 84.8 L193.1 83.7 L191.6 82.6 L190.1 81.6 L188.6 80.6 L187.1 79.6 L185.6 78.6 L184 77.6 L182.5 76.7 L181 75.7 L179.5 74.8 L178 73.9 L176.5 73 L174.9 72.1 L173.4 71.2 L171.9 70.3 L170.4 69.4 L168.9 68.6"/><g class="faxis"><line x1="190" y1="284" x2="366" y2="250"/><line x1="190" y1="284" x2="80.9" y2="232"/></g><text class="flab" x="281.2" y="287.7" text-anchor="middle" transform="rotate(-10.93 281.2 287.7)">hazard 1</text><text class="flab" x="128.1" y="277.3" text-anchor="middle" transform="rotate(25.48 128.1 277.3)">hazard 2</text><g class="fscale"><line x1="20" y1="83" x2="20" y2="232"/><line x1="20" y1="83" x2="26" y2="83"/><line x1="20" y1="232" x2="26" y2="232"/></g><text class="ftk" x="30" y="87">1</text><text class="ftk" x="30" y="236">0</text><text class="flab" x="11" y="157.5" text-anchor="middle" transform="rotate(-90 11 157.5)">P(failure)</text></svg></div>
+</section>
+
+<section class="story">
+  <h2 class="rule">The work</h2>
+  <article class="chapter">
+    <h3>Why a tool, and why a surface</h3>
+    <div><p>A code check tells you a building complies. It does not tell you what that building will do when the ground moves, or when water arrives, or when the next hazard nobody planned for arrives. Those are different questions, and answering them takes hundreds of nonlinear analyses per configuration — which is not something anyone does by hand.
+
+So the answer had to be a tool, and the tool had to be general. The hazard is an input, not a built-in assumption, and the output is a surface rather than a curve: a probability exists across the whole parameter space, including for configurations nobody explicitly ran. A probability is something an owner, a city, or a transport agency can decide on. A pass or a fail is not.</p></div>
+  </article>
+</section>
+
+<section>
+  <h2 class="rule">What it gives you</h2>
+  <ul class="adv">
+    <li>
+      <p class="advh"><svg class="hglyph" viewBox="0 0 64 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 38 L22 26 L60 26 L42 38 Z"/><path d="M13 32 L51 32"/><path d="M32 26 L14 38"/><path d="M50 26 L32 38"/><path class="acc" d="M32 32 L32 13" stroke-dasharray="3 3"/><circle class="acc" cx="32" cy="10" r="3.4" fill="currentColor" stroke="none"/></svg>Prediction, not just evaluation</p>
+      <p>A fragility curve answers for the configuration you ran. A surface answers across the whole parameter space at once, so a structure nobody explicitly analysed still has a result &mdash; and a change to the design can be tested before it is drawn.</p>
+    </li>
+    <li>
+      <p class="advh"><svg class="hglyph" viewBox="0 0 64 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="43" x2="60" y2="43"/><rect x="7" y="31" width="13" height="12"/><rect x="25" y="23" width="13" height="20"/><rect class="acc" x="43" y="11" width="13" height="32"/><path class="acc" d="M45 7 L49.5 2 L54 7"/></svg>Resilience as a number you can rank</p>
+      <p>The output is a resilience index, so two different structural systems become directly comparable. That is what turns a set of probabilities into a retrofit priority list.</p>
+    </li>
+    <li>
+      <p class="advh"><svg class="hglyph" viewBox="0 0 64 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16 q 7 -9 14 0 t 14 0"/><path class="acc" d="M4 40 q 7 -9 14 0 t 14 0"/><path d="M40 44 v-24 h16 v24"/><path d="M40 30 h16"/><path class="acc" d="M40 20 L48 12 L56 20"/></svg>Hazards assessed together, not one at a time</p>
+      <p>The hazard is an input, not a hard-coded assumption. The water meets a frame the shaking has already weakened, so assessing earthquake and tsunami separately understates the risk. Earthquake and tsunami are the demonstrated cases, not the limits.</p>
+    </li>
+    <li>
+      <p class="advh"><svg class="hglyph" viewBox="0 0 64 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 40 h30"/><circle cx="12" cy="30" r="3.4"/><circle cx="26" cy="24" r="3.4"/><path d="M12 30 L26 24"/><path class="acc" d="M26 24 L44 16"/><circle class="acc" cx="48" cy="14" r="4" fill="currentColor" stroke="none"/><path class="acc" d="M52 22 q 6 -8 0 -16"/><path class="acc" d="M57 27 q 10 -13 0 -26"/></svg>Fed by instrumentation and AI</p>
+      <p>Assessment is only as good as what it knows about the structure as built. Deep-learning damage detection and multi-sensor fusion on instrumented bridges supply that condition data &mdash; the AI reads the structure, the physics computes the failure probability.</p>
+    </li>
+  </ul>
+</section>
+
+<section class="howitworks">
+  <h2 class="rule">How Isofrag works</h2>
+  <p class="rlede">Reliability drives the search; nonlinear analysis answers it. Five steps, from a demand to a surface.</p>
+  <ol class="hsteps"><li class="hstep"><div class="hrail"><span class="hdot"><svg class="hglyph" viewBox="0 0 64 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="10" width="9" height="9"/><g class="acc"><rect x="21" y="10" width="9" height="9"/></g><rect x="34" y="10" width="9" height="9"/><g class="acc"><rect x="47" y="10" width="9" height="9"/></g><g class="acc"><rect x="8" y="23" width="9" height="9"/></g><rect x="21" y="23" width="9" height="9"/><g class="acc"><rect x="34" y="23" width="9" height="9"/></g><rect x="47" y="23" width="9" height="9"/><rect x="8" y="36" width="9" height="9"/><g class="acc"><rect x="21" y="36" width="9" height="9"/></g><rect x="34" y="36" width="9" height="9"/><g class="acc"><rect x="47" y="36" width="9" height="9"/></g></svg></span><span class="hlink" aria-hidden="true"></span></div><p class="hn">01</p><h3>Sweep</h3><p class="hd">The parameter space is discretised &mdash; every hazard intensity and configuration becomes a case.</p></li><li class="hstep"><div class="hrail"><span class="hdot"><svg class="hglyph" viewBox="0 0 64 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="10" x2="44" y2="10"/><line x1="4" y1="19" x2="52" y2="19"/><line x1="4" y1="28" x2="38" y2="28"/><line x1="4" y1="37" x2="48" y2="37"/><g class="acc"><polygon points="52,10 44,6.5 44,13.5"/><polygon points="60,19 52,15.5 52,22.5"/><polygon points="46,28 38,24.5 38,31.5"/><polygon points="56,37 48,33.5 48,40.5"/></g><line x1="4" y1="4" x2="4" y2="44" class="acc"/></svg></span><span class="hlink" aria-hidden="true"></span></div><p class="hn">02</p><h3>Distribute</h3><p class="hd">Cases are independent, so they run concurrently. Weeks of analysis become hours.</p></li><li class="hstep"><div class="hrail"><span class="hdot"><svg class="hglyph" viewBox="0 0 64 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="19" cy="24" r="9"/><circle cx="45" cy="24" r="9"/><path d="M27 17 C 31 11, 33 11, 37 17" class="acc"/><polygon points="39,19 31,15 34,22" class="acc"/><path d="M37 31 C 33 37, 31 37, 27 31" class="acc"/><polygon points="25,29 33,33 30,26" class="acc"/></svg></span><span class="hlink" aria-hidden="true"></span></div><p class="hn">03</p><h3>Iterate</h3><p class="hd">The coupled loop runs for each case until the design point converges.</p></li><li class="hstep"><div class="hrail"><span class="hdot"><svg class="hglyph" viewBox="0 0 64 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="40" r="2.2" fill="currentColor" stroke="none"/><circle cx="22" cy="33" r="2.2" fill="currentColor" stroke="none"/><circle cx="29" cy="23" r="2.2" fill="currentColor" stroke="none"/><circle cx="37" cy="14" r="2.2" fill="currentColor" stroke="none"/><circle cx="48" cy="10" r="2.2" fill="currentColor" stroke="none"/><path d="M6 43 C 18 43, 24 10, 44 9 L58 8.4" class="acc"/><line x1="4" y1="44" x2="60" y2="44" opacity=".5"/></svg></span><span class="hlink" aria-hidden="true"></span></div><p class="hn">04</p><h3>Fit</h3><p class="hd">A lognormal fitted through those points gives a continuous fragility curve.</p></li><li class="hstep"><div class="hrail"><span class="hdot"><svg class="hglyph" viewBox="0 0 64 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 34 L22 42 L58 26 L42 18 Z" opacity=".3"/><path d="M6 24 C 16 24, 20 8, 42 8 L58 14 L22 32 Z" class="acc"/><line x1="14" y1="28" x2="30" y2="36" opacity=".45"/><line x1="26" y1="20" x2="42" y2="28" opacity=".45"/></svg></span><span class="hlink" aria-hidden="true"></span></div><p class="hn">05</p><h3>Surface</h3><p class="hd">The fitted curves join into one continuous surface.</p></li><li class="hstep"><div class="hrail"><span class="hdot"><svg class="hglyph" viewBox="0 0 64 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="12" width="13" height="30" opacity=".35"/><rect x="26" y="20" width="13" height="22" class="acc"/><rect x="44" y="30" width="13" height="12" opacity=".35"/><line x1="4" y1="42" x2="60" y2="42"/></svg></span><span class="hlink" aria-hidden="true"></span></div><p class="hn">06</p><h3>Compare</h3><p class="hd">The index reduces a surface to one number, so structures can be ranked.</p></li></ol>
+<figure class="engine">
+  <svg viewBox="-32 0 848 396" role="img" aria-label="Coupled engine: input and model uncertainty distributions feed a reliability search, which exchanges deterministic trials and structural responses with a nonlinear analysis until convergence, returning a fragility surface rather than a single curve">
+
+    <!-- The two streams are not the same distribution and should not be drawn as
+         one. Hazard intensity is lognormal - a sharp rise and a long upper tail,
+         which is where the rare severe events live. Model uncertainty is a
+         narrow symmetric scatter about a nominal capacity. The dashed line marks
+         each mode, so the skew of the upper curve is legible at a glance. -->
+    <g class="ein">
+      <path class="epdf" d="M10 130 C 13 130, 16 88, 26 86 C 35 84, 38 110, 46 119 C 56 127, 70 129, 86 129.5"/>
+      <line class="emode" x1="26" y1="88" x2="26" y2="130"/>
+      <line class="eaxis" x1="10" y1="130" x2="86" y2="130"/>
+      <text class="elab" x="48" y="154" text-anchor="middle">Hazard uncertainty</text>
+      <text class="esub" x="48" y="172" text-anchor="middle">intensity, duration</text>
+    </g>
+    <g class="ein">
+      <path class="epdf" d="M30 300 C 40 300, 41 262, 48 262 C 55 262, 56 300, 66 300"/>
+      <line class="emode" x1="48" y1="264" x2="48" y2="304"/>
+      <line class="eaxis" x1="10" y1="300" x2="86" y2="300"/>
+      <g class="espread">
+        <line x1="37" y1="307" x2="59" y2="307"/>
+        <line x1="37" y1="304" x2="37" y2="310"/>
+        <line x1="59" y1="304" x2="59" y2="310"/>
+      </g>
+      <text class="elab" x="48" y="324" text-anchor="middle">Model uncertainty</text>
+      <text class="esub" x="48" y="342" text-anchor="middle">material, capacity</text>
+    </g>
+    <path class="earr" d="M100 105 h44 l0-9 20 14 -20 14 0-9 h-44 z"/>
+    <path class="earr" d="M100 278 h44 l0-9 20 14 -20 14 0-9 h-44 z"/>
+
+    <rect class="ebox" x="182" y="30" width="404" height="352" rx="16"/>
+    <text class="etitle" x="384" y="20" text-anchor="middle">Coupled engine</text>
+
+    <!-- band 1: the cycle out -->
+    <text class="ecyclab lab-out" x="384" y="52" text-anchor="middle">deterministic trial</text>
+    <path class="ecyc ecyc-out" d="M312 96 C 346 68, 422 68, 456 96"/>
+    <polygon class="ecycHead ecyc-out" points="460,99 442,87 458,80"/>
+
+    <!-- band 2: the two codes -->
+    <text class="ecode" x="279" y="134" text-anchor="middle">FERUM</text>
+    <text class="esub"  x="279" y="155" text-anchor="middle">reliability analysis</text>
+    <text class="esub"  x="279" y="172" text-anchor="middle">searches for failure</text>
+
+    <text class="ecode" x="489" y="134" text-anchor="middle">ZEUS-NL</text>
+    <text class="esub"  x="489" y="155" text-anchor="middle">nonlinear structural</text>
+    <text class="esub"  x="489" y="172" text-anchor="middle">analysis</text>
+
+    <!-- band 3: the cycle back -->
+    <path class="ecyc ecyc-back" d="M456 200 C 422 228, 346 228, 312 200"/>
+    <polygon class="ecycHead ecyc-back" points="308,197 326,209 310,216"/>
+    <text class="ecyclab lab-back" x="384" y="248" text-anchor="middle">output response</text>
+
+    <!-- band 4: what each one actually produces -->
+    <!-- The reliability side, drawn as the textbook FORM picture: a limit-state
+         boundary in standard normal space, and the point on it closest to the
+         origin. That distance is beta; that point is what the loop converges to. -->
+    <g class="eside">
+      <rect class="epanel" x="204" y="264" width="150" height="100" rx="8"/>
+      <text class="eglyph" x="279" y="283" text-anchor="middle">design point</text>
+      <path class="efail" d="M243 350 C 279 350, 300 328, 306 298 L340 298 L340 350 Z"/>
+      <line class="eaxis" x1="222" y1="350" x2="342" y2="350"/>
+      <line class="eaxis" x1="232" y1="296" x2="232" y2="356"/>
+      <path class="elimit" d="M243 352 C 279 350, 300 328, 306 296"/>
+      <line class="edash" x1="232" y1="350" x2="279" y2="322"/>
+      <circle class="eorigin" cx="232" cy="350" r="2.6"/>
+      <circle class="edesign" cx="279" cy="322" r="4.6"/>
+    </g>
+
+    <!-- The structural side: the frame, and the pinched force-displacement loop
+         a cycled RC section actually traces. -->
+    <g class="eside">
+      <rect class="epanel" x="414" y="264" width="150" height="100" rx="8"/>
+      <text class="eglyph" x="489" y="283" text-anchor="middle">response history</text>
+      <g class="eframe">
+        <line x1="437" y1="348" x2="437" y2="299"/>
+        <line x1="471" y1="348" x2="471" y2="299"/>
+        <line x1="437" y1="299" x2="471" y2="299"/>
+        <line x1="437" y1="324" x2="471" y2="324"/>
+        <line x1="429" y1="348" x2="479" y2="348"/>
+      </g>
+      <line class="eaxis" x1="498" y1="324" x2="554" y2="324"/>
+      <line class="eaxis" x1="526" y1="298" x2="526" y2="350"/>
+      <path class="ehyst" pathLength="1" d="M504 340 C 508 330, 516 320, 526 314 C 536 308, 544 304, 548 308 C 545 314, 537 322, 526 328 C 516 334, 508 340, 504 344 C 501 346, 502 342, 504 340 Z"/>
+      <path class="ehyst inner" pathLength="1" d="M514 332 C 517 328, 521 324, 526 321 C 531 318, 535 317, 536 319 C 534 323, 530 327, 526 330 C 521 333, 517 335, 515 335 C 513 335, 513 334, 514 332 Z"/>
+    </g>
+
+    <path class="earr out" d="M600 201 h34 l0-9 20 14 -20 14 0-9 h-34 z"/>
+    <g class="eout">
+      <!-- A curve is what you get when you fix every hazard but one. Isofrag does
+           not fix them, so the honest glyph for the output is the sheet - the
+           same surface, same computation, as the figure further down the page. -->
+      <g class="emesh"><path class="r" pathLength="1" style="--i:0" d="M716 252 L723.2 249.9 L730.5 240.8 L737.8 227.6 L745 216.2 L752.2 208.1 L759.5 202.3 L766.8 198.3 L774 195.2"/><path class="r" pathLength="1" style="--i:1" d="M711.5 249.6 L718.8 247.5 L726 238.4 L733.3 225.1 L740.5 213.7 L747.8 205.5 L755 199.9 L762.3 195.9 L769.5 192.9"/><path class="r" pathLength="1" style="--i:2" d="M707 243.9 L714.3 241.8 L721.5 232.5 L728.8 219.1 L736 208.2 L743.3 200.8 L750.5 195.9 L757.8 192.5 L765 189.9"/><path class="r" pathLength="1" style="--i:3" d="M702.5 233.7 L709.8 231.6 L717 222.6 L724.3 210.5 L731.5 201.3 L738.8 195.5 L746 191.7 L753.3 189 L760.5 186.9"/><path class="r" pathLength="1" style="--i:4" d="M698 222.5 L705.3 220.4 L712.5 212.5 L719.8 202.5 L727 195.4 L734.3 191.1 L741.5 188.2 L748.8 186 L756 184.2"/><path class="r" pathLength="1" style="--i:5" d="M693.5 212.5 L700.8 210.6 L708 204 L715.3 196.2 L722.5 190.8 L729.8 187.5 L737 185.2 L744.3 183.3 L751.5 181.7"/><path class="r" pathLength="1" style="--i:6" d="M689 204.5 L696.3 202.7 L703.5 197.3 L710.8 191.2 L718 187.2 L725.3 184.5 L732.5 182.6 L739.8 180.9 L747 179.3"/><path class="r" pathLength="1" style="--i:7" d="M684.5 198.1 L691.8 196.4 L699 192 L706.3 187.3 L713.5 184.1 L720.8 181.9 L728 180.2 L735.3 178.6 L742.5 177.1"/><path class="r" pathLength="1" style="--i:8" d="M680 193 L687.3 191.3 L694.5 187.7 L701.8 184 L709 181.4 L716.3 179.5 L723.5 177.8 L730.8 176.3 L738 174.8"/><path class="c" pathLength="1" style="--i:0" d="M716 252 L711.5 249.6 L707 243.9 L702.5 233.7 L698 222.5 L693.5 212.5 L689 204.5 L684.5 198.1 L680 193"/><path class="c" pathLength="1" style="--i:1" d="M723.2 249.9 L718.8 247.5 L714.3 241.8 L709.8 231.6 L705.3 220.4 L700.8 210.6 L696.3 202.7 L691.8 196.4 L687.3 191.3"/><path class="c" pathLength="1" style="--i:2" d="M730.5 240.8 L726 238.4 L721.5 232.5 L717 222.6 L712.5 212.5 L708 204 L703.5 197.3 L699 192 L694.5 187.7"/><path class="c" pathLength="1" style="--i:3" d="M737.8 227.6 L733.3 225.1 L728.8 219.1 L724.3 210.5 L719.8 202.5 L715.3 196.2 L710.8 191.2 L706.3 187.3 L701.8 184"/><path class="c" pathLength="1" style="--i:4" d="M745 216.2 L740.5 213.7 L736 208.2 L731.5 201.3 L727 195.4 L722.5 190.8 L718 187.2 L713.5 184.1 L709 181.4"/><path class="c" pathLength="1" style="--i:5" d="M752.2 208.1 L747.8 205.5 L743.3 200.8 L738.8 195.5 L734.3 191.1 L729.8 187.5 L725.3 184.5 L720.8 181.9 L716.3 179.5"/><path class="c" pathLength="1" style="--i:6" d="M759.5 202.3 L755 199.9 L750.5 195.9 L746 191.7 L741.5 188.2 L737 185.2 L732.5 182.6 L728 180.2 L723.5 177.8"/><path class="c" pathLength="1" style="--i:7" d="M766.8 198.3 L762.3 195.9 L757.8 192.5 L753.3 189 L748.8 186 L744.3 183.3 L739.8 180.9 L735.3 178.6 L730.8 176.3"/><path class="c" pathLength="1" style="--i:8" d="M774 195.2 L769.5 192.9 L765 189.9 L760.5 186.9 L756 184.2 L751.5 181.7 L747 179.3 L742.5 177.1 L738 174.8"/></g>
+      <text class="elab out" x="722" y="162" text-anchor="middle">Failure probability</text>
+      <text class="esub"     x="722" y="272" text-anchor="middle">across the whole space</text>
+    </g>
+  </svg>
+  <figcaption>A trial realisation goes out, a response comes back, the search updates &mdash; cycling until the design point converges.</figcaption>
+</figure>
+  <p class="rnote">Isofrag couples reliability analysis to nonlinear structural analysis and extends the pair to sequential multi-hazard loading, driving the established FERUM and ZEUS-NL codes as its solvers.</p>
+</section>
+
+<section>
+  <h2 class="rule">What it produces</h2>
+<figure class="isofragfig art"><svg class="figsvg surf" viewBox="0 0 620 420" role="img" aria-label="A fragility surface drawn as a wireframe: failure probability rising across two hazards together, with two ordinary fragility curves marked on it as slices that cross" xmlns="http://www.w3.org/2000/svg"><g class="fgrid"><line x1="250" y1="372" x2="106.2" y2="303.4"/><line x1="250" y1="372" x2="482" y2="327.1"/><line x1="308" y1="360.8" x2="164.2" y2="292.1"/><line x1="214" y1="354.8" x2="446" y2="310"/><line x1="366" y1="349.6" x2="222.2" y2="280.9"/><line x1="178.1" y1="337.7" x2="410.1" y2="292.8"/><line x1="424" y1="338.3" x2="280.2" y2="269.7"/><line x1="142.1" y1="320.5" x2="374.1" y2="275.6"/><line x1="482" y1="327.1" x2="338.2" y2="258.5"/><line x1="106.2" y1="303.4" x2="338.2" y2="258.5"/></g><g class="fmesh"><path class="m" opacity="0.6" d="M250 372 L264.5 369.1 L279 363.7 L293.5 349.6 L308 326.9 L322.5 300.1 L337 273.2 L351.5 248.6 L366 227.2 L380.5 209.1 L395 194 L409.5 181.4 L424 170.9 L438.5 162.1 L453 154.6 L467.5 148.1 L482 142.4"/><path class="m" opacity="0.6" d="M241 367.7 L255.5 364.8 L270 359.4 L284.5 345.3 L299 322.6 L313.5 295.8 L328 268.9 L342.5 244.3 L357 222.9 L371.5 204.8 L386 189.7 L400.5 177.1 L415 166.6 L429.5 157.8 L444 150.3 L458.5 143.8 L473 138.1"/><path class="m" opacity="0.6" d="M232 362.7 L246.5 359.9 L261 354.4 L275.5 340.3 L290 317.5 L304.5 290.5 L319 263.4 L333.5 238.7 L348 217.3 L362.5 199.2 L377 184.2 L391.5 171.7 L406 161.4 L420.5 152.7 L435 145.3 L449.5 138.9 L464 133.3"/><path class="m" opacity="0.61" d="M223 354.2 L237.5 351.3 L252 345.8 L266.5 331.5 L281 308.3 L295.5 281 L310 253.8 L324.5 229.1 L339 207.9 L353.5 190.2 L368 175.7 L382.5 163.8 L397 154 L411.5 145.8 L426 138.9 L440.5 132.9 L455 127.6"/><path class="m" opacity="0.64" d="M214 340 L228.5 337.1 L243 331.6 L257.5 317 L272 293.7 L286.5 266.3 L301 239.4 L315.5 215.4 L330 195.1 L344.5 178.6 L359 165.2 L373.5 154.4 L388 145.5 L402.5 138.1 L417 131.8 L431.5 126.3 L446 121.5"/><path class="m" opacity="0.67" d="M205 320.8 L219.6 317.9 L234 312.3 L248.6 297.9 L263 274.8 L277.6 248.1 L292 222.3 L306.6 199.7 L321 181.1 L335.6 166.2 L350 154.3 L364.6 144.7 L379 136.8 L393.6 130.3 L408 124.7 L422.6 119.8 L437 115.4"/><path class="m" opacity="0.7" d="M196.1 298.6 L210.6 295.8 L225.1 290.3 L239.6 276.2 L254.1 253.9 L268.6 228.6 L283.1 204.6 L297.6 184.1 L312.1 167.5 L326.6 154.3 L341.1 143.9 L355.6 135.6 L370.1 128.8 L384.6 123.1 L399.1 118.1 L413.6 113.7 L428.1 109.6"/><path class="m" opacity="0.73" d="M187.1 275.6 L201.6 272.7 L216.1 267.4 L230.6 253.9 L245.1 233 L259.6 209.6 L274.1 187.8 L288.6 169.5 L303.1 155 L317.6 143.6 L332.1 134.6 L346.6 127.4 L361.1 121.5 L375.6 116.4 L390.1 112 L404.6 107.9 L419.1 104.2"/><path class="m" opacity="0.76" d="M178.1 253.2 L192.6 250.3 L207.1 245.2 L221.6 232.5 L236.1 213.2 L250.6 192 L265.1 172.5 L279.6 156.5 L294.1 143.9 L308.6 134.1 L323.1 126.3 L337.6 120.1 L352.1 114.9 L366.6 110.3 L381.1 106.3 L395.6 102.6 L410.1 99.1"/><path class="m" opacity="0.78" d="M169.1 232.2 L183.6 229.3 L198.1 224.4 L212.6 212.7 L227.1 195.1 L241.6 176.1 L256.1 159 L270.6 145.1 L285.1 134.2 L299.6 125.7 L314.1 119 L328.6 113.5 L343.1 108.8 L357.6 104.7 L372.1 101 L386.6 97.5 L401.1 94.2"/><path class="m" opacity="0.8" d="M160.1 213.1 L174.6 210.2 L189.1 205.5 L203.6 194.8 L218.1 179 L232.6 162.1 L247.1 147.1 L261.6 135 L276.1 125.6 L290.6 118.2 L305.1 112.4 L319.6 107.5 L334.1 103.2 L348.6 99.4 L363.1 95.9 L377.6 92.6 L392.1 89.4"/><path class="m" opacity="0.82" d="M151.1 195.9 L165.6 193.1 L180.1 188.6 L194.6 178.8 L209.1 164.6 L223.6 149.7 L238.1 136.6 L252.6 126.1 L267.1 118 L281.6 111.5 L296.1 106.3 L310.6 101.9 L325.1 98 L339.6 94.4 L354.1 91.1 L368.6 87.9 L383.1 84.8"/><path class="m" opacity="0.83" d="M142.1 180.7 L156.6 177.8 L171.1 173.5 L185.6 164.6 L200.1 152 L214.6 138.8 L229.1 127.4 L243.6 118.2 L258.1 111.1 L272.6 105.4 L287.1 100.7 L301.6 96.6 L316.1 93 L330.6 89.6 L345.1 86.4 L359.6 83.3 L374.1 80.3"/><path class="m" opacity="0.85" d="M133.1 167.1 L147.6 164.2 L162.1 160.1 L176.6 152 L191.1 140.8 L205.6 129.2 L220.1 119.1 L234.6 111.1 L249.1 104.8 L263.6 99.7 L278.1 95.4 L292.6 91.6 L307.1 88.2 L321.6 84.9 L336.1 81.8 L350.6 78.8 L365.1 75.8"/><path class="m" opacity="0.86" d="M124.1 155 L138.6 152.2 L153.1 148.2 L167.6 140.9 L182.1 130.8 L196.6 120.5 L211.1 111.7 L225.6 104.6 L240.1 99 L254.6 94.3 L269.1 90.4 L283.6 86.8 L298.1 83.5 L312.6 80.3 L327.1 77.3 L341.6 74.3 L356.1 71.4"/><path class="m" opacity="0.86" d="M115.2 144.2 L129.6 141.4 L144.2 137.6 L158.6 130.9 L173.2 121.8 L187.6 112.8 L202.2 104.9 L216.6 98.6 L231.2 93.5 L245.6 89.2 L260.2 85.5 L274.6 82.1 L289.2 78.9 L303.6 75.8 L318.2 72.9 L332.6 69.9 L347.2 67"/><path class="m" opacity="0.87" d="M106.2 134.5 L120.7 131.7 L135.2 128 L149.7 121.9 L164.2 113.7 L178.7 105.6 L193.2 98.7 L207.7 93 L222.2 88.3 L236.7 84.3 L251.2 80.8 L265.7 77.5 L280.2 74.4 L294.7 71.4 L309.2 68.5 L323.7 65.6 L338.2 62.7"/><path class="m" opacity="0.52" d="M250 372 L241 367.7 L232 362.7 L223 354.2 L214 340 L205 320.8 L196.1 298.6 L187.1 275.6 L178.1 253.2 L169.1 232.2 L160.1 213.1 L151.1 195.9 L142.1 180.7 L133.1 167.1 L124.1 155 L115.2 144.2 L106.2 134.5"/><path class="m" opacity="0.52" d="M264.5 369.1 L255.5 364.8 L246.5 359.9 L237.5 351.3 L228.5 337.1 L219.6 317.9 L210.6 295.8 L201.6 272.7 L192.6 250.3 L183.6 229.3 L174.6 210.2 L165.6 193.1 L156.6 177.8 L147.6 164.2 L138.6 152.2 L129.6 141.4 L120.7 131.7"/><path class="m" opacity="0.53" d="M279 363.7 L270 359.4 L261 354.4 L252 345.8 L243 331.6 L234 312.3 L225.1 290.3 L216.1 267.4 L207.1 245.2 L198.1 224.4 L189.1 205.5 L180.1 188.6 L171.1 173.5 L162.1 160.1 L153.1 148.2 L144.2 137.6 L135.2 128"/><path class="m" opacity="0.56" d="M293.5 349.6 L284.5 345.3 L275.5 340.3 L266.5 331.5 L257.5 317 L248.6 297.9 L239.6 276.2 L230.6 253.9 L221.6 232.5 L212.6 212.7 L203.6 194.8 L194.6 178.8 L185.6 164.6 L176.6 152 L167.6 140.9 L158.6 130.9 L149.7 121.9"/><path class="m" opacity="0.61" d="M308 326.9 L299 322.6 L290 317.5 L281 308.3 L272 293.7 L263 274.8 L254.1 253.9 L245.1 233 L236.1 213.2 L227.1 195.1 L218.1 179 L209.1 164.6 L200.1 152 L191.1 140.8 L182.1 130.8 L173.2 121.8 L164.2 113.7"/><path class="m" opacity="0.66" d="M322.5 300.1 L313.5 295.8 L304.5 290.5 L295.5 281 L286.5 266.3 L277.6 248.1 L268.6 228.6 L259.6 209.6 L250.6 192 L241.6 176.1 L232.6 162.1 L223.6 149.7 L214.6 138.8 L205.6 129.2 L196.6 120.5 L187.6 112.8 L178.7 105.6"/><path class="m" opacity="0.71" d="M337 273.2 L328 268.9 L319 263.4 L310 253.8 L301 239.4 L292 222.3 L283.1 204.6 L274.1 187.8 L265.1 172.5 L256.1 159 L247.1 147.1 L238.1 136.6 L229.1 127.4 L220.1 119.1 L211.1 111.7 L202.2 104.9 L193.2 98.7"/><path class="m" opacity="0.76" d="M351.5 248.6 L342.5 244.3 L333.5 238.7 L324.5 229.1 L315.5 215.4 L306.6 199.7 L297.6 184.1 L288.6 169.5 L279.6 156.5 L270.6 145.1 L261.6 135 L252.6 126.1 L243.6 118.2 L234.6 111.1 L225.6 104.6 L216.6 98.6 L207.7 93"/><path class="m" opacity="0.79" d="M366 227.2 L357 222.9 L348 217.3 L339 207.9 L330 195.1 L321 181.1 L312.1 167.5 L303.1 155 L294.1 143.9 L285.1 134.2 L276.1 125.6 L267.1 118 L258.1 111.1 L249.1 104.8 L240.1 99 L231.2 93.5 L222.2 88.3"/><path class="m" opacity="0.82" d="M380.5 209.1 L371.5 204.8 L362.5 199.2 L353.5 190.2 L344.5 178.6 L335.6 166.2 L326.6 154.3 L317.6 143.6 L308.6 134.1 L299.6 125.7 L290.6 118.2 L281.6 111.5 L272.6 105.4 L263.6 99.7 L254.6 94.3 L245.6 89.2 L236.7 84.3"/><path class="m" opacity="0.84" d="M395 194 L386 189.7 L377 184.2 L368 175.7 L359 165.2 L350 154.3 L341.1 143.9 L332.1 134.6 L323.1 126.3 L314.1 119 L305.1 112.4 L296.1 106.3 L287.1 100.7 L278.1 95.4 L269.1 90.4 L260.2 85.5 L251.2 80.8"/><path class="m" opacity="0.85" d="M409.5 181.4 L400.5 177.1 L391.5 171.7 L382.5 163.8 L373.5 154.4 L364.6 144.7 L355.6 135.6 L346.6 127.4 L337.6 120.1 L328.6 113.5 L319.6 107.5 L310.6 101.9 L301.6 96.6 L292.6 91.6 L283.6 86.8 L274.6 82.1 L265.7 77.5"/><path class="m" opacity="0.86" d="M424 170.9 L415 166.6 L406 161.4 L397 154 L388 145.5 L379 136.8 L370.1 128.8 L361.1 121.5 L352.1 114.9 L343.1 108.8 L334.1 103.2 L325.1 98 L316.1 93 L307.1 88.2 L298.1 83.5 L289.2 78.9 L280.2 74.4"/><path class="m" opacity="0.87" d="M438.5 162.1 L429.5 157.8 L420.5 152.7 L411.5 145.8 L402.5 138.1 L393.6 130.3 L384.6 123.1 L375.6 116.4 L366.6 110.3 L357.6 104.7 L348.6 99.4 L339.6 94.4 L330.6 89.6 L321.6 84.9 L312.6 80.3 L303.6 75.8 L294.7 71.4"/><path class="m" opacity="0.88" d="M453 154.6 L444 150.3 L435 145.3 L426 138.9 L417 131.8 L408 124.7 L399.1 118.1 L390.1 112 L381.1 106.3 L372.1 101 L363.1 95.9 L354.1 91.1 L345.1 86.4 L336.1 81.8 L327.1 77.3 L318.2 72.9 L309.2 68.5"/><path class="m" opacity="0.88" d="M467.5 148.1 L458.5 143.8 L449.5 138.9 L440.5 132.9 L431.5 126.3 L422.6 119.8 L413.6 113.7 L404.6 107.9 L395.6 102.6 L386.6 97.5 L377.6 92.6 L368.6 87.9 L359.6 83.3 L350.6 78.8 L341.6 74.3 L332.6 69.9 L323.7 65.6"/><path class="m" opacity="0.89" d="M482 142.4 L473 138.1 L464 133.3 L455 127.6 L446 121.5 L437 115.4 L428.1 109.6 L419.1 104.2 L410.1 99.1 L401.1 94.2 L392.1 89.4 L383.1 84.8 L374.1 80.3 L365.1 75.8 L356.1 71.4 L347.2 67 L338.2 62.7"/></g><path class="fslice" d="M192.5 289.4 L195.7 288.8 L198.9 288.2 L202.1 287.5 L205.4 286.9 L208.6 286.2 L211.8 285.4 L215 284.3 L218.2 282.9 L221.5 281.1 L224.7 278.9 L227.9 276.2 L231.1 272.9 L234.4 269.3 L237.6 265.1 L240.8 260.6 L244 255.8 L247.2 250.8 L250.5 245.5 L253.7 240.1 L256.9 234.6 L260.1 229.1 L263.4 223.6 L266.6 218.2 L269.8 212.9 L273 207.7 L276.2 202.6 L279.5 197.7 L282.7 193 L285.9 188.5 L289.1 184.2 L292.4 180.1 L295.6 176.2 L298.8 172.4 L302 168.9 L305.2 165.5 L308.5 162.3 L311.7 159.3 L314.9 156.4 L318.1 153.7 L321.4 151.1 L324.6 148.7 L327.8 146.4 L331 144.2 L334.2 142.1 L337.5 140.1 L340.7 138.2 L343.9 136.4 L347.1 134.7 L350.4 133 L353.6 131.5 L356.8 129.9 L360 128.5 L363.2 127.1 L366.5 125.8 L369.7 124.5 L372.9 123.2 L376.1 122 L379.4 120.9 L382.6 119.8 L385.8 118.7 L389 117.6 L392.2 116.6 L395.5 115.6 L398.7 114.6 L401.9 113.6 L405.1 112.7 L408.4 111.8 L411.6 110.9 L414.8 110 L418 109.1 L421.2 108.3 L424.5 107.4"/><path class="fslice" d="M366 227.2 L364 226.2 L362 225.3 L360 224.3 L358 223.4 L356 222.4 L354 221.3 L352 220.1 L350 218.8 L348 217.3 L346 215.5 L344 213.6 L342 211.5 L340 209.1 L338 206.6 L336 203.9 L334 201.1 L332 198.2 L330 195.1 L328 192.1 L326 188.9 L324 185.8 L322 182.7 L320.1 179.6 L318.1 176.5 L316.1 173.4 L314.1 170.4 L312.1 167.5 L310.1 164.6 L308.1 161.7 L306.1 159 L304.1 156.3 L302.1 153.7 L300.1 151.1 L298.1 148.6 L296.1 146.2 L294.1 143.9 L292.1 141.6 L290.1 139.4 L288.1 137.3 L286.1 135.2 L284.1 133.2 L282.1 131.2 L280.1 129.3 L278.1 127.4 L276.1 125.6 L274.1 123.8 L272.1 122.1 L270.1 120.4 L268.1 118.8 L266.1 117.2 L264.1 115.6 L262.1 114.1 L260.1 112.6 L258.1 111.1 L256.1 109.6 L254.1 108.2 L252.1 106.8 L250.1 105.5 L248.1 104.1 L246.1 102.8 L244.1 101.5 L242.1 100.2 L240.1 99 L238.1 97.7 L236.1 96.5 L234.1 95.3 L232.1 94.1 L230.2 92.9 L228.2 91.7 L226.2 90.6 L224.2 89.4 L222.2 88.3"/><g class="faxis"><line x1="250" y1="372" x2="482" y2="327.1"/><line x1="250" y1="372" x2="106.2" y2="303.4"/></g><text class="flab" x="370.2" y="375.1" text-anchor="middle" transform="rotate(-10.95 370.2 375.1)">hazard 1</text><text class="flab" x="168.6" y="361.6" text-anchor="middle" transform="rotate(25.5 168.6 361.6)">hazard 2</text><g class="fscale"><line x1="26" y1="107.36" x2="26" y2="303.36"/><line x1="26" y1="107.36" x2="32" y2="107.36"/><line x1="26" y1="303.36" x2="32" y2="303.36"/></g><text class="ftk" x="36" y="111.36">1</text><text class="ftk" x="36" y="307.36">0</text><text class="flab" x="17" y="205.4" text-anchor="middle" transform="rotate(-90 17 205.4)">P(failure)</text><line class="flead" x1="427.5" y1="107.4" x2="450.5" y2="77.4"/><text class="fnote" x="454.5" y="73.4">each line is one</text><text class="fnote" x="454.5" y="87.4">ordinary fragility curve</text></svg><figcaption>A surface, not a curve &mdash; failure probability across two hazards at once. Each marked line is an ordinary fragility curve: hold one hazard fixed and you get one of them. The surface is all of them. Schematic; the hazards are deliberately unnamed, and the capacities are representative rather than from a specific study.</figcaption></figure>
+</section>
+
+<section>
+  <h2 class="rule">Try it</h2>
+  <p class="lede">Set the shaking, set the inundation, and watch the fragility surface and the frame respond.</p>
+</section>
+
+<section class="explorer" id="explorer">
+  <div class="exp-panel">
+
+    <div class="exp-left">
+      <div class="mh-struct">
+        <canvas id="structCanvas" width="420" height="370" role="img"
+          aria-label="Structure elevation responding to earthquake damage and tsunami inundation"></canvas>
+      </div>
+
+      <div class="phase" role="group" aria-label="Hazard stage">
+        <button type="button" class="ph on" data-phase="eq" aria-pressed="true">Earthquake</button>
+        <button type="button" class="ph" data-phase="ts" aria-pressed="false">Tsunami</button>
+      </div>
+
+      <div class="exp-controls">
+        <div class="ctrl">
+          <label for="sPga">Ground shaking <span id="vPga">0.35 g</span></label>
+          <input type="range" id="sPga" min="0" max="1.5" step="0.01" value="0.35">
+        </div>
+
+        <div class="ctrl">
+          <label for="sDep">Inundation <span id="vDep">13.1 ft</span></label>
+          <input type="range" id="sDep" min="0" max="8" step="0.1" value="4">
+        </div>
+
+        <div class="ctrl">
+          <label for="sFr">Flow velocity, Fr <span id="vFr">1.40</span></label>
+          <input type="range" id="sFr" min="0.4" max="2" step="0.05" value="1.4">
+        </div>
+
+        <div class="ctrl">
+          <label for="sBe">Dispersion &beta; <span id="vBe">0.50</span></label>
+          <input type="range" id="sBe" min="0.2" max="0.9" step="0.02" value="0.5">
+        </div>
+
+        <div class="ctrl">
+          <label for="sRot">View <span id="vRot">-135&deg;</span></label>
+          <input type="range" id="sRot" min="-180" max="180" step="1" value="-135">
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-right">
+      <div class="readout" aria-live="polite">
+        <p class="ro-num" id="sProb">&mdash;</p>
+        <p class="ro-text" id="sText"></p>
+      </div>
+
+      <div class="mh-surf">
+        <canvas id="surfCanvas" width="900" height="520" role="img"
+          aria-label="Fragility surface: failure probability against peak ground acceleration and tsunami inundation depth"></canvas>
+      </div>
+
+      <p class="eqn">P = 1 &minus; (1 &minus; P<sub>eq</sub>)(1 &minus; P<sub>ts</sub>) &nbsp;&middot;&nbsp; &theta;<sub>ts</sub> reduced by earthquake damage</p>
+      <p class="disclaim">Forces follow ASCE 7 Chapter 6; capacities are representative for a mid-rise RC frame, not a specific study. See the <a href="research.html">research page</a>.</p>
+    </div>
+
+      <div class="exp-share" hidden>
+        <button type="button" id="expShare">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.1 0l3-3a5 5 0 0 0-7.1-7.1l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.1 0l-3 3A5 5 0 0 0 11 21.1l1.7-1.7"/></svg><span id="expShareLabel">Copy link to this state</span>
+        </button>
+        <p class="rl" id="expShareNote">A link that reopens the surface exactly as you have set it.</p>
+      </div>
+
+  </div></section>
+
+<section class="whattotry">
+  <h2 class="rule">What to try</h2>
+  <ul class="tryl">
+    <li><strong>Take the shaking to zero.</strong> The probability collapses to the tsunami-only
+      number. That is the coupling switching off.</li>
+    <li><strong>Leave the shaking at 0.35&nbsp;g and move the inundation.</strong> The readout
+      reports the same tsunami on a damaged frame and on an undamaged one. The gap between them is
+      what assessing the two hazards separately would miss.</li>
+    <li><strong>Turn the view through a full circle.</strong> Axis labels move to whichever edge is
+      nearest you; the probability axis rides the back corner.</li>
+    <li><strong>Watch the marked point.</strong> It is where two ordinary fragility curves cross &mdash;
+      one cut at the current inundation, one at the current shaking. Both are drawn, so it reads as
+      an intersection rather than a dot on a sheet.</li>
+  </ul>
+</section>
+
+<section>
+  <p class="cta"><a href="https://github.com/amr-ghanem/locus-explorer" class="btn ghost" rel="noopener noreferrer" target="_blank">Source on GitHub</a></p>
+  <p class="rl">The interactive is open source. The research code &mdash; FORM reliability coupled to nonlinear time-history analysis &mdash; is not: the repository reproduces the shape of the result in closed form so it runs in a browser.</p>
+</section>
+
+<section>
+  <h2 class="rule">The papers behind it</h2>
+  <p class="rl">Eleven papers, newest first.</p>
+  <ul class="reflist">
+    <li>Abdelhafeez, M., Park, H., Sherif, M., <strong>Ghanem, A.</strong>, &amp; Moon, D.-S. (2026). &ldquo;<a href="https://doi.org/10.1016/j.jobe.2025.115077" rel="noopener noreferrer" target="_blank">Effects of tsunami wave and bathymetric parameters on hydrodynamic forces and structural fragility</a>&rdquo; <em class="venue">Journal of Building Engineering</em>, 118, Article 115077. <a href="https://doi.org/10.1016/j.jobe.2025.115077" class="srcdoi" rel="noopener noreferrer" target="_blank">https://doi.org/10.1016/j.jobe.2025.115077</a></li>
+    <li>Sherif, M. A., <strong>Ghanem, A. M.</strong>, Abdelhafeez, M. H., Jung, D., Kim, D.-J., &amp; Moon, D.-S. (2025). &ldquo;<a href="https://doi.org/10.12989/sss.2025.36.6.357" rel="noopener noreferrer" target="_blank">Fragility curve-based resilience index for structural vulnerability assessment in hazard analysis</a>&rdquo; <em class="venue">Smart Structures and Systems</em>. <a href="https://doi.org/10.12989/sss.2025.36.6.357" class="srcdoi" rel="noopener noreferrer" target="_blank">https://doi.org/10.12989/sss.2025.36.6.357</a></li>
+    <li><strong>Ghanem, A.</strong>, Lee, Y.-J., &amp; Moon, D.-S. (2024). &ldquo;<a href="https://doi.org/10.1061/JSENDH.STENG-12440" rel="noopener noreferrer" target="_blank">Seismic vulnerability of reinforced concrete frame structures: Obtaining plan or vertical mass irregularity from structure use change</a>&rdquo; <em class="venue">Journal of Structural Engineering</em>, 150(3), Article 04023243. <a href="https://doi.org/10.1061/JSENDH.STENG-12440" class="srcdoi" rel="noopener noreferrer" target="_blank">https://doi.org/10.1061/JSENDH.STENG-12440</a></li>
+    <li><strong>Ghanem, A.</strong> (2023). &ldquo;<a href="https://doi.org/10.13140/RG.2.2.11462.24646" rel="noopener noreferrer" target="_blank">Integrated framework for multi-hazard resilience assessment of infrastructures</a>&rdquo; <em class="venue">University of Hawaiʻi at Mānoa</em>. <a href="https://doi.org/10.13140/RG.2.2.11462.24646" class="srcdoi" rel="noopener noreferrer" target="_blank">https://doi.org/10.13140/RG.2.2.11462.24646</a></li>
+    <li><strong>Ghanem, A.</strong>, Sherif, M., Abdelhafeez, M., Lee, Y.-J., &amp; Moon, D. (2022). &ldquo;<a href="https://12ncee-assets.s3.us-east-2.amazonaws.com/library-assets/1663486205_10439_Ghanem.pdf" rel="noopener noreferrer" target="_blank">Relationship between seismic redundancy and failure likelihood for mass-eccentric reinforced concrete frame structures</a>&rdquo; <em class="venue">12th National Conference on Earthquake Engineering (12NCEE), Salt Lake City</em>.</li>
+    <li>Sherif, M., <strong>Ghanem, A.</strong>, Abdelhafeez, M., &amp; Moon, D. (2022). &ldquo;<a href="https://12ncee-assets.s3.us-east-2.amazonaws.com/library-assets/1663486533_10721_Sherif.pdf" rel="noopener noreferrer" target="_blank">Indexing seismic fragility curves of skewed reinforced concrete bridges</a>&rdquo; <em class="venue">12th National Conference on Earthquake Engineering (12NCEE), Salt Lake City</em>.</li>
+    <li>Abdelhafeez, M., <strong>Ghanem, A.</strong>, &amp; Sherif, M. (2022). &ldquo;<a href="https://doi.org/10.1061/9780784484395.049" rel="noopener noreferrer" target="_blank">Probabilistic fragility analysis of reinforced concrete structures under tsunami hydrodynamic loads of the ASCE 7 standard</a>&rdquo; <em class="venue">Ports 2022</em>, 488&ndash;497. <a href="https://doi.org/10.1061/9780784484395.049" class="srcdoi" rel="noopener noreferrer" target="_blank">https://doi.org/10.1061/9780784484395.049</a></li>
+    <li><strong>Ghanem, A.</strong>, Moon, D., &amp; Lee, Y. (2021). &ldquo;<a href="https://doi.org/10.13140/RG.2.2.10623.38562" rel="noopener noreferrer" target="_blank">Seismic fragility surface of irregular reinforced concrete frame structures</a>&rdquo; <em class="venue">17th World Conference on Earthquake Engineering (17WCEE), Sendai, Japan</em>. <a href="https://doi.org/10.13140/RG.2.2.10623.38562" class="srcdoi" rel="noopener noreferrer" target="_blank">https://doi.org/10.13140/RG.2.2.10623.38562</a></li>
+    <li><strong>Ghanem, A.</strong>, &amp; Moon, D. (2021). &ldquo;<a href="https://doi.org/10.13140/RG.2.2.13978.82882" rel="noopener noreferrer" target="_blank">Seismic fragility assessment of skewed reinforced concrete bridges</a>&rdquo; <em class="venue">17th World Conference on Earthquake Engineering (17WCEE), Sendai, Japan</em>. <a href="https://doi.org/10.13140/RG.2.2.13978.82882" class="srcdoi" rel="noopener noreferrer" target="_blank">https://doi.org/10.13140/RG.2.2.13978.82882</a></li>
+    <li><strong>Ghanem, A.</strong>, &amp; Moon, D.-S. (2021). &ldquo;<a href="https://doi.org/10.31224/osf.io/zn9uh" rel="noopener noreferrer" target="_blank">Seismic fragility analysis of 3D vertical irregular reinforced concrete structures</a>&rdquo; <em class="venue">Engineering Archive</em>. <a href="https://doi.org/10.31224/osf.io/zn9uh" class="srcdoi" rel="noopener noreferrer" target="_blank">https://doi.org/10.31224/osf.io/zn9uh</a></li>
+    <li><strong>Ghanem, A.</strong>, Moon, D.-S., &amp; Lee, Y.-J. (2021). &ldquo;<a href="https://doi.org/10.31224/osf.io/cy5pj" rel="noopener noreferrer" target="_blank">Seismic vulnerability assessment of skewed reinforced concrete bridges</a>&rdquo; <em class="venue">Engineering Archive</em>. <a href="https://doi.org/10.31224/osf.io/cy5pj" class="srcdoi" rel="noopener noreferrer" target="_blank">https://doi.org/10.31224/osf.io/cy5pj</a></li>
+  </ul>
+  <p class="rl">The full list is on the <a href="research.html">research page</a>.</p>
+</section>
+</main>
+<footer class="site">
+  <div class="fcols">
+    <div>
+      <p class="flab">Profiles</p>
+      <a href="https://orcid.org/0000-0002-1855-5421" rel="noopener noreferrer" target="_blank"><svg class="icon" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="10" cy="10" r="9" /><text x="10" y="13.6" text-anchor="middle" font-family="Libre Franklin, Segoe UI, sans-serif" font-size="9.5" font-weight="600" letter-spacing="0" fill="currentColor" stroke="none">iD</text></svg>ORCID</a><a href="https://scholar.google.com/citations?user=Y_kH3ooAAAAJ" rel="noopener noreferrer" target="_blank"><svg class="icon" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2.6 19 7 10 11.4 1 7z" fill="currentColor" stroke="none"/><path d="M4.8 9v4.1c0 1.6 2.3 2.9 5.2 2.9s5.2-1.3 5.2-2.9V9"/><path d="M18.4 8.1v4.6"/><circle cx="18.4" cy="13.6" r="1.1" fill="currentColor" stroke="none"/></svg>Google Scholar</a><a href="https://www.webofscience.com/wos/author/record/PLC-4161-2026" rel="noopener noreferrer" target="_blank"><svg class="icon" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1" y="1" width="18" height="18" rx="3" /><text x="10" y="12.8" text-anchor="middle" font-family="Libre Franklin, Segoe UI, sans-serif" font-size="6.6" font-weight="600" letter-spacing="-.02em" fill="currentColor" stroke="none">WoS</text></svg>Web of Science</a><a href="https://www.linkedin.com/in/amr-ghanem" rel="noopener noreferrer" target="_blank"><svg class="icon" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1" y="1" width="18" height="18" rx="3" /><text x="10" y="13.6" text-anchor="middle" font-family="Libre Franklin, Segoe UI, sans-serif" font-size="9.5" font-weight="600" letter-spacing="0" fill="currentColor" stroke="none">in</text></svg>LinkedIn</a>
+    </div>
+    <div>
+      <p class="flab">Pages</p>
+      <a href="index.html">Home</a>
+      <a href="isofrag.html">Isofrag</a>
+      <a href="research.html">Research</a><a href="writing.html">Writing</a>
+      <a href="about.html">About</a>
+    </div>
+    <div>
+      <p class="flab">Contact</p>
+      <a href="mailto:aghanem@hawaii.edu"><svg class="icon" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.6" y="4.6" width="14.8" height="10.8" rx="1"/><path d="m2.6 5.6 7.4 5.2 7.4-5.2"/></svg>aghanem@hawaii.edu</a>
+      <p class="fplain"><a href="https://www.google.com/maps/place/Honolulu%2C%20Hawai%CA%BBi"  rel="noopener noreferrer" target="_blank"><svg class="icon" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 17.4s5.4-5 5.4-9a5.4 5.4 0 1 0-10.8 0c0 4 5.4 9 5.4 9z"/><circle cx="10" cy="8.4" r="2"/></svg>Honolulu, Hawaiʻi</a></p>
+    </div>
+  </div>
+  <div class="footbar">
+    <p class="colophon">&copy; 2026 Amr Ghanem &middot; Last updated August 2026</p>
+  </div>
+</footer>
+<script>
+(function () {
+  var sf = document.getElementById('surfCanvas'), st = document.getElementById('structCanvas');
+  if (!sf || !sf.getContext || !st) return;
+  var g1 = sf.getContext('2d'), g2 = st.getContext('2d');
+
+  var NX = 56, NY = 56;
+  var MAXPGA = 1.5, MAXDEP = 8.0, M2FT = 3.28084;
+  var RHO = 1100, G = 9.81, CD = 1.25;
+  var THETA_EQ = 0.45, THETA_TS = 380, KDAM = 0.55;
+
+  var sPga=document.getElementById('sPga'), sDep=document.getElementById('sDep'),
+      sFr=document.getElementById('sFr'), sBe=document.getElementById('sBe'),
+      sRot=document.getElementById('sRot');
+
+  function css(n,fb){ var v=getComputedStyle(document.documentElement).getPropertyValue(n).trim(); return v||fb; }
+  function hex(h){ h=h.replace('#',''); if(h.length===3) h=h[0]+h[0]+h[1]+h[1]+h[2]+h[2];
+    return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)]; }
+  function mix(a,b,t){ return 'rgb('+Math.round(a[0]+(b[0]-a[0])*t)+','+Math.round(a[1]+(b[1]-a[1])*t)+','+Math.round(a[2]+(b[2]-a[2])*t)+')'; }
+
+  function ncdf(x){
+    var neg=x<0; if(neg)x=-x;
+    var t=1/(1+0.2316419*x), phi=Math.exp(-0.5*x*x)/Math.sqrt(2*Math.PI);
+    var p=t*(0.319381530+t*(-0.356563782+t*(1.781477937+t*(-1.821255978+t*1.330274429))));
+    var r=1-phi*p; return neg?1-r:r;
+  }
+
+  function pEq(pga,be){ return pga<=0.001 ? 0 : ncdf(Math.log(pga/THETA_EQ)/be); }
+  function fTs(h,fr){ return (0.5*RHO*G + 0.5*RHO*CD*fr*fr*G)*h*h/1000; }
+  function pTs(h,fr,be,dam){
+    if(h<=0.01) return 0;
+    return ncdf(Math.log(fTs(h,fr)/(THETA_TS*(1-KDAM*dam)))/be);
+  }
+  function pAll(pga,h,fr,be){ var a=pEq(pga,be); return 1-(1-a)*(1-pTs(h,fr,be,a)); }
+
+  // The structure elevation animates; the surface does not. The surface is
+  // 56x56 quads sorted every draw, which is far too costly for a frame loop -
+  // it redraws only when a control moves. The elevation is cheap, so it carries
+  // the motion: sway from the shaking, travelling crests from the flow, and a
+  // scrolling ground record. Off entirely under prefers-reduced-motion.
+  // The two hazards are separated in time, so the figure shows one stage at a
+  // time. PHASE decides which: 'eq' draws the dry site shaking, 'ts' draws the
+  // already-damaged frame under inundation. The sliders keep their values
+  // throughout - switching stage does not discard what the user set.
+  var PHASE = 'eq';
+  var phaseBtns = [].slice.call(document.querySelectorAll('.phase .ph'));
+
+  var ANIM = !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var T = 0, rafId = null, visible = false, t0 = 0;
+
+  function frame(ts){
+    if (!t0) t0 = ts;
+    T = ts - t0;
+    drawStructure();
+    rafId = visible ? requestAnimationFrame(frame) : null;
+  }
+  function startLoop(){ if (ANIM && visible && rafId === null) rafId = requestAnimationFrame(frame); }
+  function stopLoop(){ if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; } }
+
+  var W=sf.width, H=sf.height;
+  function proj(u,v,z,rot){
+    var a=rot*Math.PI/180, x=u-0.5, y=v-0.5;
+    var rx=x*Math.cos(a)-y*Math.sin(a), ry=x*Math.sin(a)+y*Math.cos(a);
+    return { x:W*0.5+rx*W*0.52, y:H*0.70+ry*H*0.26-z*H*0.44, depth:ry };
+  }
+
+  function drawSurface(){
+    var pga=parseFloat(sPga.value), dep=parseFloat(sDep.value),
+        fr=parseFloat(sFr.value), be=parseFloat(sBe.value), rot=parseFloat(sRot.value);
+
+    var cLow=hex(css('--accent','#0A6E6E')), cMid=hex(css('--data3','#A8792B')), cHigh=hex(css('--data4','#A8482B'));
+    var TS = Math.max(0.62, Math.min(1, W/1100));
+    var grid=css('--rule','#C7CFCB'), mute=css('--ink-mute','#6E7B78'),
+        mark=css('--data4','#A8482B'), sheet=css('--sheet','#FAFAF8');
+
+    g1.clearRect(0,0,W,H);
+
+    g1.strokeStyle=grid; g1.lineWidth=1; g1.globalAlpha=0.5;
+    for(var q=0;q<=1.0001;q+=0.125){
+      var a1=proj(q,0,0,rot), a2=proj(q,1,0,rot);
+      g1.beginPath(); g1.moveTo(a1.x,a1.y); g1.lineTo(a2.x,a2.y); g1.stroke();
+      var b1=proj(0,q,0,rot), b2=proj(1,q,0,rot);
+      g1.beginPath(); g1.moveTo(b1.x,b1.y); g1.lineTo(b2.x,b2.y); g1.stroke();
+    }
+    var cs=[[0,0],[1,0],[1,1],[0,1]], back=cs[0], bd=proj(0,0,0,rot).depth;
+    cs.forEach(function(c){ var d=proj(c[0],c[1],0,rot).depth; if(d<bd){bd=d;back=c;} });
+    var vb=proj(back[0],back[1],0,rot), vt=proj(back[0],back[1],1,rot);
+    g1.globalAlpha=0.9; g1.beginPath(); g1.moveTo(vb.x,vb.y); g1.lineTo(vt.x,vt.y); g1.stroke(); g1.globalAlpha=1;
+
+    // the probability axis rides the back corner, which moves as the view turns,
+    // so its ticks have to point away from the plot rather than always left
+    var zs = vb.x >= W*0.5 ? 1 : -1;
+    g1.fillStyle=mute; g1.font=(14*TS).toFixed(1)+'px "IBM Plex Mono", monospace';
+    g1.textAlign = zs>0 ? 'left' : 'right';
+    for(var pz=0;pz<=1.0001;pz+=0.25){
+      var tk=proj(back[0],back[1],pz,rot);
+      g1.beginPath(); g1.moveTo(tk.x,tk.y); g1.lineTo(tk.x+zs*8,tk.y); g1.strokeStyle=grid; g1.stroke();
+      g1.fillText(Math.round(pz*100)+'%', tk.x+zs*13*TS, tk.y+5*TS);
+    }
+
+    var quads=[];
+    for(var i=0;i<NX;i++){
+      for(var j=0;j<NY;j++){
+        var u0=i/NX,u1=(i+1)/NX,v0=j/NY,v1=(j+1)/NY;
+        var z00=pAll(u0*MAXPGA,v0*MAXDEP,fr,be), z10=pAll(u1*MAXPGA,v0*MAXDEP,fr,be),
+            z11=pAll(u1*MAXPGA,v1*MAXDEP,fr,be), z01=pAll(u0*MAXPGA,v1*MAXDEP,fr,be);
+        var A=proj(u0,v0,z00,rot),B=proj(u1,v0,z10,rot),C=proj(u1,v1,z11,rot),D=proj(u0,v1,z01,rot);
+        quads.push({p:[A,B,C,D], z:(z00+z10+z11+z01)/4, d:(A.depth+C.depth)/2});
+      }
+    }
+    // The surface is drawn slightly translucent so the probability axis and the
+    // marker's drop line behind it stay readable - without it the z scale simply
+    // disappears under the sheet at most view angles.
+    quads.sort(function(a,b){ return a.d-b.d; });
+    g1.globalAlpha = 0.84;
+    quads.forEach(function(q){
+      g1.beginPath(); g1.moveTo(q.p[0].x,q.p[0].y);
+      for(var k=1;k<4;k++) g1.lineTo(q.p[k].x,q.p[k].y);
+      g1.closePath();
+      g1.fillStyle = q.z<0.5 ? mix(cLow,cMid,q.z*2) : mix(cMid,cHigh,(q.z-0.5)*2);
+      g1.fill();
+    });
+    g1.globalAlpha = 1;
+
+    // Redraw the probability axis over the sheet. The line stays faint so it
+    // reads as seen *through* the surface, but the numbers get a halo in the
+    // panel colour and full opacity - a 50% grey number on an orange sheet is
+    // not readable, and the scale is the point of the axis.
+    var sunk = css('--sunk','#E4E8E5');
+    g1.strokeStyle = grid; g1.lineWidth = 1; g1.globalAlpha = 0.55;
+    g1.beginPath(); g1.moveTo(vb.x,vb.y); g1.lineTo(vt.x,vt.y); g1.stroke();
+    g1.globalAlpha = 1;
+
+    g1.font=(14*TS).toFixed(1)+'px "IBM Plex Mono", monospace';
+    g1.textAlign = zs>0 ? 'left' : 'right';
+    g1.lineJoin = 'round';
+    for(var pz2=0;pz2<=1.0001;pz2+=0.25){
+      var tk2=proj(back[0],back[1],pz2,rot);
+      g1.globalAlpha = 0.55; g1.strokeStyle = grid; g1.lineWidth = 1;
+      g1.beginPath(); g1.moveTo(tk2.x,tk2.y); g1.lineTo(tk2.x+zs*8,tk2.y); g1.stroke();
+      g1.globalAlpha = 1;
+      var lbl = Math.round(pz2*100)+'%';
+      g1.strokeStyle = sunk; g1.lineWidth = 3.5;
+      g1.strokeText(lbl, tk2.x+zs*13*TS, tk2.y+5*TS);
+      g1.fillStyle = mute;
+      g1.fillText(lbl, tk2.x+zs*13*TS, tk2.y+5*TS);
+    }
+
+    // The marked point is where two ordinary fragility curves cross: one cut
+    // through the surface at the current inundation depth (varying shaking),
+    // one at the current shaking (varying depth). Drawing both makes the point
+    // read as an intersection rather than a dot floating on a sheet.
+    var ink = css('--ink','#131E1C'), NC = 120;
+    g1.lineWidth = 2.2; g1.lineJoin = 'round'; g1.lineCap = 'round';
+
+    g1.strokeStyle = ink; g1.globalAlpha = 0.92;
+    g1.beginPath();
+    for (var ci=0; ci<=NC; ci++) {
+      var cu = ci/NC, cz = pAll(cu*MAXPGA, dep, fr, be), cp = proj(cu, dep/MAXDEP, cz, rot);
+      if (ci===0) g1.moveTo(cp.x,cp.y); else g1.lineTo(cp.x,cp.y);
+    }
+    g1.stroke();
+
+    g1.beginPath();
+    for (var cj=0; cj<=NC; cj++) {
+      var cv2 = cj/NC, cz2 = pAll(pga, cv2*MAXDEP, fr, be), cp2 = proj(pga/MAXPGA, cv2, cz2, rot);
+      if (cj===0) g1.moveTo(cp2.x,cp2.y); else g1.lineTo(cp2.x,cp2.y);
+    }
+    g1.stroke();
+    g1.globalAlpha = 1;
+
+    var z=pAll(pga,dep,fr,be);
+    var pt=proj(pga/MAXPGA,dep/MAXDEP,z,rot), bs=proj(pga/MAXPGA,dep/MAXDEP,0,rot);
+    g1.strokeStyle=mark; g1.lineWidth=2; g1.setLineDash([5,5]);
+    g1.beginPath(); g1.moveTo(bs.x,bs.y); g1.lineTo(pt.x,pt.y); g1.stroke(); g1.setLineDash([]);
+    g1.beginPath(); g1.arc(pt.x,pt.y,8,0,Math.PI*2);
+    g1.fillStyle=mark; g1.fill(); g1.strokeStyle=sheet; g1.lineWidth=3; g1.stroke();
+
+    // The view turns a full circle, so the labels cannot live on fixed edges -
+    // each axis is annotated on whichever of its two edges is nearest the
+    // viewer, and the depth labels flip to the outward side of the plot.
+    var vE = proj(0.5,0,0,rot).depth > proj(0.5,1,0,rot).depth ? 0 : 1;
+    var uE = proj(0,0.5,0,rot).depth > proj(1,0.5,0,rot).depth ? 0 : 1;
+
+    g1.fillStyle=mute; g1.textAlign='center'; g1.font=(13*TS).toFixed(1)+'px "IBM Plex Mono", monospace';
+    for(var gx=0;gx<=1.0001;gx+=0.25){ var t1=proj(gx,vE,0,rot); g1.fillText((gx*MAXPGA).toFixed(2), t1.x, t1.y+19*TS); }
+    for(var gy=0;gy<=1.0001;gy+=0.25){
+      var t2=proj(uE,gy,0,rot), sg = t2.x >= W*0.5 ? 1 : -1;
+      g1.textAlign = sg>0 ? 'left' : 'right';
+      g1.fillText(Math.round(gy*MAXDEP*M2FT)+' ft', t2.x+sg*12*TS, t2.y+5*TS);
+    }
+    g1.textAlign='center'; g1.font=(14*TS).toFixed(1)+'px "Libre Franklin", sans-serif';
+
+    // Each base axis title is set ALONG its own edge, so it stays parallel to
+    // the axis it names at every view angle instead of sitting flat while the
+    // plot turns underneath it. The text is kept upright (flipped when the edge
+    // points left) and pushed to whichever side faces away from the plot centre.
+    var cc = proj(0.5,0.5,0,rot);
+    function axisTitle(s, p0, p1, off){
+      var ang = Math.atan2(p1.y-p0.y, p1.x-p0.x);
+      if (ang >  Math.PI/2) ang -= Math.PI;
+      if (ang < -Math.PI/2) ang += Math.PI;
+      var mx=(p0.x+p1.x)/2, my=(p0.y+p1.y)/2;
+      // local (0,d) lands at (-d sin, d cos); pick the sign pointing outward
+      var sx=-Math.sin(ang), sy=Math.cos(ang);
+      var d = ((mx+sx*off-cc.x)*(mx+sx*off-cc.x)+(my+sy*off-cc.y)*(my+sy*off-cc.y)) >
+              ((mx-sx*off-cc.x)*(mx-sx*off-cc.x)+(my-sy*off-cc.y)*(my-sy*off-cc.y)) ? off : -off;
+      g1.save();
+      g1.translate(mx + sx*d, my + sy*d);
+      g1.rotate(ang);
+      g1.textAlign='center'; g1.textBaseline='middle';
+      g1.fillText(s, 0, 0);
+      g1.restore();
+      g1.textBaseline='alphabetic';
+    }
+
+    axisTitle('PEAK GROUND ACCELERATION (g)',
+              proj(0, vE, 0, rot), proj(1, vE, 0, rot), 42*TS);
+    axisTitle('INUNDATION DEPTH',
+              proj(uE, 0, 0, rot), proj(uE, 1, 0, rot), 52*TS);
+
+    // the probability axis is vertical on screen at every angle, so its title
+    // stays horizontal above the axis - clamped so it cannot run off the sheet
+    var l3=proj(back[0],back[1],1.1,rot);
+    var pad3 = g1.measureText('FAILURE PROBABILITY').width/2 + 6;
+    g1.fillText('FAILURE PROBABILITY',
+                Math.max(pad3, Math.min(W-pad3, l3.x)),
+                Math.max(18, Math.min(H-6, l3.y-6*TS)));
+  }
+
+  function drawStructure(){
+    var pga=parseFloat(sPga.value), dep=parseFloat(sDep.value),
+        fr=parseFloat(sFr.value), be=parseFloat(sBe.value);
+    if (PHASE === 'eq') dep = 0;                  // the water has not arrived yet
+    var w=st.width, h=st.height;
+    var ink=css('--ink','#131E1C'), mute=css('--ink-mute','#6E7B78'),
+        acc=css('--accent','#0A6E6E'), mark=css('--data4','#A8482B'),
+        sunk=css('--sunk','#E4E8E5'), sheet=css('--sheet','#FAFAF8'), rule=css('--rule','#C7CFCB');
+
+    g2.clearRect(0,0,w,h);
+    g2.fillStyle=sheet; g2.fillRect(0,0,w,h);
+
+    var GY=298, BH=192, BW=104, BX=(w-BW)/2+16, N=5;
+    var dam=pEq(pga,be);
+    // Static lean is the permanent set left by damage. On top of it the frame
+    // sways: amplitude from the shaking, period lengthening as damage softens
+    // the structure - which is what actually happens to a damaged building.
+    // The two hazards are SEQUENTIAL, not concurrent. Shaking lasts seconds to
+    // a couple of minutes; the tsunami arrives minutes to tens of minutes later,
+    // by which time the ground motion has stopped. So the sway only runs while
+    // the site is dry - once water is up, the earthquake is over and what
+    // remains of it is the permanent damage: residual lean and plastic hinges.
+    // Amplitude is deliberately exaggerated - a real frame's peak drift is a
+    // fraction of a percent of its height and would be invisible here. It is
+    // scaled as pgaN^0.7 rather than linearly so the middle of the slider,
+    // where most of the interesting behaviour is, actually moves; and the
+    // period is short enough that a full cycle reads at a glance.
+    var leanRes = Math.min(1,dam)*12;                // permanent set from damage
+    var swayPeak = 0, sway = 0;
+    if (pga > 0.005 && PHASE === 'eq') {
+      var soft = 1 + dam*0.9;                        // period grows with damage
+      swayPeak = Math.pow(Math.min(pga,1.5)/1.5, 0.7) * 18 * (0.70+dam*0.30);
+      if (ANIM) sway = Math.sin(T/(300*soft)) * swayPeak;
+    }
+    var lean = leanRes + sway;                       // residual lean always stays
+    var storey=BH/N;
+
+    // --- the whole scene is isometric, not just the frame: a ground plane
+    //     receding into depth, soil shown in section at the cut face, and a
+    //     footing under each column with a grade beam tying them.
+    var DX = 32, DY = -17;
+
+    // ground plane
+    g2.beginPath();
+    g2.moveTo(-40, GY); g2.lineTo(w+40, GY);
+    g2.lineTo(w+40+DX, GY+DY); g2.lineTo(-40+DX, GY+DY);
+    g2.closePath();
+    g2.fillStyle=sheet; g2.globalAlpha=0.5; g2.fill(); g2.globalAlpha=1;
+
+    // receding grid on the plane, so depth reads
+    g2.strokeStyle=mute; g2.lineWidth=1; g2.globalAlpha=0.16;
+    for(var gx=-40; gx<w+40; gx+=26){
+      g2.beginPath(); g2.moveTo(gx,GY); g2.lineTo(gx+DX,GY+DY); g2.stroke();
+    }
+    g2.beginPath(); g2.moveTo(-40+DX*0.5,GY+DY*0.5); g2.lineTo(w+40+DX*0.5,GY+DY*0.5); g2.stroke();
+    g2.globalAlpha=1;
+
+    // grade line at the front, then soil in section beneath it
+    g2.strokeStyle=mute; g2.lineWidth=1.6; g2.globalAlpha=0.85;
+    g2.beginPath(); g2.moveTo(0,GY); g2.lineTo(w,GY); g2.stroke();
+    g2.lineWidth=1; g2.globalAlpha=0.28;
+    for(var hx=-30;hx<w;hx+=15){ g2.beginPath(); g2.moveTo(hx,GY+30); g2.lineTo(hx+24,GY); g2.stroke(); }
+    g2.globalAlpha=1;
+
+    // --- foundation: a pad under each column plus the grade beam between them
+    var FBW = 26, FBH = 13, FD = 20;   // footing width, thickness, embedment
+    // One pad under every column - four, not two. The rear pair is dimmed and
+    // drawn first so the front pair overlaps it correctly.
+    function footing(cx, back){
+      var ox = back ? DX : 0, oy = back ? DY : 0, dim = back ? 0.42 : 1;
+      var x0 = BX + cx - FBW/2 + ox, x1 = BX + cx + FBW/2 + ox, yTop = GY + FD - FBH + oy;
+      var tdx = DX*0.55, tdy = DY*0.55;
+      g2.fillStyle=sunk; g2.strokeStyle=mute; g2.lineWidth=1.3;
+      // top face
+      g2.beginPath();
+      g2.moveTo(x0,yTop); g2.lineTo(x1,yTop);
+      g2.lineTo(x1+tdx, yTop+tdy); g2.lineTo(x0+tdx, yTop+tdy);
+      g2.closePath();
+      g2.globalAlpha=0.95*dim; g2.fill();
+      g2.globalAlpha=0.75*dim; g2.stroke();
+      // front face
+      g2.beginPath(); g2.rect(x0, yTop, FBW, FBH);
+      g2.globalAlpha=0.95*dim; g2.fill();
+      g2.globalAlpha=0.75*dim; g2.stroke();
+      // right return
+      g2.beginPath();
+      g2.moveTo(x1,yTop); g2.lineTo(x1+tdx, yTop+tdy);
+      g2.lineTo(x1+tdx, yTop+tdy+FBH); g2.lineTo(x1, yTop+FBH);
+      g2.closePath();
+      g2.globalAlpha=0.95*dim; g2.fill();
+      g2.globalAlpha=0.75*dim; g2.stroke();
+      // stub from pad up to the column base
+      g2.globalAlpha=0.75*dim; g2.lineWidth=2;
+      g2.beginPath(); g2.moveTo(BX+cx+ox, GY+oy); g2.lineTo(BX+cx+ox, yTop); g2.stroke();
+      g2.globalAlpha=1;
+    }
+    // grade beams: along each face and across the depth, tying all four pads
+    var gbY = GY+FD-FBH+3, gbH = FBH-6;
+    g2.strokeStyle=mute; g2.lineWidth=1.2;
+    g2.globalAlpha=0.25;
+    g2.beginPath(); g2.rect(BX+DX, gbY+DY, BW, gbH); g2.stroke();          // back
+    g2.globalAlpha=0.4;
+    [0,BW].forEach(function(cx){                                            // transverse
+      g2.beginPath();
+      g2.moveTo(BX+cx, gbY+gbH/2); g2.lineTo(BX+cx+DX, gbY+DY+gbH/2); g2.stroke();
+    });
+    g2.globalAlpha=0.5;
+    g2.beginPath(); g2.rect(BX, gbY, BW, gbH); g2.stroke();                 // front
+    g2.globalAlpha=1;
+
+    footing(0,1); footing(BW,1);      // rear pads first
+    footing(0,0); footing(BW,0);      // then the front pair over them
+
+    // --- water behind, with a wave surface rather than a ruled line. Amplitude
+    //     grows with the flow so a fast surge visibly breaks rougher.
+    var wy=GY-Math.min(1,dep/MAXDEP)*BH;
+    if(dep>0.02){
+      var amp = 2.5 + Math.min(1,(fr-0.4)/1.6)*5.5;
+      var lam = 74;
+      // The surface travels in the SAME direction as the flow it represents.
+      // With a +ph phase a crest sits where x/lam*2pi + ph = pi/2, so rising ph
+      // moves crests to the LEFT - the water ran one way while the drag arrows
+      // it produces pointed the other. Subtracting the phase sends the crests
+      // left-to-right, with the load.
+      var ph = ANIM ? T/1000 * (0.5 + fr*1.4) : 0;
+      function waveY(x){ return wy + Math.sin(x/lam*Math.PI*2 - ph)*amp + Math.sin(x/(lam*0.43)*Math.PI*2 - ph*1.7)*amp*0.35; }
+
+      // The water is a body, not a backdrop: a surface plane running back into
+      // depth, and a front face below it. Drawn last and translucent, so the
+      // frame and footings read as standing in it rather than behind it.
+      g2.lineJoin='round';
+
+      // surface plane - front wave edge, receding to a back wave edge
+      g2.beginPath();
+      g2.moveTo(0, waveY(0));
+      for(var wx=2; wx<=w; wx+=2) g2.lineTo(wx, waveY(wx));
+      g2.lineTo(w+DX, waveY(w)+DY);
+      for(var wb=w; wb>=0; wb-=2) g2.lineTo(wb+DX, waveY(wb)+DY);
+      g2.closePath();
+      g2.fillStyle=acc; g2.globalAlpha=0.26; g2.fill(); g2.globalAlpha=1;
+
+      // front face of the water body
+      g2.beginPath();
+      g2.moveTo(0, waveY(0));
+      for(var wf=2; wf<=w; wf+=2) g2.lineTo(wf, waveY(wf));
+      g2.lineTo(w, GY); g2.lineTo(0, GY); g2.closePath();
+      g2.fillStyle=acc; g2.globalAlpha=0.17; g2.fill(); g2.globalAlpha=1;
+
+      // the crest line itself
+      g2.strokeStyle=acc; g2.lineWidth=2;
+      g2.beginPath();
+      g2.moveTo(0, waveY(0));
+      for(var wx2=2; wx2<=w; wx2+=2) g2.lineTo(wx2, waveY(wx2));
+      g2.stroke();
+
+      // back crest, dimmer, to close the volume
+      g2.globalAlpha=0.4; g2.lineWidth=1.4;
+      g2.beginPath();
+      g2.moveTo(DX, waveY(0)+DY);
+      for(var wk=2; wk<=w; wk+=2) g2.lineTo(wk+DX, waveY(wk)+DY);
+      g2.stroke();
+
+      // a trailing crest inside the body reads as moving water
+      g2.globalAlpha=0.28; g2.lineWidth=1.3;
+      g2.beginPath();
+      for(var wx3=0; wx3<=w; wx3+=2){
+        var yy = waveY(wx3+lam*0.5) + 13;
+        if (yy > GY-3) continue;
+        if (wx3===0) g2.moveTo(wx3,yy); else g2.lineTo(wx3,yy);
+      }
+      g2.stroke(); g2.globalAlpha=1;
+    }
+
+    // --- moment frame in isometric: two bays of frame, front and back, tied by
+    //     transverse beams at every floor. Sway is applied per-point rather than
+    //     by a shear transform, because the back frame has to lean with the
+    //     front one at the same height, not at the same screen y.
+    // depth vector DX/DY is declared once for the whole scene above
+    function sx(h){ return lean * (h/BH); }      // lateral offset at height h
+    function P(cx, h, back){                     // frame point -> screen point
+      return { x: BX + cx + sx(h) + (back?DX:0), y: GY - h + (back?DY:0) };
+    }
+    function seg(a,b){ g2.beginPath(); g2.moveTo(a.x,a.y); g2.lineTo(b.x,b.y); g2.stroke(); }
+
+    // The swept envelope: the frame's position at each extreme of the swing,
+    // drawn faintly behind it. Without this the motion is only legible while
+    // it is actually animating - with it, the amplitude is readable in a
+    // still frame, and under prefers-reduced-motion it is the whole story.
+    if (swayPeak > 0.4) {
+      g2.save();
+      g2.strokeStyle=ink; g2.globalAlpha=0.22; g2.lineWidth=1.5;
+      g2.setLineDash([3,4]); g2.lineCap='butt';
+      [leanRes+swayPeak, leanRes-swayPeak].forEach(function(tip){
+        [0,BW].forEach(function(cx){
+          g2.beginPath();
+          g2.moveTo(BX+cx, GY);
+          g2.lineTo(BX+cx+tip, GY-BH);
+          g2.stroke();
+        });
+        g2.beginPath();                              // roof line at that extreme
+        g2.moveTo(BX+tip, GY-BH); g2.lineTo(BX+BW+tip, GY-BH); g2.stroke();
+      });
+      g2.restore();
+    }
+
+    g2.lineCap='round'; g2.strokeStyle=ink;
+
+    // back frame first (painter's order), dimmed to sit behind
+    g2.globalAlpha=0.38; g2.lineWidth=1.8;
+    seg(P(0,0,1),  P(0,BH,1));
+    seg(P(BW,0,1), P(BW,BH,1));
+    for(var fb=0; fb<=N; fb++){ var hb=storey*fb; seg(P(0,hb,1), P(BW,hb,1)); }
+
+    // transverse beams tying the two frames
+    g2.globalAlpha=0.55; g2.lineWidth=1.6;
+    for(var ft=0; ft<=N; ft++){
+      var ht=storey*ft;
+      seg(P(0,ht,0),  P(0,ht,1));
+      seg(P(BW,ht,0), P(BW,ht,1));
+    }
+
+    // front frame
+    g2.globalAlpha=1; g2.lineWidth=2.4;
+    seg(P(0,0,0),  P(0,BH,0));
+    seg(P(BW,0,0), P(BW,BH,0));
+    for(var ff=0; ff<=N; ff++){ var hf=storey*ff; seg(P(0,hf,0), P(BW,hf,0)); }
+    g2.lineCap='butt';
+
+    // Plastic hinges where capacity design puts them: BEAM ends at each floor,
+    // and COLUMN bases at the foundation. The previous version marked column
+    // ends at every storey, which is a weak-column soft-storey mechanism -
+    // the failure a strong-column/weak-beam frame is detailed to avoid.
+    if(dam>0.05){
+      var inset = 11;
+      for(var s2=1; s2<=N; s2++){                       // floor beams, low to high
+        var inten=Math.min(1, dam*1.7 - (s2-1)*0.28);
+        if(inten<=0.06) continue;
+        var h2=storey*s2, r=3.0+inten*2.4;
+        g2.fillStyle=mark;
+        // back frame beam ends, faint
+        g2.globalAlpha=(0.35+inten*0.65)*0.4;
+        [P(inset,h2,1), P(BW-inset,h2,1)].forEach(function(pt){
+          g2.beginPath(); g2.arc(pt.x,pt.y,r*0.85,0,Math.PI*2); g2.fill(); });
+        // front frame beam ends
+        g2.globalAlpha=0.35+inten*0.65;
+        [P(inset,h2,0), P(BW-inset,h2,0)].forEach(function(pt){
+          g2.beginPath(); g2.arc(pt.x,pt.y,r,0,Math.PI*2); g2.fill(); });
+      }
+      // column bases - the one place columns are expected to hinge
+      var baseInt=Math.min(1,dam*1.7), rb=3.0+baseInt*2.4;
+      g2.globalAlpha=(0.35+baseInt*0.65)*0.4;
+      [P(0,0,1),P(BW,0,1)].forEach(function(pt){
+        g2.beginPath(); g2.arc(pt.x,pt.y,rb*0.85,0,Math.PI*2); g2.fill(); });
+      g2.globalAlpha=0.35+baseInt*0.65;
+      [P(0,0,0),P(BW,0,0)].forEach(function(pt){
+        g2.beginPath(); g2.arc(pt.x,pt.y,rb,0,Math.PI*2); g2.fill(); });
+      g2.globalAlpha=1;
+    }
+
+    // --- Seismic lateral load, applied at the floor levels.
+    //
+    //     Under the equivalent lateral force procedure the storey force is
+    //     Fx = V * w_x*h_x^k / SUM(w_i*h_i^k). With equal floor weights and
+    //     k = 1 that is proportional to height: an INVERTED triangle, largest
+    //     at the roof.
+    //
+    //     Worth seeing beside the tsunami case, which is the opposite shape -
+    //     hydrostatic plus drag is largest at the base. The same frame is
+    //     pushed from the top by one hazard and from the bottom by the other,
+    //     which is exactly why assessing them separately understates the risk.
+    if (PHASE === 'eq' && pga > 0.005){
+      var sTot=0; for(var w1=1; w1<=N; w1++) sTot += w1;
+      g2.strokeStyle=mark; g2.fillStyle=mark; g2.lineCap='round';
+      for(var s3=1; s3<=N; s3++){
+        var h3=storey*s3, sharePct=s3/sTot;
+        var L=(14 + sharePct*N*0.72*(30+Math.min(pga,1.5)/1.5*46));
+        [1,0].forEach(function(back){
+          var pt=P(0,h3,back);
+          g2.globalAlpha = back?0.4:0.95;
+          g2.lineWidth = back?1.8:2.3;
+          var tip=pt.x-3, len=L*(back?0.82:1);
+          g2.beginPath(); g2.moveTo(tip-len-11,pt.y); g2.lineTo(tip-11,pt.y); g2.stroke();
+          g2.beginPath(); g2.moveTo(tip,pt.y); g2.lineTo(tip-12,pt.y-5); g2.lineTo(tip-12,pt.y+5);
+          g2.closePath(); g2.fill();
+        });
+      }
+      g2.globalAlpha=1; g2.lineCap='butt';
+    }
+
+    // --- Tsunami loading on the two front columns.
+    //
+    //     Arrow length is the PRESSURE at that height, not the total force.
+    //     Previously every arrow shared one length driven by F_ts, so the whole
+    //     set grew uniformly with depth - which drew a rectangular distribution
+    //     for a load that is not rectangular.
+    //
+    //     Hydrostatic pressure varies linearly with depth below the surface
+    //     (zero at the waterline, maximum at the bed). Drag under Froude
+    //     scaling, u^2 = Fr^2*g*h, is uniform over the wetted height. The sum
+    //     is a trapezoid: widest at the base, never zero at the top while there
+    //     is flow. Overall magnitude still scales with F_ts.
+    if(dep>0.02){
+      var rel=Math.min(1,fTs(dep,fr)/900);
+      var hyd=0.5*RHO*G*dep*dep, drg=0.5*RHO*CD*fr*fr*G*dep*dep;
+      var dragShare=drg/(hyd+drg);                    // 0 = all hydrostatic
+      g2.lineCap='round';
+      var na=Math.max(3,Math.min(6,Math.round(dep*0.9)+2));
+      var wetted=GY-wy;
+      //     The flow arrives from the left, so the loaded columns are the two
+      //     WINDWARD ones - front-left and back-left. The downstream columns sit
+      //     in their wake; drawing arrows into those would show load passing
+      //     through the building to reach them.
+      [1,0].forEach(function(back){                   // back first, front over it
+        var ox = back?DX:0, oy = back?DY:0;
+        var tipX = BX - 3 + ox;
+        g2.globalAlpha = back?0.45:1;                 // back column reads behind
+        g2.strokeStyle=mark; g2.fillStyle=mark; g2.lineWidth = back?2:2.4;
+        for(var k=0;k<na;k++){
+          var frac=(k+0.5)/na;                        // 0 at surface, 1 at bed
+          var ay=wy+frac*wetted+oy;
+          if(ay>GY+oy-4) continue;
+          var press=(1-dragShare)*frac + dragShare;   // triangular + uniform
+          var len=(12+press*(26+rel*40))*(back?0.82:1);
+          g2.beginPath(); g2.moveTo(tipX-len-11,ay); g2.lineTo(tipX-11,ay); g2.stroke();
+          g2.beginPath(); g2.moveTo(tipX,ay); g2.lineTo(tipX-12,ay-5); g2.lineTo(tipX-12,ay+5);
+          g2.closePath(); g2.fill();
+        }
+      });
+      g2.globalAlpha=1; g2.lineCap='butt';
+      g2.fillStyle=acc; g2.font='600 17px "IBM Plex Mono", monospace'; g2.textAlign='left';
+      g2.fillText((dep*M2FT).toFixed(1)+' ft', 16, wy-14);
+    }
+
+    // --- shaking, drawn as the ground motion itself: an accelerogram trace
+    //     through the soil. A double-headed arrow says "it moves"; a record
+    //     says "this is an earthquake", and its amplitude carries the PGA.
+    var sy = GY + 30, cxb = BX + BW/2;
+    var amp2 = Math.min(pga, 1.5) / 1.5 * 15;
+    var quakeOver = (PHASE === 'ts');
+    if (quakeOver) {
+      // Shaking has stopped, so the trace goes flat and the intensity value
+      // goes with it - it belongs to a stage that is over. The slider still
+      // reads it, which is where a locked past value belongs.
+      g2.strokeStyle = mute; g2.globalAlpha = 0.28; g2.lineWidth = 1.4;
+      g2.beginPath(); g2.moveTo(0, sy); g2.lineTo(w, sy); g2.stroke();
+      g2.globalAlpha = 1;
+    } else if (pga > 0.005) {
+      g2.strokeStyle = ink; g2.lineWidth = 1.7; g2.globalAlpha = 0.85;
+      g2.lineJoin = 'round'; g2.lineCap = 'round';
+      // the record scrolls right to left, like a live seismograph drum
+      var sh = ANIM ? T * 0.055 : 0;
+      g2.beginPath();
+      for (var ex = 0; ex <= w; ex += 2) {
+        var u = ex + sh;
+        var frac = ex / w;
+        var env = Math.exp(-Math.pow((frac - 0.42) * 2.6, 2)) * 0.75 + 0.25;
+        var v = Math.sin(u * 0.21) * 0.55 + Math.sin(u * 0.077 + 1.3) * 0.9 +
+                Math.sin(u * 0.44 + 2.1) * 0.32 + Math.sin(u * 0.031 + 0.7) * 0.45;
+        var ey = sy + v * amp2 * env;
+        if (ex === 0) g2.moveTo(ex, ey); else g2.lineTo(ex, ey);
+      }
+      g2.stroke();
+      g2.globalAlpha = 1; g2.lineCap = 'butt';
+    } else {
+      g2.strokeStyle = mute; g2.globalAlpha = 0.4; g2.lineWidth = 1.4;
+      g2.beginPath(); g2.moveTo(0, sy); g2.lineTo(w, sy); g2.stroke(); g2.globalAlpha = 1;
+    }
+    if (!quakeOver) {
+      g2.fillStyle = ink;
+      g2.font = '400 16px "IBM Plex Mono", monospace'; g2.textAlign = 'center';
+      g2.fillText(pga.toFixed(2) + ' g', cxb, sy + 34);
+    }
+
+    // --- The sequence, as a graphic rather than four stacked lines of prose.
+    //     The old caption block ran to y=104 with the frame starting at y=106,
+    //     so it crowded the structure. This is a single 26px strip: two stages
+    //     with a gap between them for the delay, and whichever stage the current
+    //     state represents is lit while the other recedes.
+    (function(){
+      // Span the canvas: shaking anchored left, inundation anchored right, the
+      // delay centred between them. The right group is positioned from its
+      // measured width so it truly right-aligns whatever the label says.
+      var by=27, x1=18, pad=16;
+      g2.font='700 15px "Libre Franklin", sans-serif';
+      var wIn=g2.measureText('INUNDATION').width, wSh=g2.measureText('SHAKING').width;
+      var x2 = w - pad - wIn - 21;
+      // the delay spans the clear gap between the two labels, not between the
+      // two markers - measured, so it never runs underneath the type
+      var dA = x1 + 21 + wSh + 10, dB = x2 - 10;
+      var stage2 = (PHASE === 'ts');
+      function stage(x, on, kind){
+        g2.globalAlpha = on ? 1 : 0.3;
+        // marker
+        g2.strokeStyle = on ? (kind==='eq'?ink:acc) : mute;
+        g2.fillStyle   = g2.strokeStyle;
+        g2.lineWidth = 1.6; g2.lineCap='round';
+        g2.beginPath(); g2.arc(x+7, by, 7.5, 0, Math.PI*2); g2.stroke();
+        if (kind==='eq'){                       // ground-motion squiggle
+          g2.beginPath();
+          for(var i=0;i<=12;i++){
+            var px=x+2.5+i*0.75, py=by+Math.sin(i*1.5)*3.1;
+            if(i===0) g2.moveTo(px,py); else g2.lineTo(px,py);
+          }
+          g2.stroke();
+        } else {                                // wave crest
+          g2.beginPath();
+          g2.moveTo(x+2.5,by+2);
+          g2.bezierCurveTo(x+5,by-3.5, x+9,by+5.5, x+11.5,by-1);
+          g2.stroke();
+        }
+        g2.lineCap='butt';
+      }
+      stage(x1, !stage2, 'eq');
+      stage(x2, stage2, 'ts');
+
+      // the delay between them
+      g2.globalAlpha=0.42; g2.strokeStyle=mute; g2.fillStyle=mute; g2.lineWidth=1.3;
+      g2.beginPath(); g2.setLineDash([4,4]);
+      g2.moveTo(dA, by); g2.lineTo(dB-8, by); g2.stroke(); g2.setLineDash([]);
+      g2.beginPath(); g2.moveTo(dB,by); g2.lineTo(dB-8,by-4); g2.lineTo(dB-8,by+4);
+      g2.closePath(); g2.fill();
+
+      g2.font='700 13px "Libre Franklin", sans-serif'; g2.textAlign='center';
+      g2.fillText('MINUTES LATER', (dA + dB)/2, by-12);
+
+      g2.textAlign='left'; g2.font='700 15px "Libre Franklin", sans-serif';
+      g2.globalAlpha = stage2?0.5:1; g2.fillStyle = stage2?mute:ink;
+      g2.fillText('SHAKING', x1+21, by+5);
+      g2.globalAlpha = stage2?1:0.5; g2.fillStyle = stage2?acc:mute;
+      g2.fillText('INUNDATION', x2+21, by+5);
+      g2.globalAlpha=1;
+    })();
+  }
+  function render(){
+    var pga=parseFloat(sPga.value), dep=parseFloat(sDep.value),
+        fr=parseFloat(sFr.value), be=parseFloat(sBe.value);
+
+    drawSurface(); drawStructure();
+    if (ANIM) startLoop();
+
+    document.getElementById('vPga').textContent = pga.toFixed(2)+' g';
+    document.getElementById('vDep').textContent = (dep*M2FT).toFixed(1)+' ft';
+    document.getElementById('vFr').textContent  = fr.toFixed(2);
+    document.getElementById('vBe').textContent  = be.toFixed(2);
+    document.getElementById('vRot').textContent = Math.round(parseFloat(sRot.value))+'°';
+
+    var a=pEq(pga,be), b=pTs(dep,fr,be,a), tot=1-(1-a)*(1-b);
+    document.getElementById('sProb').textContent = Math.round(tot*100)+'%';
+
+    // The big number already states the total and the sliders already state the
+    // inputs, so the sentence only has to carry what neither shows: the split,
+    // and how much of the tsunami risk is owed to the earthquake damage.
+    var alone=pTs(dep,fr,be,0), extra=Math.round((b-alone)*100);
+
+    document.getElementById('sText').textContent =
+      'Earthquake alone ' + Math.round(a*100) + '%. Tsunami on the damaged frame ' + Math.round(b*100) + '%' +
+      (extra>1 ? ' — up ' + extra + ' points from ' + Math.round(alone*100) + '% undamaged.' : '.');
+  }
+
+  function lock(sl, off){
+    sl.disabled = off;
+    var row = sl.closest ? sl.closest('.ctrl') : null;
+    if (row) row.classList.toggle('muted', off);
+  }
+  function applyLocks(p){
+    lock(sDep, p === 'eq');
+    lock(sFr,  p === 'eq');
+    lock(sPga, p === 'ts');
+  }
+
+  function setPhase(p){
+    PHASE = p;
+    phaseBtns.forEach(function(b){
+      var on = b.getAttribute('data-phase') === p;
+      b.classList.toggle('on', on);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    // Each stage locks the other stage's demands. During the shaking there is
+    // no water yet, so the flood controls are disabled; once the water arrives
+    // the shaking is over, so its intensity is fixed at whatever was set and
+    // the slider is disabled holding that value. A locked slider still shows
+    // its number - that is the record of what the frame has already been
+    // through, which is exactly what the tsunami stage is conditioned on.
+    applyLocks(p);
+    render();
+    if (ANIM) startLoop();
+  }
+  phaseBtns.forEach(function(b){
+    b.addEventListener('click', function(){ setPhase(b.getAttribute('data-phase')); writeState(); });
+  });
+
+  // ---- shareable state -----------------------------------------------
+  // A reader who finds an interesting combination should be able to send it,
+  // not describe it. The five demands and the stage go in the hash, which is
+  // written with replaceState so dragging a slider never adds history entries
+  // and never scrolls the page.
+  var FIELDS = [['pga',sPga],['dep',sDep],['fr',sFr],['be',sBe],['rot',sRot]];
+  var writeTimer = null;
+
+  function writeState(){
+    if (!window.history || !history.replaceState) return;
+    var parts = FIELDS.map(function(f){ return f[0] + '=' + f[1].value; });
+    parts.push('ph=' + PHASE);
+    try { history.replaceState(null, '', location.pathname + location.search + '#' + parts.join('&')); }
+    catch (e) { /* file:// and some embeddings refuse; sharing is optional */ }
+  }
+  function queueWrite(){
+    if (writeTimer) clearTimeout(writeTimer);
+    writeTimer = setTimeout(writeState, 220);
+  }
+
+  function readState(){
+    var h = (location.hash || '').replace(/^#/, '');
+    if (!h || h.indexOf('=') < 0) return false;
+    var q = {};
+    h.split('&').forEach(function(kv){
+      var i = kv.indexOf('='); if (i > 0) q[kv.slice(0, i)] = kv.slice(i + 1);
+    });
+    var touched = false;
+    FIELDS.forEach(function(f){
+      var v = parseFloat(q[f[0]]);
+      if (isNaN(v)) return;
+      // clamp to the control's own range - a hand-edited URL must not be able
+      // to drive the model outside what the sliders allow
+      var lo = parseFloat(f[1].min), hi = parseFloat(f[1].max);
+      f[1].value = Math.min(hi, Math.max(lo, v));
+      touched = true;
+    });
+    if (q.ph === 'eq' || q.ph === 'ts') { setPhase(q.ph); touched = true; }
+    return touched;
+  }
+
+  [sPga,sDep,sFr,sBe,sRot].forEach(function(el){
+    el.addEventListener('input', function(){
+      render(); queueWrite();
+    });
+    el.addEventListener('change', function(){ render(); queueWrite(); });
+  });
+
+  var shareBtn = document.getElementById('expShare');
+  if (shareBtn && navigator.clipboard && navigator.clipboard.writeText) {
+    shareBtn.parentNode.hidden = false;
+    var shareLabel = document.getElementById('expShareLabel'), shareT = null;
+    shareBtn.addEventListener('click', function(){
+      writeState();
+      navigator.clipboard.writeText(location.href).then(function(){
+        shareLabel.textContent = 'Link copied';
+        if (shareT) clearTimeout(shareT);
+        shareT = setTimeout(function(){ shareLabel.textContent = 'Copy link to this state'; }, 2000);
+      }, function(){
+        shareLabel.textContent = 'Press Ctrl+C to copy the address bar';
+      });
+    });
+  }
+
+  // A shared link should land on the thing it is sharing, not the top of the
+  // page. Only scrolls when the URL actually carried a state.
+  if (readState()) {
+    render();
+    // The browser restores its own scroll position after load, which was
+    // undoing an early scrollIntoView. Take that over, and jump rather than
+    // glide: html has scroll-behavior:smooth, and animating 2000px on arrival
+    // reads as the page running away from the reader.
+    if ('scrollRestoration' in history) { try { history.scrollRestoration = 'manual'; } catch (e) {} }
+    var landOnPanel = function(){
+      var panel = document.querySelector('.exp-panel');
+      if (!panel) return;
+      var y = panel.getBoundingClientRect().top + window.pageYOffset - 80;
+      var root = document.documentElement, prev = root.style.scrollBehavior;
+      root.style.scrollBehavior = 'auto';
+      window.scrollTo(0, y);
+      root.style.scrollBehavior = prev;
+    };
+    if (document.readyState === 'complete') setTimeout(landOnPanel, 60);
+    else window.addEventListener('load', function(){ setTimeout(landOnPanel, 60); });
+  }
+
+  if (window.matchMedia) {
+    var mq=window.matchMedia('(prefers-color-scheme: dark)');
+    if (mq.addEventListener) mq.addEventListener('change', render);
+  }
+
+  // Once the panel stacks to one column the surface gets the full width but far
+  // less of it, and a 900x540 plot flattens to an unreadable strip. Give the
+  // narrow layout a taller drawing space so the surface keeps its relief.
+  // The canvas is laid out at width:100% with an automatic height, so its own
+  // backing store is what decides the drawn proportions. Sizing it to the space
+  // actually available means the plot lands at 1:1 pixels - no CSS height fight,
+  // and no resampling. Stacked layouts get a squarer box so the relief survives.
+  function fit(){
+    var avail = (sf.parentNode && sf.parentNode.clientWidth) || 900;
+    var nw = Math.max(260, Math.round(avail));
+    var narrow = window.innerWidth <= 1040;
+    var nh = Math.max(260, Math.min(Math.round(nw * (narrow ? 1.02 : 0.58)), 560));
+    if (sf.width !== nw || sf.height !== nh) { sf.width = nw; sf.height = nh; }
+    W = sf.width; H = sf.height;
+  }
+  var rt;
+  window.addEventListener('resize', function(){
+    clearTimeout(rt);
+    rt = setTimeout(function(){ fit(); render(); }, 120);
+  });
+
+  // run the loop only while the panel is on screen and the tab is focused
+  if (ANIM && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function(es){
+      visible = es[0].isIntersecting;
+      if (visible) startLoop(); else stopLoop();
+    }, {threshold:0.05}).observe(st);
+  } else {
+    ANIM = false;
+  }
+  document.addEventListener('visibilitychange', function(){
+    if (document.hidden) stopLoop(); else startLoop();
+  });
+
+  applyLocks(PHASE);
+  fit();
+  render();
+})();
+</script>
+<script>
+// One handler for every [data-share] control on the site. The button ships
+// hidden and is only revealed where the clipboard API exists, so it is never a
+// control that does nothing when pressed.
+(function(){
+  var btns = [].slice.call(document.querySelectorAll('[data-share]'));
+  if (!btns.length) return;
+  if (!navigator.clipboard || !navigator.clipboard.writeText) return;
+  btns.forEach(function(b){
+    if (b.parentNode) b.parentNode.hidden = false;
+    var lab = b.querySelector('span'), t = null, was = lab ? lab.textContent : '';
+    b.addEventListener('click', function(){
+      navigator.clipboard.writeText(location.href).then(function(){
+        if (!lab) return;
+        lab.textContent = 'Link copied';
+        if (t) clearTimeout(t);
+        t = setTimeout(function(){ lab.textContent = was; }, 2000);
+      }, function(){ if (lab) lab.textContent = 'Copy failed'; });
+    });
+  });
+})();
+(function(){
+  // Progressive enhancement: nothing carries .reveal in the HTML, so if this
+  // never runs the page is simply fully visible. Also a no-op under
+  // prefers-reduced-motion.
+  var rm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (rm || !('IntersectionObserver' in window)) return;
+  // Cast a wide net, then keep only the innermost blocks. An explicit list of
+  // selectors always misses something and the coverage looks arbitrary; this
+  // way every content block on every page animates, and nothing animates
+  // inside something else that is also animating (which would compound the two
+  // opacities and read as a flicker).
+  var SEL = [
+    'main > section > *', 'main > div > *',
+    '.hero-text > *', '.pagehead-text > *', '.exp-intro > *', '.exp-panel', '.engine',
+    '.chapter', '.xcard', '.hstep', '.work', '.entry', '.pub', '.post',
+    '.pubgroup-head', '.recog li', '.creds li', '.svc li',
+    '.funders li', '.roles li', '.stats > div', '.herostats > div',
+    'main figure'
+  ].join(',');
+
+  var cand = [].slice.call(document.querySelectorAll(SEL));
+  // keep leaves: drop any candidate that contains another candidate
+  var t = cand.filter(function(el){
+    for (var q=0;q<cand.length;q++) if (cand[q] !== el && el.contains(cand[q])) return false;
+    return true;
+  });
+  if (!t.length) return;
+
+  // stagger siblings so a group cascades rather than appearing all at once
+  var counts = new Map();
+  for (var i=0;i<t.length;i++) {
+    var el = t[i], p = el.parentNode;
+    var n = (counts.get(p) || 0); counts.set(p, n+1);
+    if (n) el.style.transitionDelay = Math.min(n*50, 300) + 'ms';
+    el.classList.add('reveal');
+  }
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(!e.isIntersecting) return; e.target.classList.add('seen'); io.unobserve(e.target); });
+  }, {rootMargin:'0px 0px -8% 0px', threshold:0.06});
+  for (var j=0;j<t.length;j++) io.observe(t[j]);
+  // Strip the class outright rather than adding .seen: .seen still relies on a
+  // transition running to completion, and in a throttled or non-compositing
+  // context that transition can stall at opacity 0, leaving text invisible.
+  // Removing .reveal drops the initial state entirely - instantly readable.
+  // Crucially this is scoped to what is ON SCREEN. The earlier version rescued
+  // the entire document after a fixed delay, which meant every section below
+  // the fold was already revealed long before the reader scrolled to it - the
+  // scroll reveal effectively never ran. Blocks further down keep waiting.
+  function rescueInView(){
+    var vh = window.innerHeight;
+    for (var k=0;k<t.length;k++){
+      var el = t[k];
+      if (!el.classList.contains('reveal') || el.classList.contains('seen')) continue;
+      var r = el.getBoundingClientRect();
+      if (r.top < vh && r.bottom > 0){ el.style.transitionDelay=''; el.classList.remove('reveal'); }
+    }
+  }
+  // Above-the-fold blocks: reveal on load, but only AFTER the browser has
+  // painted the hidden state once. Adding .reveal and .seen inside the same
+  // frame gives the engine no start value to interpolate from, so the content
+  // simply popped in with no transition at all - which is what happened on the
+  // home page. Two nested frames guarantee a paint in between.
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){
+      for (var k=0;k<t.length;k++)
+        if (t[k].getBoundingClientRect().top < window.innerHeight) t[k].classList.add('seen');
+    });
+  });
+  // Safety net: hidden tabs, prerender, or any environment where the observer
+  // does not fire would otherwise leave content stuck at opacity 0. Content
+  // being visible always wins over the animation - but only for content the
+  // reader has actually reached.
+  setTimeout(rescueInView, 2500);
+  // Printing is not scrolling: nothing below the fold has been revealed, and a
+  // print snapshot of opacity 0 is a blank page. Clear every pending reveal
+  // before the dialog opens, whichever way the reader got there - the CV
+  // button, Ctrl+P, or Save as PDF.
+  // The screen keeps its reveals exactly as they were: whatever is cleared for
+  // the dialog is put back the moment it closes.
+  var parked = [];
+  function revealAllForPrint(){
+    parked = [];
+    for (var k=0;k<t.length;k++){
+      if (!t[k].classList.contains('reveal')) continue;
+      parked.push([t[k], t[k].style.transitionDelay]);
+      t[k].style.transitionDelay = '';
+      t[k].classList.remove('reveal');
+    }
+  }
+  function restoreAfterPrint(){
+    for (var k=0;k<parked.length;k++){
+      parked[k][0].classList.add('reveal');
+      parked[k][0].style.transitionDelay = parked[k][1];
+    }
+    parked = [];
+  }
+  window.addEventListener('beforeprint', revealAllForPrint);
+  window.addEventListener('afterprint', restoreAfterPrint);
+  if (window.matchMedia) {
+    var mqPrint = window.matchMedia('print');
+    var onPrint = function(e){ if (e.matches) revealAllForPrint(); else restoreAfterPrint(); };
+    if (mqPrint.addEventListener) mqPrint.addEventListener('change', onPrint);
+    else if (mqPrint.addListener) mqPrint.addListener(onPrint);
+  }
+  document.addEventListener('visibilitychange', function(){
+    if (!document.hidden) setTimeout(rescueInView, 400);
+  });
+
+  // A scroll-driven mirror of the observer. If IntersectionObserver is present
+  // but throttled into never firing, this still brings each section in as it is
+  // reached - and unlike the old blanket rescue it animates rather than snaps.
+  var tick = null;
+  window.addEventListener('scroll', function(){
+    if (tick) return;
+    tick = setTimeout(function(){
+      tick = null;
+      var vh = window.innerHeight;
+      for (var k=0;k<t.length;k++){
+        var el = t[k];
+        if (!el.classList.contains('reveal') || el.classList.contains('seen')) continue;
+        var r = el.getBoundingClientRect();
+        if (r.top < vh*0.94 && r.bottom > 0) el.classList.add('seen');
+      }
+    }, 140);
+  }, {passive:true});
+})();
+</script>
+</body>
+</html>
