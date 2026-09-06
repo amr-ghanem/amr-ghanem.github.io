@@ -510,7 +510,7 @@ main>section.writinghead{margin-bottom:var(--s-4)}
    Sibling rule, so it needs no class and covers wherever this recurs. */
 .reflist + .rl,.reflist + p{margin-top:var(--s-3)}
 /* "What to try" prompts. Lived only in the demo's own stylesheet, so the
-   list rendered unstyled the moment the Isofrag page carried it too. It is
+   list rendered unstyled the moment the Struxa page carried it too. It is
    shared content now, so it is shared style. Measure cap dropped with the
    rest of them. */
 .tryl{list-style:none;margin:0;padding:0;display:grid;gap:12px}
@@ -544,9 +544,9 @@ main>section.writinghead{margin-bottom:var(--s-4)}
 .projpubs a:hover{color:var(--accent);border-bottom-color:var(--accent)}
 .proj .more{margin-top:var(--s-2)}
 @media(max-width:700px){.proj.haspic{grid-template-columns:1fr}.projfig{order:-1}.projpubs li{grid-template-columns:44px minmax(0,1fr);gap:10px}}
-.isofragfig{margin:0}
-.isofragfig img{width:100%;height:auto;max-height:460px;object-fit:contain;display:block;border:1px solid var(--rule)}
-.isofragfig figcaption{font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);color:var(--ink-mute);margin-top:12px}
+.struxafig{margin:0}
+.struxafig img{width:100%;height:auto;max-height:460px;object-fit:contain;display:block;border:1px solid var(--rule)}
+.struxafig figcaption{font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);color:var(--ink-mute);margin-top:12px}
 .cvrow{display:grid;grid-template-columns:118px minmax(0,1fr);gap:32px;padding:18px 0;border-top:1px solid var(--rule-soft);align-items:baseline}
 .cvrow h3{font-family:"Newsreader",Georgia,serif;font-weight:400;font-size:var(--t-md);margin:0 0 4px;color:var(--ink)}
 /* Gold marks WHERE: the employer, the institution, the journal, the active nav
@@ -667,9 +667,9 @@ main>section.writinghead{margin-bottom:var(--s-4)}
 .figsvg .sframe .sground{stroke:var(--rule);stroke-width:1}
 
 .projfig.art figcaption{font-family:"Libre Franklin",sans-serif;font-size:var(--t-xs);line-height:1.55;color:var(--ink-mute);margin-top:10px}
-.projfig.art,.isofragfig.art{border:0;padding:0}
+.projfig.art,.struxafig.art{border:0;padding:0}
 .projfig.art .figsvg{max-width:100%}
-.isofragfig.art .figsvg{max-width:620px;margin:0 auto}
+.struxafig.art .figsvg{max-width:620px;margin:0 auto}
 .adv .advh{display:flex;align-items:center;gap:12px}
 .adv .hglyph{color:var(--data3)}
 /* The 80px section step is for pages carrying figures and prose. Ten dense
